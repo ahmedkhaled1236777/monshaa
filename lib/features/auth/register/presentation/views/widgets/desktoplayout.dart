@@ -73,8 +73,11 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             width: width * 0.1,
                             height: height * 0.1,
                             imagename: 'images/building.png'),
-                        const Text(Apptextes.register,
-                            style: Appstyles.textstle13),
+                     const   SizedBox(
+                          width: double.infinity,
+                          child:  Text(Apptextes.register,textAlign: TextAlign.right,
+                              style: Appstyles.textstle13),
+                        ),
                         const SizedBox(
                           height: Appsizes.size20,
                         ),

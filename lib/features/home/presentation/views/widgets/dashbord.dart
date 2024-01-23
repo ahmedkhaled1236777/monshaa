@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:aplication/building.dart';
 import 'package:aplication/catch_receipt.dart';
 import 'package:aplication/connect.dart';
@@ -32,8 +34,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return LayoutBuilder(builder: (context, conters) {
-      if (conters.maxWidth <650) {
+      if (MediaQuery.sizeOf(context).width <675) {
         return   Container(
           child: Drawer(
               shape: RoundedRectangleBorder(
@@ -48,14 +51,14 @@ class Dashboard extends StatelessWidget {
                         shrinkWrap: true,
                         children: [
                         
-      appbartittle(sizedboxwidth:  Appsizes.size10.w,logo: "images/logo.png", name: "شركة الاتقان",fontSize:20.sp ,),
+      appbartittle(sizedboxwidth:  Appsizes.size10.w,logo: "images/logo.png", name: "شركة الاتقان",fontSize:20.sp.clamp(0, 20.sp) ,),
                     SizedBox(
                       height: 20.h,
                     ),
                    Column(children: BlocProvider.of<HomeCubit>(context).drawer.map((e) => Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
-                       customdraweritem(sizedboxwidth: 6.w,textstyle: TextStyle(fontSize: 15.sp,color: Appcolors.whitecolor),iconData: e["icon"], text: e["name"], onTap: (){navigateandfinish(navigationscreen: e["page"], context: context);}, iconsize: 30.sp),
+                       customdraweritem(sizedboxwidth: 6.w,textstyle: TextStyle(fontSize: 15.sp.clamp(0, 15.sp),color: Appcolors.whitecolor),iconData: e["icon"], text: e["name"], onTap: (){navigateandfinish(navigationscreen: e["page"], context: context);}, iconsize: 30.sp),
                        SizedBox(height: 20.h,)
                      ],
                    )).toList(),)
@@ -83,7 +86,7 @@ class Dashboard extends StatelessWidget {
                     ),
                    Column(children: BlocProvider.of<HomeCubit>(context).drawer.map((e) => Column(
                      children: [
-                       customdraweritem(sizedboxwidth: 3.w,textstyle: Appstyles.textStyle13w,iconData: e["icon"], text: e["name"], onTap: (){navigateandfinish(navigationscreen: e["page"], context: context);}, iconsize: 10.sp),
+                       customdraweritem(sizedboxwidth: 3.w,textstyle: Appstyles.textStyle13w,iconData: e["icon"], text: e["name"], onTap: (){navigateandfinish(navigationscreen: e["page"], context: context);}, iconsize: 10.sp.clamp(0, 10.sp)),
                      SizedBox(height: Appsizes.size10.h,)
                      ],
                    )).toList(),)

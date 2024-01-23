@@ -12,7 +12,7 @@ abstract class Appstyles {
   static   TextStyle textStyle13w=TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w300,
-                                  fontSize: 3.sp);
+                                  fontSize: 4.sp.clamp(0, 4.sp));
   static   TextStyle textStyle14w=TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w300,
