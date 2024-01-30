@@ -6,17 +6,17 @@ import 'package:equatable/equatable.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  Profilemodel?profilemodel;
+  Profilemodel? profilemodel;
   final profilerepoimplementation profilerepo;
   ProfileCubit(this.profilerepo) : super(ProfileInitial());
-  getprofile({required String token})async{
+  getprofile({required String token}) async {
     emit(Profileloading());
-    var result=await profilerepo.getprofile(token: token);
+    var result = await profilerepo.getprofile(token: token);
     result.fold((failure) {
       emit(Profilefailure(error_message: failure.error_message));
-    }, (success){
-profilemodel=success;
-emit(Profilesuccess());
+    }, (success) {
+      profilemodel = success;
+      emit(Profilesuccess());
     });
   }
 }

@@ -63,7 +63,7 @@ class _DesktoplayoutState extends State<Desktoplayout> {
               ),
               alignment: Alignment.center,
               padding: EdgeInsets.only(top: height * 0.04),
-              child:  ListView(
+              child: ListView(
                 children: [
                   Form(
                     key: formkey,
@@ -73,9 +73,10 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             width: width * 0.1,
                             height: height * 0.1,
                             imagename: 'images/building.png'),
-                     const   SizedBox(
+                        const SizedBox(
                           width: double.infinity,
-                          child:  Text(Apptextes.register,textAlign: TextAlign.right,
+                          child: Text(Apptextes.register,
+                              textAlign: TextAlign.right,
                               style: Appstyles.textstle13),
                         ),
                         const SizedBox(
@@ -169,15 +170,15 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                         onPressed: () async {
                           if (formkey.currentState!.validate()) {
                             await BlocProvider.of<registercuibt>(context)
-                                .register(registerrequest: registerrequest(name: name.text,
-                                 shop_name: shop_name.text, 
-                                 shop_address: shop_address.text,
-                                  password: password.text, 
-                                  phone: phone.text,
-                                   privacy_and_policy: "1",
-                                   tax_number: tax_number.text
-                                   )
-                                    );
+                                .register(
+                                    registerrequest: registerrequest(
+                                        name: name.text,
+                                        shop_name: shop_name.text,
+                                        shop_address: shop_address.text,
+                                        password: password.text,
+                                        phone: phone.text,
+                                        privacy_and_policy: "1",
+                                        tax_number: tax_number.text));
                           }
                         },
                       );

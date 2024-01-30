@@ -8,7 +8,7 @@ import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
-import 'package:aplication/estate.dart';
+import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/expense.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
 import 'package:aplication/features/home/presentation/views/home.dart';
@@ -30,46 +30,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return LayoutBuilder(builder: (context, conters) {
-      if (MediaQuery.sizeOf(context).width <675) {
-        return   Container(
-          child: Drawer(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              backgroundColor: Color(0xff415769),
-              child: 
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.18,
-                      padding: EdgeInsets.all(10),
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                        
-      appbartittle(sizedboxwidth:  Appsizes.size10.w,logo: "images/logo.png", name: "شركة الاتقان",fontSize:20.sp.clamp(0, 20.sp) ,),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                   Column(children: BlocProvider.of<HomeCubit>(context).drawer.map((e) => Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                     children: [
-                       customdraweritem(sizedboxwidth: 6.w,textstyle: TextStyle(fontSize: 15.sp.clamp(0, 15.sp),color: Appcolors.whitecolor),iconData: e["icon"], text: e["name"], onTap: (){navigateandfinish(navigationscreen: e["page"], context: context);}, iconsize: 30.sp),
-                       SizedBox(height: 20.h,)
-                     ],
-                   )).toList(),)
-                    
-                  ],
-                ),
-              )),
-        );
-       
-      } else {
-       return   Container(
+      if (MediaQuery.sizeOf(context).width >= 950) {
+        return Container(
           child: Drawer(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0),
@@ -79,17 +45,95 @@ class Dashboard extends StatelessWidget {
               child: Container(
                 child: ListView(
                   children: [
-                  
-                appbartittle(sizedboxwidth:  Appsizes.size5.w,logo: "images/logo.png", name: "شركة الاتقان",fontSize:6.sp ,),
+                    appbartittle(
+                      sizedboxwidth: Appsizes.size5.w,
+                      logo: "images/logo.png",
+                      name: "شركة الاتقان",
+                      fontSize: 6.sp,
+                    ),
                     SizedBox(
                       height: 2.h,
                     ),
-                   Column(children: BlocProvider.of<HomeCubit>(context).drawer.map((e) => Column(
-                     children: [
-                       customdraweritem(sizedboxwidth: 3.w,textstyle: Appstyles.textStyle13w,iconData: e["icon"], text: e["name"], onTap: (){navigateandfinish(navigationscreen: e["page"], context: context);}, iconsize: 10.sp.clamp(0, 10.sp)),
-                     SizedBox(height: Appsizes.size10.h,)
-                     ],
-                   )).toList(),)
+                    Column(
+                      children: BlocProvider.of<HomeCubit>(context)
+                          .drawer
+                          .map((e) => Column(
+                                children: [
+                                  customdraweritem(
+                                      sizedboxwidth: 3.w,
+                                      textstyle: Appstyles.textStyle13w,
+                                      iconData: e["icon"],
+                                      text: e["name"],
+                                      onTap: () {
+                                        navigateandfinish(
+                                            navigationscreen: e["page"],
+                                            context: context);
+                                      },
+                                      iconsize: 10.sp.clamp(0, 10.sp)),
+                                  SizedBox(
+                                    height: Appsizes.size10.h,
+                                  )
+                                ],
+                              ))
+                          .toList(),
+                    )
+                  ],
+                ),
+              )),
+        );
+      } else {
+        return Container(
+          child: Drawer(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0),
+              ),
+              backgroundColor: Color(0xff415769),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.18,
+                padding: EdgeInsets.all(10),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    appbartittle(
+                      sizedboxwidth: Appsizes.size10.w,
+                      logo: "images/logo.png",
+                      name: "شركة الاتقان",
+                      fontSize: conters.maxWidth > 600 ? 12.sp : 15.sp,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Column(
+                      children: BlocProvider.of<HomeCubit>(context)
+                          .drawer
+                          .map((e) => Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  customdraweritem(
+                                      sizedboxwidth: 6.w,
+                                      textstyle: TextStyle(
+                                          fontSize: conters.maxWidth > 600
+                                              ? 8.sp
+                                              : 12.sp.clamp(0, 12.sp),
+                                          color: Appcolors.whitecolor),
+                                      iconData: e["icon"],
+                                      text: e["name"],
+                                      onTap: () {
+                                        navigateandfinish(
+                                            navigationscreen: e["page"],
+                                            context: context);
+                                      },
+                                      iconsize: conters.maxWidth > 600
+                                          ? 15.sp
+                                          : 20.sp),
+                                  SizedBox(
+                                    height: 20.h,
+                                  )
+                                ],
+                              ))
+                          .toList(),
+                    )
                   ],
                 ),
               )),

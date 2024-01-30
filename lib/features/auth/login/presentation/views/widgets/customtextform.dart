@@ -23,7 +23,6 @@ class customtextform extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       validator: (value) {
         if (value!.isEmpty) {
           return val;
@@ -32,16 +31,20 @@ class customtextform extends StatelessWidget {
       obscureText: obscureText,
       controller: controller,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Appsizes.size5),
               borderSide:
                   const BorderSide(color: Appcolors.bluecolor, width: 0.5)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Appsizes.size5),
-              borderSide: BorderSide(color: Appcolors.bluecolor, width: 0.5)),
-          prefixIcon: Icon(prefixicon,
-              size: Appsizes.size20, color: Appcolors.blackcolor),
+              borderSide:
+                  const BorderSide(color: Appcolors.bluecolor, width: 0.5)),
+          prefixIcon: Icon(
+            prefixicon,
+            size: Appsizes.size20,
+            color: Appcolors.blackcolor,
+          ),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Appsizes.size5),
               borderSide: BorderSide(color: Appcolors.bluecolor, width: 0.5)),

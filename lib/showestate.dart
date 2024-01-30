@@ -1,5 +1,5 @@
 import 'package:aplication/building.dart';
-import 'package:aplication/estate.dart';
+import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/main.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';

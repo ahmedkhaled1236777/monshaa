@@ -16,7 +16,8 @@ class registerrepoimplementation extends registerrepo {
       {required registerrequest registerrequest}) async {
     Registermodel registermodel;
     try {
-      Response response = await Postdata.postdata(path: urls.register, data: registerrequest.tojson());
+      Response response = await Postdata.postdata(
+          path: urls.register, data: registerrequest.tojson());
       if (response.statusCode == 200 &&
           response.data["message"] == "تم اضافه بيانات الشركه بنجاح") {
         registermodel = Registermodel.fromJson(response.data);

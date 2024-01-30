@@ -1,4 +1,10 @@
 import 'package:aplication/building.dart';
+import 'package:aplication/features/aqarat/data/repos/addaqar/addaqarimplementation.dart';
+import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepoimplementation.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
+import 'package:aplication/features/aqarat/presentation/views/estate.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -19,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -26,46 +33,52 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
   print("Handling a background message: ${message.messageId}");
 }
-void main()async {
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+// Replace with actual values
+    options: const FirebaseOptions(
+      apiKey: "api key here",
+      appId: "monshaa-b498c",
+      messagingSenderId: "messaging id",
+      projectId: "monshaa-b498c",
+    ),
   );
   Apiservice.initdio();
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-NotificationSettings settings = await messaging.requestPermission(
-  alert: true,
-  announcement: false,
-  badge: true,
-  carPlay: false,
-  criticalAlert: false,
-  provisional: false,
-  sound: true,
-);
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   AwesomeNotifications().initialize(
-    // set the icon to null if you want to use the default app icon
-    'resource://drawable/qqq',
-    [
+      // set the icon to null if you want to use the default app icon
+      'resource://drawable/qqq',
+      [
         NotificationChannel(
             channelKey: 'basic key',
             channelName: 'Basic notifications',
             channelDescription: 'Notification channel for basic tests',
             defaultColor: Color(0xFF9D50DD),
-            ledColor: Colors.white
-        )
-    ]
-);
-FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  print("///////////////////////////////////////////");
-AwesomeNotifications().createNotification(content: NotificationContent(id: 1, channelKey: 'basic key',title: message.notification!.title));
-     
-});
-
+            ledColor: Colors.white)
+      ]);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    AwesomeNotifications().createNotification(
+        content: NotificationContent(
+            id: 1,
+            channelKey: 'basic key',
+            title: message.notification!.title));
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -85,18 +98,19 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 registercuibt(registerrepo: registerrepoimplementation())),
         BlocProvider(
-            create: (context) =>
-                ProfileCubit(profilerepoimplementation())),
+            create: (context) => ProfileCubit(profilerepoimplementation())),
+        BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(
             create: (context) =>
-                HomeCubit()),
-       
+                addaqarcuibt(addaqarrepo: addaqarimplementation())),
+        BlocProvider(create: (context) => DateCubit()),
+        BlocProvider(create: (context) => ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
       ],
       child: ScreenUtilInit(
-         designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-        builder:(context, child) =>  MaterialApp(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           routes: {
@@ -107,7 +121,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: MyHomePage(),
+          home: Estate(),
         ),
       ),
     );

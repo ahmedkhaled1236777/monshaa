@@ -5,6 +5,5 @@ import 'package:dartz/dartz.dart';
 
 // ignore: camel_case_types
 abstract class loginrepo {
-  Future<Either<failure, LoginModel>> login(
-      {required loginrequest login});
+  Future<Either<failure, LoginModel>> login({required loginrequest login});
 }

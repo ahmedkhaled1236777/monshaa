@@ -16,9 +16,8 @@ class login_repo_implementation extends loginrepo {
       {required loginrequest login}) async {
     LoginModel loginModel;
     try {
-      var response = await Postdata.postdata(
-          path: urls.login,
-          data: login.toJson());
+      var response =
+          await Postdata.postdata(path: urls.login, data: login.toJson());
       if (response.statusCode == 200 &&
           response.data["message"] == "تم تسجيل دخول المدير بنجاح") {
         loginModel = LoginModel.fromJson(response.data);

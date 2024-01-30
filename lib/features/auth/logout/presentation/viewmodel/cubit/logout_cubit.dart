@@ -5,13 +5,13 @@ import 'package:equatable/equatable.dart';
 part 'logout_state.dart';
 
 class LogoutCubit extends Cubit<LogoutState> {
- final logoutrepoimplementation logoutrepo;
+  final logoutrepoimplementation logoutrepo;
   LogoutCubit({required this.logoutrepo}) : super(LogoutInitial());
-  log_out({required String token})async{
+  log_out({required String token}) async {
     emit(Logoutloading());
-    var result=await logoutrepo.logout(token: token);
-    result.fold((failure){
-emit(Logoutfailure(error_message: failure.error_message));
+    var result = await logoutrepo.logout(token: token);
+    result.fold((failure) {
+      emit(Logoutfailure(error_message: failure.error_message));
     }, (success) {
       emit(Logoutsuccess(success_message: success));
     });

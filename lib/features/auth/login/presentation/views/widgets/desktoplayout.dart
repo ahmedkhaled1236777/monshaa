@@ -114,8 +114,11 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             onPressed: () async {
                               if (formkey.currentState!.validate()) {
                                 await BlocProvider.of<logincuibt>(context)
-                                    .loginpostdata(login: loginrequest(phone: phone.text, password: password.text, user_type:"user")
-                                       );
+                                    .loginpostdata(
+                                        login: loginrequest(
+                                            phone: phone.text,
+                                            password: password.text,
+                                            user_type: "user"));
                               }
                             },
                           );
@@ -128,7 +131,9 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             showsnack(
                                 comment: "تم تسجيل الدخول بنجاح",
                                 context: context);
-                                navigateandfinish(navigationscreen: MyHomePage(), context: context);
+                            navigateandfinish(
+                                navigationscreen: MyHomePage(),
+                                context: context);
                           }
                         },
                       ),

@@ -56,14 +56,14 @@ class profilebody extends StatelessWidget {
               SizedBox(
                 height: height * 0.025,
               ),
-           if(   pro.profilemodel!.data!.taxNumber != null)
-                   customdescription(
-                      description: "الرقم الضريبي",
-                      value: pro.profilemodel!.data!.taxNumber!),
-                  
-        if(   pro.profilemodel!.data!.taxNumber != null)      SizedBox(
-                height: height * 0.025,
-              ),
+              if (pro.profilemodel!.data!.taxNumber != null)
+                customdescription(
+                    description: "الرقم الضريبي",
+                    value: pro.profilemodel!.data!.taxNumber!),
+              if (pro.profilemodel!.data!.taxNumber != null)
+                SizedBox(
+                  height: height * 0.025,
+                ),
               logoutpro(onPressed: () async {
                 await BlocProvider.of<LogoutCubit>(context).log_out(
                     token:

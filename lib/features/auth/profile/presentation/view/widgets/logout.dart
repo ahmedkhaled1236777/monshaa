@@ -29,13 +29,14 @@ class logoutpro extends StatelessWidget {
             children: [
               BlocConsumer<LogoutCubit, LogoutState>(
                 listener: (context, state) {
-    if(state is Logoutfailure)   showsnack(comment: state.error_message, context: context)   ;
-    else if(state is Logoutsuccess){
-      showsnack(comment: state.success_message, context: context);
-    }
-          },
+                  if (state is Logoutfailure)
+                    showsnack(comment: state.error_message, context: context);
+                  else if (state is Logoutsuccess) {
+                    showsnack(comment: state.success_message, context: context);
+                  }
+                },
                 builder: (context, state) {
-                  if(state is Logoutloading)return loading();
+                  if (state is Logoutloading) return loading();
                   return IconButton(
                       onPressed: onPressed,
                       icon: Icon(

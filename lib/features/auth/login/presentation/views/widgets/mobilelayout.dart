@@ -103,8 +103,8 @@ class _MobilelayoutState extends State<Mobilelayout> {
                   } else if (state is loginsucces) {
                     showsnack(
                         comment: "تم تسجيل الدخول بنجاح", context: context);
-                                                        navigateandfinish(navigationscreen: MyHomePage(), context: context);
-
+                    navigateandfinish(
+                        navigationscreen: MyHomePage(), context: context);
                   }
                 }, builder: (context, state) {
                   if (state is loginloading) {
@@ -118,7 +118,10 @@ class _MobilelayoutState extends State<Mobilelayout> {
                       if (formkey.currentState!.validate()) {
                         await BlocProvider.of<logincuibt>(context)
                             .loginpostdata(
-                               login: loginrequest(phone: phone.text, password: password.text, user_type:"user"));
+                                login: loginrequest(
+                                    phone: phone.text,
+                                    password: password.text,
+                                    user_type: "user"));
                       }
                     },
                   );

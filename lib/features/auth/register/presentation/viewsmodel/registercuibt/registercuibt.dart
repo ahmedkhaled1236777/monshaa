@@ -7,11 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class registercuibt extends Cubit<registerstate> {
   final registerrepoimplementation registerrepo;
   registercuibt({required this.registerrepo}) : super(registerinitaial());
-  register(
-      {required registerrequest registerrequest})async {
+  register({required registerrequest registerrequest}) async {
     emit(registerloading());
-    var result = await registerrepo.register(
-       registerrequest: registerrequest);
+    var result = await registerrepo.register(registerrequest: registerrequest);
     result.fold((failure) {
       emit(registerfailure(error_message: failure.error_message));
     }, (success) {

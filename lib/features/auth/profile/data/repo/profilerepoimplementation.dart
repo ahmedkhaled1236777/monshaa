@@ -7,22 +7,26 @@ import 'package:aplication/features/auth/profile/data/repo/profilerepo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class profilerepoimplementation extends profilerepo{
+class profilerepoimplementation extends profilerepo {
   @override
-  Future<Either<failure, Profilemodel>> getprofile({required String token})async {
+  Future<Either<failure, Profilemodel>> getprofile(
+      {required String token}) async {
     Profilemodel profilemodel;
-   try{
-Response response=await Getdata.getdata(path: urls.get_profile,token: token);
-if(response.statusCode==200&&response.data["message"]=="تم الحصول على بيانات بروفايل الشركة بنجاح"){
-  profilemodel=Profilemodel.fromJson(response.data);
-  return right(profilemodel);
-}
-else return left(response.data["message"]);
-
-   }catch(e){
-if(e is DioException)return left(requestfailure.fromdioexception(e));
-else return left(requestfailure(error_message: e.toString()));
-   }
+    try {
+      Response response =
+          await Getdata.getdata(path: urls.get_profile, token: token);
+      if (response.statusCode == 200 &&
+          response.data["message"] ==
+              "تم الحصول على بيانات بروفايل الشركة بنجاح") {
+        profilemodel = Profilemodel.fromJson(response.data);
+        return right(profilemodel);
+      } else
+        return left(response.data["message"]);
+    } catch (e) {
+      if (e is DioException)
+        return left(requestfailure.fromdioexception(e));
+      else
+        return left(requestfailure(error_message: e.toString()));
+    }
   }
-  
 }

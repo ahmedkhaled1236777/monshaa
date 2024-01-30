@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:aplication/building.dart';
 import 'package:aplication/contract_reports.dart';
-import 'package:aplication/estate.dart';
+import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/estate_reports.dart';
 import 'package:aplication/expenses.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';

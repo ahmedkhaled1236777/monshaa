@@ -32,3 +32,11 @@ class Getdata {
     return respnse;
   }
 }
+class Deletedata {
+  static Future<Response>deletedata({required String path, String? token})async{
+    Response response=await Apiservice.dio.delete(path,  options: Options(
+            headers: {"Accept": "application/json", "Authorization": token}));
+                return response;
+
+  }
+}

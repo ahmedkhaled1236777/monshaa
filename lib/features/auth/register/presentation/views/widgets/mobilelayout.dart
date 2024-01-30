@@ -154,14 +154,14 @@ class _mobilelayoutState extends State<mobilelayout> {
                   onPressed: () async {
                     if (formkey.currentState!.validate()) {
                       await BlocProvider.of<registercuibt>(context).register(
-                        registerrequest: registerrequest(name: name.text,
-                                     shop_name: shop_name.text, 
-                                     shop_address: shop_address.text,
-                                      password: password.text, 
-                                      phone: phone.text,
-                                       privacy_and_policy: "1",
-                                       tax_number: tax_number.text
-                                       ));
+                          registerrequest: registerrequest(
+                              name: name.text,
+                              shop_name: shop_name.text,
+                              shop_address: shop_address.text,
+                              password: password.text,
+                              phone: phone.text,
+                              privacy_and_policy: "1",
+                              tax_number: tax_number.text));
                     }
                   },
                 );
