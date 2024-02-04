@@ -1,10 +1,14 @@
 import 'package:aplication/building.dart';
 import 'package:aplication/features/aqarat/data/repos/addaqar/addaqarimplementation.dart';
+import 'package:aplication/features/aqarat/data/repos/editaqar/editaqarrepoimplementation.dart';
 import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepoimplementation.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/edit/edit_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
+import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
+import 'package:aplication/features/auth/profile/presentation/view/profile.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -97,6 +101,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 registercuibt(registerrepo: registerrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+               EditCubit(editrepo: editaqarrepoimplementation())),
         BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
         BlocProvider(create: (context) => HomeCubit()),

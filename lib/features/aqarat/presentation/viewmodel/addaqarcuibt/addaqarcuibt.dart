@@ -45,7 +45,9 @@ emit(changeadvistortype());
     for (int i = 0; i < imageFile.length; i++) {
       images!.add(await MultipartFile.fromFile(imageFile[i].path,
           filename: imageFile[i].path.split("/").last));
+         
     }
+   
   }
 
   removeimage(int index) {
@@ -69,6 +71,7 @@ emit(changeadvistortype());
   advistor_type=null;
   departement=null;
   imageFile=[];
-  
+    List images = [];
+
  }
 }

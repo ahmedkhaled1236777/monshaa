@@ -30,7 +30,7 @@ class customtableitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints:BoxConstraints(minHeight: MediaQuery.of(context).size.height/12) ,
+      constraints:BoxConstraints(minHeight: MediaQuery.of(context).size.height/19) ,
       child: Row(
         children: [
           Expanded(
@@ -42,33 +42,33 @@ class customtableitem extends StatelessWidget {
             ),
           ),
           Expanded(
+              flex: 3,
               child: Text(
                 section,
                 style: textStyle,
                 textAlign: TextAlign.center,
-              ),
-              flex: 3),
+              )),
           Expanded(
+              flex: 3,
               child: Text(
                 price,
                 style: textStyle,
                 textAlign: TextAlign.center,
-              ),
-              flex: 3),
+              )),
           Expanded(
+              flex: 3,
               child: Text(
                 type,
                 style: textStyle,
                 textAlign: TextAlign.center,
-              ),
-              flex: 3),
+              )),
           Expanded(
+              flex: 3,
               child: Text(
                 advertise_type,
                 style: textStyle,
                 textAlign: TextAlign.center,
-              ),
-              flex: 3),
+              )),
           Expanded(
             child: edit,
             flex: 2,

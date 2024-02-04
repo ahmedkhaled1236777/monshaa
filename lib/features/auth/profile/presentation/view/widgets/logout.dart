@@ -39,7 +39,7 @@ class logoutpro extends StatelessWidget {
                   if (state is Logoutloading) return loading();
                   return IconButton(
                       onPressed: onPressed,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.logout,
                         color: Appcolors.whitecolor,
                       ));

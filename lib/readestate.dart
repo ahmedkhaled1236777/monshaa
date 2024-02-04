@@ -5,7 +5,7 @@ import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:aplication/main.dart';
 import 'package:aplication/pdt.dart';
-import 'package:aplication/showestate.dart';
+import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
 import 'package:flutter/material.dart';
 
 import 'building.dart';
@@ -611,12 +611,7 @@ class ReadEstateState extends State<ReadEstate> {
                                           TableRow(children: [
                                             InkWell(
                                               onTap: () {
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                        MaterialPageRoute(
-                                                            builder: (context) {
-                                                  return ShowEstate();
-                                                }));
+                                               
                                               },
                                               child: Row(
                                                   mainAxisAlignment:

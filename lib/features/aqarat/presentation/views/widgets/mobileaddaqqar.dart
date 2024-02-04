@@ -1,5 +1,8 @@
+import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/addaqar.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/addaqarwithscaffold.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/customtableaqar.dart';
@@ -8,6 +11,7 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/search.dar
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/pdt.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class mobiladdaqaar extends StatelessWidget {
@@ -42,9 +46,16 @@ class mobiladdaqaar extends StatelessWidget {
               actions: [
                 Row(
                   children: [
+                     IconButton(onPressed: (){
+                    BlocProvider.of<ShowaqaratCubit>(context).queryParameters=null;
+  BlocProvider.of<ShowaqaratCubit>(context).data.clear();
+             BlocProvider.of<ShowaqaratCubit>(context).getallaqarat(
+        token:
+        generaltoken,
+        page:1);                  }, icon: Icon(Icons.data_exploration,color: Appcolors.whitecolor,)),
                     search(),
                     const SizedBox(
-                      width: Appsizes.size15,
+                      width: Appsizes.size5,
                     ),
                     InkWell(
                       onTap: () {},
@@ -54,7 +65,7 @@ class mobiladdaqaar extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: Appsizes.size15,
+                      width: Appsizes.size5,
                     ),
                     InkWell(
                       onTap: () {
@@ -71,7 +82,7 @@ class mobiladdaqaar extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: Appsizes.size10,
+                      width: Appsizes.size5,
                     ),
                   ],
                 )

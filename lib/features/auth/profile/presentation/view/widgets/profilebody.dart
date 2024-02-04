@@ -1,3 +1,4 @@
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/features/auth/logout/presentation/viewmodel/cubit/logout_cubit.dart';
 import 'package:aplication/features/auth/profile/presentation/view/widgets/customdescription.dart';
@@ -67,7 +68,7 @@ class profilebody extends StatelessWidget {
               logoutpro(onPressed: () async {
                 await BlocProvider.of<LogoutCubit>(context).log_out(
                     token:
-                        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzA1Nzc2MTUyLCJleHAiOjE3MzczMTIxNTIsIm5iZiI6MTcwNTc3NjE1MiwianRpIjoiU2JEQlZmb1Bwbk1sNklxSyIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z6IWqiXZp6ffGXkEqFj6o3y5fVw-gJ2N6hmxOUFhrsw");
+                        generaltoken);
               })
             ],
           ),

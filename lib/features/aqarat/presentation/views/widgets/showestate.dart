@@ -1,19 +1,23 @@
 import 'package:aplication/building.dart';
+import 'package:aplication/core/commn/constants.dart';
+import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/main.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:flutter/material.dart';
 
-class ShowEstate extends StatefulWidget {
+class mShowEstate extends StatefulWidget {
+ final Datum data;
+
+  const mShowEstate({super.key, required this.data});
   @override
   State<StatefulWidget> createState() {
     return ShowEstateState();
   }
 }
 
-class ShowEstateState extends State<ShowEstate> {
-  String? name;
+class ShowEstateState extends State<mShowEstate> {
   GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
 
   @override
@@ -28,12 +32,12 @@ class ShowEstateState extends State<ShowEstate> {
               onPressed: () {
                 scafoldstate.currentState!.openDrawer();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.menu,
                 color: Colors.white,
               ),
             ),
-            title: Text(
+            title: const Text(
               'بيانات العقار',
               style: TextStyle(color: Colors.white, fontSize: 14),
             ),
@@ -44,23 +48,23 @@ class ShowEstateState extends State<ShowEstate> {
                 children: [
                   InkWell(
                     onTap: () {},
-                    child: Icon(
+                    child: const Icon(
                       Icons.notifications,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   InkWell(
                     onTap: () {},
-                    child: Icon(
+                    child: const Icon(
                       Icons.message,
                       color: Colors.white,
                       size: 24,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 13,
                   ),
                 ],
@@ -81,21 +85,26 @@ class ShowEstateState extends State<ShowEstate> {
                       Container(
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.all(20),
                             child: Form(
                                 child: ListView(
                               shrinkWrap: true,
                               children: [
-                                Text(
+                                const Text(
                                   'تفاصيل الاعلان',
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 Container(
-                                  child: Row(
+                                  child:  Row(
                                     children: [
                                       Icon(Icons.home,
                                           size: 20, color: Colors.blueGrey),
@@ -103,7 +112,7 @@ class ShowEstateState extends State<ShowEstate> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'ايجار',
+                            show[widget.data.realStateType!],
                                         style: TextStyle(
                                             fontSize: 12.5,
                                             color: Colors.blueGrey,
@@ -112,11 +121,11 @@ class ShowEstateState extends State<ShowEstate> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
-                                  child: Row(
+                                  child:  Row(
                                     children: [
                                       Icon(Icons.location_on_outlined,
                                           size: 20, color: Colors.blueGrey),
@@ -124,7 +133,7 @@ class ShowEstateState extends State<ShowEstate> {
                                         width: 10,
                                       ),
                                       Text(
-                                        'التجمع الثالث',
+                                        widget.data!.realStateAddress!,
                                         style: TextStyle(
                                             fontSize: 12.5,
                                             color: Colors.blueGrey,
@@ -137,7 +146,7 @@ class ShowEstateState extends State<ShowEstate> {
                                   height: 15,
                                 ),
                                 Container(
-                                  child: Row(
+                                  child:  Row(
                                     children: [
                                       Row(
                                         children: [
@@ -146,7 +155,7 @@ class ShowEstateState extends State<ShowEstate> {
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          Text('10 متر',
+                                          Text('${widget.data.realStateSpace} متر',
                                               style: TextStyle(
                                                   fontSize: 12.5,
                                                   color: Colors.blueGrey))
@@ -162,7 +171,7 @@ class ShowEstateState extends State<ShowEstate> {
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          Text('7 غرف',
+                                          Text(widget.data!.numberOfRooms!.toString(),
                                               style: TextStyle(
                                                   fontSize: 12.5,
                                                   color: Colors.blueGrey))
@@ -173,12 +182,12 @@ class ShowEstateState extends State<ShowEstate> {
                                       ),
                                       Row(
                                         children: [
-                                          Icon(Icons.bathtub_outlined,
+                                if(widget.data.numberOfBathrooms!=null)            Icon(Icons.bathtub_outlined,
                                               size: 20, color: Colors.blueGrey),
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          Text('2 حمام',
+                             if(widget.data.numberOfBathrooms!=null)               Text('${widget.data.numberOfBathrooms!} حمام',
                                               style: TextStyle(
                                                   fontSize: 12.5,
                                                   color: Colors.blueGrey))
@@ -187,14 +196,14 @@ class ShowEstateState extends State<ShowEstate> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
-                                  child: Row(
+                                  child:  Row(
                                     children: [
                                       Text(
-                                        'السعر: 4000 جنيه',
+                                       "السعر : ${widget.data.realStatePrice.toString()}",
                                         style: TextStyle(
                                             fontSize: 12.5,
                                             color: Colors.blueGrey,
@@ -203,14 +212,14 @@ class ShowEstateState extends State<ShowEstate> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
                                   child: Row(
                                     children: [
                                       Text(
-                                        'نوع المعلن: صاحب عقار',
+                                        'نوع المعلن:${show[widget.data.advertiserType]}',
                                         style: TextStyle(
                                             fontSize: 12.5,
                                             color: Colors.blueGrey,
@@ -233,7 +242,7 @@ class ShowEstateState extends State<ShowEstate> {
                                             fontWeight: FontWeight.w100),
                                       ),
                                       Text(
-                                        '35',
+                                        widget.data.id.toString(),
                                         style: TextStyle(
                                             fontSize: 13,
                                             color: Colors.blueGrey,
@@ -256,7 +265,7 @@ class ShowEstateState extends State<ShowEstate> {
                                             fontWeight: FontWeight.w100),
                                       ),
                                       Text(
-                                        '21-1-2024',
+                                        widget.data.createdAt.toString(),
                                         style: TextStyle(
                                             fontSize: 13,
                                             color: Colors.blueGrey,
@@ -277,7 +286,7 @@ class ShowEstateState extends State<ShowEstate> {
                                         width: 10,
                                       ),
                                       Text(
-                                        '01019539347',
+                                        widget.data.advertisedPhoneNumber.toString(),
                                         style: TextStyle(
                                             fontSize: 13,
                                             color: Colors.blueGrey,
@@ -289,10 +298,10 @@ class ShowEstateState extends State<ShowEstate> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Container(
+                     if(widget.data.advertiseDetails!=null)           Container(
                                   child: Text(
-                                    'وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة',
-                                    textAlign: TextAlign.justify,
+                                    "وصف الاعلان : ${widget.data.advertiseDetails!}"
+                                   , textAlign: TextAlign.justify,
                                     style: TextStyle(
                                         height: 2,
                                         fontSize: 12.5,
@@ -302,11 +311,6 @@ class ShowEstateState extends State<ShowEstate> {
                                 ),
                               ],
                             )),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
-                            ),
-                            padding: EdgeInsets.all(20),
                           )),
                       Container(
                           width: MediaQuery.of(context).size.width * 0.5,
@@ -324,78 +328,7 @@ class ShowEstateState extends State<ShowEstate> {
                                         childAspectRatio: 1.4,
                                         crossAxisSpacing: 10,
                                         mainAxisSpacing: 10),
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Image.asset('images/unnamed.jpg',
-                                        fit: BoxFit.fill),
-                                  ),
-                                ],
+                                children: widget.data.realStateImages!.map((e) =>Image.network(e)).toList(),
                               ),
                             ),
                             decoration: BoxDecoration(
@@ -415,6 +348,11 @@ class ShowEstateState extends State<ShowEstate> {
                       Container(
                           width: MediaQuery.of(context).size.width,
                           child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.all(20),
                             child: Form(
                                 child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
@@ -439,7 +377,7 @@ class ShowEstateState extends State<ShowEstate> {
                                           width: 10,
                                         ),
                                         Text(
-                                          'ايجار',
+                            show[widget.data.realStateType!],
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
@@ -460,7 +398,7 @@ class ShowEstateState extends State<ShowEstate> {
                                           width: 10,
                                         ),
                                         Text(
-                                          'التجمع الثالث',
+                                        widget.data!.realStateAddress!,
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
@@ -483,7 +421,7 @@ class ShowEstateState extends State<ShowEstate> {
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            Text('10 متر',
+                                            Text('${widget.data.realStateSpace} متر',
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.blueGrey))
@@ -500,7 +438,7 @@ class ShowEstateState extends State<ShowEstate> {
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            Text('7 غرف',
+                                            Text(widget.data!.numberOfRooms!.toString(),
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.blueGrey))
@@ -511,13 +449,13 @@ class ShowEstateState extends State<ShowEstate> {
                                         ),
                                         Row(
                                           children: [
-                                            Icon(Icons.bathtub_outlined,
+                                    if(widget.data.numberOfBathrooms!=null)          Icon(Icons.bathtub_outlined,
                                                 size: 20,
                                                 color: Colors.blueGrey),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            Text('2 حمام',
+                                     if(widget.data.numberOfBathrooms!=null)         Text('${widget.data.numberOfBathrooms!} حمام',
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.blueGrey))
@@ -533,8 +471,7 @@ class ShowEstateState extends State<ShowEstate> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'السعر: 4000 جنيه',
-                                          style: TextStyle(
+"السعر : ${widget.data.realStatePrice.toString()}",                                          style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
                                               fontWeight: FontWeight.w100),
@@ -549,7 +486,7 @@ class ShowEstateState extends State<ShowEstate> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'نوع المعلن: صاحب عقار',
+                                        'نوع المعلن:${show[widget.data.advertiserType]}',
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
@@ -572,7 +509,7 @@ class ShowEstateState extends State<ShowEstate> {
                                               fontWeight: FontWeight.w100),
                                         ),
                                         Text(
-                                          '35',
+                                        widget.data.id.toString(),
                                           style: TextStyle(
                                               fontSize: 13,
                                               color: Colors.blueGrey,
@@ -595,7 +532,7 @@ class ShowEstateState extends State<ShowEstate> {
                                               fontWeight: FontWeight.w100),
                                         ),
                                         Text(
-                                          '21-1-2024',
+                                        widget.data.createdAt.toString(),
                                           style: TextStyle(
                                               fontSize: 13,
                                               color: Colors.blueGrey,
@@ -616,7 +553,7 @@ class ShowEstateState extends State<ShowEstate> {
                                           width: 10,
                                         ),
                                         Text(
-                                          '01019539347',
+                                        widget.data.advertisedPhoneNumber.toString(),
                                           style: TextStyle(
                                               fontSize: 13,
                                               color: Colors.blueGrey,
@@ -625,13 +562,13 @@ class ShowEstateState extends State<ShowEstate> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
-                                  Container(
-                                    child: Text(
-                                      'وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة وصف الاعلان: ,للايجار شقه بالتجمع الثالث بجوار شركة إنبي للبترول مبنية ارضي وتسعة ادوار مقسمة كالاتي الدور الارضي ثلاث شقق الدور الأول دور بالكامل مساحة الشقة 210 متر الدور الثاني دور بالكامل مساحة الشقة 210 متر الدور التالت دور بالكامل مساحة الشقة 210 متر الدور الرابع شقتينمساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع متاحة ) الدور الخامس شقتين مساحة الشقة 105 متر (الخلفية مباعه اللي على الشارع معروضة للبيع) الدور السادس مباع بالكامل شقة واحدة',
-                                      textAlign: TextAlign.justify,
+                        if(widget.data.advertiseDetails!="null")            Container(
+                                    child:  Text(
+                                    "وصف الاعلان : ${widget.data.advertiseDetails!}"
+                                    ,  textAlign: TextAlign.justify,
                                       style: TextStyle(
                                           height: 2,
                                           fontSize: 12,
@@ -642,11 +579,6 @@ class ShowEstateState extends State<ShowEstate> {
                                 ],
                               ),
                             )),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
-                            ),
-                            padding: EdgeInsets.all(20),
                           )),
                       Container(
                           width: MediaQuery.of(context).size.width,
@@ -657,80 +589,7 @@ class ShowEstateState extends State<ShowEstate> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.vertical,
                                   child: Column(
-                                    children: [
-                                      Container(
-                                        height: 200,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                        child: Image.asset(
-                                          'images/unnamed.jpg',
-                                          fit: BoxFit.fill,
-                                          height: 200,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        height: 200,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                        child: Image.asset(
-                                          'images/unnamed.jpg',
-                                          fit: BoxFit.fill,
-                                          height: 200,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        height: 200,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                        child: Image.asset(
-                                          'images/unnamed.jpg',
-                                          fit: BoxFit.fill,
-                                          height: 200,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        height: 200,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                        child: Image.asset(
-                                          'images/unnamed.jpg',
-                                          fit: BoxFit.fill,
-                                          height: 200,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        height: 200,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                        child: Image.asset(
-                                          'images/unnamed.jpg',
-                                          fit: BoxFit.fill,
-                                          height: 200,
-                                        ),
-                                      ),
-                                    ],
+                                    children:widget.data.realStateImages!.map((e) =>Image.network(e)).toList(),
                                   ),
                                 )),
                           )),

@@ -48,11 +48,7 @@ class _addaqarState extends State<addaqar> {
   TextEditingController adressdetails = TextEditingController();
   TextEditingController area = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
 
-  DateTime selectedDate1 = DateTime.now();
-
-  var date1 = 'التاريخ';
 
   @override
   Widget build(BuildContext context) {
@@ -240,6 +236,7 @@ class _addaqarState extends State<addaqar> {
 
                                   }
                                   else{
+                                  
                                     if(BlocProvider.of<addaqarcuibt>(context).imageFile.isNotEmpty) {
                               await BlocProvider.of<addaqarcuibt>(context)
                                     .uploadimages();

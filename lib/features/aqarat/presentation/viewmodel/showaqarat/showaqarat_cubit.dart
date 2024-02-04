@@ -1,3 +1,4 @@
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
 import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepoimplementation.dart';
 import 'package:bloc/bloc.dart';
@@ -8,20 +9,24 @@ part 'showaqarat_state.dart';
 
 class ShowaqaratCubit extends Cubit<ShowaqaratState> {
  final showaqqarrepoimplementation showaqar;
+ bool search=true;
  List <Datum>data=[];
+ Map<String,dynamic>?queryParameters;
  ScrollController scrollController=ScrollController();
   ShowaqaratCubit({required this.showaqar}) : super(ShowaqaratInitial()){
     scrollController.addListener(() async {
       
-    await getamorellaqarat(token: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzA2NDMwNTc2LCJleHAiOjE3Mzc5NjY1NzYsIm5iZiI6MTcwNjQzMDU3NiwianRpIjoicFE2aDZ4b3dUVWJnOHZNTSIsInN1YiI6IjIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.hGFTzLfWHUmxbtHLdxWscD4bGK8HijQpEhP3QJ5EbmE");
+    await getamorellaqarat(token: generaltoken);
       
     });
+    
   }
   int page=1;
   bool loading=false;
-  getallaqarat({required String token,required int page}) async {
+  getallaqarat({required String token,required int page,    
+}) async {
     emit(Showaqaratloading());
-    var result=await showaqar.showaqar(token: token, page: page);
+   var result=await showaqar.showaqar(token: token, page: page,queryParameters: queryParameters);
     loading=true;
     result.fold((failue) {
      
@@ -38,7 +43,7 @@ emit(Showaqaratsuccess());
      if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {  
       page++;
-    var result=await showaqar.showaqar(token: token, page: page);
+    var result=await showaqar.showaqar(token: token, page: page,queryParameters: queryParameters);
     loading=true;
     result.fold((failue) {
      

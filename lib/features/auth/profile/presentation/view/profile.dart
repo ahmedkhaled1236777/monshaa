@@ -16,7 +16,7 @@ class _profileState extends State<profile> {
   getprofile() async {
     await BlocProvider.of<ProfileCubit>(context).getprofile(
         token:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzA1Nzc2MTUyLCJleHAiOjE3MzczMTIxNTIsIm5iZiI6MTcwNTc3NjE1MiwianRpIjoiU2JEQlZmb1Bwbk1sNklxSyIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Z6IWqiXZp6ffGXkEqFj6o3y5fVw-gJ2N6hmxOUFhrsw");
+            generaltoken);
   }
 
   @override
@@ -39,21 +39,24 @@ class _profileState extends State<profile> {
           }
         },
         builder: (context, state) {
+                        print(state);
+
           if (state is Profileloading) {
             return loading();
-          } else if (state is Profilesuccess)
+          } else if (state is Profilesuccess){
             // ignore: curly_braces_in_flow_control_structures
             return LayoutBuilder(builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
                 return profilebody();
               } else {
+                print(state);
                 return Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.sizeOf(context).width * .25),
                   child: profilebody(),
                 );
               }
-            });
+            });}
           return const SizedBox();
         },
       )),

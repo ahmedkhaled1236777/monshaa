@@ -4,7 +4,7 @@ import 'package:aplication/main.dart';
 import 'package:aplication/pdt.dart';
 import 'package:aplication/readestate.dart';
 import 'package:aplication/readreceipt.dart';
-import 'package:aplication/showestate.dart';
+import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
 import 'package:aplication/showreceipt.dart';
 import 'package:flutter/material.dart';
 

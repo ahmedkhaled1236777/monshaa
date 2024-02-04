@@ -8,10 +8,11 @@ import 'package:dio/dio.dart';
 
 class showaqqarrepoimplementation extends showaqarrepo{
   @override
-  Future<Either<failure, Showstate>> showaqar({required String token, required int page}) async {
+  Future<Either<failure, Showstate>> showaqar({required String token, required int page,    Map<String,dynamic>?queryParameters
+}) async {
     Showstate showstate;
   try{
-Response response=await Getdata.getdata(path: "/state/all-states?page=${page}",token: token);
+Response response=await Getdata.getdata(path: "/state/all-states?page=${page}",token: token,queryParameters: queryParameters);
 if(response.statusCode==200&&response.data["message"]=="تم الحصول على بيانات جميع العقارات بنجاح"){
   showstate=Showstate.fromJson(response.data);
   return right(showstate);

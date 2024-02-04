@@ -17,7 +17,6 @@ class dropdownbutton extends StatelessWidget{
         border: Border.all(color: Appcolors.bluecolor),
             borderRadius: BorderRadius.circular(10)
           ),
-          width: double.infinity,
       child: Row(
         children: [
           Expanded(

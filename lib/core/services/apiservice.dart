@@ -14,9 +14,11 @@ class Postdata {
     required String path,
     String? token,
     Object? data,
+    Map<String,dynamic>?queryParameters
   }) async {
     var respnse = await Apiservice.dio.post(path,
         data: data,
+        queryParameters: queryParameters,
         options: Options(
             headers: {"Accept": "application/json", "Authorization": token}));
     return respnse;
@@ -25,9 +27,12 @@ class Postdata {
 
 // ignore: camel_case_types
 class Getdata {
-  static Future<Response> getdata({required String path, String? token}) async {
+  static Future<Response> getdata({required String path, String? token, Map<String,dynamic>?queryParameters
+}) async {
     var respnse = await Apiservice.dio.get(path,
+    queryParameters: queryParameters,
         options: Options(
+          
             headers: {"Accept": "application/json", "Authorization": token}));
     return respnse;
   }
