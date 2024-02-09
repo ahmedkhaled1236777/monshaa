@@ -9,6 +9,7 @@ import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
 import 'package:aplication/features/auth/profile/presentation/view/profile.dart';
+import 'package:aplication/features/lands/presentation/views/estate.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -103,7 +104,7 @@ class MyApp extends StatelessWidget {
                 registercuibt(registerrepo: registerrepoimplementation())),
         BlocProvider(
             create: (context) =>
-               EditCubit(editrepo: editaqarrepoimplementation())),
+                EditCubit(editrepo: editaqarrepoimplementation())),
         BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
         BlocProvider(create: (context) => HomeCubit()),
@@ -111,7 +112,9 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 addaqarcuibt(addaqarrepo: addaqarimplementation())),
         BlocProvider(create: (context) => DateCubit()),
-        BlocProvider(create: (context) => ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

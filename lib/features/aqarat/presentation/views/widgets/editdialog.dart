@@ -210,51 +210,67 @@ class editdialog extends StatelessWidget {
                 const SizedBox(
                   height: Appsizes.size15,
                 ),
-                 customgridimages(),
-                        const SizedBox(
-                          height: Appsizes.size15,
-                        ),
-               
+                customgridimages(),
+                const SizedBox(
+                  height: Appsizes.size15,
+                ),
                 BlocConsumer<EditCubit, EditState>(
                   listener: (context, state) {
-                    if(state is editfailure){
+                    if (state is editfailure) {
                       showsnack(comment: state.error_message, context: context);
                     }
-                    if(state is editsuccess){
-                                            Navigator.pop(context);
+                    if (state is editsuccess) {
+                      Navigator.pop(context);
 
-                      showsnack(comment: state.successmessage, context: context);
+                      showsnack(
+                          comment: state.successmessage, context: context);
                     }
-                },
+                  },
                   builder: (context, state) {
-                    if(state is editloading)return loading();
+                    if (state is editloading) return loading();
                     return custommaterialbutton(
-                      onPressed: () async {
-                          if(BlocProvider.of<addaqarcuibt>(context).imageFile.isNotEmpty) {
-                              await BlocProvider.of<addaqarcuibt>(context)
-                                    .uploadimages();
-                            }
-                        BlocProvider.of<EditCubit>(context).updateaqar(token: generaltoken, id: data.id!.toInt(), add_aqar: 
-                        addaqarrequest(real_state_address:adress.text,
-                        real_state_images: BlocProvider.of<addaqarcuibt>(context).images,
-                         real_state_address_details: adressdetails.text,
-                          real_state_type:BlocProvider.of<EditCubit>(context).aqartype==null?data.realStateType:
-                          request[ BlocProvider.of<EditCubit>(context).aqartype!] , 
-                          department: BlocProvider.of<EditCubit>(context).departement==null?data.department:
-                          request[ BlocProvider.of<EditCubit>(context).departement!],
-                           advertiser_type:BlocProvider.of<EditCubit>(context).advistor_type==null?data.advertiserType:
-                            request[BlocProvider.of<EditCubit>(context).advistor_type!],
-                            advertised_phone_number: phone.text,
-                            real_state_space: num.parse(area.text), 
-                           real_state_price: num.parse(price.text),
-                            number_of_rooms: int.parse(roomsnumber.text),
-                            state_date_register: BlocProvider.of<DateCubit>(context).date1,
-                             advertise_details: details.text,
-                             apartment_number: housenumber.text,
-                              building_number: aqarnumber.text)
-                        );
-                      },
-                        button_name: "تعديل البيانات", buttonicon: Icons.edit);
+                        onPressed: () async {
+                          if (BlocProvider.of<addaqarcuibt>(context)
+                              .imageFile
+                              .isNotEmpty) {
+                            await BlocProvider.of<addaqarcuibt>(context)
+                                .uploadimages();
+                          }
+                          BlocProvider.of<EditCubit>(context).updateaqar(
+                              token: generaltoken,
+                              id: data.id!.toInt(),
+                              add_aqar: addaqarrequest(
+                                  real_state_address: adress.text,
+                                  real_state_images:
+                                      BlocProvider.of<addaqarcuibt>(context)
+                                          .images,
+                                  real_state_address_details:
+                                      adressdetails.text,
+                                  real_state_type:
+                                      BlocProvider.of<EditCubit>(context).aqartype == null
+                                          ? data.realStateType
+                                          : request[
+                                              BlocProvider.of<EditCubit>(context)
+                                                  .aqartype!],
+                                  department: BlocProvider.of<EditCubit>(context).departement == null
+                                      ? data.department
+                                      : request[BlocProvider.of<EditCubit>(context)
+                                          .departement!],
+                                  advertiser_type:
+                                      BlocProvider.of<EditCubit>(context).advistor_type == null
+                                          ? data.advertiserType
+                                          : request[BlocProvider.of<EditCubit>(context).advistor_type!],
+                                  advertised_phone_number: phone.text,
+                                  real_state_space: num.parse(area.text),
+                                  real_state_price: num.parse(price.text),
+                                  number_of_rooms: int.parse(roomsnumber.text),
+                                  state_date_register: BlocProvider.of<DateCubit>(context).date1,
+                                  advertise_details: details.text,
+                                  apartment_number: housenumber.text,
+                                  building_number: aqarnumber.text));
+                        },
+                        button_name: "تعديل البيانات",
+                        buttonicon: Icons.edit);
                   },
                 )
               ]),

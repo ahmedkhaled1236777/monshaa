@@ -69,13 +69,16 @@ class _desktopaqaratState extends State<desktopaqarat> {
             actions: [
               Row(
                 children: [
-                  IconButton(onPressed: (){
-                    BlocProvider.of<ShowaqaratCubit>(context).queryParameters=null;
-  BlocProvider.of<ShowaqaratCubit>(context).data.clear();
-             BlocProvider.of<ShowaqaratCubit>(context).getallaqarat(
-        token:
-        generaltoken,
-        page:1);                  }, icon: Icon(Icons.data_exploration,color: Appcolors.whitecolor)),
+                  IconButton(
+                      onPressed: () {
+                        BlocProvider.of<ShowaqaratCubit>(context)
+                            .queryParameters = null;
+                        BlocProvider.of<ShowaqaratCubit>(context).data.clear();
+                        BlocProvider.of<ShowaqaratCubit>(context)
+                            .getallaqarat(token: generaltoken, page: 1);
+                      },
+                      icon: Icon(Icons.data_exploration,
+                          color: Appcolors.whitecolor)),
                   search(),
                   const SizedBox(
                     width: Appsizes.size15,

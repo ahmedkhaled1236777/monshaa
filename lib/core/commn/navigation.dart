@@ -6,7 +6,7 @@ navigateto({required Widget navigationscreen, required BuildContext context}) {
   }));
 }
 
-navigateandfinish( 
+navigateandfinish(
     {required Widget navigationscreen, required BuildContext context}) {
   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
     return navigationscreen;

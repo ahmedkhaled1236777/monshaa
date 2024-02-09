@@ -1,8 +1,11 @@
 abstract class addaqarstate {}
 
 class addaaqarintial extends addaqarstate {}
+
 class changedepartement extends addaqarstate {}
+
 class changeadvistortype extends addaqarstate {}
+
 class changetype extends addaqarstate {}
 
 class addnewimagestate extends addaqarstate {}

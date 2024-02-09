@@ -26,7 +26,7 @@ class addaqarrequest {
       required this.advertised_phone_number,
       required this.real_state_space,
       required this.real_state_price,
-       this.number_of_bathrooms,
+      this.number_of_bathrooms,
       required this.number_of_rooms,
       required this.state_date_register,
       required this.advertise_details,

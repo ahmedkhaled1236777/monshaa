@@ -10,12 +10,11 @@ class Apiservice {
 
 // ignore: camel_case_types
 class Postdata {
-  static Future<Response> postdata({
-    required String path,
-    String? token,
-    Object? data,
-    Map<String,dynamic>?queryParameters
-  }) async {
+  static Future<Response> postdata(
+      {required String path,
+      String? token,
+      Object? data,
+      Map<String, dynamic>? queryParameters}) async {
     var respnse = await Apiservice.dio.post(path,
         data: data,
         queryParameters: queryParameters,
@@ -27,21 +26,24 @@ class Postdata {
 
 // ignore: camel_case_types
 class Getdata {
-  static Future<Response> getdata({required String path, String? token, Map<String,dynamic>?queryParameters
-}) async {
+  static Future<Response> getdata(
+      {required String path,
+      String? token,
+      Map<String, dynamic>? queryParameters}) async {
     var respnse = await Apiservice.dio.get(path,
-    queryParameters: queryParameters,
+        queryParameters: queryParameters,
         options: Options(
-          
             headers: {"Accept": "application/json", "Authorization": token}));
     return respnse;
   }
 }
-class Deletedata {
-  static Future<Response>deletedata({required String path, String? token})async{
-    Response response=await Apiservice.dio.delete(path,  options: Options(
-            headers: {"Accept": "application/json", "Authorization": token}));
-                return response;
 
+class Deletedata {
+  static Future<Response> deletedata(
+      {required String path, String? token}) async {
+    Response response = await Apiservice.dio.delete(path,
+        options: Options(
+            headers: {"Accept": "application/json", "Authorization": token}));
+    return response;
   }
 }

@@ -66,9 +66,8 @@ class profilebody extends StatelessWidget {
                   height: height * 0.025,
                 ),
               logoutpro(onPressed: () async {
-                await BlocProvider.of<LogoutCubit>(context).log_out(
-                    token:
-                        generaltoken);
+                await BlocProvider.of<LogoutCubit>(context)
+                    .log_out(token: generaltoken);
               })
             ],
           ),

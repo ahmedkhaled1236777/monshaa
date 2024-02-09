@@ -1,4 +1,3 @@
-
 import 'package:aplication/features/aqarat/presentation/views/widgets/desktopaqarat.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/mobileaddaqqar.dart';
 
@@ -13,8 +12,6 @@ class Estate extends StatefulWidget {
 
 class EstateState extends State<Estate> {
   GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
-
-    
 
   @override
   Widget build(BuildContext context) {

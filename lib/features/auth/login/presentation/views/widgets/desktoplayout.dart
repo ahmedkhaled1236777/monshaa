@@ -101,12 +101,13 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                       ),
                       BlocConsumer<logincuibt, loginstate>(
                         builder: (context, state) {
-                          if (state is loginloading)
-                            return Center(
+                          if (state is loginloading) {
+                            return const Center(
                               child: CircularProgressIndicator(
                                 color: Appcolors.bluecolor,
                               ),
                             );
+                          }
 
                           return custommaterialbutton(
                             button_name: Apptextes.login,

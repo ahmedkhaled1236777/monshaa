@@ -27,12 +27,11 @@ class customtableaqar extends StatefulWidget {
 class _customtableaqarState extends State<customtableaqar> {
   @override
   void initState() {
-    BlocProvider.of<ShowaqaratCubit>(context).data.clear();
-         BlocProvider.of<ShowaqaratCubit>(context).getallaqarat(
-        token:
-        generaltoken,
-        page:1);
+     BlocProvider.of<ShowaqaratCubit>(context).data.clear();
+    BlocProvider.of<ShowaqaratCubit>(context)
+        .getallaqarat(token: generaltoken, page: 1);
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,82 +61,199 @@ class _customtableaqarState extends State<customtableaqar> {
           ),
           Expanded(
               child: BlocConsumer<ShowaqaratCubit, ShowaqaratState>(
-                listener: (context, state) {
-                  if(state is Showaqaratfailure)showsnack(comment: state.error_message, context: context);
-                },
-                builder: (context, state) {
-              if(state is Showaqaratloading) {
-                return loading();
+                  listener: (context, state) {
+            if (state is Showaqaratfailure)
+              showsnack(comment: state.error_message, context: context);
+          }, builder: (context, state) {
+            if (state is Showaqaratloading) {
+              return loading();
               // ignore: curly_braces_in_flow_control_structures
-              } else if(state is Showaqaratfailure)return const SizedBox();
-                  return ListView.separated(
-                    controller: BlocProvider.of<ShowaqaratCubit>(context).scrollController,
-                                physics:  BouncingScrollPhysics(),
-                  
-                  
-                      itemBuilder: (context, index) {
-                    return                  index>=BlocProvider.of<ShowaqaratCubit>(context).data.length? loading():
-                  
-                        InkWell(
+            } else if (state is Showaqaratfailure) return const SizedBox();
+            return ListView.separated(
+              primary: false,
+                controller:
+                    BlocProvider.of<ShowaqaratCubit>(context).scrollController,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return index >=
+                          BlocProvider.of<ShowaqaratCubit>(context).data.length
+                      ? loading()
+                      : InkWell(
                           onTap: (() {
-                            navigateto(navigationscreen: mShowEstate(
-                              data: BlocProvider.of<ShowaqaratCubit>(context).data[index],
-                            ), context: context);
+                            navigateto(
+                                navigationscreen: mShowEstate(
+                                  data:
+                                      BlocProvider.of<ShowaqaratCubit>(context)
+                                          .data[index],
+                                ),
+                                context: context);
                           }),
                           child: customtableitem(
                             textStyle: MediaQuery.of(context).size.width < 600
-                                ? Appstyles.textStyle12b.copyWith(fontSize: 12.sp)
+                                ? Appstyles.textStyle12b
+                                    .copyWith(fontSize: 12.sp)
                                 : Appstyles.textStyle12b,
-                            iconsize:
-                                MediaQuery.of(context).size.width < 600 ? 20.sp : 22,
-                            adress:BlocProvider.of<ShowaqaratCubit>(context).data[index].realStateAddress! ,
-                            section: show[BlocProvider.of<ShowaqaratCubit>(context).data[index].department!],
-                            price: BlocProvider.of<ShowaqaratCubit>(context).data[index].realStatePrice.toString(),
-                            type:show[ BlocProvider.of<ShowaqaratCubit>(context).data[index].realStateType!],
-                            advertise_type:show[ BlocProvider.of<ShowaqaratCubit>(context).data[index].advertiserType!],
-                            edit: IconButton(icon: Icon(Icons.edit,size:  MediaQuery.of(context).size.width < 600 ? 20.sp : 22,),onPressed: (){
-                              BlocProvider.of<addaqarcuibt>(context).images=[];
-                              BlocProvider.of<addaqarcuibt>(context).imageFile=[];
-                              BlocProvider.of<DateCubit>(context).date1=BlocProvider.of<ShowaqaratCubit>(context).data[index].createdAt!;                           showDialog(context: context, builder: (_){
-                                return AlertDialog(
-                                  scrollable: true,
-                                  actions: [
-                                    editdialog(
-                                      width: MediaQuery.sizeOf(context).width*0.5,
-                                      height:  MediaQuery.sizeOf(context).height*0.85,
-                                       aqarnumber: TextEditingController(text:BlocProvider.of<ShowaqaratCubit>(context).data[index].apartmentNumber ), 
-                                       data:BlocProvider.of<ShowaqaratCubit>(context).data[index] ,
-                                       adress: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].realStateAddress),
-                                       toilletsnumber: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].numberOfBathrooms.toString()),
-                                       housenumber: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].buildingNumber.toString()),
-                                       phone: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].advertisedPhoneNumber.toString()),
-                                       roomsnumber: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].numberOfRooms.toString()),
-                                       price: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].realStatePrice.toString()),
-                                       details: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].advertiseDetails.toString()),
-                                       adressdetails: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].realStateAddressDetails.toString()),
-                                       area: TextEditingController(text: BlocProvider.of<ShowaqaratCubit>(context).data[index].realStateSpace.toString()),
-                          
-                          
-                                    )
-                                ],)
-                                ;
-                              });
-                            },),
-                            delet: BlocBuilder<ShowaqaratCubit, ShowaqaratState>(
-                              builder: (context, state) {
-                             
-                                return IconButton(icon: Icon(Icons.delete,color: Colors.red,size:  MediaQuery.of(context).size.width < 600 ? 20.sp : 22,),onPressed: (){
-                                  BlocProvider.of<ShowaqaratCubit>(context).deleteaqar(token: generaltoken, aqarnumber:  BlocProvider.of<ShowaqaratCubit>(context).data[index].id!.toInt());
-                                },);
-                              }
-                            ),),
-                        );},
-                      separatorBuilder: (context, index) => const Divider(),
-                      itemCount: BlocProvider.of<ShowaqaratCubit>(context).loading==true?
-                      BlocProvider.of<ShowaqaratCubit>(context).data.length+1:BlocProvider.of<ShowaqaratCubit>(context).data.length
-                      );
-                }
-              ))
+                            iconsize: MediaQuery.of(context).size.width < 600
+                                ? 20.sp
+                                : 22,
+                            adress: BlocProvider.of<ShowaqaratCubit>(context)
+                                .data[index]
+                                .realStateAddress!,
+                            section: show[
+                                BlocProvider.of<ShowaqaratCubit>(context)
+                                    .data[index]
+                                    .department!],
+                            price: BlocProvider.of<ShowaqaratCubit>(context)
+                                .data[index]
+                                .realStatePrice
+                                .toString(),
+                            type: show[BlocProvider.of<ShowaqaratCubit>(context)
+                                .data[index]
+                                .realStateType!],
+                            advertise_type: show[
+                                BlocProvider.of<ShowaqaratCubit>(context)
+                                    .data[index]
+                                    .advertiserType!],
+                            edit: IconButton(
+                              icon: Icon(
+                                Icons.edit,
+                                size: MediaQuery.of(context).size.width < 600
+                                    ? 20.sp
+                                    : 22,
+                              ),
+                              onPressed: () {
+                                BlocProvider.of<addaqarcuibt>(context).images =
+                                    [];
+                                BlocProvider.of<addaqarcuibt>(context)
+                                    .imageFile = [];
+                                BlocProvider.of<DateCubit>(context).date1 =
+                                    BlocProvider.of<ShowaqaratCubit>(context)
+                                        .data[index]
+                                        .createdAt!;
+                                showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return AlertDialog(
+                                        scrollable: true,
+                                        actions: [
+                                          editdialog(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.5,
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                0.85,
+                                            aqarnumber: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .apartmentNumber),
+                                            data: BlocProvider.of<
+                                                    ShowaqaratCubit>(context)
+                                                .data[index],
+                                            adress: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .realStateAddress),
+                                            toilletsnumber:
+                                                TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .numberOfBathrooms
+                                                        .toString()),
+                                            housenumber: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .buildingNumber
+                                                    .toString()),
+                                            phone: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .advertisedPhoneNumber
+                                                    .toString()),
+                                            roomsnumber: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .numberOfRooms
+                                                    .toString()),
+                                            price: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .realStatePrice
+                                                    .toString()),
+                                            details: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .advertiseDetails
+                                                    .toString()),
+                                            adressdetails: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .realStateAddressDetails
+                                                    .toString()),
+                                            area: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index]
+                                                    .realStateSpace
+                                                    .toString()),
+                                          )
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                            delet:
+                                BlocBuilder<ShowaqaratCubit, ShowaqaratState>(
+                                    builder: (context, state) {
+                              return IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                  size: MediaQuery.of(context).size.width < 600
+                                      ? 20.sp
+                                      : 22,
+                                ),
+                                onPressed: () {
+                                  BlocProvider.of<ShowaqaratCubit>(context)
+                                      .deleteaqar(
+                                          token: generaltoken,
+                                          aqarnumber:
+                                              BlocProvider.of<ShowaqaratCubit>(
+                                                      context)
+                                                  .data[index]
+                                                  .id!
+                                                  .toInt());
+                                },
+                              );
+                            }),
+                          ),
+                        );
+                },
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: BlocProvider.of<ShowaqaratCubit>(context).loading ==
+                        true
+                    ? BlocProvider.of<ShowaqaratCubit>(context).data.length + 1
+                    : BlocProvider.of<ShowaqaratCubit>(context).data.length);
+          }))
         ]));
   }
 }

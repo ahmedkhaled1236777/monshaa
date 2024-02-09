@@ -14,9 +14,8 @@ class profile extends StatefulWidget {
 
 class _profileState extends State<profile> {
   getprofile() async {
-    await BlocProvider.of<ProfileCubit>(context).getprofile(
-        token:
-            generaltoken);
+    await BlocProvider.of<ProfileCubit>(context)
+        .getprofile(token: generaltoken);
   }
 
   @override
@@ -39,11 +38,11 @@ class _profileState extends State<profile> {
           }
         },
         builder: (context, state) {
-                        print(state);
+          print(state);
 
           if (state is Profileloading) {
             return loading();
-          } else if (state is Profilesuccess){
+          } else if (state is Profilesuccess) {
             // ignore: curly_braces_in_flow_control_structures
             return LayoutBuilder(builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
@@ -56,7 +55,8 @@ class _profileState extends State<profile> {
                   child: profilebody(),
                 );
               }
-            });}
+            });
+          }
           return const SizedBox();
         },
       )),

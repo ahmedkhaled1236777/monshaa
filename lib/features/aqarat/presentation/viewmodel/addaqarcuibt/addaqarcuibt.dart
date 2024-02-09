@@ -11,9 +11,9 @@ class addaqarcuibt extends Cubit<addaqarstate> {
   addaqarcuibt({required this.addaqarrepo}) : super(addaaqarintial());
   List<XFile> imageFile = [];
   List? images = [];
-String?aqartype;
-String?departement;
-String?advistor_type;
+  String? aqartype;
+  String? departement;
+  String? advistor_type;
   List headertable = [
     "العنوان",
     "القسم",
@@ -23,19 +23,21 @@ String?advistor_type;
     "تعديل",
     "حذف"
   ];
-  changeaddaqartype(String val){
-aqartype=val;
-emit(changetype());
+  changeaddaqartype(String val) {
+    aqartype = val;
+    emit(changetype());
   }
-  changeaddaqardepartement(String val){
-departement=val;
-emit(changedepartement());
 
+  changeaddaqardepartement(String val) {
+    departement = val;
+    emit(changedepartement());
   }
-  changeaddaqaradvistortype(String val){
-advistor_type=val;
-emit(changeadvistortype());
+
+  changeaddaqaradvistortype(String val) {
+    advistor_type = val;
+    emit(changeadvistortype());
   }
+
   addnewimage({required List<XFile> pickedimages}) {
     imageFile.addAll(pickedimages);
     emit(addnewimagestate());
@@ -45,9 +47,7 @@ emit(changeadvistortype());
     for (int i = 0; i < imageFile.length; i++) {
       images!.add(await MultipartFile.fromFile(imageFile[i].path,
           filename: imageFile[i].path.split("/").last));
-         
     }
-   
   }
 
   removeimage(int index) {
@@ -66,12 +66,12 @@ emit(changeadvistortype());
       emit(addaaqarsuccess(successmessage: success));
     });
   }
- cleardata(){
-  aqartype=null;
-  advistor_type=null;
-  departement=null;
-  imageFile=[];
-    List images = [];
 
- }
+  cleardata() {
+    aqartype = null;
+    advistor_type = null;
+    departement = null;
+    imageFile = [];
+    List images = [];
+  }
 }

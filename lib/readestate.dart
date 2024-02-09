@@ -610,9 +610,7 @@ class ReadEstateState extends State<ReadEstate> {
                                               ]),
                                           TableRow(children: [
                                             InkWell(
-                                              onTap: () {
-                                               
-                                              },
+                                              onTap: () {},
                                               child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,

@@ -9,7 +9,7 @@ class customtableitem extends StatelessWidget {
   final String price;
   final String type;
   final String advertise_type;
-  
+
   Widget delet;
   Widget edit;
   TextStyle textStyle;
@@ -30,7 +30,8 @@ class customtableitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints:BoxConstraints(minHeight: MediaQuery.of(context).size.height/19) ,
+      constraints:
+          BoxConstraints(minHeight: MediaQuery.of(context).size.height / 19),
       child: Row(
         children: [
           Expanded(
@@ -74,7 +75,7 @@ class customtableitem extends StatelessWidget {
             flex: 2,
           ),
           Expanded(
-            child:delet,
+            child: delet,
             flex: 2,
           ),
         ],
