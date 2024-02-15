@@ -14,7 +14,7 @@ abstract class Appstyles {
       fontWeight: FontWeight.w300,
       fontSize: 3.sp.clamp(0, 3.sp));
   static TextStyle textStyle13wd = TextStyle(
-      color: Colors.white, fontWeight: FontWeight.w300, fontSize: 4.3.sp);
+      color: Colors.white, fontWeight: FontWeight.w300, fontSize: 3.sp);
   static TextStyle textStyle14wm = TextStyle(
       color: Colors.white, fontWeight: FontWeight.w300, fontSize: 15.sp);
   static TextStyle textStyle14wt = TextStyle(

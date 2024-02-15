@@ -8,6 +8,7 @@ import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/expense.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:aplication/features/home/presentation/views/home.dart';
 import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:aplication/features/home/presentation/views/widgets/appbartittle.dart';
 import 'package:aplication/features/home/presentation/views/widgets/customdraweitem.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
 import 'package:aplication/main.dart';
 import 'package:aplication/readbuild.dart';
 import 'package:aplication/readcatch.dart';
@@ -65,6 +67,10 @@ class Dashboard extends StatelessWidget {
                                       iconData: e["icon"],
                                       text: e["name"],
                                       onTap: () {
+                                          BlocProvider.of<ShowaqaratCubit>(context)
+                            .queryParameters = null;
+                                          BlocProvider.of<ShowlandsCubit>(context)
+                            .queryParameters = null;
                                         navigateandfinish(
                                             navigationscreen: e["page"],
                                             context: context);

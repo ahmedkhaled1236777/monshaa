@@ -1,22 +1,23 @@
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/addlandcuibt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class pickedimage extends StatefulWidget {
+class pickedimageland extends StatefulWidget {
   ImagePicker picker = ImagePicker();
 
   @override
-  State<pickedimage> createState() => _pickedimageState();
+  State<pickedimageland> createState() => _pickedimagelandState();
 }
 
-class _pickedimageState extends State<pickedimage> {
+class _pickedimagelandState extends State<pickedimageland> {
   uploadImage() async {
     final List<XFile> pickedimage = await widget.picker.pickMultiImage();
 
     if (pickedimage.isNotEmpty) {
       // ignore: use_build_context_synchronously
-      BlocProvider.of<addaqarcuibt>(context)
+      BlocProvider.of<addlandcuibt>(context)
           .addnewimage(pickedimages: pickedimage);
     }
   }

@@ -16,3 +16,11 @@ Map request = {
   "صاحب عقار": "real_state_owner",
   "شركة عقارات": "real_state_company"
 };
+Map requestland={
+  "شركة عقارات":"real_state_company",
+  "صاحب الارض":"real_state_owner"
+};
+Map showland={
+ "real_state_company" :"شركة عقارات",
+  "real_state_owner":"صاحب الارض",
+};

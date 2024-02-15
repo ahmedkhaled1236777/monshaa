@@ -4,7 +4,7 @@ class Links extends Equatable {
   final String? first;
   final String? last;
   final dynamic prev;
-  final dynamic next;
+  final String? next;
 
   const Links({this.first, this.last, this.prev, this.next});
 
@@ -12,7 +12,7 @@ class Links extends Equatable {
         first: json['first']?.toString(),
         last: json['last']?.toString(),
         prev: json['prev'],
-        next: json['next'],
+        next: json['next']?.toString(),
       );
 
   Map<String, dynamic> toJson() => {

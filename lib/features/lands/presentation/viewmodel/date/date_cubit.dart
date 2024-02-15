@@ -19,7 +19,7 @@ class DatelandCubit extends Cubit<DatelandState> {
         lastDate: DateTime(3000));
     if (date != null) {
       selectedDate = date;
-      String month=date.month>9?'${date.month}':'0${date.month}';
+      String month = date.month > 9 ? '${date.month}' : '0${date.month}';
       date1 = '${date.year}-${month}-${date.day}';
     }
     ;

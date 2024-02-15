@@ -9,6 +9,7 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customtabl
 import 'package:aplication/features/aqarat/presentation/views/widgets/desktopdrawer.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/search.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/searchland.dart';
 import 'package:aplication/pdt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +61,7 @@ class mobileland extends StatelessWidget {
                           Icons.data_exploration,
                           color: Appcolors.whitecolor,
                         )),
-                    search(),
+                    landsearch(),
                     const SizedBox(
                       width: Appsizes.size5,
                     ),

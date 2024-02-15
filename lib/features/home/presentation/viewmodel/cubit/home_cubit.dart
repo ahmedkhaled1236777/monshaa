@@ -5,6 +5,7 @@ import 'package:aplication/connect.dart';
 import 'package:aplication/contract.dart';
 import 'package:aplication/expense.dart';
 import 'package:aplication/features/home/presentation/views/home.dart';
+import 'package:aplication/features/lands/presentation/views/estateland.dart';
 import 'package:aplication/receipt.dart';
 import 'package:aplication/reports.dart';
 import 'package:aplication/tenants.dart';
@@ -19,7 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
   List drawer = [
     {"name": "الصفحه الرئيسيه", "icon": Icons.home, "page": MyHomePage()},
     {"name": "العقارات ", "icon": Icons.landscape_outlined, "page": aqart()},
-    {"name": "الاراضي", "icon": Icons.landscape_outlined, "page": Building()},
+    {"name": "الاراضي", "icon": Icons.landscape_outlined, "page": landsEstate()},
     {
       "name": "المستاجرين",
       "icon": Icons.verified_user_outlined,

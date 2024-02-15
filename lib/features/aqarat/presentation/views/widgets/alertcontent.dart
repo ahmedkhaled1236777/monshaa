@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
@@ -248,9 +249,9 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .queryParameters = {
                                   "real_state_address": adress.text,
-                                  "department":
+                                  "department":request[
                                       BlocProvider.of<addaqarcuibt>(context)
-                                          .departement,
+                                          .departement],
                                   "advertised_phone_number": phone.text,
                                   "lowest_price": pricefrom.text.isEmpty
                                       ? null

@@ -2,12 +2,12 @@ import 'package:aplication/core/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class customheadertable extends StatelessWidget {
+class customheadertableland extends StatelessWidget {
   int flex;
   String? tabletormobile;
   final String title;
   final TextStyle textStyle;
-  customheadertable(
+  customheadertableland(
       {this.flex = 3,
       required this.title,
       this.tabletormobile,

@@ -1,6 +1,7 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/loading.dart';
+import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -9,6 +10,7 @@ import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/edit/edit_cubit.dart';
+import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/customgridimages.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
@@ -220,7 +222,7 @@ class editdialog extends StatelessWidget {
                       showsnack(comment: state.error_message, context: context);
                     }
                     if (state is editsuccess) {
-                      Navigator.pop(context);
+                      navigateandfinish(navigationscreen: Estate(), context: context);
 
                       showsnack(
                           comment: state.successmessage, context: context);

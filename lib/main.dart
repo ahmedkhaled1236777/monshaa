@@ -9,7 +9,14 @@ import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
 import 'package:aplication/features/auth/profile/presentation/view/profile.dart';
-import 'package:aplication/features/lands/presentation/views/estate.dart';
+import 'package:aplication/features/lands/data/repos/addland/addlandrepoimplementation.dart';
+import 'package:aplication/features/lands/data/repos/editland/editlandrepoimplementation.dart';
+import 'package:aplication/features/lands/data/repos/showland/showlandrepoimplementation.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/addlandcuibt.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/edit/edit_cubit.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
+import 'package:aplication/features/lands/presentation/views/estateland.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -106,15 +113,25 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 EditCubit(editrepo: editaqarrepoimplementation())),
         BlocProvider(
+            create: (context) =>
+                EditlandCubit(editrepo: editlandrepoimplementation())),
+        BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(
             create: (context) =>
                 addaqarcuibt(addaqarrepo: addaqarimplementation())),
         BlocProvider(create: (context) => DateCubit()),
+        BlocProvider(create: (context) => DatelandCubit()),
         BlocProvider(
             create: (context) =>
                 ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                addlandcuibt(addlandrepo: addlandrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                ShowlandsCubit(showlands: showlandsrepoimplementation())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

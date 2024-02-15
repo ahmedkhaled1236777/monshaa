@@ -1,16 +1,17 @@
 import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class choosedate extends StatefulWidget {
+class choosedateland extends StatefulWidget {
   @override
-  State<choosedate> createState() => _choosedateState();
+  State<choosedateland> createState() => _choosedatelandState();
 }
 
-class _choosedateState extends State<choosedate> {
+class _choosedatelandState extends State<choosedateland> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DateCubit, DateState>(
+    return BlocBuilder<DatelandCubit, DatelandState>(
       builder: (context, state) {
         return Container(
           alignment: Alignment.topRight,
@@ -26,12 +27,12 @@ class _choosedateState extends State<choosedate> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5))),
               onPressed: () async {
-                BlocProvider.of<DateCubit>(context).changedate(context);
+                BlocProvider.of<DatelandCubit>(context).changedate(context);
               },
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                  BlocProvider.of<DateCubit>(context).date1,
+                  BlocProvider.of<DatelandCubit>(context).date1,
                   textAlign: TextAlign.start,
                   style: const TextStyle(
                       color: Colors.black45,

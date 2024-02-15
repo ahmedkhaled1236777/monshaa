@@ -1,23 +1,24 @@
 import 'package:aplication/building.dart';
 import 'package:aplication/core/commn/constants.dart';
-import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
+import 'package:aplication/core/commn/widgets/cashedimage.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
+import 'package:aplication/features/lands/data/models/showlands/datum.dart';
 import 'package:aplication/main.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:flutter/material.dart';
 
-class mShowEstate extends StatefulWidget {
+class mlandShowEstate extends StatefulWidget {
   final Datum data;
 
-  const mShowEstate({super.key, required this.data});
+  const mlandShowEstate({super.key, required this.data});
   @override
   State<StatefulWidget> createState() {
-    return ShowEstateState();
+    return ShowlandEstateState();
   }
 }
 
-class ShowEstateState extends State<mShowEstate> {
+class ShowlandEstateState extends State<mlandShowEstate> {
   GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
 
   @override
@@ -38,7 +39,7 @@ class ShowEstateState extends State<mShowEstate> {
               ),
             ),
             title: const Text(
-              'بيانات العقار',
+              'بيانات الارض',
               style: TextStyle(color: Colors.white, fontSize: 14),
             ),
             centerTitle: true,
@@ -103,27 +104,7 @@ class ShowEstateState extends State<mShowEstate> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.home,
-                                          size: 20, color: Colors.blueGrey),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        show[widget.data.realStateType!],
-                                        style: TextStyle(
-                                            fontSize: 12.5,
-                                            color: Colors.blueGrey,
-                                            fontWeight: FontWeight.w100),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
+                               
                                 Container(
                                   child: Row(
                                     children: [
@@ -133,7 +114,7 @@ class ShowEstateState extends State<mShowEstate> {
                                         width: 10,
                                       ),
                                       Text(
-                                        widget.data!.realStateAddress!,
+                                        widget.data!.address!,
                                         style: TextStyle(
                                             fontSize: 12.5,
                                             color: Colors.blueGrey,
@@ -146,7 +127,7 @@ class ShowEstateState extends State<mShowEstate> {
                                   height: 15,
                                 ),
                                 Container(
-                                  child: Row(
+                                  child: Column(
                                     children: [
                                       Row(
                                         children: [
@@ -156,7 +137,7 @@ class ShowEstateState extends State<mShowEstate> {
                                             width: 10,
                                           ),
                                           Text(
-                                              '${widget.data.realStateSpace} متر',
+                                              '${widget.data.sizeInMetres} متر',
                                               style: TextStyle(
                                                   fontSize: 12.5,
                                                   color: Colors.blueGrey))
@@ -165,46 +146,8 @@ class ShowEstateState extends State<mShowEstate> {
                                       SizedBox(
                                         width: 15,
                                       ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.bed_outlined,
-                                              size: 20, color: Colors.blueGrey),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                              widget.data!.numberOfRooms!
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 12.5,
-                                                  color: Colors.blueGrey))
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Row(
-                                        children: [
-                                          if (widget.data.numberOfBathrooms !=
-                                              null)
-                                            Icon(Icons.bathtub_outlined,
-                                                size: 20,
-                                                color: Colors.blueGrey),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          if (widget.data.numberOfBathrooms !=
-                                              null)
-                                            Text(
-                                                '${widget.data.numberOfBathrooms!} حمام',
-                                                style: TextStyle(
-                                                    fontSize: 12.5,
-                                                    color: Colors.blueGrey))
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                 
+                                    
                                 const SizedBox(
                                   height: 15,
                                 ),
@@ -212,7 +155,7 @@ class ShowEstateState extends State<mShowEstate> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "السعر : ${widget.data.realStatePrice.toString()}",
+                                        "السعر : ${widget.data.priceOfOneMeter.toString()}",
                                         style: TextStyle(
                                             fontSize: 12.5,
                                             color: Colors.blueGrey,
@@ -295,7 +238,7 @@ class ShowEstateState extends State<mShowEstate> {
                                         width: 10,
                                       ),
                                       Text(
-                                        widget.data.advertisedPhoneNumber
+                                        widget.data.sellerPhoneNumber
                                             .toString(),
                                         style: TextStyle(
                                             fontSize: 13,
@@ -322,8 +265,8 @@ class ShowEstateState extends State<mShowEstate> {
                                   ),
                               ],
                             )),
-                          )),
-                      Container(
+                          
+       if(widget.data.landImages!.isNotEmpty)               Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Container(
                             child: Container(
@@ -339,8 +282,8 @@ class ShowEstateState extends State<mShowEstate> {
                                         childAspectRatio: 1.4,
                                         crossAxisSpacing: 10,
                                         mainAxisSpacing: 10),
-                                children: widget.data.realStateImages!
-                                    .map((e) => Image.network(e))
+                                children: widget.data.landImages!
+                                    .map((e) => imagefromrequest(url: e, height: double.infinity, width: double.infinity))
                                     .toList(),
                               ),
                             ),
@@ -352,7 +295,7 @@ class ShowEstateState extends State<mShowEstate> {
                           )),
                     ],
                   ),
-                );
+                )))]));
               } else {
                 return Container(
                   child: ListView(
@@ -381,27 +324,7 @@ class ShowEstateState extends State<mShowEstate> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.home,
-                                            size: 20, color: Colors.blueGrey),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          show[widget.data.realStateType!],
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.blueGrey,
-                                              fontWeight: FontWeight.w100),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
+                               
                                   Container(
                                     child: Row(
                                       children: [
@@ -411,7 +334,7 @@ class ShowEstateState extends State<mShowEstate> {
                                           width: 10,
                                         ),
                                         Text(
-                                          widget.data!.realStateAddress!,
+                                          widget.data!.address!,
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
@@ -424,7 +347,7 @@ class ShowEstateState extends State<mShowEstate> {
                                     height: 15,
                                   ),
                                   Container(
-                                    child: Row(
+                                    child: Column(
                                       children: [
                                         Row(
                                           children: [
@@ -435,7 +358,7 @@ class ShowEstateState extends State<mShowEstate> {
                                               width: 10,
                                             ),
                                             Text(
-                                                '${widget.data.realStateSpace} متر',
+                                                '${widget.data.sizeInMetres} متر',
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.blueGrey))
@@ -444,55 +367,14 @@ class ShowEstateState extends State<mShowEstate> {
                                         SizedBox(
                                           width: 15,
                                         ),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.bed_outlined,
-                                                size: 20,
-                                                color: Colors.blueGrey),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                                widget.data!.numberOfRooms!
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.blueGrey))
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Row(
-                                          children: [
-                                            if (widget.data.numberOfBathrooms !=
-                                                null)
-                                              Icon(Icons.bathtub_outlined,
-                                                  size: 20,
-                                                  color: Colors.blueGrey),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            if (widget.data.numberOfBathrooms !=
-                                                null)
-                                              Text(
-                                                  '${widget.data.numberOfBathrooms!} حمام',
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.blueGrey))
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
+                                       
+                                     
+                                   
                                   Container(
                                     child: Row(
                                       children: [
                                         Text(
-                                          "السعر : ${widget.data.realStatePrice.toString()}",
+                                          "السعر : ${widget.data.priceOfOneMeter.toString()}",
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
@@ -575,7 +457,7 @@ class ShowEstateState extends State<mShowEstate> {
                                           width: 10,
                                         ),
                                         Text(
-                                          widget.data.advertisedPhoneNumber
+                                          widget.data.sellerPhoneNumber
                                               .toString(),
                                           style: TextStyle(
                                               fontSize: 13,
@@ -598,13 +480,13 @@ class ShowEstateState extends State<mShowEstate> {
                                             fontSize: 12,
                                             color: Colors.blueGrey,
                                             fontWeight: FontWeight.w100),
-                                      ),
-                                    ),
-                                ],
-                              ),
+                                         ),
+                                  ),
+                              ],
                             )),
-                          )),
-                      Container(
+                        
+    if(widget.data.landImages!
+      .isNotEmpty)                Container(
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             child: Container(
@@ -613,15 +495,15 @@ class ShowEstateState extends State<mShowEstate> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.vertical,
                                   child: Column(
-                                    children: widget.data.realStateImages!
-                                        .map((e) => Image.network(e))
+                                    children: widget.data.landImages!
+                                        .map((e) => imagefromrequest(url: e, height: double.infinity, width: double.infinity))
                                         .toList(),
                                   ),
                                 )),
                           )),
                     ],
-                  ),
-                );
+                              )
+                ))))]));
               }
             },
           ),

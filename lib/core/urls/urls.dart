@@ -14,4 +14,5 @@ abstract class urls {
   static const delete_employee = "/employee/delete/21";
   // ignore: constant_identifier_names
   static const add_aqar = "/state/create";
+  static const add_land = "/land/create";
 }

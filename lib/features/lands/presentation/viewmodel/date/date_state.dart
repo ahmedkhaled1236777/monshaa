@@ -1,9 +1,6 @@
 part of 'date_cubit.dart';
 
-abstract class DatelandState{
-
- 
-}
+abstract class DatelandState {}
 
 class DatelandInitial extends DatelandState {}
 

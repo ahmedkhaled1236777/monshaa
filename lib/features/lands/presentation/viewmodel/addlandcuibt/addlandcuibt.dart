@@ -1,21 +1,23 @@
 import 'package:aplication/features/aqarat/data/models/addaqarrequest/addaqarrequest.dart';
 import 'package:aplication/features/aqarat/data/repos/addaqar/addaqarimplementation.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
-import 'package:aplication/features/lands/presentation/viewmodel/addaqarcuibt/addlandstate.dart';
+import 'package:aplication/features/lands/data/models/addlandrequestmodel.dart';
+import 'package:aplication/features/lands/data/repos/addland/addlandrepoimplementation.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/addlandstate.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class addlandcuibt extends Cubit<addlandstate> {
-  final addaqarimplementation addaqarrepo;
-  addlandcuibt({required this.addaqarrepo}) : super(addlandintial());
+  final addlandrepoimplementation addlandrepo;
+  addlandcuibt({required this.addlandrepo}) : super(addlandintial());
   List<XFile> imageFile = [];
   List? images = [];
 String?advistor_type;
   List headertable = [
     "العنوان",
-    "ٍعر المتر",
+    "سعر المتر",
     "المساحه",
     "التكلفه",
     "نوع المعلن",
@@ -47,11 +49,11 @@ emit(changeadvistortypeland());
     emit(addnewimagestateland());
   }
 
-  addaqar(
-      {required addaqarrequest myaddaqarrequest, required String token}) async {
+  addland(
+      {required addlandrequest myaddaqarrequest, required String token}) async {
     emit(addlandloading());
-    var result = await addaqarrepo.addaqar(
-        myaddaqarrequest: myaddaqarrequest, token: token);
+    var result = await addlandrepo.addland(
+        addlandrequest: myaddaqarrequest, token: token);
     result.fold((failure) {
       emit(addlandfailure(error: failure.error_message));
     }, (success) {

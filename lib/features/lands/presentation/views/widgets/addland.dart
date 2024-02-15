@@ -21,6 +21,12 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customchoo
 import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/pickedimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
+import 'package:aplication/features/lands/data/models/addlandrequestmodel.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/addlandcuibt.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/addlandstate.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit.dart';
+import 'package:aplication/features/lands/presentation/views/estateland.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +52,6 @@ class _addlandState extends State<addland> {
   TextEditingController area = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,136 +70,179 @@ class _addlandState extends State<addland> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: BlocBuilder<addaqarcuibt, addaqarstate>(
-                    builder: (context, state) {
-            return        Column(
-                      children: [
-                        Image.asset(
-                          'images/appartments.png',
-                          height: 50,
-                          width: 50,
-                        ),
-                        const SizedBox(
-                          height: Appsizes.size15,
-                        ),
-                        Text('تسجيل العقارات',
-                            style: Appstyles.textStyle12
-                                .copyWith(color: Appcolors.bluecolor),
-                            textAlign: TextAlign.right),
-                        const SizedBox(
-                          height: Appsizes.size15,
-                        ),
-                        Form(
-                          key: formkey,
-                          child: Column(
-                            children: [
-                              custommytextform(
-                                  val: "برجاء ادخال عنوان الارض",
-                                  controller: adress,
-                                  hintText: "العنوان"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              custommytextform(
-                                  val: "برجاء ادخال عنوان الارض بالتفصيل",
-                                  controller: adressdetails,
-                                  hintText: "عنوان الارض بالتفصيل"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              custommytextform(
-                                  val: "يرجي ادخال اسم العميل",
-                                  controller: adressdetails,
-                                  hintText: "اسم العميل"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                           
-                              custommytextform(
-                                  keyboardType: TextInputType.number,
-                                  val: "برجاء ادخال المساحه",
-                                  controller: area,
-                                  hintText: "المساحه"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              custommytextform(
-                                  keyboardType: TextInputType.number,
-                                  val: "برجاء ادخال سعر المتر",
-                                  controller: price,
-                                  hintText: "سعر المتر"),
-                              const SizedBox(
-                                height: Appsizes.size10,
-                              ),
-                              custommytextform(
-                                  keyboardType: TextInputType.number,
-                                  val: "برجاء ادخال رقم الهاتف",
-                                  controller: phone,
-                                  hintText: "رقم االهاتف"),
-                            ],
+                    scrollDirection: Axis.vertical,
+                    child: BlocBuilder<addlandcuibt, addlandstate>(
+                        builder: (context, state) {
+                      return Column(
+                        children: [
+                          Image.asset(
+                            'images/appartments.png',
+                            height: 50,
+                            width: 50,
                           ),
-                        ),
-                        const SizedBox(
-                          height: Appsizes.size10,
-                        ),
-                      
-                       
-                      
-                      
-                         dropdownbutton(
-                          onchanged: (val){
-                    
-                          },
-                          name:BlocProvider.of<addaqarcuibt>(context).advistor_type ,
-                            items: ["صاحب الارض", "شركة عقارات"],
-                            hint: "نوع المعلن"),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                     
-                        custommytextform(
-                            controller: details, hintText: "تفاصيل الاعلان"),
-                        const SizedBox(
-                          height: Appsizes.size10,
-                        ),
-                        choosedate(),
-                        const SizedBox(
-                          height: Appsizes.size10,
-                        ),
-                        pickedimage(),
-                        const SizedBox(
-                          height: Appsizes.size15,
-                        ),
-                        customgridimages(),
-                        const SizedBox(
-                          height: Appsizes.size15,
-                        ),
-                        BlocConsumer<addaqarcuibt, addaqarstate>(
-                          listener: (context, state) {
-                      
-                    
-                    
-                        },
-                         
-                          builder:(context, state) {
-                           if(state is addaaqarloading) return loading();
-                         return custommaterialbutton(
-                              onPressed: () async {
-                                if(formkey.currentState!.validate()){
-                                }
+                          const SizedBox(
+                            height: Appsizes.size15,
+                          ),
+                          Text('تسجيل الاراضي',
+                              style: Appstyles.textStyle12
+                                  .copyWith(color: Appcolors.bluecolor),
+                              textAlign: TextAlign.right),
+                          const SizedBox(
+                            height: Appsizes.size15,
+                          ),
+                          Form(
+                            key: formkey,
+                            child: Column(
+                              children: [
+                                custommytextform(
+                                    val: "برجاء ادخال عنوان الارض",
+                                    controller: adress,
+                                    hintText: "العنوان"),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                custommytextform(
+                                    val: "برجاء ادخال عنوان الارض بالتفصيل",
+                                    controller: adressdetails,
+                                    hintText: "عنوان الارض بالتفصيل"),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                custommytextform(
+                                    val: "يرجي ادخال اسم العميل",
+                                    controller: clientname,
+                                    hintText: "اسم العميل"),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                custommytextform(
+                                    keyboardType: TextInputType.number,
+                                    val: "برجاء ادخال المساحه",
+                                    controller: area,
+                                    hintText: "المساحه"),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                custommytextform(
+                                    keyboardType: TextInputType.number,
+                                    val: "برجاء ادخال سعر المتر",
+                                    controller: price,
+                                    hintText: "سعر المتر"),
+                                const SizedBox(
+                                  height: Appsizes.size10,
+                                ),
+                                custommytextform(
+                                    keyboardType: TextInputType.number,
+                                    val: "برجاء ادخال رقم الهاتف",
+                                    controller: phone,
+                                    hintText: "رقم االهاتف"),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: Appsizes.size10,
+                          ),
+                          dropdownbutton(
+                              onchanged: (val) {
+                                BlocProvider.of<addlandcuibt>(context)
+                                  .changeaddaqaradvistortype(val);
                               },
-                              button_name: "تسجيل البيانات",
-                              buttonicon: Icons.data_array);
-                      })
-                      ],
-                    );}
-                  )
-                ),
+                              name: BlocProvider.of<addlandcuibt>(context)
+                                  .advistor_type,
+                              items: ["صاحب الارض", "شركة عقارات"],
+                              hint: "نوع المعلن"),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          custommytextform(
+                              controller: details, hintText: "تفاصيل الاعلان"),
+                          const SizedBox(
+                            height: Appsizes.size10,
+                          ),
+                          choosedateland(),
+                          const SizedBox(
+                            height: Appsizes.size10,
+                          ),
+                          pickedimage(),
+                          const SizedBox(
+                            height: Appsizes.size15,
+                          ),
+                          customgridimages(),
+                          const SizedBox(
+                            height: Appsizes.size15,
+                          ),
+                          BlocConsumer<addlandcuibt, addlandstate>(
+                              listener: (context, state) {
+                                if (state is addlandfailure)
+                              showsnack(comment: state.error, context: context);
+                            if (state is addlandsuccess) {
+                              showsnack(
+                                  comment: "تمت اضافة الارض بنجاح",
+                                  context: context);
+
+                              BlocProvider.of<addlandcuibt>(context)
+                                  .cleardata();
+                              BlocProvider.of<DatelandCubit>(context).date1 =
+                                  "التاريخ";
+
+                              navigateandfinish(
+                                  navigationscreen: landsEstate(), context: context);}
+                              },
+                              builder: (context, state) {
+                                if (state is addlandloading) return loading();
+                                return custommaterialbutton(
+                                    onPressed: () async {
+                                      if (formkey.currentState!.validate()) {
+                               if (BlocProvider.of<addlandcuibt>(
+                                                context)
+                                            .advistor_type ==
+                                        null) {
+                                      dialogerror(context,
+                                          error: "برجاء اختيار نوع المعلن");
+                                    }    
+                                    else if (BlocProvider.of<DatelandCubit>(
+                                                context)
+                                            .date1 ==
+                                        "التاريخ") {
+                                      dialogerror(context,
+                                          error: "برجاء اختيار التاريخ");
+                                    }     
+                                    else{
+                                         if (BlocProvider.of<addlandcuibt>(context)
+                                          .imageFile
+                                          .isNotEmpty) {
+                                        await BlocProvider.of<addlandcuibt>(
+                                                context)
+                                            .uploadimages();
+                                      }
+                                      await BlocProvider.of<addlandcuibt>(context).addland(
+                                        myaddaqarrequest: addlandrequest(
+                                          land_images:   BlocProvider.of<addaqarcuibt>(context)
+                                                      .images,
+                                          address: adress.text,
+                                           seller_name: clientname.text,
+                                            size_in_metres: num.parse(area.text),
+                                             price_of_one_meter: num.parse(price.text), 
+                                             total_cost: num.parse(area.text)*num.parse(price.text),
+                                              seller_phone_number: phone.text,
+                                               advertiser_type: requestland[
+                                                  BlocProvider.of<addlandcuibt>(context)
+                                                      .advistor_type],
+                                                land_date_register:  BlocProvider.of<DatelandCubit>(context).date1,)
+                                        , token: generaltoken);
+
+                                    }
+                                      }
+                                    },
+                                    button_name: "تسجيل البيانات",
+                                    buttonicon: Icons.data_array);
+                              })
+                        ],
+                      );
+                    })),
               )),
         ],
       ),
     );
   }
-
 }

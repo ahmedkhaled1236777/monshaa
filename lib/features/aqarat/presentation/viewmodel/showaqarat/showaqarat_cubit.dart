@@ -14,13 +14,8 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
   List<Datum> data = [];
   Map<String, dynamic>? queryParameters;
   ScrollController scrollController = ScrollController();
-  ShowaqaratCubit({required this.showaqar}) : super(ShowaqaratInitial()) {
-    scrollController.addListener(() async {
-       if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
-      await getamorellaqarat(token: generaltoken);
-    }});
-  }
+  ShowaqaratCubit({required this.showaqar}) : super(ShowaqaratInitial()) ;
+  
   int page = 1;
   bool loading = false;
   getallaqarat({
@@ -43,21 +38,19 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
   }
 
   getamorellaqarat({required String token}) async {
-   
-      page++;
-      var result = await showaqar.showaqar(
-          token: token, page: page, queryParameters: queryParameters);
-      loading = true;
-      result.fold((failue) {
-        emit(Showaqaratfailure(error_message: failue.error_message));
-      }, (success) {
-        if (success.data!.links?.next == null) {
-          loading = false;
-        }
-        data.addAll(success.data!.data!);
-        emit(Showaqaratsuccess());
-      });
-    
+    page++;
+    var result = await showaqar.showaqar(
+        token: token, page: page, queryParameters: queryParameters);
+    loading = true;
+    result.fold((failue) {
+      emit(Showaqaratfailure(error_message: failue.error_message));
+    }, (success) {
+      if (success.data!.links?.next == null) {
+        loading = false;
+      }
+      data.addAll(success.data!.data!);
+      emit(Showaqaratsuccess());
+    });
   }
 
   deleteaqar({required String token, required int aqarnumber}) async {

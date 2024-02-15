@@ -1,6 +1,7 @@
 import 'package:aplication/advertiser_type.dart';
 import 'package:aplication/dropdown_estate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/alertcontent.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/alertcontentland.dart';
 import 'package:flutter/material.dart';
 
 class landsearch extends StatelessWidget {
@@ -25,7 +26,7 @@ class landsearch extends StatelessWidget {
                       },
                       icon: Icon(Icons.close)),
                 ),
-                content: alertcontent());
+                content: landalertcontent());
           },
         );
       },

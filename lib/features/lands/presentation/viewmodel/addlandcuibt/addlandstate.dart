@@ -1,6 +1,7 @@
 abstract class addlandstate {}
 
 class addlandintial extends addlandstate {}
+
 class changeadvistortypeland extends addlandstate {}
 
 class addnewimagestateland extends addlandstate {}

@@ -1,5 +1,6 @@
 import 'package:aplication/building.dart';
 import 'package:aplication/core/commn/constants.dart';
+import 'package:aplication/core/commn/widgets/cashedimage.dart';
 import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
@@ -340,7 +341,7 @@ class ShowEstateState extends State<mShowEstate> {
                                         crossAxisSpacing: 10,
                                         mainAxisSpacing: 10),
                                 children: widget.data.realStateImages!
-                                    .map((e) => Image.network(e))
+                                    .map((e) => imagefromrequest(url: e, height: double.infinity, width: double.infinity))
                                     .toList(),
                               ),
                             ),
@@ -614,7 +615,7 @@ class ShowEstateState extends State<mShowEstate> {
                                   scrollDirection: Axis.vertical,
                                   child: Column(
                                     children: widget.data.realStateImages!
-                                        .map((e) => Image.network(e))
+                                        .map((e) => imagefromrequest(url: e, height: double.infinity, width: double.infinity))
                                         .toList(),
                                   ),
                                 )),

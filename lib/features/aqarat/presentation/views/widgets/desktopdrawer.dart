@@ -1,9 +1,11 @@
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
 import 'package:aplication/features/home/presentation/views/widgets/appbartittle.dart';
 import 'package:aplication/features/home/presentation/views/widgets/customdraweitem.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,6 +43,10 @@ class desktopdrawer extends StatelessWidget {
                                   iconData: e["icon"],
                                   text: e["name"],
                                   onTap: () {
+                                      BlocProvider.of<ShowaqaratCubit>(context)
+                            .queryParameters = null;
+                                      BlocProvider.of<ShowlandsCubit>(context)
+                            .queryParameters = null;
                                     navigateandfinish(
                                         navigationscreen: e["page"],
                                         context: context);

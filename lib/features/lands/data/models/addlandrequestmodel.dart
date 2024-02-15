@@ -9,12 +9,21 @@ class addlandrequest {
   final num total_cost;
   final String seller_phone_number;
   final String advertiser_type;
-   String? advertise_details;
+  String? advertise_details;
   final String land_date_register;
 
-  addlandrequest({required this.address, required this.seller_name, required this.size_in_metres, required this.price_of_one_meter, required this.total_cost, required this.seller_phone_number, required this.advertiser_type, required this.land_date_register,this.advertise_details,this.land_images});
+  addlandrequest(
+      {required this.address,
+      required this.seller_name,
+      required this.size_in_metres,
+      required this.price_of_one_meter,
+      required this.total_cost,
+      required this.seller_phone_number,
+      required this.advertiser_type,
+      required this.land_date_register,
+      this.advertise_details,
+      this.land_images});
 
-  
   FormData tojson() => FormData.fromMap({
         "land_images[]": land_images,
         "address": address,
@@ -27,6 +36,5 @@ class addlandrequest {
         "advertiser_type": advertiser_type,
         "advertise_details": advertise_details,
         "land_date_register": land_date_register,
-       
       });
 }

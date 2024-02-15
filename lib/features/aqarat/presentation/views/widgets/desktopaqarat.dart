@@ -62,7 +62,7 @@ class _desktopaqaratState extends State<desktopaqarat> {
             ),
             title: Text(
               'العقارات',
-              style: TextStyle(color: Colors.white, fontSize: 6.sp),
+              style: TextStyle(color: Colors.white, fontSize: 3.3.sp),
             ),
             centerTitle: true,
             backgroundColor: Color(0xff415769),

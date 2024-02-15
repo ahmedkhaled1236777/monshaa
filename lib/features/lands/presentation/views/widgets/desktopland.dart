@@ -9,6 +9,9 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/addaqar.da
 import 'package:aplication/features/aqarat/presentation/views/widgets/customtableaqar.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/desktopdrawer.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/search.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/addland.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/customtableland.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/searchland.dart';
 import 'package:aplication/pdt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +25,6 @@ class desktopland extends StatefulWidget {
 
 class _desktoplandState extends State<desktopland> {
   GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +45,18 @@ class _desktoplandState extends State<desktopland> {
             ),
             title: Text(
               'الاراضي',
-              style: TextStyle(color: Colors.white, fontSize: 6.sp),
+              style: TextStyle(color: Colors.white, fontSize: 3.3.sp),
             ),
             centerTitle: true,
             backgroundColor: Color(0xff415769),
             actions: [
               Row(
                 children: [
-                  IconButton(onPressed: (){
-                            }, icon: Icon(Icons.data_exploration,color: Appcolors.whitecolor)),
-                  search(),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.data_exploration,
+                          color: Appcolors.whitecolor)),
+                  landsearch(),
                   const SizedBox(
                     width: Appsizes.size15,
                   ),
@@ -95,10 +99,10 @@ class _desktoplandState extends State<desktopland> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                addaqar(
+                addland(
                   width: MediaQuery.of(context).size.width * 0.27,
                 ),
-                customtableaqar((MediaQuery.of(context).size.width * 0.70))
+                customtableland((MediaQuery.of(context).size.width * 0.70))
               ],
             ),
           )),
