@@ -1,10 +1,11 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/textes/textes.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/core/commn/toast.dart';
-import 'package:aplication/features/auth/login/data/models/login_model/loginrequest.dart';
+import 'package:aplication/features/auth/login/data/models/loginrequest.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/customimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/customtextform.dart';
@@ -117,9 +118,9 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                                 await BlocProvider.of<logincuibt>(context)
                                     .loginpostdata(
                                         login: loginrequest(
-                                            phone: phone.text,
-                                            password: password.text,
-                                            user_type: "user"));
+                                  phone: phone.text,
+                                  password: password.text,
+                                ));
                               }
                             },
                           );
@@ -129,6 +130,15 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             showsnack(
                                 comment: state.error_message, context: context);
                           } else if (state is loginsucces) {
+                            password.clear();
+                            phone.clear();
+                            cashhelper.setdata(
+                                key: "token",
+                                value: state.loginmodel.data!.token!);
+                            cashhelper.setdata(
+                                key: "permessions",
+                                value: state.loginmodel.data!.permissions!);
+
                             showsnack(
                                 comment: "تم تسجيل الدخول بنجاح",
                                 context: context);

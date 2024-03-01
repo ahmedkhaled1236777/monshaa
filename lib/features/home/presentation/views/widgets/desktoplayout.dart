@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class desktoplayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print(BlocProvider.of<HomeCubit>(context).drawerpermessions);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -46,7 +47,7 @@ class desktoplayout extends StatelessWidget {
               color: Appcolors.maincolor,
               child: ListView(
                   children: BlocProvider.of<HomeCubit>(context)
-                      .drawer
+                      .drawerpermessions
                       .map((e) => Column(
                             children: [
                               customdraweritem(
@@ -83,7 +84,7 @@ class desktoplayout extends StatelessWidget {
                         crossAxisSpacing: 5.w,
                         mainAxisSpacing: 5.w),
                     children: BlocProvider.of<HomeCubit>(context)
-                        .grid
+                        .gridpermessions
                         .map((e) => customgriditem(
                             imagewidth: 12.w,
                             textfontsize: 3.6.sp,

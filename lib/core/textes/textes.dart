@@ -4,5 +4,6 @@ abstract class Apptextes {
   static const login = "تسجيل الدخول";
   static const pass = "كلمة السر";
   static const noaccount = "ليس لديك حساب ؟";
+  static const haveaccount = " لديك حساب ؟";
   static const registernow = 'سجل الان';
 }

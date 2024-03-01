@@ -1,4 +1,7 @@
 import 'package:aplication/building.dart';
+import 'package:aplication/features/contracts/presentation/views/contract.dart';
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
+import 'package:aplication/expense.dart';
 import 'package:aplication/features/aqarat/data/repos/addaqar/addaqarimplementation.dart';
 import 'package:aplication/features/aqarat/data/repos/editaqar/editaqarrepoimplementation.dart';
 import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepoimplementation.dart';
@@ -8,7 +11,18 @@ import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/sho
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
+import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:aplication/features/auth/profile/presentation/view/profile.dart';
+import 'package:aplication/features/auth/register/presentation/views/register.dart';
+import 'package:aplication/features/contracts/data/repos/contractrepoimplementation.dart';
+import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
+import 'package:aplication/features/emoloyees/data/repos/addemployeerepoimplementation.dart';
+import 'package:aplication/features/emoloyees/presentation/viewmodel/addemployee/addemployee_cubit.dart';
+import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeecuibt.dart';
+import 'package:aplication/features/emoloyees/presentation/views/widgets/employees.dart';
+import 'package:aplication/features/expenses.dart/data/repos/expenserepoimplementation.dart';
+import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_cubit.dart';
+import 'package:aplication/features/expenses.dart/presentation/views/expenses.dart';
 import 'package:aplication/features/lands/data/repos/addland/addlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/editland/editlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/showland/showlandrepoimplementation.dart';
@@ -17,9 +31,14 @@ import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit
 import 'package:aplication/features/lands/presentation/viewmodel/edit/edit_cubit.dart';
 import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
 import 'package:aplication/features/lands/presentation/views/estateland.dart';
+import 'package:aplication/features/tenants/data/repo/tenantrepoimplementation.dart';
+import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
+import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
+import 'package:aplication/features/settings/presentation.dart/views/setting.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
 import 'firebase_options.dart';
 import 'package:aplication/core/services/apiservice.dart';
 
@@ -48,6 +67,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await cashhelper.initcashhelper();
   await Firebase.initializeApp(
 // Replace with actual values
     options: const FirebaseOptions(
@@ -113,6 +133,8 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 EditCubit(editrepo: editaqarrepoimplementation())),
         BlocProvider(
+            create: (context) => TenantCubit(tenantrepoimplementation())),
+        BlocProvider(
             create: (context) =>
                 EditlandCubit(editrepo: editlandrepoimplementation())),
         BlocProvider(
@@ -128,16 +150,30 @@ class MyApp extends StatelessWidget {
                 ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
         BlocProvider(
             create: (context) =>
+                AddemployeeCubit(addemployeerepo: emplyeerepoimplementaion())),
+        BlocProvider(
+            create: (context) =>
+                showemployeescuibt(employeerepo: emplyeerepoimplementaion())),
+        BlocProvider(
+            create: (context) =>
+                ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
                 addlandcuibt(addlandrepo: addlandrepoimplementation())),
         BlocProvider(
             create: (context) =>
                 ShowlandsCubit(showlands: showlandsrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                contractCubit(contractrepoimplementation())),
+        BlocProvider(
+            create: (context) => expenseCubit(expenserepoimplementation())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (context, child) => MaterialApp(
+        builder: (context, child) => GetMaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           routes: {
@@ -148,7 +184,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: Estate(),
+          home: Tenants()
         ),
       ),
     );

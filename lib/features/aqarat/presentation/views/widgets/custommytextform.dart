@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -10,11 +12,15 @@ class custommytextform extends StatelessWidget {
   Widget? suffixIcon;
   String? val;
   TextInputType keyboardType;
+  int? maxlines;
+  bool ?readonly;
   custommytextform(
       {super.key,
+      this.readonly=false,
       required this.controller,
       required this.hintText,
       this.obscureText = false,
+      this.maxlines = 1,
       this.val,
       this.keyboardType = TextInputType.none,
       this.suffixIcon});
@@ -28,7 +34,9 @@ class custommytextform extends StatelessWidget {
         }
       },
       obscureText: obscureText,
+      readOnly:readonly!,
       keyboardType: keyboardType,
+      maxLines: maxlines,
       controller: controller,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(horizontal: 7),

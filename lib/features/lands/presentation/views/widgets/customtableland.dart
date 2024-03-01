@@ -22,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class customtableland extends StatefulWidget {
-  ScrollController scrollController=ScrollController();
+  ScrollController scrollController = ScrollController();
   final double width;
   customtableland(this.width);
 
@@ -31,20 +31,21 @@ class customtableland extends StatefulWidget {
 }
 
 class _customtablelandState extends State<customtableland> {
-   initscroll(){
-      BlocProvider.of<ShowlandsCubit>(context).data.clear();
+  initscroll() {
     BlocProvider.of<ShowlandsCubit>(context)
         .getallalands(token: generaltoken, page: 1);
-     widget.scrollController.addListener(() async {
-     if (widget.scrollController.position.pixels ==
+    widget.scrollController.addListener(() async {
+      if (widget.scrollController.position.pixels ==
           widget.scrollController.position.maxScrollExtent) {
-        await BlocProvider.of<ShowlandsCubit>(context).getamorelllands(token: generaltoken);
-  }});
+        await BlocProvider.of<ShowlandsCubit>(context)
+            .getamorelllands(token: generaltoken);
+      }
+    });
   }
+
   @override
   void initState() {
     initscroll();
-  
   }
 
   @override
@@ -61,20 +62,13 @@ class _customtablelandState extends State<customtableland> {
                 children: BlocProvider.of<addlandcuibt>(context)
                     .headertable
                     .map((e) => customheadertable(
-                          title: e,
-                          flex: e == "تعديل" || e == "حذف" ? 2 : 3,
-                          textStyle: MediaQuery.of(context).size.width > 950
-                              ? Appstyles.textStyle13wd
-                              : MediaQuery.of(context).size.width < 950 &&
-                                      MediaQuery.of(context).size.width > 600
-                                  ? Appstyles.textStyle13wd
-                                      .copyWith(fontSize: 8.sp)
-                                  : Appstyles.textStyle13wd
-                                      .copyWith(fontSize: 12.sp),
-                        ))
+                        title: e,
+                        flex: e == "تعديل" || e == "حذف" ? 2 : 3,
+                        textStyle:
+                            Appstyles.getheadertextstyle(context: context)))
                     .toList()),
           ),
-           Expanded(
+          Expanded(
               child: BlocConsumer<ShowlandsCubit, ShowlandsState>(
                   listener: (context, state) {
             if (state is Showlandsfailure)
@@ -85,9 +79,8 @@ class _customtablelandState extends State<customtableland> {
               // ignore: curly_braces_in_flow_control_structures
             } else if (state is Showlandsfailure) return const SizedBox();
             return SingleChildScrollView(
-              controller:  widget.scrollController ,
+              controller: widget.scrollController,
               child: ListView.separated(
-                
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -105,27 +98,28 @@ class _customtablelandState extends State<customtableland> {
                                   context: context);
                             }),
                             child: customtablelanditem(
-                              textStyle: MediaQuery.of(context).size.width < 600
-                                  ? Appstyles.textStyle12b
-                                      .copyWith(fontSize: 12.sp)
-                                  : Appstyles.textStyle12b,
+                              textStyle:
+                                  Appstyles.gettabletextstyle(context: context),
                               iconsize: MediaQuery.of(context).size.width < 600
                                   ? 20.sp
                                   : 22,
                               adress: BlocProvider.of<ShowlandsCubit>(context)
                                   .data[index]
                                   .address!,
-                                  totalcost:  BlocProvider.of<ShowlandsCubit>(context)
-                                  .data[index]
-                                  .totalCost.toString(),
-                           
-                              priceofmeter: BlocProvider.of<ShowlandsCubit>(context)
-                                  .data[index]
-                                  .priceOfOneMeter
-                                  .toString(),
+                              totalcost:
+                                  BlocProvider.of<ShowlandsCubit>(context)
+                                      .data[index]
+                                      .totalCost
+                                      .toString(),
+                              priceofmeter:
+                                  BlocProvider.of<ShowlandsCubit>(context)
+                                      .data[index]
+                                      .priceOfOneMeter
+                                      .toString(),
                               area: BlocProvider.of<ShowlandsCubit>(context)
                                   .data[index]
-                                  .sizeInMetres.toString()!,
+                                  .sizeInMetres
+                                  .toString()!,
                               advertise_type: showland[
                                   BlocProvider.of<ShowlandsCubit>(context)
                                       .data[index]
@@ -138,13 +132,14 @@ class _customtablelandState extends State<customtableland> {
                                       : 22,
                                 ),
                                 onPressed: () {
-                                  BlocProvider.of<addlandcuibt>(context).images =
-                                      [];
-                                  BlocProvider.of<EditlandCubit>(context).advistor_type =
-                                      null;
+                                  BlocProvider.of<addlandcuibt>(context)
+                                      .images = [];
+                                  BlocProvider.of<EditlandCubit>(context)
+                                      .advistor_type = null;
                                   BlocProvider.of<addlandcuibt>(context)
                                       .imageFile = [];
-                                  BlocProvider.of<DatelandCubit>(context).date1 =
+                                  BlocProvider.of<DatelandCubit>(context)
+                                          .date1 =
                                       BlocProvider.of<ShowlandsCubit>(context)
                                           .data[index]
                                           .createdAt!;
@@ -153,7 +148,7 @@ class _customtablelandState extends State<customtableland> {
                                       builder: (_) {
                                         return AlertDialog(
                                           scrollable: true,
-                                          actions: [
+                                          content: 
                                             editlanddialog(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
@@ -161,7 +156,6 @@ class _customtablelandState extends State<customtableland> {
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
                                                   0.85,
-                                             
                                               data: BlocProvider.of<
                                                       ShowlandsCubit>(context)
                                                   .data[index],
@@ -171,14 +165,12 @@ class _customtablelandState extends State<customtableland> {
                                                           context)
                                                       .data[index]
                                                       .address),
-                                                      clientname: TextEditingController(
+                                              clientname: TextEditingController(
                                                   text: BlocProvider.of<
                                                               ShowlandsCubit>(
                                                           context)
                                                       .data[index]
                                                       .sellerName),
-                                             
-                                             
                                               phone: TextEditingController(
                                                   text: BlocProvider.of<
                                                               ShowlandsCubit>(
@@ -186,7 +178,6 @@ class _customtablelandState extends State<customtableland> {
                                                       .data[index]
                                                       .sellerPhoneNumber
                                                       .toString()),
-                                            
                                               price: TextEditingController(
                                                   text: BlocProvider.of<
                                                               ShowlandsCubit>(
@@ -196,12 +187,11 @@ class _customtablelandState extends State<customtableland> {
                                                       .toString()),
                                               details: TextEditingController(
                                                   text: BlocProvider.of<
-                                                              ShowlandsCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .advertiseDetails
-                                                    ??""),
-                                            
+                                                                  ShowlandsCubit>(
+                                                              context)
+                                                          .data[index]
+                                                          .advertiseDetails ??
+                                                      ""),
                                               area: TextEditingController(
                                                   text: BlocProvider.of<
                                                               ShowlandsCubit>(
@@ -210,7 +200,7 @@ class _customtablelandState extends State<customtableland> {
                                                       .sizeInMetres
                                                       .toString()),
                                             )
-                                          ],
+                                          
                                         );
                                       });
                                 },
@@ -222,9 +212,10 @@ class _customtablelandState extends State<customtableland> {
                                   icon: Icon(
                                     Icons.delete,
                                     color: Colors.red,
-                                    size: MediaQuery.of(context).size.width < 600
-                                        ? 20.sp
-                                        : 22,
+                                    size:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 20.sp
+                                            : 22,
                                   ),
                                   onPressed: () {
                                     BlocProvider.of<ShowlandsCubit>(context)
@@ -250,7 +241,5 @@ class _customtablelandState extends State<customtableland> {
             );
           }))
         ]));
-          }
-        
   }
-
+}

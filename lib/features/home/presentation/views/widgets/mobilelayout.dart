@@ -53,7 +53,7 @@ class mobilelayout extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10),
               children: BlocProvider.of<HomeCubit>(context)
-                  .grid
+                  .gridpermessions
                   .map((e) => customgriditem(
                       imagewidth: tablet_or_mobile == "tablet" ? 20.w : 35.w,
                       textfontsize: tablet_or_mobile == "tablet" ? 8.sp : 12.sp,

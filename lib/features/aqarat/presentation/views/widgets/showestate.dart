@@ -341,7 +341,8 @@ class ShowEstateState extends State<mShowEstate> {
                                         crossAxisSpacing: 10,
                                         mainAxisSpacing: 10),
                                 children: widget.data.realStateImages!
-                                    .map((e) => imagefromrequest(url: e, height: double.infinity, width: double.infinity))
+                                    .map((e) => imagefromrequest(
+                                        url: e, height: 200, width: 200))
                                     .toList(),
                               ),
                             ),
@@ -589,7 +590,7 @@ class ShowEstateState extends State<mShowEstate> {
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  if (widget.data.advertiseDetails != "null")
+                                  if (widget.data.advertiseDetails != null)
                                     Container(
                                       child: Text(
                                         "وصف الاعلان : ${widget.data.advertiseDetails!}",
@@ -606,19 +607,32 @@ class ShowEstateState extends State<mShowEstate> {
                             )),
                           )),
                       Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width * 0.5,
                           child: Container(
                             child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Column(
-                                    children: widget.data.realStateImages!
-                                        .map((e) => imagefromrequest(url: e, height: double.infinity, width: double.infinity))
-                                        .toList(),
-                                  ),
-                                )),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              alignment: Alignment.center,
+                              width: 400,
+                              height: 400,
+                              child: GridView(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: 1.4,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10),
+                                children: widget.data.realStateImages!
+                                    .map((e) => imagefromrequest(
+                                        url: e, height: 200, width: 200))
+                                    .toList(),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.all(20),
                           )),
                     ],
                   ),

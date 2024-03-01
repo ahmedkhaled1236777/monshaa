@@ -9,6 +9,9 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customtabl
 import 'package:aplication/features/aqarat/presentation/views/widgets/desktopdrawer.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/search.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/addlandswithscaffold.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/customtableland.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/searchland.dart';
 import 'package:aplication/pdt.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +40,10 @@ class mobileland extends StatelessWidget {
                 ),
               ),
               title: Text(
-                'العقارات',
+                'الاراضي',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: constrains.maxWidth > 600 ? 10.sp : 15.sp),
+                    fontSize: constrains.maxWidth > 600 ? 6.sp : 9.sp),
               ),
               centerTitle: true,
               backgroundColor: Color(0xff415769),
@@ -49,13 +52,11 @@ class mobileland extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                          BlocProvider.of<ShowaqaratCubit>(context)
+                          BlocProvider.of<ShowlandsCubit>(context)
                               .queryParameters = null;
-                          BlocProvider.of<ShowaqaratCubit>(context)
-                              .data
-                              .clear();
-                          BlocProvider.of<ShowaqaratCubit>(context)
-                              .getallaqarat(token: generaltoken, page: 1);
+                          BlocProvider.of<ShowlandsCubit>(context).data.clear();
+                          BlocProvider.of<ShowlandsCubit>(context)
+                              .getallalands(token: generaltoken, page: 1);
                         },
                         icon: Icon(
                           Icons.data_exploration,
@@ -79,7 +80,7 @@ class mobileland extends StatelessWidget {
                       onTap: () {
                         navigateto(
                             navigationscreen: PdfView(
-                              titles: 'العقارات',
+                              titles: 'الاراضي',
                             ),
                             context: context);
                       },
@@ -99,7 +100,7 @@ class mobileland extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 navigateandfinish(
-                    navigationscreen: addaqarwithscafold(), context: context);
+                    navigationscreen: addlandwithscafold(), context: context);
               },
               backgroundColor: Color(0xffBF4F51),
               child: const Icon(
@@ -111,7 +112,7 @@ class mobileland extends StatelessWidget {
             body: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                customtableaqar(
+                customtableland(
                   (MediaQuery.of(context).size.width),
                 )
               ],

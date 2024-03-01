@@ -27,6 +27,8 @@ import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/ad
 import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit.dart';
 import 'package:aplication/features/lands/presentation/views/estateland.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customchoosedate.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/customgridimages.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/pickedimage.dart';
 import 'package:aplication/type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,7 +147,7 @@ class _addlandState extends State<addland> {
                           dropdownbutton(
                               onchanged: (val) {
                                 BlocProvider.of<addlandcuibt>(context)
-                                  .changeaddaqaradvistortype(val);
+                                    .changeaddaqaradvistortype(val);
                               },
                               name: BlocProvider.of<addlandcuibt>(context)
                                   .advistor_type,
@@ -163,17 +165,17 @@ class _addlandState extends State<addland> {
                           const SizedBox(
                             height: Appsizes.size10,
                           ),
-                          pickedimage(),
+                          pickedimageland(),
                           const SizedBox(
                             height: Appsizes.size15,
                           ),
-                          customgridimages(),
+                          customgridimagesland(),
                           const SizedBox(
                             height: Appsizes.size15,
                           ),
                           BlocConsumer<addlandcuibt, addlandstate>(
                               listener: (context, state) {
-                                if (state is addlandfailure)
+                            if (state is addlandfailure)
                               showsnack(comment: state.error, context: context);
                             if (state is addlandsuccess) {
                               showsnack(
@@ -186,57 +188,69 @@ class _addlandState extends State<addland> {
                                   "التاريخ";
 
                               navigateandfinish(
-                                  navigationscreen: landsEstate(), context: context);}
-                              },
-                              builder: (context, state) {
-                                if (state is addlandloading) return loading();
-                                return custommaterialbutton(
-                                    onPressed: () async {
-                                      if (formkey.currentState!.validate()) {
-                               if (BlocProvider.of<addlandcuibt>(
-                                                context)
+                                  navigationscreen: landsEstate(),
+                                  context: context);
+                            }
+                          }, builder: (context, state) {
+                            if (state is addlandloading) return loading();
+                            return custommaterialbutton(
+                                onPressed: () async {
+                                  if (formkey.currentState!.validate()) {
+                                    if (BlocProvider.of<addlandcuibt>(context)
                                             .advistor_type ==
                                         null) {
                                       dialogerror(context,
                                           error: "برجاء اختيار نوع المعلن");
-                                    }    
-                                    else if (BlocProvider.of<DatelandCubit>(
+                                    } else if (BlocProvider.of<DatelandCubit>(
                                                 context)
                                             .date1 ==
                                         "التاريخ") {
                                       dialogerror(context,
                                           error: "برجاء اختيار التاريخ");
-                                    }     
-                                    else{
-                                         if (BlocProvider.of<addlandcuibt>(context)
+                                    } else {
+                                      if (BlocProvider.of<addlandcuibt>(context)
                                           .imageFile
                                           .isNotEmpty) {
                                         await BlocProvider.of<addlandcuibt>(
                                                 context)
                                             .uploadimages();
                                       }
-                                      await BlocProvider.of<addlandcuibt>(context).addland(
-                                        myaddaqarrequest: addlandrequest(
-                                          land_images:   BlocProvider.of<addaqarcuibt>(context)
-                                                      .images,
-                                          address: adress.text,
-                                           seller_name: clientname.text,
-                                            size_in_metres: num.parse(area.text),
-                                             price_of_one_meter: num.parse(price.text), 
-                                             total_cost: num.parse(area.text)*num.parse(price.text),
-                                              seller_phone_number: phone.text,
-                                               advertiser_type: requestland[
-                                                  BlocProvider.of<addlandcuibt>(context)
-                                                      .advistor_type],
-                                                land_date_register:  BlocProvider.of<DatelandCubit>(context).date1,)
-                                        , token: generaltoken);
-
+                                      await BlocProvider.of<addlandcuibt>(
+                                              context)
+                                          .addland(
+                                              myaddaqarrequest: addlandrequest(
+                                                land_images: BlocProvider.of<
+                                                        addlandcuibt>(context)
+                                                    .images,
+                                                real_state_address_details:
+                                                    "ghfghfghhg",
+                                                address: adress.text,
+                                                seller_name: clientname.text,
+                                                size_in_metres:
+                                                    num.parse(area.text),
+                                                price_of_one_meter:
+                                                    num.parse(price.text),
+                                                total_cost:
+                                                    num.parse(area.text) *
+                                                        num.parse(price.text),
+                                                seller_phone_number: phone.text,
+                                                advertiser_type: requestland[
+                                                    BlocProvider.of<
+                                                                addlandcuibt>(
+                                                            context)
+                                                        .advistor_type],
+                                                land_date_register: BlocProvider
+                                                        .of<DatelandCubit>(
+                                                            context)
+                                                    .date1,
+                                              ),
+                                              token: generaltoken);
                                     }
-                                      }
-                                    },
-                                    button_name: "تسجيل البيانات",
-                                    buttonicon: Icons.data_array);
-                              })
+                                  }
+                                },
+                                button_name: "تسجيل البيانات",
+                                buttonicon: Icons.data_array);
+                          })
                         ],
                       );
                     })),

@@ -14,7 +14,7 @@ class addlandcuibt extends Cubit<addlandstate> {
   addlandcuibt({required this.addlandrepo}) : super(addlandintial());
   List<XFile> imageFile = [];
   List? images = [];
-String?advistor_type;
+  String? advistor_type;
   List headertable = [
     "العنوان",
     "سعر المتر",
@@ -24,12 +24,12 @@ String?advistor_type;
     "تعديل",
     "حذف"
   ];
- 
- 
-  changeaddaqaradvistortype(String val){
-advistor_type=val;
-emit(changeadvistortypeland());
+
+  changeaddaqaradvistortype(String val) {
+    advistor_type = val;
+    emit(changeadvistortypeland());
   }
+
   addnewimage({required List<XFile> pickedimages}) {
     imageFile.addAll(pickedimages);
     emit(addnewimagestateland());
@@ -39,9 +39,7 @@ emit(changeadvistortypeland());
     for (int i = 0; i < imageFile.length; i++) {
       images!.add(await MultipartFile.fromFile(imageFile[i].path,
           filename: imageFile[i].path.split("/").last));
-         
     }
-   
   }
 
   removeimage(int index) {
@@ -60,10 +58,10 @@ emit(changeadvistortypeland());
       emit(addlandsuccess(successmessage: success));
     });
   }
- cleardata(){
-  advistor_type=null;
-  imageFile=[];
-    List images = [];
 
- }
+  cleardata() {
+    advistor_type = null;
+    imageFile = [];
+    List images = [];
+  }
 }

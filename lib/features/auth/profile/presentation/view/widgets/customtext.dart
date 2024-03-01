@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 class customtext extends StatelessWidget {
   final String text;
-
-  const customtext({super.key, required this.text});
+  TextStyle? textStyle15;
+  customtext(
+      {super.key,
+      required this.text,
+      this.textStyle15 = Appstyles.textStyle15});
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Appstyles.textStyle15,
+      style: textStyle15,
     );
   }
 }

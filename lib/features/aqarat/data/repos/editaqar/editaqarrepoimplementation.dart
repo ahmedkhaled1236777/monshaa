@@ -19,7 +19,7 @@ class editaqarrepoimplementation extends editaqarrepo {
           response.data["message"] == "تم تعديل بيانات العقار  بنجاح") {
         return right("تم تعديل بيانات العقار بنجاح");
       } else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));

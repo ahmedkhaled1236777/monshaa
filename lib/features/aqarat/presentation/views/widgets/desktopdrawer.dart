@@ -34,7 +34,7 @@ class desktopdrawer extends StatelessWidget {
                 ),
                 Column(
                   children: BlocProvider.of<HomeCubit>(context)
-                      .drawer
+                      .drawerpermessions
                       .map((e) => Column(
                             children: [
                               customdraweritem(
@@ -43,10 +43,10 @@ class desktopdrawer extends StatelessWidget {
                                   iconData: e["icon"],
                                   text: e["name"],
                                   onTap: () {
-                                      BlocProvider.of<ShowaqaratCubit>(context)
-                            .queryParameters = null;
-                                      BlocProvider.of<ShowlandsCubit>(context)
-                            .queryParameters = null;
+                                    BlocProvider.of<ShowaqaratCubit>(context)
+                                        .queryParameters = null;
+                                    BlocProvider.of<ShowlandsCubit>(context)
+                                        .queryParameters = null;
                                     navigateandfinish(
                                         navigationscreen: e["page"],
                                         context: context);

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:aplication/building.dart';
 import 'package:aplication/catch_receipt.dart';
 import 'package:aplication/connect.dart';
-import 'package:aplication/contract.dart';
+import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
@@ -27,7 +27,7 @@ import 'package:aplication/readreceipt.dart';
 import 'package:aplication/readtenants.dart';
 import 'package:aplication/receipt.dart';
 import 'package:aplication/reports.dart';
-import 'package:aplication/tenants.dart';
+import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +58,7 @@ class Dashboard extends StatelessWidget {
                     ),
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
-                          .drawer
+                          .drawerpermessions
                           .map((e) => Column(
                                 children: [
                                   customdraweritem(
@@ -67,10 +67,11 @@ class Dashboard extends StatelessWidget {
                                       iconData: e["icon"],
                                       text: e["name"],
                                       onTap: () {
-                                          BlocProvider.of<ShowaqaratCubit>(context)
-                            .queryParameters = null;
-                                          BlocProvider.of<ShowlandsCubit>(context)
-                            .queryParameters = null;
+                                        BlocProvider.of<ShowaqaratCubit>(
+                                                context)
+                                            .queryParameters = null;
+                                        BlocProvider.of<ShowlandsCubit>(context)
+                                            .queryParameters = null;
                                         navigateandfinish(
                                             navigationscreen: e["page"],
                                             context: context);
@@ -111,7 +112,7 @@ class Dashboard extends StatelessWidget {
                     ),
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
-                          .drawer
+                          .drawerpermessions
                           .map((e) => Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

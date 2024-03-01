@@ -39,7 +39,7 @@ class mobiladdaqaar extends StatelessWidget {
                 'العقارات',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: constrains.maxWidth > 600 ? 10.sp : 15.sp),
+                    fontSize: constrains.maxWidth > 600 ? 6.sp : 9.sp),
               ),
               centerTitle: true,
               backgroundColor: Color(0xff415769),

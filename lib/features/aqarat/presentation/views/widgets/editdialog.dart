@@ -26,6 +26,7 @@ class editdialog extends StatelessWidget {
   final Datum data;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final TextEditingController aqarnumber;
+  final TextEditingController advertiser_name;
   final TextEditingController housenumber;
   final TextEditingController adress;
   final TextEditingController phone;
@@ -39,6 +40,7 @@ class editdialog extends StatelessWidget {
   editdialog(
       {super.key,
       required this.width,
+      required this.advertiser_name,
       required this.height,
       required this.aqarnumber,
       required this.data,
@@ -85,6 +87,13 @@ class editdialog extends StatelessWidget {
                   key: formkey,
                   child: Column(
                     children: [
+                      custommytextform(
+                          val: "برجاء ادخال اسم المعلن",
+                          controller: advertiser_name,
+                          hintText: "اسم المعلن"),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       custommytextform(
                           val: "برجاء ادخال عنوان العقار",
                           controller: adress,
@@ -149,7 +158,13 @@ class editdialog extends StatelessWidget {
                   height: 10,
                 ),
                 dropdownbutton(
-                  items: ["شقه", "فيلا", "محل"],
+                  items: [
+                    "فيلا فارغه",
+                    "شقه فارغه",
+                    "شقه مفروشه",
+                    "فيلا مفروشه",
+                    "محل"
+                  ],
                   hint: "نوع العقار",
                   name: BlocProvider.of<EditCubit>(context).aqartype == null
                       ? show[data.realStateType]
@@ -222,7 +237,8 @@ class editdialog extends StatelessWidget {
                       showsnack(comment: state.error_message, context: context);
                     }
                     if (state is editsuccess) {
-                      navigateandfinish(navigationscreen: Estate(), context: context);
+                      navigateandfinish(
+                          navigationscreen: Estate(), context: context);
 
                       showsnack(
                           comment: state.successmessage, context: context);
@@ -242,6 +258,7 @@ class editdialog extends StatelessWidget {
                               token: generaltoken,
                               id: data.id!.toInt(),
                               add_aqar: addaqarrequest(
+                                  advertiser_name: advertiser_name.text,
                                   real_state_address: adress.text,
                                   real_state_images:
                                       BlocProvider.of<addaqarcuibt>(context)

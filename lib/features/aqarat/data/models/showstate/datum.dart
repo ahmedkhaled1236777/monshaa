@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class Datum extends Equatable {
   final num? id;
   final String? status;
+  final String? advertiser_name;
   final List? realStateImages;
   final String? buildingNumber;
   final String? apartmentNumber;
@@ -23,6 +24,7 @@ class Datum extends Equatable {
   const Datum({
     this.id,
     this.status,
+    this.advertiser_name,
     this.realStateImages,
     this.buildingNumber,
     this.apartmentNumber,
@@ -44,6 +46,7 @@ class Datum extends Equatable {
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: num.tryParse(json['id'].toString()),
         status: json['status']?.toString(),
+        advertiser_name: json['advertiser_name']?.toString(),
         realStateImages: json['real_state_images'],
         buildingNumber: json['building_number']?.toString(),
         apartmentNumber: json['apartment_number']?.toString(),

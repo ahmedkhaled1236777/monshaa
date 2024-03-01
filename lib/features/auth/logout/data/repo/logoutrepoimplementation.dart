@@ -12,11 +12,10 @@ class logoutrepoimplementation extends logoutrepo {
     try {
       Response response =
           await Postdata.postdata(path: urls.log_out, token: token);
-      if (response.statusCode == 200 &&
-          response.data["message"] == "تم تسجيل خروج الشركه بنجاح") {
+      if (response.statusCode == 200 && response.data["status"] == true) {
         return right(response.data["message"]);
       } else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException)
         return left(requestfailure.fromdioexception(e));

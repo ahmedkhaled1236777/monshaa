@@ -9,6 +9,7 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/addaqar.da
 import 'package:aplication/features/aqarat/presentation/views/widgets/customtableaqar.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/desktopdrawer.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/search.dart';
+import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/addland.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customtableland.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/searchland.dart';
@@ -45,7 +46,7 @@ class _desktoplandState extends State<desktopland> {
             ),
             title: Text(
               'الاراضي',
-              style: TextStyle(color: Colors.white, fontSize: 3.3.sp),
+              style: TextStyle(color: Colors.white, fontSize: 4.sp),
             ),
             centerTitle: true,
             backgroundColor: Color(0xff415769),
@@ -53,7 +54,11 @@ class _desktoplandState extends State<desktopland> {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        BlocProvider.of<ShowlandsCubit>(context).data.clear();
+                        BlocProvider.of<ShowlandsCubit>(context)
+                            .getallalands(token: generaltoken, page: 1);
+                      },
                       icon: Icon(Icons.data_exploration,
                           color: Appcolors.whitecolor)),
                   landsearch(),

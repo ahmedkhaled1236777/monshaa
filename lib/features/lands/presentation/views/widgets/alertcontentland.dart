@@ -7,6 +7,7 @@ import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
@@ -66,8 +67,6 @@ class landalertcontent extends StatelessWidget {
                           const SizedBox(
                             height: Appsizes.size10,
                           ),
-                         
-                         
                           Form(
                             key: minpricek,
                             child: custommytextform(
@@ -235,10 +234,10 @@ class landalertcontent extends StatelessWidget {
                                       );
                                     });
                               } else {
-                                   BlocProvider.of<ShowlandsCubit>(context)
+                                BlocProvider.of<ShowlandsCubit>(context)
                                     .queryParameters = {
                                   "address": adress.text,
-                                  "advertiser_type":requestland[
+                                  "advertiser_type": requestland[
                                       BlocProvider.of<addlandcuibt>(context)
                                           .advistor_type],
                                   "lowest_price": pricefrom.text.isEmpty
@@ -255,7 +254,13 @@ class landalertcontent extends StatelessWidget {
                                     .data
                                     .clear();
                                 BlocProvider.of<ShowlandsCubit>(context)
-                                    .getallalands(token: generaltoken, page: 1,);
+                                    .getallalands(
+                                  token: generaltoken,
+                                  page: 1,
+                                );
+                                BlocProvider.of<DateCubit>(context)
+                                    .cleardates();
+
                                 Navigator.pop(context);
                               }
                             },
@@ -266,5 +271,4 @@ class landalertcontent extends StatelessWidget {
               ])));
     });
   }
-  
 }

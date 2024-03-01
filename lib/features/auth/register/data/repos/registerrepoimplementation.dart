@@ -19,11 +19,12 @@ class registerrepoimplementation extends registerrepo {
       Response response = await Postdata.postdata(
           path: urls.register, data: registerrequest.tojson());
       if (response.statusCode == 200 &&
-          response.data["message"] == "تم اضافه بيانات الشركه بنجاح") {
+          response.data["message"] ==
+              "تم إضافة بيانات الشركة والمدير العام بنجاح") {
         registermodel = Registermodel.fromJson(response.data);
         return right(registermodel);
       } else {
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
       }
       // ignore: curly_braces_in_flow_control_structures
     } catch (e) {

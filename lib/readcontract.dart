@@ -1,4 +1,4 @@
-import 'package:aplication/contract.dart';
+import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/auth/login/presentation/views/login.dart';
@@ -308,12 +308,7 @@ class ReadContractState extends State<ReadContract> {
             ),
             drawer: Dashboard(),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return Contract();
-                }));
-              },
+              onPressed: () {},
               child: Icon(
                 Icons.add,
                 color: Colors.white,

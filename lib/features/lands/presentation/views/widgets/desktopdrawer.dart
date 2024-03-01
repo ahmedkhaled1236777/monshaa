@@ -32,7 +32,7 @@ class desktopdrawer extends StatelessWidget {
                 ),
                 Column(
                   children: BlocProvider.of<HomeCubit>(context)
-                      .drawer
+                      .drawerpermessions
                       .map((e) => Column(
                             children: [
                               customdraweritem(

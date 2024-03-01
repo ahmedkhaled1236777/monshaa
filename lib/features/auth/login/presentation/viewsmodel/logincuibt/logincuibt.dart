@@ -1,12 +1,12 @@
-import 'package:aplication/features/auth/login/data/models/login_model/login_model.dart';
-import 'package:aplication/features/auth/login/data/models/login_model/loginrequest.dart';
+import 'package:aplication/features/auth/login/data/models/loginmodel/loginmodel.dart';
+import 'package:aplication/features/auth/login/data/models/loginrequest.dart';
 import 'package:aplication/features/auth/login/data/repos/loginrepo/loginrepoimplementation.dart';
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/loginstates.dart';
 import 'package:bloc/bloc.dart';
 
 // ignore: camel_case_types
 class logincuibt extends Cubit<loginstate> {
-  LoginModel? loginModel;
+  Loginmodel? loginModel;
 
   final login_repo_implementation loginrepo;
   logincuibt({required this.loginrepo}) : super(logininitial());
@@ -19,7 +19,7 @@ class logincuibt extends Cubit<loginstate> {
       emit(loginfailure(error_message: failure.error_message));
     }, (success) {
       loginModel = success;
-      emit(loginsucces());
+      emit(loginsucces(loginmodel: success));
     });
   }
 }

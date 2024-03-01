@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/textes/textes.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
@@ -31,7 +32,7 @@ class _mobilelayoutState extends State<mobilelayout> {
 
   TextEditingController shop_name = TextEditingController();
 
-  TextEditingController tax_number = TextEditingController();
+  TextEditingController compenyphone = TextEditingController();
 
   bool obscureText = true;
 
@@ -105,6 +106,15 @@ class _mobilelayoutState extends State<mobilelayout> {
                     height: Appsizes.size20,
                   ),
                   customtextform(
+                    controller: compenyphone,
+                    prefixicon: Icons.phone,
+                    hintText: "رقم هاتف الشركه",
+                    val: "برجاء ادخال رقم هاتف صاحب الشركه",
+                  ),
+                  const SizedBox(
+                    height: Appsizes.size20,
+                  ),
+                  customtextform(
                     val: "برجاء ادخال كلمة المرور",
                     controller: password,
                     prefixicon: Icons.password,
@@ -128,20 +138,19 @@ class _mobilelayoutState extends State<mobilelayout> {
                 ],
               ),
             ),
-            customtextform(
-              controller: tax_number,
-              prefixicon: Icons.menu,
-              hintText: "الرقم الضريبي",
-              val: "برجاء ادخال الرقم الضريبي",
-            ),
-            const SizedBox(
-              height: Appsizes.size20,
-            ),
             BlocConsumer<registercuibt, registerstate>(
               listener: (context, state) {
                 if (state is registerfailure) {
                   showsnack(comment: state.error_message, context: context);
                 } else if (state is registersuccess) {
+                  name.clear();
+                  phone.clear();
+                  compenyphone.clear();
+                  shop_address.clear();
+                  shop_name.clear();
+                  password.clear();
+                  navigateandfinish(
+                      navigationscreen: Login(), context: context);
                   showsnack(
                       comment: state.registermodel.message!, context: context);
                 }
@@ -149,19 +158,20 @@ class _mobilelayoutState extends State<mobilelayout> {
               builder: (context, state) {
                 if (state is registerloading) return loading();
                 return custommaterialbutton(
-                  button_name: Apptextes.login,
+                  button_name: Apptextes.register,
                   buttonicon: Icons.login,
                   onPressed: () async {
                     if (formkey.currentState!.validate()) {
                       await BlocProvider.of<registercuibt>(context).register(
                           registerrequest: registerrequest(
-                              name: name.text,
-                              shop_name: shop_name.text,
-                              shop_address: shop_address.text,
-                              password: password.text,
-                              phone: phone.text,
-                              privacy_and_policy: "1",
-                              tax_number: tax_number.text));
+                        name: name.text,
+                        company_name: shop_name.text,
+                        company_address: shop_address.text,
+                        password: password.text,
+                        phone: phone.text,
+                        company_phone: compenyphone.text,
+                        privacy_and_policy: "1",
+                      ));
                     }
                   },
                 );
@@ -171,20 +181,10 @@ class _mobilelayoutState extends State<mobilelayout> {
               height: Appsizes.size10,
             ),
             noaccount(
-                maintext: Apptextes.noaccount,
-                buttontext: Apptextes.registernow,
+                maintext: Apptextes.haveaccount,
+                buttontext: Apptextes.login,
                 navigated_widget: Login())
           ],
         ));
-  }
-
-  @override
-  void dispose() {
-    name.dispose();
-    shop_address.dispose();
-    shop_name.dispose();
-    password.dispose();
-    phone.dispose();
-    tax_number.dispose();
   }
 }

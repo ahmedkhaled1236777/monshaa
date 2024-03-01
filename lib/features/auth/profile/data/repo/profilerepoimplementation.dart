@@ -15,13 +15,11 @@ class profilerepoimplementation extends profilerepo {
     try {
       Response response =
           await Getdata.getdata(path: urls.get_profile, token: token);
-      if (response.statusCode == 200 &&
-          response.data["message"] ==
-              "تم الحصول على بيانات بروفايل الشركه بنجاح") {
+      if (response.statusCode == 200 && response.data["status"] == true) {
         profilemodel = Profilemodel.fromJson(response.data);
         return right(profilemodel);
       } else {
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
       }
     } catch (e) {
       if (e is DioException)

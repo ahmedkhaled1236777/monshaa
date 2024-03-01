@@ -19,17 +19,15 @@ class imagefromrequest extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(border),
       child: CachedNetworkImage(
-        fit: BoxFit.fill,
-        height: height,
-        width: width,
-        imageUrl: url,
-        placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(
-          color: Appcolors.maincolor,
-        )),
-        errorWidget: (context, url, error) =>Icon(Icons.error)
-           
-      ),
+          fit: BoxFit.fill,
+          height: height,
+          width: width,
+          imageUrl: url,
+          placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(
+                color: Appcolors.maincolor,
+              )),
+          errorWidget: (context, url, error) => Icon(Icons.error)),
     );
   }
 }

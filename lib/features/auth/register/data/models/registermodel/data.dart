@@ -4,11 +4,14 @@ class Data extends Equatable {
   final num? id;
   final dynamic logo;
   final String? name;
+  final String? jobTitle;
+  final String? currency;
   final String? userType;
-  final String? shopName;
-  final String? shopAddress;
+  final List<String>? permissions;
+  final String? companyName;
+  final String? companyAddress;
+  final String? companyPhone;
   final String? phone;
-  final String? taxNumber;
   final String? status;
   final String? token;
   final String? createdAt;
@@ -18,11 +21,14 @@ class Data extends Equatable {
     this.id,
     this.logo,
     this.name,
+    this.jobTitle,
+    this.currency,
     this.userType,
-    this.shopName,
-    this.shopAddress,
+    this.permissions,
+    this.companyName,
+    this.companyAddress,
+    this.companyPhone,
     this.phone,
-    this.taxNumber,
     this.status,
     this.token,
     this.createdAt,
@@ -33,11 +39,14 @@ class Data extends Equatable {
         id: num.tryParse(json['id'].toString()),
         logo: json['logo'],
         name: json['name']?.toString(),
+        jobTitle: json['job_title']?.toString(),
+        currency: json['currency']?.toString(),
         userType: json['user_type']?.toString(),
-        shopName: json['shop_name']?.toString(),
-        shopAddress: json['shop_address']?.toString(),
+        permissions: List<String>.from(json['permissions'] ?? []),
+        companyName: json['company_name']?.toString(),
+        companyAddress: json['company_address']?.toString(),
+        companyPhone: json['company_phone']?.toString(),
         phone: json['phone']?.toString(),
-        taxNumber: json['tax_number']?.toString(),
         status: json['status']?.toString(),
         token: json['token']?.toString(),
         createdAt: json['created_at']?.toString(),
@@ -48,11 +57,14 @@ class Data extends Equatable {
         if (id != null) 'id': id,
         if (logo != null) 'logo': logo,
         if (name != null) 'name': name,
+        if (jobTitle != null) 'job_title': jobTitle,
+        if (currency != null) 'currency': currency,
         if (userType != null) 'user_type': userType,
-        if (shopName != null) 'shop_name': shopName,
-        if (shopAddress != null) 'shop_address': shopAddress,
+        if (permissions != null) 'permissions': permissions,
+        if (companyName != null) 'company_name': companyName,
+        if (companyAddress != null) 'company_address': companyAddress,
+        if (companyPhone != null) 'company_phone': companyPhone,
         if (phone != null) 'phone': phone,
-        if (taxNumber != null) 'tax_number': taxNumber,
         if (status != null) 'status': status,
         if (token != null) 'token': token,
         if (createdAt != null) 'created_at': createdAt,
@@ -65,11 +77,14 @@ class Data extends Equatable {
       id,
       logo,
       name,
+      jobTitle,
+      currency,
       userType,
-      shopName,
-      shopAddress,
+      permissions,
+      companyName,
+      companyAddress,
+      companyPhone,
       phone,
-      taxNumber,
       status,
       token,
       createdAt,

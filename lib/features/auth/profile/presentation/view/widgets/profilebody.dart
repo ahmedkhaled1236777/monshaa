@@ -1,3 +1,4 @@
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/features/auth/logout/presentation/viewmodel/cubit/logout_cubit.dart';
@@ -41,13 +42,13 @@ class profilebody extends StatelessWidget {
               ),
               customdescription(
                   description: "اسم الشركه",
-                  value: pro.profilemodel!.data!.shopName!),
+                  value: pro.profilemodel!.data!.companyName!),
               SizedBox(
                 height: height * 0.025,
               ),
               customdescription(
                   description: "العنوان",
-                  value: pro.profilemodel!.data!.shopAddress!),
+                  value: pro.profilemodel!.data!.companyAddress!),
               SizedBox(
                 height: height * 0.025,
               ),
@@ -57,17 +58,15 @@ class profilebody extends StatelessWidget {
               SizedBox(
                 height: height * 0.025,
               ),
-              if (pro.profilemodel!.data!.taxNumber != null)
-                customdescription(
-                    description: "الرقم الضريبي",
-                    value: pro.profilemodel!.data!.taxNumber!),
-              if (pro.profilemodel!.data!.taxNumber != null)
-                SizedBox(
-                  height: height * 0.025,
-                ),
+              customdescription(
+                  description: "رقم هاتف الشركه",
+                  value: pro.profilemodel!.data!.companyPhone!),
+              SizedBox(
+                height: height * 0.025,
+              ),
               logoutpro(onPressed: () async {
                 await BlocProvider.of<LogoutCubit>(context)
-                    .log_out(token: generaltoken);
+                    .log_out(token: cashhelper.getdata(key: "token"));
               })
             ],
           ),

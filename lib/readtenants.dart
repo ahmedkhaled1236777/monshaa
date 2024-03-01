@@ -4,7 +4,7 @@ import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:aplication/main.dart';
 import 'package:aplication/pdt.dart';
 import 'package:aplication/showtenants.dart';
-import 'package:aplication/tenants.dart';
+import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
 import 'package:flutter/material.dart';
 
 import 'building.dart';

@@ -40,6 +40,7 @@ class _addaqarState extends State<addaqar> {
   TextEditingController aqarnumber = TextEditingController();
   TextEditingController housenumber = TextEditingController();
   TextEditingController adress = TextEditingController();
+  TextEditingController advertiser_name = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController roomsnumber = TextEditingController();
   TextEditingController price = TextEditingController();
@@ -91,6 +92,13 @@ class _addaqarState extends State<addaqar> {
                             key: formkey,
                             child: Column(
                               children: [
+                                custommytextform(
+                                    val: "برجاء ادخال اسم المعلن",
+                                    controller: advertiser_name,
+                                    hintText: "اسم المعلن"),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 custommytextform(
                                     val: "برجاء ادخال عنوان العقار",
                                     controller: adress,
@@ -155,7 +163,13 @@ class _addaqarState extends State<addaqar> {
                             height: 10,
                           ),
                           dropdownbutton(
-                            items: ["شقه", "فيلا", "محل"],
+                            items: [
+                              "فيلا فارغه",
+                              "شقه فارغه",
+                              "شقه مفروشه",
+                              "فيلا مفروشه",
+                              "محل"
+                            ],
                             hint: "نوع العقار",
                             name:
                                 BlocProvider.of<addaqarcuibt>(context).aqartype,
@@ -271,9 +285,10 @@ class _addaqarState extends State<addaqar> {
 
                                       await BlocProvider.of<addaqarcuibt>(context).addaqar(
                                           myaddaqarrequest: addaqarrequest(
-                                              real_state_images:
-                                                  BlocProvider.of<addaqarcuibt>(context)
-                                                      .images,
+                                              advertiser_name:
+                                                  advertiser_name.text,
+                                              real_state_images: BlocProvider.of<addaqarcuibt>(context)
+                                                  .images,
                                               real_state_address: adress.text,
                                               real_state_address_details:
                                                   adressdetails.text,

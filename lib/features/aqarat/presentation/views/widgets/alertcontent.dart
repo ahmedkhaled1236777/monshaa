@@ -7,6 +7,7 @@ import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
@@ -138,7 +139,7 @@ class alertcontent extends StatelessWidget {
                           custommaterialbutton(
                             button_name: "بحث",
                             buttonicon: Icons.search,
-                            onPressed: () {
+                            onPressed: () async {
                               if (minimumarea.text.isEmpty &&
                                   maximumarea.text.isNotEmpty) {
                                 showDialog(
@@ -249,7 +250,7 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .queryParameters = {
                                   "real_state_address": adress.text,
-                                  "department":request[
+                                  "department": request[
                                       BlocProvider.of<addaqarcuibt>(context)
                                           .departement],
                                   "advertised_phone_number": phone.text,
@@ -265,8 +266,11 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .data
                                     .clear();
-                                BlocProvider.of<ShowaqaratCubit>(context)
+                                await BlocProvider.of<ShowaqaratCubit>(context)
                                     .getallaqarat(token: generaltoken, page: 1);
+                                BlocProvider.of<DateCubit>(context)
+                                    .cleardates();
+
                                 Navigator.pop(context);
                               }
                             },

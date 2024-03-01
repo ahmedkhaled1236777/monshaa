@@ -1,9 +1,11 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/textes/textes.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/core/commn/toast.dart';
+import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/customimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/customtextform.dart';
@@ -30,7 +32,7 @@ class _DesktoplayoutState extends State<Desktoplayout> {
   TextEditingController shop_address = TextEditingController();
   TextEditingController shop_name = TextEditingController();
 
-  TextEditingController tax_number = TextEditingController();
+  TextEditingController companyphone = TextEditingController();
 
   bool obscureText = true;
 
@@ -119,6 +121,15 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                           height: Appsizes.size20,
                         ),
                         customtextform(
+                          controller: companyphone,
+                          prefixicon: Icons.phone,
+                          hintText: "رقم هاتف الشركه",
+                          val: "برجاء ادخال رقم هاتف الشركه",
+                        ),
+                        const SizedBox(
+                          height: Appsizes.size20,
+                        ),
+                        customtextform(
                           val: "برجاء ادخال كلمة المرور",
                           controller: password,
                           prefixicon: Icons.password,
@@ -142,21 +153,20 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                   const SizedBox(
                     height: Appsizes.size20,
                   ),
-                  customtextform(
-                    controller: tax_number,
-                    prefixicon: Icons.menu,
-                    hintText: "الرقم الضريبي",
-                    val: "برجاء ادخال الرقم الضريبي",
-                  ),
-                  const SizedBox(
-                    height: Appsizes.size20,
-                  ),
                   BlocConsumer<registercuibt, registerstate>(
                     listener: (context, state) {
                       if (state is registerfailure) {
                         showsnack(
                             comment: state.error_message, context: context);
                       } else if (state is registersuccess) {
+                        name.clear();
+                        phone.clear();
+                        companyphone.clear();
+                        shop_address.clear();
+                        shop_name.clear();
+                        password.clear();
+                        navigateandfinish(
+                            navigationscreen: Login(), context: context);
                         showsnack(
                             comment: state.registermodel.message!,
                             context: context);
@@ -172,13 +182,14 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             await BlocProvider.of<registercuibt>(context)
                                 .register(
                                     registerrequest: registerrequest(
-                                        name: name.text,
-                                        shop_name: shop_name.text,
-                                        shop_address: shop_address.text,
-                                        password: password.text,
-                                        phone: phone.text,
-                                        privacy_and_policy: "1",
-                                        tax_number: tax_number.text));
+                              name: name.text,
+                              company_name: shop_name.text,
+                              company_address: shop_address.text,
+                              password: password.text,
+                              phone: phone.text,
+                              company_phone: companyphone.text,
+                              privacy_and_policy: "1",
+                            ));
                           }
                         },
                       );
@@ -188,9 +199,9 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                     height: Appsizes.size10,
                   ),
                   noaccount(
-                      maintext: Apptextes.noaccount,
-                      buttontext: Apptextes.registernow,
-                      navigated_widget: Register())
+                      maintext: Apptextes.haveaccount,
+                      buttontext: Apptextes.login,
+                      navigated_widget: Login())
                 ],
               ),
             )

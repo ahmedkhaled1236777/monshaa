@@ -2,6 +2,7 @@ import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/data/models/showstate/showstate.dart';
@@ -18,7 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class customtableaqar extends StatefulWidget {
-  ScrollController scrollController=ScrollController();
+  ScrollController scrollController = ScrollController();
   final double width;
   customtableaqar(this.width);
 
@@ -27,20 +28,22 @@ class customtableaqar extends StatefulWidget {
 }
 
 class _customtableaqarState extends State<customtableaqar> {
-  
-  initscroll(){
-      BlocProvider.of<ShowaqaratCubit>(context).data.clear();
+  initscroll() {
+    BlocProvider.of<ShowaqaratCubit>(context).data.clear();
     BlocProvider.of<ShowaqaratCubit>(context)
-        .getallaqarat(token: generaltoken, page: 1);
-     widget.scrollController.addListener(() async {
-     if (widget.scrollController.position.pixels ==
+        .getallaqarat(token: cashhelper.getdata(key: "token"), page: 1);
+    widget.scrollController.addListener(() async {
+      if (widget.scrollController.position.pixels ==
           widget.scrollController.position.maxScrollExtent) {
-        await BlocProvider.of<ShowaqaratCubit>(context).getamorellaqarat(token: generaltoken);
-  }});
+        await BlocProvider.of<ShowaqaratCubit>(context)
+            .getamorellaqarat(token: cashhelper.getdata(key: "token"));
+      }
+    });
   }
+
   @override
   void initState() {
-  initscroll();
+    initscroll();
   }
 
   @override
@@ -59,14 +62,8 @@ class _customtableaqarState extends State<customtableaqar> {
                     .map((e) => customheadertable(
                           title: e,
                           flex: e == "تعديل" || e == "حذف" ? 2 : 3,
-                          textStyle: MediaQuery.of(context).size.width > 950
-                              ? Appstyles.textStyle13wd
-                              : MediaQuery.of(context).size.width < 950 &&
-                                      MediaQuery.of(context).size.width > 600
-                                  ? Appstyles.textStyle13wd
-                                      .copyWith(fontSize: 8.sp)
-                                  : Appstyles.textStyle13wd
-                                      .copyWith(fontSize: 12.sp),
+                          textStyle:
+                              Appstyles.getheadertextstyle(context: context),
                         ))
                     .toList()),
           ),
@@ -81,193 +78,209 @@ class _customtableaqarState extends State<customtableaqar> {
               // ignore: curly_braces_in_flow_control_structures
             } else if (state is Showaqaratfailure) return const SizedBox();
             return SingleChildScrollView(
-              controller:  widget.scrollController ,
+              controller: widget.scrollController,
               child: ListView.separated(
-                
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return index >=
-                            BlocProvider.of<ShowaqaratCubit>(context).data.length
+                            BlocProvider.of<ShowaqaratCubit>(context)
+                                .data
+                                .length
                         ? loading()
                         : InkWell(
                             onTap: (() {
                               navigateto(
                                   navigationscreen: mShowEstate(
-                                    data:
-                                        BlocProvider.of<ShowaqaratCubit>(context)
-                                            .data[index],
+                                    data: BlocProvider.of<ShowaqaratCubit>(
+                                            context)
+                                        .data[index],
                                   ),
                                   context: context);
                             }),
                             child: customtableitem(
-                              textStyle: MediaQuery.of(context).size.width < 600
-                                  ? Appstyles.textStyle12b
-                                      .copyWith(fontSize: 12.sp)
-                                  : Appstyles.textStyle12b,
-                              iconsize: MediaQuery.of(context).size.width < 600
-                                  ? 20.sp
-                                  : 22,
-                              adress: BlocProvider.of<ShowaqaratCubit>(context)
-                                  .data[index]
-                                  .realStateAddress!,
-                              section: show[
-                                  BlocProvider.of<ShowaqaratCubit>(context)
-                                      .data[index]
-                                      .department!],
-                              price: BlocProvider.of<ShowaqaratCubit>(context)
-                                  .data[index]
-                                  .realStatePrice
-                                  .toString(),
-                              type: show[BlocProvider.of<ShowaqaratCubit>(context)
-                                  .data[index]
-                                  .realStateType!],
-                              advertise_type: show[
-                                  BlocProvider.of<ShowaqaratCubit>(context)
-                                      .data[index]
-                                      .advertiserType!],
-                              edit: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: MediaQuery.of(context).size.width < 600
-                                      ? 20.sp
-                                      : 22,
+                                textStyle: Appstyles.gettabletextstyle(
+                                    context: context),
+                                iconsize:
+                                    MediaQuery.of(context).size.width < 600
+                                        ? 20.sp
+                                        : 22,
+                                adress:
+                                    BlocProvider.of<ShowaqaratCubit>(context)
+                                        .data[index]
+                                        .realStateAddress!,
+                                section: show[
+                                    BlocProvider.of<ShowaqaratCubit>(context)
+                                        .data[index]
+                                        .department!],
+                                price: BlocProvider.of<ShowaqaratCubit>(context)
+                                    .data[index]
+                                    .realStatePrice
+                                    .toString(),
+                                type: show[
+                                    BlocProvider.of<ShowaqaratCubit>(context)
+                                        .data[index]
+                                        .realStateType!],
+                                advertise_type: show[
+                                    BlocProvider.of<ShowaqaratCubit>(context)
+                                        .data[index]
+                                        .advertiserType!],
+                                edit: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    size:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 20.sp
+                                            : 22,
+                                  ),
+                                  onPressed: () {
+                                    BlocProvider.of<addaqarcuibt>(context)
+                                        .images = [];
+                                    BlocProvider.of<addaqarcuibt>(context)
+                                        .imageFile = [];
+                                    BlocProvider.of<DateCubit>(context).date1 =
+                                        BlocProvider.of<ShowaqaratCubit>(
+                                                context)
+                                            .data[index]
+                                            .createdAt!;
+                                    BlocProvider.of<EditCubit>(context)
+                                        .advistor_type = null;
+                                    BlocProvider.of<EditCubit>(context)
+                                        .aqartype = null;
+                                    BlocProvider.of<EditCubit>(context)
+                                        .departement = null;
+                                    showDialog(
+                                        context: context,
+                                        builder: (_) {
+                                          return AlertDialog(
+                                            scrollable: true,
+                                            content:
+                                              editdialog(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.5,
+                                                height:
+                                                    MediaQuery.sizeOf(context)
+                                                            .height *
+                                                        0.85,
+                                                advertiser_name:
+                                                    TextEditingController(
+                                                        text: BlocProvider.of<
+                                                                    ShowaqaratCubit>(
+                                                                context)
+                                                            .data[index]
+                                                            .advertiser_name),
+                                                aqarnumber: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .apartmentNumber),
+                                                data: BlocProvider.of<
+                                                            ShowaqaratCubit>(
+                                                        context)
+                                                    .data[index],
+                                                adress: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .realStateAddress),
+                                                toilletsnumber:
+                                                    TextEditingController(
+                                                        text: BlocProvider.of<
+                                                                    ShowaqaratCubit>(
+                                                                context)
+                                                            .data[index]
+                                                            .numberOfBathrooms
+                                                            .toString()),
+                                                housenumber: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .buildingNumber
+                                                        .toString()),
+                                                phone: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .advertisedPhoneNumber
+                                                        .toString()),
+                                                roomsnumber: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .numberOfRooms
+                                                        .toString()),
+                                                price: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .realStatePrice
+                                                        .toString()),
+                                                details: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .advertiseDetails
+                                                        .toString()),
+                                                adressdetails: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .realStateAddressDetails
+                                                        .toString()),
+                                                area: TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                ShowaqaratCubit>(
+                                                            context)
+                                                        .data[index]
+                                                        .realStateSpace
+                                                        .toString()),
+                                              )
+                                            
+                                          );
+                                        });
+                                  },
                                 ),
-                                onPressed: () {
-                                  BlocProvider.of<addaqarcuibt>(context).images =
-                                      [];
-                                  BlocProvider.of<addaqarcuibt>(context)
-                                      .imageFile = [];
-                                  BlocProvider.of<DateCubit>(context).date1 =
-                                      BlocProvider.of<ShowaqaratCubit>(context)
-                                          .data[index]
-                                          .createdAt!;
-                                             BlocProvider.of<EditCubit>(context).advistor_type=null;
-                                                BlocProvider.of<EditCubit>(context).aqartype=null;
-                                                   BlocProvider.of<EditCubit>(context).departement=null;
-                                  showDialog(
-                                      context: context,
-                                      builder: (_) {
-                                        return AlertDialog(
-                                          scrollable: true,
-                                          actions: [
-                                            editdialog(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.5,
-                                              height: MediaQuery.sizeOf(context)
-                                                      .height *
-                                                  0.85,
-                                              aqarnumber: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .apartmentNumber),
-                                              data: BlocProvider.of<
-                                                      ShowaqaratCubit>(context)
-                                                  .data[index],
-                                              adress: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .realStateAddress),
-                                              toilletsnumber:
-                                                  TextEditingController(
-                                                      text: BlocProvider.of<
-                                                                  ShowaqaratCubit>(
-                                                              context)
-                                                          .data[index]
-                                                          .numberOfBathrooms
-                                                          .toString()),
-                                              housenumber: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .buildingNumber
-                                                      .toString()),
-                                              phone: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .advertisedPhoneNumber
-                                                      .toString()),
-                                              roomsnumber: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .numberOfRooms
-                                                      .toString()),
-                                              price: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .realStatePrice
-                                                      .toString()),
-                                              details: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .advertiseDetails
-                                                      .toString()),
-                                              adressdetails: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .realStateAddressDetails
-                                                      .toString()),
-                                              area: TextEditingController(
-                                                  text: BlocProvider.of<
-                                                              ShowaqaratCubit>(
-                                                          context)
-                                                      .data[index]
-                                                      .realStateSpace
-                                                      .toString()),
-                                            )
-                                          ],
-                                        );
-                                      });
-                                },
-                              ),
-                              delet:
-                                  BlocBuilder<ShowaqaratCubit, ShowaqaratState>(
-                                      builder: (context, state) {
-                                return IconButton(
+                                delet: IconButton(
                                   icon: Icon(
                                     Icons.delete,
                                     color: Colors.red,
-                                    size: MediaQuery.of(context).size.width < 600
-                                        ? 20.sp
-                                        : 22,
+                                    size:
+                                        MediaQuery.of(context).size.width < 600
+                                            ? 20.sp
+                                            : 22,
                                   ),
                                   onPressed: () {
                                     BlocProvider.of<ShowaqaratCubit>(context)
                                         .deleteaqar(
                                             token: generaltoken,
-                                            aqarnumber:
-                                                BlocProvider.of<ShowaqaratCubit>(
-                                                        context)
-                                                    .data[index]
-                                                    .id!
-                                                    .toInt());
+                                            aqarnumber: BlocProvider.of<
+                                                    ShowaqaratCubit>(context)
+                                                .data[index]
+                                                .id!
+                                                .toInt());
                                   },
-                                );
-                              }),
-                            ),
-                          );
+                                )));
                   },
                   separatorBuilder: (context, index) => const Divider(),
-                  itemCount: BlocProvider.of<ShowaqaratCubit>(context).loading ==
-                          true
-                      ? BlocProvider.of<ShowaqaratCubit>(context).data.length + 1
-                      : BlocProvider.of<ShowaqaratCubit>(context).data.length),
+                  itemCount:
+                      BlocProvider.of<ShowaqaratCubit>(context).loading == true
+                          ? BlocProvider.of<ShowaqaratCubit>(context)
+                                  .data
+                                  .length +
+                              1
+                          : BlocProvider.of<ShowaqaratCubit>(context)
+                              .data
+                              .length),
             );
           }))
         ]));

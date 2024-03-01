@@ -50,6 +50,6 @@ class requestfailure extends failure {
       return requestfailure(error_message: "يوجد مشكله في السيرفر");
     else
       // ignore: curly_braces_in_flow_control_structures
-      return requestfailure(error_message: "برجاء المحاوله مرخ اخري");
+      return requestfailure(error_message: "برجاء المحاوله مره اخري");
   }
 }

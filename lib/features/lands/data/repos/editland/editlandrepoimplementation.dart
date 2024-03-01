@@ -13,7 +13,7 @@ class editlandrepoimplementation extends editlandrepo {
   Future<Either<failure, String>> editland(
       {required String token,
       required int id,
-     required addlandrequest add_land}) async {
+      required addlandrequest add_land}) async {
     try {
       Response response = await Postdata.postdata(
           path: "/land/update/${id}", data: add_land.tojson(), token: token);
@@ -21,7 +21,7 @@ class editlandrepoimplementation extends editlandrepo {
           response.data["message"] == "تم تعديل بيانات الارض  بنجاح") {
         return right("تم تعديل بيانات الارض  بنجاح");
       } else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));

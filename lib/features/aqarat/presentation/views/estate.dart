@@ -16,9 +16,7 @@ class Estate extends StatefulWidget {
 class EstateState extends State<Estate> {
   GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
   @override
-  void initState() {
- 
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {

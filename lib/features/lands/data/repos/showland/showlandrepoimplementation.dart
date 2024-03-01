@@ -26,7 +26,7 @@ class showlandsrepoimplementation extends showlandsrepo {
         showlands = Showlands.fromJson(response.data);
         return right(showlands);
       } else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       print(e.toString());
       if (e is DioException) {
@@ -47,7 +47,7 @@ class showlandsrepoimplementation extends showlandsrepo {
           response.data["message"] == "تم حذف بيانات الارض  بنجاح")
         return right("تم حذف البيانات بنجاح");
       else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));

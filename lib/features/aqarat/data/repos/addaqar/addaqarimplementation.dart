@@ -19,7 +19,7 @@ class addaqarimplementation extends aqarrepo {
         print(response.data);
         return right("تمت اضافة البيانات بنجاح");
       } else {
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
       }
     } catch (e) {
       if (e is DioException) {

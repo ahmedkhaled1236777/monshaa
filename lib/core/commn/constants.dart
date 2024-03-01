@@ -1,6 +1,8 @@
 Map show = {
-  "villa": "فيلا",
-  "apartment": "شقه",
+  "empty_villa": "فيلا فارغه",
+  "furnished_apartment": "شقه مفروشه",
+  "empty_apartment": "شقه فارغه",
+  "furnished_villa": "فيلا مفروشه",
   "shop": "محل",
   "rent": "ايجار",
   "sale": "بيع",
@@ -8,19 +10,29 @@ Map show = {
   "real_state_company": "شركة عقارات"
 };
 Map request = {
-  "فيلا": "villa",
-  "شقه": "apartment",
+  "شقه مفروشه": "furnished_apartment",
+  "شقه فارغه": "empty_apartment",
+  "فيلا مفروشه": "furnished_villa",
+  "فيلا فارغه": "empty_villa",
   "محل": "shop",
   "ايجار": "rent",
   "بيع": "sale",
   "صاحب عقار": "real_state_owner",
   "شركة عقارات": "real_state_company"
 };
-Map requestland={
-  "شركة عقارات":"real_state_company",
-  "صاحب الارض":"real_state_owner"
+Map requestland = {
+  "شركة عقارات": "real_state_company",
+  "صاحب الارض": "real_state_owner"
 };
-Map showland={
- "real_state_company" :"شركة عقارات",
-  "real_state_owner":"صاحب الارض",
+Map showland = {
+  "real_state_company": "شركة عقارات",
+  "real_state_owner": "صاحب الارض",
+};
+Map commessionrequest={
+  "نسبه":"per",
+  "عموله":"val"
+};
+Map commessionresponse={
+  "per":"نسبه",
+  "val":"عموله"
 };

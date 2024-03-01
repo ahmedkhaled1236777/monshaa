@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 class addlandrequest {
   dynamic? land_images;
   final String address;
+  final String real_state_address_details;
   final String seller_name;
   final num size_in_metres;
   final num price_of_one_meter;
@@ -14,6 +15,7 @@ class addlandrequest {
 
   addlandrequest(
       {required this.address,
+      required this.real_state_address_details,
       required this.seller_name,
       required this.size_in_metres,
       required this.price_of_one_meter,
@@ -28,6 +30,7 @@ class addlandrequest {
         "land_images[]": land_images,
         "address": address,
         "seller_name": seller_name,
+        "address_details": real_state_address_details,
         "size_in_metres": size_in_metres,
         "price_of_one_meter": price_of_one_meter,
         "total_cost": total_cost,

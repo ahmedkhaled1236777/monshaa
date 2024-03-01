@@ -1,4 +1,5 @@
 import 'package:aplication/core/commn/loading.dart';
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/auth/logout/data/repo/logoutrepoimplementation.dart';
 import 'package:aplication/features/auth/logout/presentation/viewmodel/cubit/logout_cubit.dart';
@@ -15,7 +16,7 @@ class profile extends StatefulWidget {
 class _profileState extends State<profile> {
   getprofile() async {
     await BlocProvider.of<ProfileCubit>(context)
-        .getprofile(token: generaltoken);
+        .getprofile(token: cashhelper.getdata(key: "token"));
   }
 
   @override

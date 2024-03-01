@@ -91,7 +91,6 @@ class editlanddialog extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                    
                       custommytextform(
                           val: "يرجي ادخال اسم العميل",
                           controller: clientname,
@@ -126,20 +125,17 @@ class editlanddialog extends StatelessWidget {
                 const SizedBox(
                   height: Appsizes.size10,
                 ),
-              
                 dropdownbutton(
                     onchanged: (val) {
-                    
                       BlocProvider.of<EditlandCubit>(context)
                           .changeaddlandadvistortype(val);
-                          
                     },
-                    name:
-                        BlocProvider.of<EditlandCubit>(context).advistor_type ==
-                                null
-                            ? showland[data.advertiserType]
-                            : BlocProvider.of<EditlandCubit>(context).advistor_type,
-                    items: ["صاحب الارض","شركة عقارات"],
+                    name: BlocProvider.of<EditlandCubit>(context)
+                                .advistor_type ==
+                            null
+                        ? showland[data.advertiserType]
+                        : BlocProvider.of<EditlandCubit>(context).advistor_type,
+                    items: ["صاحب الارض", "شركة عقارات"],
                     hint: "نوع المعلن"),
                 const SizedBox(
                   height: Appsizes.size10,
@@ -170,7 +166,8 @@ class editlanddialog extends StatelessWidget {
                       showsnack(comment: state.error_message, context: context);
                     }
                     if (state is editlandsuccess) {
-                      navigateandfinish(navigationscreen: landsEstate(), context: context);
+                      navigateandfinish(
+                          navigationscreen: landsEstate(), context: context);
 
                       showsnack(
                           comment: state.successmessage, context: context);
@@ -180,7 +177,7 @@ class editlanddialog extends StatelessWidget {
                     if (state is editlandloading) return loading();
                     return custommaterialbutton(
                         onPressed: () async {
-                            if (BlocProvider.of<addlandcuibt>(context)
+                          if (BlocProvider.of<addlandcuibt>(context)
                               .imageFile
                               .isNotEmpty) {
                             await BlocProvider.of<addlandcuibt>(context)
@@ -190,22 +187,30 @@ class editlanddialog extends StatelessWidget {
                               token: generaltoken,
                               id: data.id!.toInt(),
                               add_land: addlandrequest(
-                                  address: adress.text,
-                                  land_images:
-                                      BlocProvider.of<addlandcuibt>(context)
-                                          .images,
-                                 total_cost: num.parse(area.text)*num.parse(price.text),
-                            seller_name: clientname.text,
-                                  advertiser_type:
-                                      BlocProvider.of<EditlandCubit>(context).advistor_type == null
-                                          ? data.advertiserType
-                                          : request[BlocProvider.of<EditlandCubit>(context).advistor_type!],
-                                  seller_phone_number: phone.text,
-                                  size_in_metres: num.parse(area.text),
-                                  price_of_one_meter: num.parse(price.text),
-                                  land_date_register: BlocProvider.of<DatelandCubit>(context).date1,
-                                  advertise_details: details.text,
-                                  ));
+                                address: adress.text,
+                                real_state_address_details: "",
+                                land_images:
+                                    BlocProvider.of<addlandcuibt>(context)
+                                        .images,
+                                total_cost: num.parse(area.text) *
+                                    num.parse(price.text),
+                                seller_name: clientname.text,
+                                advertiser_type: BlocProvider.of<EditlandCubit>(
+                                                context)
+                                            .advistor_type ==
+                                        null
+                                    ? data.advertiserType
+                                    : request[
+                                        BlocProvider.of<EditlandCubit>(context)
+                                            .advistor_type!],
+                                seller_phone_number: phone.text,
+                                size_in_metres: num.parse(area.text),
+                                price_of_one_meter: num.parse(price.text),
+                                land_date_register:
+                                    BlocProvider.of<DatelandCubit>(context)
+                                        .date1,
+                                advertise_details: details.text,
+                              ));
                         },
                         button_name: "تعديل البيانات",
                         buttonicon: Icons.edit);

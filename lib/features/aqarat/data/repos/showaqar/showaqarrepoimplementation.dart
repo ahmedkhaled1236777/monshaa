@@ -45,7 +45,7 @@ class showaqqarrepoimplementation extends showaqarrepo {
           response.data["message"] == "تم حذف بيانات العقار  بنجاح")
         return right("تم حذف البيانات بنجاح");
       else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));

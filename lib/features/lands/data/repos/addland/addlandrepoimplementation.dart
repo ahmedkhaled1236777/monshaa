@@ -21,9 +21,10 @@ class addlandrepoimplementation extends landrepo {
         print(response.data);
         return right("تمت اضافة البيانات بنجاح");
       } else {
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
       }
     } catch (e) {
+      print(e);
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));
       } else {

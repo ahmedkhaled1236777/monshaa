@@ -14,7 +14,7 @@ class customgridimagesland extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<addlandcuibt, addlandstate>(builder: (context, state) {
       return GridView.builder(
-          itemCount: BlocProvider.of<addaqarcuibt>(context).imageFile.length,
+          itemCount: BlocProvider.of<addlandcuibt>(context).imageFile.length,
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, mainAxisSpacing: 10, crossAxisSpacing: 10),

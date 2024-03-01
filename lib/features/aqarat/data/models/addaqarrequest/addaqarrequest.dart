@@ -15,10 +15,12 @@ class addaqarrequest {
   final int? number_of_bathrooms;
   final int number_of_rooms;
   final String advertise_details;
+  final String advertiser_name;
   final String state_date_register;
 
   addaqarrequest(
       {required this.real_state_address,
+      required this.advertiser_name,
       required this.real_state_address_details,
       required this.real_state_type,
       required this.department,
@@ -34,8 +36,9 @@ class addaqarrequest {
       required this.building_number,
       this.real_state_images});
   FormData tojson() => FormData.fromMap({
-        " real_state_images[]": real_state_images,
+        "real_state_images[]": real_state_images,
         "building_number": building_number,
+        "advertiser_name": advertiser_name,
         "apartment_number": apartment_number,
         "real_state_address": real_state_address,
         "real_state_address_details": real_state_address_details,

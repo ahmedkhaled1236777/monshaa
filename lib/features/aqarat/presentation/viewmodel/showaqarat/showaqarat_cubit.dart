@@ -14,8 +14,8 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
   List<Datum> data = [];
   Map<String, dynamic>? queryParameters;
   ScrollController scrollController = ScrollController();
-  ShowaqaratCubit({required this.showaqar}) : super(ShowaqaratInitial()) ;
-  
+  ShowaqaratCubit({required this.showaqar}) : super(ShowaqaratInitial());
+
   int page = 1;
   bool loading = false;
   getallaqarat({
@@ -23,6 +23,7 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
     required int page,
   }) async {
     emit(Showaqaratloading());
+    this.page = 1;
     var result = await showaqar.showaqar(
         token: token, page: page, queryParameters: queryParameters);
     loading = true;
@@ -32,6 +33,7 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
       if (success.data!.links?.next == null) {
         loading = false;
       }
+      data.clear();
       data.addAll(success.data!.data!);
       emit(Showaqaratsuccess());
     });
@@ -54,14 +56,13 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
   }
 
   deleteaqar({required String token, required int aqarnumber}) async {
-    emit(deleteaqarloading());
     var result =
         await showaqar.deleteaqar(token: token, aqarnumber: aqarnumber);
     result.fold((failure) {
       emit(deleteaqarfailure(error_message: failure.error_message));
     }, (success) {
       data.removeWhere((element) => element.id == aqarnumber);
-      emit(deleteaqarsuccess(successmessage: "تم حذف العقار بنجاح"));
+      emit(deleteaqarsuccess(successmessage: success));
     });
   }
 }
