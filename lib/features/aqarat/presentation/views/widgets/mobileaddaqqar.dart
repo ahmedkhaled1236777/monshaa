@@ -56,7 +56,7 @@ class mobiladdaqaar extends StatelessWidget {
                           BlocProvider.of<ShowaqaratCubit>(context)
                               .getallaqarat(token: generaltoken, page: 1);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.data_exploration,
                           color: Appcolors.whitecolor,
                         )),

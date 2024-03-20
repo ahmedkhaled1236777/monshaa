@@ -62,7 +62,7 @@ class customtablecontractitem extends StatelessWidget {
             width: 3,
           ),
           Expanded(
-            child:addcontract,
+            child: addcontract,
             flex: 2,
           ),
           Expanded(

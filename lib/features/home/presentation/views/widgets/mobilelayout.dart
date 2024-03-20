@@ -1,5 +1,7 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
@@ -42,29 +44,39 @@ class mobilelayout extends StatelessWidget {
           ],
         ),
         drawer: Dashboard(),
-        body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          alignment: Alignment.center,
-          width: double.infinity,
-          child: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: tablet_or_mobile == "tablet" ? 3 : 2,
-                  childAspectRatio: 1.4,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-              children: BlocProvider.of<HomeCubit>(context)
-                  .gridpermessions
-                  .map((e) => customgriditem(
-                      imagewidth: tablet_or_mobile == "tablet" ? 20.w : 35.w,
-                      textfontsize: tablet_or_mobile == "tablet" ? 8.sp : 12.sp,
-                      image: e["image"],
-                      onTap: () {
-                        navigateto(
-                            navigationscreen: e["page"], context: context);
-                      },
-                      count: e["count"],
-                      name: e["name"]))
-                  .toList()),
+        body: BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {
+            if (state is Homefailure)
+              showsnack(comment: state.error_message, context: context);
+          },
+          builder: (context, state) {
+            if (state is Homeloading)
+              return loading();
+            else if (state is Homefailure) return SizedBox();
+            return Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              alignment: Alignment.center,
+              width: double.infinity,
+              child: GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: tablet_or_mobile == "tablet" ? 3 : 2,
+                      childAspectRatio: 1.4,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  children: BlocProvider.of<HomeCubit>(context)
+                      .gridpermessions
+                      .map((e) => customgriditem(
+                          imagewidth:
+                              tablet_or_mobile == "tablet" ? 20.w : 35.w,
+                          textfontsize:
+                              tablet_or_mobile == "tablet" ? 8.sp : 12.sp,
+                          image: e.icon!,
+                          onTap: () {},
+                          count: e.count!.toInt(),
+                          name: e.name!))
+                      .toList()),
+            );
+          },
         ),
       ),
     );

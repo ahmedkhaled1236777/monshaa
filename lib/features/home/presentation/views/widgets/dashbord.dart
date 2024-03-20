@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:aplication/building.dart';
 import 'package:aplication/catch_receipt.dart';
 import 'package:aplication/connect.dart';
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
@@ -49,8 +50,10 @@ class Dashboard extends StatelessWidget {
                   children: [
                     appbartittle(
                       sizedboxwidth: Appsizes.size5.w,
-                      logo: "images/logo.png",
-                      name: "شركة الاتقان",
+                      logo: cashhelper.getdata(key: "company_logo") ??
+                          "images/logo.png",
+                      name: cashhelper.getdata(key: "company_name") ??
+                          "شركة الاتقان",
                       fontSize: 6.sp,
                     ),
                     SizedBox(
@@ -58,10 +61,11 @@ class Dashboard extends StatelessWidget {
                     ),
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
-                          .drawerpermessions
+                          .sidebarpermessions
                           .map((e) => Column(
                                 children: [
                                   customdraweritem(
+                                      count: e["count"],
                                       sizedboxwidth: 3.w,
                                       textstyle: Appstyles.textStyle13w,
                                       iconData: e["icon"],
@@ -112,12 +116,13 @@ class Dashboard extends StatelessWidget {
                     ),
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
-                          .drawerpermessions
+                          .sidebarpermessions
                           .map((e) => Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   customdraweritem(
+                                      count: e["count"],
                                       sizedboxwidth: 6.w,
                                       textstyle: TextStyle(
                                           fontSize: conters.maxWidth > 600

@@ -136,9 +136,24 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                       showDialog(
                                           context: context,
                                           builder: (_) {
-                                            return AlertDialog(
-                                              scrollable: true,
-                                              actions: [
+                                          return AlertDialog(
+                                                title: Container(
+                                                  alignment: Alignment.topLeft,
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.close)),
+                                                ),
+                                                surfaceTintColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0)),
+                                                scrollable: true,
+                                                content:
                                                 editexpensedialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
@@ -167,7 +182,7 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                                                   index]
                                                               .description),
                                                 )
-                                              ],
+                                            
                                             );
                                           });
                                     },

@@ -16,101 +16,164 @@ class showtemployeedialog extends StatelessWidget {
     return InkWell(
       child: child,
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                content: Container(
-                  width: 400,
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const Text('بيانات الموظف',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Color(0xff2ba4c8),
-                                fontWeight: FontWeight.w100),
-                            textAlign: TextAlign.right),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        if (BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .employeephoto !=
-                            null)
-                          CircleAvatar(
-                            backgroundColor: Appcolors.maincolor,
-                            radius: 60,
-                            child: CircleAvatar(
-                              radius: 57,
-                              backgroundColor: Colors.white,
-                              child: imagefromrequest(
-                                  url: BlocProvider.of<showemployeescuibt>(
-                                          context)
-                                      .employeesdata[index]
-                                      .employeephoto!,
-                                  height: 100,
-                                  width: 100),
-                            ),
-                          ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "اسم الموظف",
-                            value: BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .name!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "العنوان",
-                            value: BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .address!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "الوظيفه",
-                            value: BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .jobTitle!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "رقم الهاتف",
-                            value: BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .phone!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "رقم البطاقه",
-                            value: BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .cardNumber!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "التاريخ",
-                            value: BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata[index]
-                                .createdAt!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                      ],
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Container(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.close)),
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
+              content: SingleChildScrollView(
+                  child: Container(
+                width: MediaQuery.of(context).size.width * 0.24,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Center(
+                      child: Text(
+                        'بيانات الموظف',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    if (BlocProvider.of<showemployeescuibt>(context)
+                            .employeesdata[index]
+                            .employeephoto !=
+                        null)
+                      Center(
+                        child: CircleAvatar(
+                          child: imagefromrequest(
+                            url: BlocProvider.of<showemployeescuibt>(context)
+                                .employeesdata[index]
+                                .employeephoto!,
+                            height: 200,
+                            width: 200,
+                            border: 50,
+                          ),
+                          radius: 50,
+                        ),
+                      ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'اسم الموظف:  ${BlocProvider.of<showemployeescuibt>(context).employeesdata[index].name!}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'العنوان:  ${BlocProvider.of<showemployeescuibt>(context).employeesdata[index].address}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'رقم الهاتف: ${BlocProvider.of<showemployeescuibt>(context).employeesdata[index].phone}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'رقم البطاقة: ${BlocProvider.of<showemployeescuibt>(context).employeesdata[index].cardNumber}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'المسمي الوظيفي: ${BlocProvider.of<showemployeescuibt>(context).employeesdata[index].jobTitle}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'التاريخ: ${BlocProvider.of<showemployeescuibt>(context).employeesdata[index].createdAt}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            });
+              )),
+            );
+          },
+        );
       },
     );
   }

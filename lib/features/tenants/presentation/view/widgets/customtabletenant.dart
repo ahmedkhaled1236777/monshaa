@@ -1,3 +1,4 @@
+import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
 import 'package:aplication/features/contracts/presentation/views/addcontractwithscafold.dart';
 import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/core/color/appcolors.dart';
@@ -102,113 +103,136 @@ class _customtabletenantsState extends State<customtabletenants> {
                                       .phone!,
                                   addcontrect: IconButton(
                                       onPressed: () {
-                if(MediaQuery.sizeOf(context).width<=950){
-                  navigateandfinish(navigationscreen: addcontractwithscafold(
-                                          id:BlocProvider.of<TenantCubit>(context)
-                                          .tenantdata[index]
-                                          .id!.toInt() ,
-                                          tenantname: TextEditingController(
-                                          text:   BlocProvider.of<TenantCubit>(context)
-                                          .tenantdata[index]
-                                          .name!
-                                        ), 
-          tenanphone: TextEditingController(
-            text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .phone!,
-          ),
-           tenantcard: TextEditingController(
-            text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .cardNumber
-           ),
-            tenantadress: TextEditingController(
-              text:  BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .cardAddress!
-            ),
-             tenantjob: TextEditingController(
-              text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .jobTitle
-             ),
-              tenantnationality: TextEditingController(
-                text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .nationality
-              ), 
-              ownername: TextEditingController(), 
-              ownerphone: TextEditingController(),
-               ownercard: TextEditingController(), 
-               owneradress: TextEditingController(),
-                ownerjob: TextEditingController(),
-                 ownernationality: TextEditingController(),
-                  aqaradress: TextEditingController(),
-                   aqaradressdetails: TextEditingController(),
-                   aqarmohafza: TextEditingController(),
-                    aqartype: TextEditingController(),
-                    area: TextEditingController(),
-                     emaranumber: TextEditingController(),
-                      housenumber: TextEditingController(),
-                       totalvalue: TextEditingController(),
-                        insuranceval: TextEditingController(), 
-                        commessionvalue: TextEditingController(),
-                         periodofdelay: TextEditingController())
-                                        , context: context);
-
-                } else                       
-                                        navigateandfinish(navigationscreen: Contract(
-                                          id:BlocProvider.of<TenantCubit>(context)
-                                          .tenantdata[index]
-                                          .id!.toInt() ,
-                                          tenantname: TextEditingController(
-                                          text:   BlocProvider.of<TenantCubit>(context)
-                                          .tenantdata[index]
-                                          .name!
-                                        ), 
-          tenanphone: TextEditingController(
-            text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .phone!,
-          ),
-           tenantcard: TextEditingController(
-            text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .cardNumber
-           ),
-            tenantadress: TextEditingController(
-              text:  BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .cardAddress!
-            ),
-             tenantjob: TextEditingController(
-              text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .jobTitle
-             ),
-              tenantnationality: TextEditingController(
-                text: BlocProvider.of<TenantCubit>(context)
-                                      .tenantdata[index]
-                                      .nationality
-              ), 
-              ownername: TextEditingController(), 
-              ownerphone: TextEditingController(),
-               ownercard: TextEditingController(), 
-               owneradress: TextEditingController(),
-                ownerjob: TextEditingController(),
-                 ownernationality: TextEditingController(),
-                  aqaradress: TextEditingController(),
-                   aqaradressdetails: TextEditingController(),
-                   aqarmohafza: TextEditingController(),
-                    aqartype: TextEditingController(),
-                    area: TextEditingController(),
-                     emaranumber: TextEditingController(),
-                      housenumber: TextEditingController(),
-                       totalvalue: TextEditingController(),
-                        insuranceval: TextEditingController(), 
-                        commessionvalue: TextEditingController(),
-                         periodofdelay: TextEditingController())
-                                        , context: context);
+                                        if (MediaQuery.sizeOf(context).width <=
+                                            950) {
+                                          BlocProvider.of<contractCubit>(
+                                                      context)
+                                                  .id =
+                                              BlocProvider.of<TenantCubit>(
+                                                      context)
+                                                  .tenantdata[index]
+                                                  .id!
+                                                  .toInt();
+                                          navigateandfinish(
+                                              navigationscreen:
+                                                  addcontractwithscafold(
+                                                      tenantname: TextEditingController(
+                                                          text: BlocProvider.of<TenantCubit>(context)
+                                                              .tenantdata[index]
+                                                              .name!),
+                                                      tenanphone:
+                                                          TextEditingController(
+                                                        text: BlocProvider.of<
+                                                                    TenantCubit>(
+                                                                context)
+                                                            .tenantdata[index]
+                                                            .phone!,
+                                                      ),
+                                                      tenantcard: TextEditingController(
+                                                          text: BlocProvider.of<TenantCubit>(context)
+                                                              .tenantdata[index]
+                                                              .cardNumber),
+                                                      tenantadress: TextEditingController(
+                                                          text: BlocProvider.of<TenantCubit>(context)
+                                                              .tenantdata[index]
+                                                              .cardAddress!),
+                                                      tenantjob: TextEditingController(
+                                                          text: BlocProvider.of<TenantCubit>(context)
+                                                              .tenantdata[index]
+                                                              .jobTitle),
+                                                      tenantnationality: TextEditingController(
+                                                          text: BlocProvider.of<TenantCubit>(context)
+                                                              .tenantdata[index]
+                                                              .nationality),
+                                                      ownername:
+                                                          TextEditingController(),
+                                                      ownerphone:
+                                                          TextEditingController(),
+                                                      ownercard:
+                                                          TextEditingController(),
+                                                      owneradress:
+                                                          TextEditingController(),
+                                                      ownerjob:
+                                                          TextEditingController(),
+                                                      ownernationality:
+                                                          TextEditingController(),
+                                                      aqaradress:
+                                                          TextEditingController(),
+                                                      aqaradressdetails: TextEditingController(),
+                                                      aqarmohafza: TextEditingController(),
+                                                      aqartype: TextEditingController(),
+                                                      area: TextEditingController(),
+                                                      emaranumber: TextEditingController(),
+                                                      housenumber: TextEditingController(),
+                                                      totalvalue: TextEditingController(),
+                                                      insuranceval: TextEditingController(),
+                                                      commessionvalue: TextEditingController(),
+                                                      periodofdelay: TextEditingController()),
+                                              context: context);
+                                        } else {
+                                          BlocProvider.of<contractCubit>(
+                                                      context)
+                                                  .id =
+                                              BlocProvider.of<TenantCubit>(
+                                                      context)
+                                                  .tenantdata[index]
+                                                  .id!
+                                                  .toInt();
+                                          navigateandfinish(
+                                              navigationscreen: Contract(
+                                                  tenantname: TextEditingController(
+                                                      text: BlocProvider.of<TenantCubit>(context)
+                                                          .tenantdata[index]
+                                                          .name!),
+                                                  tenanphone:
+                                                      TextEditingController(
+                                                    text: BlocProvider.of<
+                                                                TenantCubit>(
+                                                            context)
+                                                        .tenantdata[index]
+                                                        .phone!,
+                                                  ),
+                                                  tenantcard: TextEditingController(
+                                                      text: BlocProvider.of<TenantCubit>(context)
+                                                          .tenantdata[index]
+                                                          .cardNumber),
+                                                  tenantadress: TextEditingController(
+                                                      text: BlocProvider.of<TenantCubit>(context)
+                                                          .tenantdata[index]
+                                                          .cardAddress!),
+                                                  tenantjob: TextEditingController(
+                                                      text: BlocProvider.of<TenantCubit>(context)
+                                                          .tenantdata[index]
+                                                          .jobTitle),
+                                                  tenantnationality: TextEditingController(
+                                                      text: BlocProvider.of<TenantCubit>(context)
+                                                          .tenantdata[index]
+                                                          .nationality),
+                                                  ownername:
+                                                      TextEditingController(),
+                                                  ownerphone:
+                                                      TextEditingController(),
+                                                  ownercard:
+                                                      TextEditingController(),
+                                                  owneradress:
+                                                      TextEditingController(),
+                                                  ownerjob:
+                                                      TextEditingController(),
+                                                  ownernationality:
+                                                      TextEditingController(),
+                                                  aqaradress: TextEditingController(),
+                                                  aqaradressdetails: TextEditingController(),
+                                                  aqarmohafza: TextEditingController(),
+                                                  aqartype: TextEditingController(),
+                                                  area: TextEditingController(),
+                                                  emaranumber: TextEditingController(),
+                                                  housenumber: TextEditingController(),
+                                                  totalvalue: TextEditingController(),
+                                                  insuranceval: TextEditingController(),
+                                                  commessionvalue: TextEditingController(),
+                                                  periodofdelay: TextEditingController()),
+                                              context: context);
+                                        }
                                       },
                                       icon: const Icon(Icons.add_box_outlined,
                                           size: 23, color: Color(0xff00416A))),
@@ -243,24 +267,26 @@ class _customtabletenantsState extends State<customtabletenants> {
                                     ),
                                     onPressed: () {
                                       showDialog(
-                                        
                                           context: context,
                                           builder: (_) {
                                             return AlertDialog(
-                                               title: Container(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.close)),
-              ),
-                                                 surfaceTintColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0)),
-                                              scrollable: true,
-                                              content: 
-                                                edittenantdialog(
+                                                title: Container(
+                                                  alignment: Alignment.topLeft,
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.close)),
+                                                ),
+                                                surfaceTintColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0)),
+                                                scrollable: true,
+                                                content: edittenantdialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
                                                               .width *
@@ -311,9 +337,7 @@ class _customtabletenantsState extends State<customtabletenants> {
                                                           .tenantdata[index]
                                                           .phone
                                                           .toString()),
-                                                )
-                                              
-                                            );
+                                                ));
                                           });
                                     },
                                   )),

@@ -2,6 +2,7 @@ import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/showdialogerror.dart';
 import 'package:aplication/core/commn/toast.dart';
+import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeecuibt.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/employees.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/employees_powers.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
@@ -158,7 +159,7 @@ class _addemplyeeState extends State<addemplyee> {
                 height: 10,
               ),
               BlocConsumer<AddemployeeCubit, AddemployeeState>(
-                listener: (context, state) {
+                listener: (context, state) async {
                   if (state is Addemployeefailure) {
                     showsnack(comment: state.error_message, context: context);
                   }
@@ -173,7 +174,11 @@ class _addemplyeeState extends State<addemplyee> {
                     password.clear();
                     phone.clear();
                     cardnumber.clear();
-
+                    BlocProvider.of<showemployeescuibt>(context)
+                        .employeesdata
+                        .clear();
+                    await BlocProvider.of<showemployeescuibt>(context)
+                        .getallemployees(token: generaltoken, page: 1);
                     showsnack(comment: state.succes_message, context: context);
                   }
                 },

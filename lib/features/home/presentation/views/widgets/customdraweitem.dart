@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class customdraweritem extends StatelessWidget {
   final IconData iconData;
   final String text;
+  final int count;
   final void Function() onTap;
   final double iconsize;
   final TextStyle textstyle;
@@ -13,6 +14,7 @@ class customdraweritem extends StatelessWidget {
   const customdraweritem(
       {super.key,
       required this.iconData,
+      required this.count,
       required this.sizedboxwidth,
       required this.textstyle,
       required this.text,
@@ -36,7 +38,24 @@ class customdraweritem extends StatelessWidget {
             Text(
               text,
               style: textstyle,
-            )
+            ),
+            Spacer(),
+            if (count > 0)
+              Container(
+                constraints: BoxConstraints(maxWidth: 30),
+                padding: EdgeInsets.symmetric(horizontal: 4),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20), color: Colors.red),
+                height: 20,
+                child: Center(
+                    child: Text(
+                  count.toString(),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  textDirection: TextDirection.ltr,
+                  style: TextStyle(color: Colors.white, fontSize: 10),
+                )),
+              )
           ],
         ));
   }

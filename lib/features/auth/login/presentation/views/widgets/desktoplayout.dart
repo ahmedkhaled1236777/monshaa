@@ -14,6 +14,7 @@ import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuib
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/loginstates.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:aplication/features/home/presentation/views/home.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -114,10 +115,18 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             button_name: Apptextes.login,
                             buttonicon: Icons.login,
                             onPressed: () async {
+                              print("oooooooooooooooooooooooooooooooooooooooooo");
+                              print(cashhelper.getdata(key: "devicetoken"));
+                              var player = new AudioPlayer();
+                              const alarmAudioPath =
+                                  "sound/mixkit-quick-win-video-game-notification-269.wav";
+                              player.play(UrlSource(alarmAudioPath));
                               if (formkey.currentState!.validate()) {
                                 await BlocProvider.of<logincuibt>(context)
                                     .loginpostdata(
                                         login: loginrequest(
+                                  token: cashhelper.getdata(key: "devicetoken"),
+                                  device_type: "android",
                                   phone: phone.text,
                                   password: password.text,
                                 ));
@@ -133,12 +142,11 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             password.clear();
                             phone.clear();
                             cashhelper.setdata(
-                                key: "token",
-                                value: state.loginmodel.data!.token!);
+                                key: "company_logo",
+                                value: state.loginmodel.data!.logo);
                             cashhelper.setdata(
-                                key: "permessions",
-                                value: state.loginmodel.data!.permissions!);
-
+                                key: "company_name",
+                                value: state.loginmodel.data!.companyName);
                             showsnack(
                                 comment: "تم تسجيل الدخول بنجاح",
                                 context: context);

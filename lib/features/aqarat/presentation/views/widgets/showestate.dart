@@ -174,8 +174,7 @@ class ShowEstateState extends State<mShowEstate> {
                                             width: 10,
                                           ),
                                           Text(
-                                              widget.data!.numberOfRooms!
-                                                  .toString(),
+                                              '${widget.data.numberOfRooms!}  غرفه',
                                               style: TextStyle(
                                                   fontSize: 12.5,
                                                   color: Colors.blueGrey))
@@ -455,8 +454,7 @@ class ShowEstateState extends State<mShowEstate> {
                                               width: 10,
                                             ),
                                             Text(
-                                                widget.data!.numberOfRooms!
-                                                    .toString(),
+                                                '${widget.data.numberOfRooms!}  غرفه',
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.blueGrey))

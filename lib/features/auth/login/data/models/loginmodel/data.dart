@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+import 'home.dart';
+import 'sidebar.dart';
+
 class Data extends Equatable {
   final num? id;
   final dynamic logo;
@@ -7,13 +10,14 @@ class Data extends Equatable {
   final String? jobTitle;
   final String? currency;
   final String? userType;
-  final List<String>? permissions;
   final String? companyName;
   final String? companyAddress;
   final String? companyPhone;
   final String? phone;
   final String? status;
   final String? token;
+  final List<Sidebar>? sidebar;
+  final List<Home>? home;
   final String? createdAt;
   final String? updatedAt;
 
@@ -24,13 +28,14 @@ class Data extends Equatable {
     this.jobTitle,
     this.currency,
     this.userType,
-    this.permissions,
     this.companyName,
     this.companyAddress,
     this.companyPhone,
     this.phone,
     this.status,
     this.token,
+    this.sidebar,
+    this.home,
     this.createdAt,
     this.updatedAt,
   });
@@ -42,13 +47,18 @@ class Data extends Equatable {
         jobTitle: json['job_title']?.toString(),
         currency: json['currency']?.toString(),
         userType: json['user_type']?.toString(),
-        permissions: List<String>.from(json['permissions'] ?? []),
         companyName: json['company_name']?.toString(),
         companyAddress: json['company_address']?.toString(),
         companyPhone: json['company_phone']?.toString(),
         phone: json['phone']?.toString(),
         status: json['status']?.toString(),
         token: json['token']?.toString(),
+        sidebar: (json['sidebar'] as List<dynamic>?)
+            ?.map((e) => Sidebar.fromJson(Map<String, dynamic>.from(e)))
+            .toList(),
+        home: (json['home'] as List<dynamic>?)
+            ?.map((e) => Home.fromJson(Map<String, dynamic>.from(e)))
+            .toList(),
         createdAt: json['created_at']?.toString(),
         updatedAt: json['updated_at']?.toString(),
       );
@@ -60,13 +70,15 @@ class Data extends Equatable {
         if (jobTitle != null) 'job_title': jobTitle,
         if (currency != null) 'currency': currency,
         if (userType != null) 'user_type': userType,
-        if (permissions != null) 'permissions': permissions,
         if (companyName != null) 'company_name': companyName,
         if (companyAddress != null) 'company_address': companyAddress,
         if (companyPhone != null) 'company_phone': companyPhone,
         if (phone != null) 'phone': phone,
         if (status != null) 'status': status,
         if (token != null) 'token': token,
+        if (sidebar != null)
+          'sidebar': sidebar?.map((e) => e.toJson()).toList(),
+        if (home != null) 'home': home?.map((e) => e.toJson()).toList(),
         if (createdAt != null) 'created_at': createdAt,
         if (updatedAt != null) 'updated_at': updatedAt,
       };
@@ -80,13 +92,14 @@ class Data extends Equatable {
       jobTitle,
       currency,
       userType,
-      permissions,
       companyName,
       companyAddress,
       companyPhone,
       phone,
       status,
       token,
+      sidebar,
+      home,
       createdAt,
       updatedAt,
     ];

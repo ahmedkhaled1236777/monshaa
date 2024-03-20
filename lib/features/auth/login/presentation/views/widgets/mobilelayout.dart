@@ -105,11 +105,11 @@ class _MobilelayoutState extends State<Mobilelayout> {
                     password.clear();
                     phone.clear();
                     cashhelper.setdata(
-                        key: "token", value: state.loginmodel.data!.token!);
+                        key: "company_logo",
+                        value: state.loginmodel.data!.logo);
                     cashhelper.setdata(
-                        key: "permessions",
-                        value: state.loginmodel.data!.permissions!);
-
+                        key: "company_name",
+                        value: state.loginmodel.data!.companyName);
                     showsnack(
                         comment: "تم تسجيل الدخول بنجاح", context: context);
                     navigateandfinish(
@@ -128,6 +128,8 @@ class _MobilelayoutState extends State<Mobilelayout> {
                         await BlocProvider.of<logincuibt>(context)
                             .loginpostdata(
                                 login: loginrequest(
+                          device_type: "android",
+                          token: "kljkjkljljklkl",
                           phone: phone.text,
                           password: password.text,
                         ));

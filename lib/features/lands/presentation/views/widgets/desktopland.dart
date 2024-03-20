@@ -57,6 +57,8 @@ class _desktoplandState extends State<desktopland> {
                       onPressed: () {
                         BlocProvider.of<ShowlandsCubit>(context).data.clear();
                         BlocProvider.of<ShowlandsCubit>(context)
+                            .queryParameters = null;
+                        BlocProvider.of<ShowlandsCubit>(context)
                             .getallalands(token: generaltoken, page: 1);
                       },
                       icon: Icon(Icons.data_exploration,

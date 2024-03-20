@@ -266,6 +266,8 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .data
                                     .clear();
+                                Navigator.pop(context);
+
                                 await BlocProvider.of<ShowaqaratCubit>(context)
                                     .getallaqarat(token: generaltoken, page: 1);
                                 BlocProvider.of<DateCubit>(context)

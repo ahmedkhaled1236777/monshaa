@@ -20,7 +20,8 @@ class DatelandCubit extends Cubit<DatelandState> {
     if (date != null) {
       selectedDate = date;
       String month = date.month > 9 ? '${date.month}' : '0${date.month}';
-      date1 = '${date.year}-${month}-${date.day}';
+      String day = date.day > 9 ? '${date.day}' : '0${date.day}';
+      date1 = '${date.year}-${month}-${day}';
     }
     ;
     emit(changeDatelandState());

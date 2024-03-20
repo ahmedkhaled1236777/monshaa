@@ -29,9 +29,10 @@ class customtableaqar extends StatefulWidget {
 
 class _customtableaqarState extends State<customtableaqar> {
   initscroll() {
+    BlocProvider.of<ShowaqaratCubit>(context).queryParameters = null;
     BlocProvider.of<ShowaqaratCubit>(context).data.clear();
     BlocProvider.of<ShowaqaratCubit>(context)
-        .getallaqarat(token: cashhelper.getdata(key: "token"), page: 1);
+        .getallaqarat(token: generaltoken, page: 1);
     widget.scrollController.addListener(() async {
       if (widget.scrollController.position.pixels ==
           widget.scrollController.position.maxScrollExtent) {
@@ -152,10 +153,24 @@ class _customtableaqarState extends State<customtableaqar> {
                                     showDialog(
                                         context: context,
                                         builder: (_) {
-                                          return AlertDialog(
-                                            scrollable: true,
-                                            content:
-                                              editdialog(
+                                         return AlertDialog(
+                                                title: Container(
+                                                  alignment: Alignment.topLeft,
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.close)),
+                                                ),
+                                                surfaceTintColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0)),
+                                                scrollable: true,
+                                                content: editdialog(
                                                 width:
                                                     MediaQuery.sizeOf(context)
                                                             .width *
@@ -225,11 +240,18 @@ class _customtableaqarState extends State<customtableaqar> {
                                                         .toString()),
                                                 details: TextEditingController(
                                                     text: BlocProvider.of<
-                                                                ShowaqaratCubit>(
-                                                            context)
-                                                        .data[index]
-                                                        .advertiseDetails
-                                                        .toString()),
+                                                                        ShowaqaratCubit>(
+                                                                    context)
+                                                                .data[index]
+                                                                .advertiseDetails ==
+                                                            null
+                                                        ? ""
+                                                        : BlocProvider.of<
+                                                                    ShowaqaratCubit>(
+                                                                context)
+                                                            .data[index]
+                                                            .advertiseDetails
+                                                            .toString()),
                                                 adressdetails: TextEditingController(
                                                     text: BlocProvider.of<
                                                                 ShowaqaratCubit>(
@@ -244,9 +266,7 @@ class _customtableaqarState extends State<customtableaqar> {
                                                         .data[index]
                                                         .realStateSpace
                                                         .toString()),
-                                              )
-                                            
-                                          );
+                                              ));
                                         });
                                   },
                                 ),

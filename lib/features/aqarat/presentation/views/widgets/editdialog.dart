@@ -286,6 +286,7 @@ class editdialog extends StatelessWidget {
                                   state_date_register: BlocProvider.of<DateCubit>(context).date1,
                                   advertise_details: details.text,
                                   apartment_number: housenumber.text,
+                                  number_of_bathrooms: int.parse(toilletsnumber.text),
                                   building_number: aqarnumber.text));
                         },
                         button_name: "تعديل البيانات",

@@ -13,15 +13,18 @@ class custommytextform extends StatelessWidget {
   String? val;
   TextInputType keyboardType;
   int? maxlines;
-  bool ?readonly;
+  bool? readonly;
+  String? suffixtext;
+
   custommytextform(
       {super.key,
-      this.readonly=false,
+      this.readonly = false,
       required this.controller,
       required this.hintText,
       this.obscureText = false,
       this.maxlines = 1,
       this.val,
+      this.suffixtext,
       this.keyboardType = TextInputType.none,
       this.suffixIcon});
 
@@ -34,11 +37,13 @@ class custommytextform extends StatelessWidget {
         }
       },
       obscureText: obscureText,
-      readOnly:readonly!,
+      readOnly: readonly!,
       keyboardType: keyboardType,
       maxLines: maxlines,
+      style: TextStyle(fontFamily: "cairo", fontSize: 15),
       controller: controller,
       decoration: InputDecoration(
+          suffixText: suffixtext,
           contentPadding: const EdgeInsets.symmetric(horizontal: 7),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Appsizes.size5),

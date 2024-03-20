@@ -140,7 +140,7 @@ class customsettings extends StatelessWidget {
                           listener: (context, state) {
                             if (state is Logoutsuccess) {
                               BlocProvider.of<HomeCubit>(context)
-                                  .drawerpermessions
+                                  .sidebarpermessions
                                   .clear();
                               BlocProvider.of<HomeCubit>(context)
                                   .gridpermessions

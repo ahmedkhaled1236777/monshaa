@@ -10,7 +10,7 @@ class contractsearch extends StatelessWidget {
   final TextEditingController tenantcard = TextEditingController();
   final TextEditingController ownerphone = TextEditingController();
   final TextEditingController ownercard = TextEditingController();
- 
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -85,21 +85,24 @@ class contractsearch extends StatelessWidget {
                                     height: 20,
                                   ),
                                   custommaterialbutton(
-                                      onPressed: () async{
-                         BlocProvider.of<contractCubit>(context).queryParameters={
-                          "tenant_phone":tenantphone.text,
-                          "tenant_card_number":tenantcard.text,
-                          "owner_phone":ownerphone.text,
-                          "owner_card_number":ownercard.text
-                         }       ;       
-                                                                 Navigator.pop(context);
- 
-                                       await BlocProvider.of<contractCubit>(context)
-        .getallcontracts(token: generaltoken, page: 1);
-        tenantcard.clear();
-    tenantphone.clear();
-    ownercard.clear();
-    ownerphone.clear();
+                                      onPressed: () async {
+                                        BlocProvider.of<contractCubit>(context)
+                                            .queryParameters = {
+                                          "tenant_phone": tenantphone.text,
+                                          "tenant_card_number": tenantcard.text,
+                                          "owner_phone": ownerphone.text,
+                                          "owner_card_number": ownercard.text
+                                        };
+                                        Navigator.pop(context);
+
+                                        await BlocProvider.of<contractCubit>(
+                                                context)
+                                            .getallcontracts(
+                                                token: generaltoken, page: 1);
+                                        tenantcard.clear();
+                                        tenantphone.clear();
+                                        ownercard.clear();
+                                        ownerphone.clear();
                                       },
                                       button_name: "بحث",
                                       buttonicon: Icons.search)
@@ -121,9 +124,9 @@ class contractsearch extends StatelessWidget {
         size: 24,
       ),
     );
-  
   }
-@override
+
+  @override
   void dispose() {
     /* Discards any resources used by the object. After this is called,
     the object is not in a usable state and should be discarded
@@ -132,5 +135,5 @@ class contractsearch extends StatelessWidget {
     tenantphone.dispose();
     ownercard.dispose();
     ownerphone.dispose();
-
-  }}
+  }
+}

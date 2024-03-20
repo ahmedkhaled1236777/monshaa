@@ -9,6 +9,7 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customchoo
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensemodel/datum.dart';
+import 'package:aplication/features/expenses.dart/data/models/expensemodelupdate.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensesmodelrequest.dart';
 import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_cubit.dart';
 import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_state.dart';
@@ -109,13 +110,13 @@ class editexpensedialog extends StatelessWidget {
                           BlocProvider.of<expenseCubit>(context).updateexpense(
                               token: generaltoken,
                               id: data.id!.toInt(),
-                              expensemodel: expensesmodelrequest(
+                              expensemodel: expensesmodelupdaterequest(
                                   amount: amount.text,
                                   description: descreption.text,
                                   date: BlocProvider.of<DateCubit>(context)
                                       .date1));
                         },
-                        button_name: "تعديل المستاجرين",
+                        button_name: "تعديل الايراد",
                         buttonicon: Icons.edit);
                   },
                 )

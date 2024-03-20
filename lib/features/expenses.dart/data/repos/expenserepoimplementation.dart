@@ -3,6 +3,7 @@ import 'package:aplication/core/errors/handlingerror.dart';
 import 'package:aplication/core/services/apiservice.dart';
 import 'package:aplication/core/urls/urls.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensemodel/expensemodel.dart';
+import 'package:aplication/features/expenses.dart/data/models/expensemodelupdate.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensesmodelrequest.dart';
 import 'package:aplication/features/expenses.dart/data/repos/expenserepo.dart';
 import 'package:dartz/dartz.dart';
@@ -82,7 +83,7 @@ class expenserepoimplementation extends expenserepo {
   Future<Either<failure, String>> editexpense(
       {required String token,
       required int id,
-      required expensesmodelrequest expensemodel}) async {
+      required expensesmodelupdaterequest expensemodel}) async {
     try {
       Response response = await Postdata.postdata(
           path: "/expenses/update/${id}",

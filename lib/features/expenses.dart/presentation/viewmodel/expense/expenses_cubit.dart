@@ -1,4 +1,5 @@
 import 'package:aplication/features/expenses.dart/data/models/expensemodel/datum.dart';
+import 'package:aplication/features/expenses.dart/data/models/expensemodelupdate.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensesmodelrequest.dart';
 import 'package:aplication/features/expenses.dart/data/repos/expenserepoimplementation.dart';
 import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_state.dart';
@@ -77,7 +78,7 @@ class expenseCubit extends Cubit<expenseState> {
   updateexpense(
       {required String token,
       required int id,
-      required expensesmodelrequest expensemodel}) async {
+      required expensesmodelupdaterequest expensemodel}) async {
     emit(editexpenseloading());
     var result = await expenserepo.editexpense(
         token: token, id: id, expensemodel: expensemodel);

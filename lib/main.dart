@@ -1,4 +1,7 @@
 import 'package:aplication/building.dart';
+import 'package:aplication/features/clients/data/repos/clientrepoimplementation.dart';
+import 'package:aplication/features/clients/presentation/view/clients.dart';
+import 'package:aplication/features/clients/presentation/viewmodel/clients/clients_cubit.dart';
 import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/expense.dart';
@@ -23,6 +26,10 @@ import 'package:aplication/features/emoloyees/presentation/views/widgets/employe
 import 'package:aplication/features/expenses.dart/data/repos/expenserepoimplementation.dart';
 import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_cubit.dart';
 import 'package:aplication/features/expenses.dart/presentation/views/expenses.dart';
+import 'package:aplication/features/financial/data/repos/financialrepoimplementation.dart';
+import 'package:aplication/features/financial/presentation/view/financial.dart';
+import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_cubit.dart';
+import 'package:aplication/features/home/data/repos/homerepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/addland/addlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/editland/editlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/showland/showlandrepoimplementation.dart';
@@ -31,6 +38,12 @@ import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit
 import 'package:aplication/features/lands/presentation/viewmodel/edit/edit_cubit.dart';
 import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
 import 'package:aplication/features/lands/presentation/views/estateland.dart';
+import 'package:aplication/features/reciept/data/repos/recieptrepoimplementation.dart';
+import 'package:aplication/features/reciept/presentaion/view/reciept.dart';
+import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptcuibt.dart';
+import 'package:aplication/features/revenus/data/repos/revenurepoimplementation.dart';
+import 'package:aplication/features/revenus/presentation/viewmodel/revenuecuibt/revenue_cubit.dart';
+import 'package:aplication/features/revenus/presentation/views/revenues.dart';
 import 'package:aplication/features/tenants/data/repo/tenantrepoimplementation.dart';
 import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
 import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
@@ -78,6 +91,7 @@ void main() async {
     ),
   );
   Apiservice.initdio();
+  
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -127,8 +141,13 @@ class MyApp extends StatelessWidget {
               logincuibt(loginrepo: login_repo_implementation()),
         ),
         BlocProvider(
+          create: (context) => financialCubit(financialrepoimplementation()),
+        ),
+        BlocProvider(
             create: (context) =>
                 registercuibt(registerrepo: registerrepoimplementation())),
+        BlocProvider(
+            create: (context) => recieptCubit(recieptrepoimplementation())),
         BlocProvider(
             create: (context) =>
                 EditCubit(editrepo: editaqarrepoimplementation())),
@@ -139,7 +158,7 @@ class MyApp extends StatelessWidget {
                 EditlandCubit(editrepo: editlandrepoimplementation())),
         BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
-        BlocProvider(create: (context) => HomeCubit()),
+        BlocProvider(create: (context) => HomeCubit(homerepoimplementation())),
         BlocProvider(
             create: (context) =>
                 addaqarcuibt(addaqarrepo: addaqarimplementation())),
@@ -164,28 +183,55 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 ShowlandsCubit(showlands: showlandsrepoimplementation())),
         BlocProvider(
-            create: (context) =>
-                contractCubit(contractrepoimplementation())),
+            create: (context) => contractCubit(contractrepoimplementation())),
         BlocProvider(
             create: (context) => expenseCubit(expenserepoimplementation())),
+        BlocProvider(
+            create: (context) => revenueCubit(revenuerepoimplementation())),
+        BlocProvider(
+            create: (context) => clientsCubit(clientsrepoimplementation())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) => GetMaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          routes: {
-            'build': (context) => Building(),
-          },
-          theme: ThemeData(
-            fontFamily: 'Alexandria',
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: Tenants()
-        ),
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            routes: {
+              'build': (context) => Building(),
+            },
+            theme: ThemeData(
+              fontFamily: 'Alexandria',
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home:
+                Login() /* Contract(
+                tenantname: TextEditingController(),
+                tenanphone: TextEditingController(),
+                tenantcard: TextEditingController(),
+                tenantadress: TextEditingController(),
+                tenantjob: TextEditingController(),
+                tenantnationality: TextEditingController(),
+                ownername: TextEditingController(),
+                ownerphone: TextEditingController(),
+                ownercard: TextEditingController(),
+                owneradress: TextEditingController(),
+                ownerjob: TextEditingController(),
+                ownernationality: TextEditingController(),
+                aqaradress: TextEditingController(),
+                aqaradressdetails: TextEditingController(),
+                aqarmohafza: TextEditingController(),
+                aqartype: TextEditingController(),
+                area: TextEditingController(),
+                emaranumber: TextEditingController(),
+                housenumber: TextEditingController(),
+                totalvalue: TextEditingController(),
+                insuranceval: TextEditingController(),
+                commessionvalue: TextEditingController(),
+                periodofdelay: TextEditingController())*/
+            ),
       ),
     );
   }

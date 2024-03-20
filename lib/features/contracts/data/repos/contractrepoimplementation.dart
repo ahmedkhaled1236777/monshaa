@@ -8,24 +8,29 @@ import 'package:aplication/features/contracts/data/repos/contractrepo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class contractrepoimplementation extends contractrepo{
+class contractrepoimplementation extends contractrepo {
   addcontract(
-      {required String token, required contractmodelrequest contract,int?id}) async {
+      {required String token,
+      required contractmodelrequest contract,
+      int? id}) async {
     // ignore: curly_braces_in_flow_control_structures
     try {
       Response response = await Postdata.postdata(
-        queryParameters:{
-          "tenant_id":id
-        } ,
-          path: urls.add_contract, token: token, data: contract.tojson());
+          queryParameters: {"tenant_id": id},
+          path: urls.add_contract,
+          token: token,
+          data: contract.tojson());
+      print("wwwwwwwwwwwwwwwwwwwwwww");
+      print(response.data);
+
       if (response.statusCode == 200 && response.data["status"] == true) {
         print(response.data);
         return right(response.data["message"]);
       }
       if (response.statusCode == 200 && response.data["code"] == 409) {
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
       } else {
-        return left(requestfailure(error_message: response.data[0]));
+        return left(requestfailure(error_message: response.data["data"][0]));
       }
     } catch (e) {
       if (e is DioException) return left(requestfailure.fromdioexception(e));
@@ -40,11 +45,12 @@ class contractrepoimplementation extends contractrepo{
       Map<String, dynamic>? queryParameters}) async {
     Contractmodel contractmodel;
     try {
+      print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
       Response response = await Getdata.getdata(
           path: "/tenant-contract/all-tenant-contracts?page=${page}",
           token: token,
           queryParameters: queryParameters);
-          print(response.data);
+      print(response.data);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         contractmodel = Contractmodel.fromJson(response.data);
         return right(contractmodel);
@@ -71,8 +77,7 @@ class contractrepoimplementation extends contractrepo{
       } else if (response.statusCode == 200 && response.data["code"] == 409) {
         return left(requestfailure(error_message: response.data["message"]));
       } else
-        return left(
-            requestfailure(error_message: response.data["data"][0]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));

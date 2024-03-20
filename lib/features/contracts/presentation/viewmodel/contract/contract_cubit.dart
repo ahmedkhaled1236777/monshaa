@@ -19,43 +19,70 @@ class contractCubit extends Cubit<contractState> {
     "طباعة عقد",
     "تعديل",
     "حذف",
-  ];
+  ]; /*
+ TextEditingController tenantname=TextEditingController();
+ TextEditingController tenanphone=TextEditingController();
+ TextEditingController tenantcard=TextEditingController();
+ TextEditingController tenantadress=TextEditingController();
+ TextEditingController tenantjob=TextEditingController();
+ TextEditingController tenantnationality=TextEditingController();
+ TextEditingController ownername=TextEditingController();
+ TextEditingController ownerphone=TextEditingController();
+ TextEditingController ownercard=TextEditingController();
+ TextEditingController owneradress=TextEditingController();
+ TextEditingController ownerjob=TextEditingController();
+ TextEditingController ownernationality=TextEditingController();
+ TextEditingController aqaradress=TextEditingController();
+ TextEditingController aqaradressdetails=TextEditingController();
+ TextEditingController aqarmohafza=TextEditingController();
+ TextEditingController area=TextEditingController();
+ TextEditingController emaranumber=TextEditingController();
+ TextEditingController housenumber=TextEditingController();
+ TextEditingController totalvalue=TextEditingController();
+ TextEditingController insuranceval=TextEditingController();
+ TextEditingController commessionvalue=TextEditingController();
+ TextEditingController periodofdelay=TextEditingController();*/
   int? id;
-  String?aqartype;
-  String?commessiontype;
+  String? aqartype;
+  String? commessiontype;
   cleardata() {
     aqartype = null;
     commessiontype = null;
-   
-  
-}
-  changecommessiontype(String val){
-    commessiontype=val;
+  }
+
+  changecommessiontype(String? val) {
+    commessiontype = val;
     emit(changecommison());
   }
-  mycleardata(BuildContext context){
-     aqartype = null;
+
+  mycleardata(BuildContext context) {
+    aqartype = null;
     commessiontype = null;
-       BlocProvider.of<contractCubit>(context).id=null;
-                       BlocProvider.of<contractCubit>(context).aqartype=null;
-                                      BlocProvider.of<contractCubit>(context).commessiontype=null;
-                                      BlocProvider.of<DateCubit>(context).date1="التاريخ";
-                                      BlocProvider.of<DateCubit>(context).date3="الايجار من";
-                                      BlocProvider.of<DateCubit>(context).date4="الايجار الي";
-                                      emit(cleardatastate());
+    BlocProvider.of<contractCubit>(context).id = null;
+    BlocProvider.of<contractCubit>(context).aqartype = null;
+    BlocProvider.of<contractCubit>(context).commessiontype = null;
+    BlocProvider.of<DateCubit>(context).date1 = "التاريخ";
+    BlocProvider.of<DateCubit>(context).date3 = "الايجار من";
+    BlocProvider.of<DateCubit>(context).date4 = "الايجار الي";
+    emit(cleardatastate());
   }
-   changeaddaqartype(String val) {
+
+  changeaddaqartype(String val) {
     aqartype = val;
     emit(changetype());
   }
+
   Map<String, dynamic>? queryParameters;
   List<Datum> contractdata = [];
   bool loading = false;
   int page = 1;
   addcontract(
-      {required String token, required contractmodelrequest contract,int?id}) async {
+      {required String token,
+      required contractmodelrequest contract,
+      int? id}) async {
     emit(Addcontractloading());
-    var result = await contractrepo.addcontract(token: token, contract: contract,id: id);
+    var result = await contractrepo.addcontract(
+        token: token, contract: contract, id: id);
     result.fold((failure) {
       emit(Addcontractfailure(error_message: failure.error_message));
     }, (success) {
@@ -65,7 +92,6 @@ class contractCubit extends Cubit<contractState> {
 
   getallmorecontracts({
     required String token,
-    
   }) async {
     page++;
     var result = await contractrepo.getcontracts(

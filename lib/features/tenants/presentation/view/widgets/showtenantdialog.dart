@@ -1,3 +1,5 @@
+import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
+import 'package:aplication/features/auth/login/presentation/views/widgets/customtextform.dart';
 import 'package:aplication/features/auth/profile/presentation/view/widgets/customdescription.dart';
 import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
 import 'package:flutter/material.dart';
@@ -13,79 +15,161 @@ class showtenantdialog extends StatelessWidget {
     return InkWell(
       child: child,
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                content: Container(
-                  width: 400,
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'images/people.png',
-                          height: 50,
-                          width: 50,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text('بيانات المستاجر',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0xff2ba4c8),
-                                fontWeight: FontWeight.w100),
-                            textAlign: TextAlign.right),
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        customdescription(
-                            description: "اسم المستأجر",
-                            value: BlocProvider.of<TenantCubit>(context)
-                                .tenantdata[index]
-                                .name!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "رقم الهاتف",
-                            value: BlocProvider.of<TenantCubit>(context)
-                                .tenantdata[index]
-                                .phone!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "عنوان المستأجر",
-                            value: BlocProvider.of<TenantCubit>(context)
-                                .tenantdata[index]
-                                .name!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "رقم البطاقه",
-                            value: BlocProvider.of<TenantCubit>(context)
-                                .tenantdata[index]
-                                .cardNumber!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        customdescription(
-                            description: "الجنسيه",
-                            value: BlocProvider.of<TenantCubit>(context)
-                                .tenantdata[index]
-                                .nationality!),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                      ],
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Container(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.close)),
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
+              content: SingleChildScrollView(
+                  child: Container(
+                width: MediaQuery.of(context).size.width * 0.24,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Center(
+                      child: Text(
+                        'بيانات المستاجر',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'اسم المستاجر: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].name}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'العنوان: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].cardAddress}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'رقم الهاتف: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].phone}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'رقم البطاقة: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].cardNumber}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'الوظيفة: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].jobTitle}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'الجنسية: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].nationality}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'التاريخ: ${BlocProvider.of<TenantCubit>(context).tenantdata[index].createdAt}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            });
+              )),
+            );
+          },
+        );
       },
     );
   }

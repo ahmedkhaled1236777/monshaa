@@ -24,6 +24,7 @@ import 'package:aplication/features/lands/presentation/viewmodel/edit/edit_cubit
 import 'package:aplication/features/lands/presentation/views/estateland.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customgridimages.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/pickedimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,6 +35,7 @@ class editlanddialog extends StatelessWidget {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final TextEditingController clientname;
   final TextEditingController adress;
+  final TextEditingController adressdetails;
   final TextEditingController price;
   final TextEditingController phone;
   final TextEditingController details;
@@ -43,6 +45,7 @@ class editlanddialog extends StatelessWidget {
       {super.key,
       required this.width,
       required this.height,
+      required this.adressdetails,
       required this.data,
       required this.clientname,
       required this.adress,
@@ -88,6 +91,13 @@ class editlanddialog extends StatelessWidget {
                           val: "برجاء ادخال عنوان الارض",
                           controller: adress,
                           hintText: "العنوان"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      custommytextform(
+                          val: "برجاء ادخال تفاصيل العنوان",
+                          controller: adressdetails,
+                          hintText: "تفاصيل"),
                       const SizedBox(
                         height: 10,
                       ),
@@ -149,7 +159,7 @@ class editlanddialog extends StatelessWidget {
                 const SizedBox(
                   height: Appsizes.size10,
                 ),
-                pickedimage(),
+                pickedimageland(),
                 const SizedBox(
                   height: Appsizes.size15,
                 ),
@@ -188,7 +198,7 @@ class editlanddialog extends StatelessWidget {
                               id: data.id!.toInt(),
                               add_land: addlandrequest(
                                 address: adress.text,
-                                real_state_address_details: "",
+                                real_state_address_details: adressdetails.text,
                                 land_images:
                                     BlocProvider.of<addlandcuibt>(context)
                                         .images,

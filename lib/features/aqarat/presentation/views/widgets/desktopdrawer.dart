@@ -1,4 +1,5 @@
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
@@ -25,8 +26,10 @@ class desktopdrawer extends StatelessWidget {
               children: [
                 appbartittle(
                   sizedboxwidth: Appsizes.size5.w,
-                  logo: "images/logo.png",
-                  name: "شركة الاتقان",
+                  logo: cashhelper.getdata(key: "company_logo") ??
+                      "images/logo.png",
+                  name:
+                      cashhelper.getdata(key: "company_name") ?? "شركة الاتقان",
                   fontSize: 6.sp,
                 ),
                 SizedBox(
@@ -34,10 +37,11 @@ class desktopdrawer extends StatelessWidget {
                 ),
                 Column(
                   children: BlocProvider.of<HomeCubit>(context)
-                      .drawerpermessions
+                      .sidebarpermessions
                       .map((e) => Column(
                             children: [
                               customdraweritem(
+                                  count: e["count"],
                                   sizedboxwidth: 3.w,
                                   textstyle: Appstyles.textStyle13wd,
                                   iconData: e["icon"],

@@ -22,6 +22,7 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.d
 import 'package:aplication/features/aqarat/presentation/views/widgets/pickedimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/type.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -125,6 +126,7 @@ class _addaqarState extends State<addaqar> {
                                     keyboardType: TextInputType.number,
                                     val: "برجاء ادخال المساحه",
                                     controller: area,
+                                    suffixtext: "متر",
                                     hintText: "المساحه"),
                                 const SizedBox(
                                   height: 10,
@@ -132,6 +134,7 @@ class _addaqarState extends State<addaqar> {
                                 custommytextform(
                                     keyboardType: TextInputType.number,
                                     val: "برجاء ادخال السعر",
+                                    suffixtext: "جنيه",
                                     controller: price,
                                     hintText: "السعر"),
                                 const SizedBox(
@@ -250,6 +253,10 @@ class _addaqarState extends State<addaqar> {
                             if (state is addaaqarloading) return loading();
                             return custommaterialbutton(
                                 onPressed: () async {
+                                  var player = new AudioPlayer();
+                                  const alarmAudioPath =
+                                      "sound/click-124467.mp3";
+                                  player.play(UrlSource(alarmAudioPath));
                                   if (formkey.currentState!.validate()) {
                                     if (BlocProvider.of<addaqarcuibt>(context)
                                             .aqartype ==

@@ -32,10 +32,11 @@ class desktopdrawer extends StatelessWidget {
                 ),
                 Column(
                   children: BlocProvider.of<HomeCubit>(context)
-                      .drawerpermessions
+                      .sidebarpermessions
                       .map((e) => Column(
                             children: [
                               customdraweritem(
+                                  count: e["count"],
                                   sizedboxwidth: 3.w,
                                   textstyle: Appstyles.textStyle13wd,
                                   iconData: e["icon"],

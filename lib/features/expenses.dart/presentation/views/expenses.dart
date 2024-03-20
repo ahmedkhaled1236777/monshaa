@@ -10,12 +10,6 @@ class expenses extends StatefulWidget {
 }
 
 class expensesState extends State<expenses> {
-  GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
-  DateTime selectedDate = DateTime.now();
-  DateTime selectedDate1 = DateTime.now();
-  var date1 = 'التاريخ';
-  var date2 = 'اضغط لاختيار تاريخ محدد';
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, consters) {

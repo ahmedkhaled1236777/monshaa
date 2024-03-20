@@ -119,6 +119,7 @@ class _addexpenseState extends State<addexpense> {
                                   .addexpense(
                                       token: generaltoken,
                                       expense: expensesmodelrequest(
+                                          type: "expense",
                                           amount: amount.text,
                                           description: descreption.text,
                                           date: BlocProvider.of<DateCubit>(

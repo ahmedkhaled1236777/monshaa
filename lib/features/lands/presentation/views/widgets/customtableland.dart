@@ -147,9 +147,8 @@ class _customtablelandState extends State<customtableland> {
                                       context: context,
                                       builder: (_) {
                                         return AlertDialog(
-                                          scrollable: true,
-                                          content: 
-                                            editlanddialog(
+                                            scrollable: true,
+                                            content: editlanddialog(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
                                                   0.5,
@@ -159,6 +158,13 @@ class _customtablelandState extends State<customtableland> {
                                               data: BlocProvider.of<
                                                       ShowlandsCubit>(context)
                                                   .data[index],
+                                              adressdetails:
+                                                  TextEditingController(
+                                                      text: BlocProvider.of<
+                                                                  ShowlandsCubit>(
+                                                              context)
+                                                          .data[index]
+                                                          .addressDetails),
                                               adress: TextEditingController(
                                                   text: BlocProvider.of<
                                                               ShowlandsCubit>(
@@ -199,9 +205,7 @@ class _customtablelandState extends State<customtableland> {
                                                       .data[index]
                                                       .sizeInMetres
                                                       .toString()),
-                                            )
-                                          
-                                        );
+                                            ));
                                       });
                                 },
                               ),

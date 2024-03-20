@@ -1,5 +1,6 @@
 import 'package:aplication/core/errors/failure.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensemodel/expensemodel.dart';
+import 'package:aplication/features/expenses.dart/data/models/expensemodelupdate.dart';
 import 'package:aplication/features/expenses.dart/data/models/expensesmodelrequest.dart';
 import 'package:dartz/dartz.dart';
 
@@ -15,5 +16,5 @@ abstract class expenserepo {
   Future<Either<failure, String>> editexpense(
       {required String token,
       required int id,
-      required expensesmodelrequest expensemodel});
+      required expensesmodelupdaterequest expensemodel});
 }

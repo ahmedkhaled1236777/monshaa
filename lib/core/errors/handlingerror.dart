@@ -38,10 +38,10 @@ class requestfailure extends failure {
     }
   }
   factory requestfailure.fromresponse(int statuscode, dynamic respnse) {
-    if (statuscode == 422 ||
-        statuscode == 400 ||
-        statuscode == 401 ||
-        statuscode == 403) {
+    if (statuscode == 422 || statuscode == 400 || statuscode == 401) {
+      print(respnse);
+      return requestfailure(error_message: respnse["data"][0]);
+    } else if (statuscode == 403) {
       return requestfailure(error_message: respnse["message"]);
     } else if (statuscode == 404) {
       return requestfailure(error_message: "الصفحه غير موجوده");

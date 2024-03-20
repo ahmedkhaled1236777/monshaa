@@ -67,13 +67,16 @@ class showexpensedialog extends StatelessWidget {
                         const SizedBox(
                           height: 15,
                         ),
-                        customdescription(
-                            firstfshape: false,
-                            height: MediaQuery.sizeOf(context).height * 0.05,
-                            description: "الوصف",
-                            value: BlocProvider.of<expenseCubit>(context)
-                                .expensedata[index]
-                                .description!),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: customdescription(
+                              firstfshape: false,
+                              height: MediaQuery.sizeOf(context).height * 0.05,
+                              description: "الوصف",
+                              value: BlocProvider.of<expenseCubit>(context)
+                                  .expensedata[index]
+                                  .description!),
+                        ),
                         const SizedBox(
                           height: 15,
                         ),

@@ -1,8 +1,11 @@
 abstract class contractState {}
 
 class contractInitial extends contractState {}
+
 class changecommison extends contractState {}
+
 class changetype extends contractState {}
+
 class cleardatastate extends contractState {}
 
 class editcontractloading extends contractState {}
@@ -50,4 +53,3 @@ class Addcontractfailure extends contractState {
 
   Addcontractfailure({required this.error_message});
 }
-

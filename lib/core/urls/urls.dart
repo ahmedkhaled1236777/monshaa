@@ -1,6 +1,8 @@
 abstract class urls {
   static const baseurl = "http://127.0.0.1:8000/api";
   static const login = "/login";
+  static const add_clients = "/clients/create";
+  static const home = "/home";
   static const register = "/register";
   // ignore: constant_identifier_names
   static const get_profile = "/auth/get-profile";

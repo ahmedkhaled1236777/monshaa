@@ -1,8 +1,10 @@
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/features/auth/login/data/models/loginmodel/loginmodel.dart';
 import 'package:aplication/features/auth/login/data/models/loginrequest.dart';
 import 'package:aplication/features/auth/login/data/repos/loginrepo/loginrepoimplementation.dart';
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/loginstates.dart';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 // ignore: camel_case_types
 class logincuibt extends Cubit<loginstate> {
@@ -22,4 +24,10 @@ class logincuibt extends Cubit<loginstate> {
       emit(loginsucces(loginmodel: success));
     });
   }
+ /* getdevicetoken(){
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; // Change here
+    _firebaseMessaging.getToken().then((token){
+      cashhelper.setdata(key: "devicetoken", value: token);
+  });
+  }*/
 }
