@@ -53,36 +53,13 @@ class mobileexpenses extends StatelessWidget {
                               .getallexpenses(token: generaltoken, page: 1);
                         },
                         icon: const Icon(
-                          Icons.data_exploration,
+                          Icons.blur_circular_rounded,
                           color: Appcolors.whitecolor,
                         )),
                     expensesearch(),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                    ),
+                   
                     const SizedBox(
-                      width: Appsizes.size5,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        navigateto(
-                            navigationscreen: PdfView(
-                              titles: 'الموظفيم',
-                            ),
-                            context: context);
-                      },
-                      child: const Icon(
-                        Icons.print,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: Appsizes.size5,
+                      width: Appsizes.size10,
                     ),
                   ],
                 )

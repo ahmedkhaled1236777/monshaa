@@ -7,9 +7,9 @@ part 'logout_state.dart';
 class LogoutCubit extends Cubit<LogoutState> {
   final logoutrepoimplementation logoutrepo;
   LogoutCubit({required this.logoutrepo}) : super(LogoutInitial());
-  log_out({required String token}) async {
+  log_out({required String token,required String devicetoken}) async {
     emit(Logoutloading());
-    var result = await logoutrepo.logout(token: token);
+    var result = await logoutrepo.logout(token: token,devicetoken:devicetoken);
     result.fold((failure) {
       emit(Logoutfailure(error_message: failure.error_message));
     }, (success) {

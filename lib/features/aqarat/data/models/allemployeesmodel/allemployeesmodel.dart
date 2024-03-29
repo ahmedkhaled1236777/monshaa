@@ -2,16 +2,21 @@ import 'package:equatable/equatable.dart';
 
 import 'data.dart';
 
-class Employeesmodel extends Equatable {
+class Allemployeesmodel extends Equatable {
   final Data? data;
   final num? code;
   final String? message;
   final bool? status;
 
-  const Employeesmodel({this.data, this.code, this.message, this.status});
+  const Allemployeesmodel({
+    this.data,
+    this.code,
+    this.message,
+    this.status,
+  });
 
-  factory Employeesmodel.fromJson(Map<String, dynamic> json) {
-    return Employeesmodel(
+  factory Allemployeesmodel.fromJson(Map<String, dynamic> json) {
+    return Allemployeesmodel(
       data: json['data'] == null
           ? null
           : Data.fromJson(Map<String, dynamic>.from(json['data'])),

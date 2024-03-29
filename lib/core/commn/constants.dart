@@ -30,25 +30,25 @@ Map showland = {
 };
 Map commessionrequest = {"نسبه": "per", "عموله": "val"};
 Map commessionresponse = {"per": "نسبه", "val": "عموله"};
-Map clientstatussrequest={
-  "انتظار":"waiting",
-  "معاينه":"inspection",
-  "معاينه مقبوله":"inspection_accepted",
-  "معاينه مرفوضه":"inspection_refused",
+Map clientstatussrequest = {
+  "انتظار": "waiting",
+  "معاينه": "inspection",
+  "معاينه مقبوله": "inspection_accepted",
+  "معاينه مرفوضه": "inspection_refused",
 };
-Map clientstatussresponse={
-  "waiting":"انتظار",
-  "inspection":"معاينه",
-  "inspection_accepted":"معاينه مقبوله",
-  "inspection_refused":"معاينه مرفوضه",
+Map clientstatussresponse = {
+  "waiting": "انتظار",
+  "inspection": "معاينه",
+  "inspection_accepted": "معاينه مقبوله",
+  "inspection_refused": "معاينه مرفوضه",
 };
-Map clientsdepartementrequest={
-  "عقار بيع":"state_sale",
-  "عقار ايجار":"state_rent",
-  "ارض بيع":"land_sale",
+Map clientsdepartementrequest = {
+  "عقار بيع": "state_sale",
+  "عقار ايجار": "state_rent",
+  "ارض بيع": "land_sale",
 };
-Map clientsdepartementresponse={
-  "state_sale":"عقار بيع",
-  "state_rent":"عقار ايجار",
-  "land_sale":"ارض بيع",
+Map clientsdepartementresponse = {
+  "state_sale": "عقار بيع",
+  "state_rent": "عقار ايجار",
+  "land_sale": "ارض بيع",
 };

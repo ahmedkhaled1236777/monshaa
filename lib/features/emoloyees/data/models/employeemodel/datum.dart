@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 
 class Datum extends Equatable {
   final num? id;
-  final dynamic logo;
+  final String? logo;
+  final String? employeeImage;
   final String? name;
-  final String? employeephoto;
   final String? jobTitle;
   final String? currency;
   final List<String>? permissions;
@@ -19,8 +19,8 @@ class Datum extends Equatable {
   const Datum({
     this.id,
     this.logo,
+    this.employeeImage,
     this.name,
-    this.employeephoto,
     this.jobTitle,
     this.currency,
     this.permissions,
@@ -35,9 +35,9 @@ class Datum extends Equatable {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: num.tryParse(json['id'].toString()),
-        logo: json['logo'],
+        logo: json['logo']?.toString(),
+        employeeImage: json['employee_image']?.toString(),
         name: json['name']?.toString(),
-        employeephoto: json['employee_image']?.toString(),
         jobTitle: json['job_title']?.toString(),
         currency: json['currency']?.toString(),
         permissions: List<String>.from(json['permissions'] ?? []),
@@ -53,6 +53,7 @@ class Datum extends Equatable {
   Map<String, dynamic> toJson() => {
         if (id != null) 'id': id,
         if (logo != null) 'logo': logo,
+        if (employeeImage != null) 'employee_image': employeeImage,
         if (name != null) 'name': name,
         if (jobTitle != null) 'job_title': jobTitle,
         if (currency != null) 'currency': currency,
@@ -71,6 +72,7 @@ class Datum extends Equatable {
     return [
       id,
       logo,
+      employeeImage,
       name,
       jobTitle,
       currency,

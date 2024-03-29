@@ -153,24 +153,23 @@ class _customtableaqarState extends State<customtableaqar> {
                                     showDialog(
                                         context: context,
                                         builder: (_) {
-                                         return AlertDialog(
-                                                title: Container(
-                                                  alignment: Alignment.topLeft,
-                                                  child: IconButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      icon: const Icon(
-                                                          Icons.close)),
-                                                ),
-                                                surfaceTintColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0)),
-                                                scrollable: true,
-                                                content: editdialog(
+                                          return AlertDialog(
+                                              title: Container(
+                                                alignment: Alignment.topLeft,
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    icon: const Icon(
+                                                        Icons.close)),
+                                              ),
+                                              surfaceTintColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(0)),
+                                              scrollable: true,
+                                              content: editdialog(
                                                 width:
                                                     MediaQuery.sizeOf(context)
                                                             .width *

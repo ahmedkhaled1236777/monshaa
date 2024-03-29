@@ -26,6 +26,9 @@ class EmployessPowersState extends State<EmployessPowers> {
     "عقارات البيع",
     "عقارات الايجار",
     "الايرادات",
+    "الاشعارات",
+    "العملاء",
+    "العقود المنتهيه",
     "الارباح"
   ];
 

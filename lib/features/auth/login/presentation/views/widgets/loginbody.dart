@@ -5,16 +5,13 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types, use_key_in_widget_constructors
 class loginbody extends StatefulWidget {
-  
   @override
   State<loginbody> createState() => _loginbodyState();
 }
 
 class _loginbodyState extends State<loginbody> {
   @override
-  void initState() {
-   
-  }
+  void initState() {}
   @override
   Widget build(BuildContext context) {
     return Directionality(

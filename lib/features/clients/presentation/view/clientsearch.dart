@@ -113,26 +113,28 @@ class clientsearch extends StatelessWidget {
                                           "phone": phone.text,
                                           "inspection_date":
                                               BlocProvider.of<DateCubit>(
-                                                      context)
-                                                  .date5=="تاريخ المعاينه"?null:  BlocProvider.of<DateCubit>(
-                                                      context)
-                                                  .date5,
+                                                              context)
+                                                          .date5 ==
+                                                      "تاريخ المعاينه"
+                                                  ? null
+                                                  : BlocProvider.of<DateCubit>(
+                                                          context)
+                                                      .date5,
                                           "status": clientstatussrequest[
                                               BlocProvider.of<clientsCubit>(
                                                       context)
                                                   .status],
                                         };
-                                        
+
                                         await BlocProvider.of<clientsCubit>(
                                                 context)
                                             .getallclientss(
                                                 token: generaltoken, page: 1);
                                         BlocProvider.of<DateCubit>(context)
                                             .cleardates();
-                                            phone.clear();
-                                           BlocProvider.of<clientsCubit>(
-                                                      context)
-                                                  .status=null;   
+                                        phone.clear();
+                                        BlocProvider.of<clientsCubit>(context)
+                                            .status = null;
                                         Navigator.pop(context);
                                       },
                                       button_name: "بحث",

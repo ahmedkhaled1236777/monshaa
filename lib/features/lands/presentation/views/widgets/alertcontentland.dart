@@ -67,6 +67,32 @@ class landalertcontent extends StatelessWidget {
                           const SizedBox(
                             height: Appsizes.size10,
                           ),
+                          BlocBuilder<addaqarcuibt, addaqarstate>(
+                            builder: (context, state) {
+                              return dropdownbutton(
+                                items: BlocProvider.of<addaqarcuibt>(context)
+                                            .allemployeesmodel ==
+                                        null
+                                    ? []
+                                    : BlocProvider.of<addaqarcuibt>(context)
+                                        .allemployeesmodel!
+                                        .data!
+                                        .data!
+                                        .map((e) => e.name!)
+                                        .toList(),
+                                hint: "اسم الموظف",
+                                name: BlocProvider.of<addaqarcuibt>(context)
+                                    .employeename,
+                                onchanged: (val) {
+                                  BlocProvider.of<addaqarcuibt>(context)
+                                      .changeemployeename(val);
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(
+                            height: Appsizes.size10,
+                          ),
                           Form(
                             key: minpricek,
                             child: custommytextform(
@@ -237,6 +263,9 @@ class landalertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowlandsCubit>(context)
                                     .queryParameters = {
                                   "address": adress.text,
+                                  "user_id":
+                                      BlocProvider.of<addaqarcuibt>(context)
+                                          .employeeid,
                                   "advertiser_type": requestland[
                                       BlocProvider.of<addlandcuibt>(context)
                                           .advistor_type],
@@ -253,11 +282,14 @@ class landalertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowlandsCubit>(context)
                                     .data
                                     .clear();
+
                                 BlocProvider.of<ShowlandsCubit>(context)
                                     .getallalands(
                                   token: generaltoken,
                                   page: 1,
                                 );
+                                BlocProvider.of<addaqarcuibt>(context)
+                                    .employeeid = null;
                                 BlocProvider.of<DateCubit>(context)
                                     .cleardates();
 

@@ -66,7 +66,7 @@ class profilebody extends StatelessWidget {
               ),
               logoutpro(onPressed: () async {
                 await BlocProvider.of<LogoutCubit>(context)
-                    .log_out(token: cashhelper.getdata(key: "token"));
+                    .log_out(token: cashhelper.getdata(key: "token",),devicetoken: cashhelper.getdata(key: "devicetoken"));
               })
             ],
           ),

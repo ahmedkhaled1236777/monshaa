@@ -3,7 +3,7 @@ import 'package:aplication/core/errors/handlingerror.dart';
 import 'package:aplication/core/services/apiservice.dart';
 import 'package:aplication/core/urls/urls.dart';
 import 'package:aplication/features/emoloyees/data/models/addemployeerequest.dart';
-import 'package:aplication/features/emoloyees/data/models/employeesmodel/employeesmodel.dart';
+import 'package:aplication/features/emoloyees/data/models/employeemodel/employeemodel.dart';
 import 'package:aplication/features/emoloyees/data/repos/addemployeerepo.dart';
 import 'package:aplication/features/tenants/data/model/tenantmodel/tenantmodel.dart';
 import 'package:dartz/dartz.dart';
@@ -32,9 +32,9 @@ class emplyeerepoimplementaion extends employeerepo {
   }
 
   @override
-  Future<Either<failure, Employeesmodel>> getemployees(
+  Future<Either<failure, Employeemodel>> getemployees(
       {required String token, required int page}) async {
-    Employeesmodel employeesmodel;
+    Employeemodel employeesmodel;
     try {
       Response response = await Getdata.getdata(
           path: "/employee/get-all-employees?page=${page}", token: token);
@@ -42,7 +42,7 @@ class emplyeerepoimplementaion extends employeerepo {
       if (response.statusCode == 200 &&
           response.data["message"] ==
               "تم جلب جميع الموظفين التابعه للشركه العقاريه بنجاح") {
-        employeesmodel = Employeesmodel.fromJson(response.data);
+        employeesmodel = Employeemodel.fromJson(response.data);
         return right(employeesmodel);
       } else
         return left(requestfailure(error_message: response.data["data"][0]));

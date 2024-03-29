@@ -147,35 +147,46 @@ class _addclientsState extends State<addclients> {
                     ),
                     BlocConsumer<clientsCubit, clientsState>(
                       listener: (context, state) {
-                        if(state is Addclientsfailure)showsnack(comment: state.error_message, context: context);
-                        if(state is Addclientssuccess){
+                        if (state is Addclientsfailure)
+                          showsnack(
+                              comment: state.error_message, context: context);
+                        if (state is Addclientssuccess) {
                           notes.clear();
                           clientname.clear();
                           clientphone.clear();
                           code.clear();
                           BlocProvider.of<DateCubit>(context).cleardates();
                           BlocProvider.of<clientsCubit>(context).cleardata();
-                          
-                          
-                          
-                          
-                          showsnack(comment: state.success_message, context: context);}
 
+                          showsnack(
+                              comment: state.success_message, context: context);
+                        }
                       },
                       builder: (context, state) {
-                        if(state is Addclientsloading)return loading();
+                        if (state is Addclientsloading) return loading();
                         return custommaterialbutton(
                             onPressed: () async {
-                          await    BlocProvider.of<clientsCubit>(context).addclients(token: generaltoken, clients: clientmodelrequest(
-                            name: clientname.text,
-                            phone: clientphone.text,
-                            code: code.text.isEmpty?"0":code.text,
-                            departement: clientsdepartementrequest[BlocProvider.of<clientsCubit>(context).departement],
-                            status:  clientstatussrequest[BlocProvider.of<clientsCubit>(context).status],
-                            inspectiondate: BlocProvider.of<DateCubit>(context).date5=="تاريخ المعاينه"?"":BlocProvider.of<DateCubit>(context).date5,
-                            notes: notes.text
-
-                          ));
+                              await BlocProvider.of<clientsCubit>(context).addclients(
+                                  token: generaltoken,
+                                  clients: clientmodelrequest(
+                                      name: clientname.text,
+                                      phone: clientphone.text,
+                                      code: code.text.isEmpty ? "0" : code.text,
+                                      departement: clientsdepartementrequest[
+                                          BlocProvider.of<clientsCubit>(context)
+                                              .departement],
+                                      status: clientstatussrequest[
+                                          BlocProvider.of<clientsCubit>(context)
+                                              .status],
+                                      inspectiondate:
+                                          BlocProvider.of<DateCubit>(context)
+                                                      .date5 ==
+                                                  "تاريخ المعاينه"
+                                              ? ""
+                                              : BlocProvider.of<DateCubit>(
+                                                      context)
+                                                  .date5,
+                                      notes: notes.text));
                             },
                             button_name: "تسجيل البيانات",
                             buttonicon: Icons.save);

@@ -72,24 +72,20 @@ class editclientdialog extends StatelessWidget {
                 Column(
                   children: [
                     custommytextform(
-                        controller: clientname,
-                        hintText: "اسم العميل"),
+                        controller: clientname, hintText: "اسم العميل"),
                     const SizedBox(
                       height: 10,
                     ),
                     custommytextform(
-                        controller: clientphone,
-                        hintText: "رقم هاتف العميل"),
+                        controller: clientphone, hintText: "رقم هاتف العميل"),
                     const SizedBox(
                       height: 10,
                     ),
-                    custommytextform(
-                        controller: code,
-                        hintText: "الكود"),
+                    custommytextform(controller: code, hintText: "الكود"),
                     const SizedBox(
                       height: 10,
                     ),
-                      dropdownbutton(
+                    dropdownbutton(
                         onchanged: (val) {
                           BlocProvider.of<clientsCubit>(context)
                               .changestatus(val);
@@ -140,7 +136,6 @@ class editclientdialog extends StatelessWidget {
                       controller: notes,
                       hintText: "ملاحظات",
                     ),
-                   
                   ],
                 ),
                 const SizedBox(
@@ -170,22 +165,31 @@ class editclientdialog extends StatelessWidget {
                               token: generaltoken,
                               id: data.id!.toInt(),
                               clientsmodel: clientmodelrequest(
-                            name: clientname.text,
-                            phone: clientphone.text,
-                            code: code.text.isEmpty?"0":code.text,
-                            departement: clientsdepartementrequest[BlocProvider.of<clientsCubit>(context).departement],
-                            status:  clientstatussrequest[BlocProvider.of<clientsCubit>(context).status],
-                            inspectiondate: BlocProvider.of<DateCubit>(context).date5=="تاريخ المعاينه"?"":BlocProvider.of<DateCubit>(context).date5,
-                            notes: notes.text
-
-                          ));
+                                  name: clientname.text,
+                                  phone: clientphone.text,
+                                  code: code.text.isEmpty ? "0" : code.text,
+                                  departement: clientsdepartementrequest[
+                                      BlocProvider.of<clientsCubit>(context)
+                                          .departement],
+                                  status: clientstatussrequest[
+                                      BlocProvider.of<clientsCubit>(context)
+                                          .status],
+                                  inspectiondate:
+                                      BlocProvider.of<DateCubit>(context)
+                                                  .date5 ==
+                                              "تاريخ المعاينه"
+                                          ? ""
+                                          : BlocProvider.of<DateCubit>(context)
+                                              .date5,
+                                  notes: notes.text));
                         },
                         button_name: "تعديل الايراد",
                         buttonicon: Icons.edit);
                   },
                 ),
-                SizedBox(height: 40,)
-                
+                SizedBox(
+                  height: 40,
+                )
               ]),
             ),
           ),

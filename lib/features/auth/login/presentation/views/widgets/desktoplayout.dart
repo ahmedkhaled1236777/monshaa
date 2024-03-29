@@ -115,17 +115,14 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             button_name: Apptextes.login,
                             buttonicon: Icons.login,
                             onPressed: () async {
-                              print("oooooooooooooooooooooooooooooooooooooooooo");
-                              print(cashhelper.getdata(key: "devicetoken"));
-                              var player = new AudioPlayer();
-                              const alarmAudioPath =
-                                  "sound/mixkit-quick-win-video-game-notification-269.wav";
-                              player.play(UrlSource(alarmAudioPath));
+                              print(
+                                  "oooooooooooooooooooooooooooooooooooooooooo");
+                             
                               if (formkey.currentState!.validate()) {
                                 await BlocProvider.of<logincuibt>(context)
                                     .loginpostdata(
                                         login: loginrequest(
-                                  token: cashhelper.getdata(key: "devicetoken"),
+                                  token: "jknjknjkjk",
                                   device_type: "android",
                                   phone: phone.text,
                                   password: password.text,
@@ -142,8 +139,11 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             password.clear();
                             phone.clear();
                             cashhelper.setdata(
-                                key: "company_logo",
+                                key: "logo",
                                 value: state.loginmodel.data!.logo);
+                            cashhelper.setdata(
+                                key: "token",
+                                value: state.loginmodel.data!.token);
                             cashhelper.setdata(
                                 key: "company_name",
                                 value: state.loginmodel.data!.companyName);

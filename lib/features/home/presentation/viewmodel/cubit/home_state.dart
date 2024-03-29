@@ -8,6 +8,8 @@ class Homeloading extends HomeState {}
 
 class Homesuccess extends HomeState {}
 
+class resetcounterstate extends HomeState {}
+
 class Homefailure extends HomeState {
   final String error_message;
 

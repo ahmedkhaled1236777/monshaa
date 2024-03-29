@@ -27,7 +27,7 @@ import 'package:aplication/readexpense.dart';
 import 'package:aplication/readreceipt.dart';
 import 'package:aplication/readtenants.dart';
 import 'package:aplication/receipt.dart';
-import 'package:aplication/reports.dart';
+import 'package:aplication/features/reports/presentation/view/reports.dart';
 import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,10 +50,8 @@ class Dashboard extends StatelessWidget {
                   children: [
                     appbartittle(
                       sizedboxwidth: Appsizes.size5.w,
-                      logo: cashhelper.getdata(key: "company_logo") ??
-                          "images/logo.png",
-                      name: cashhelper.getdata(key: "company_name") ??
-                          "شركة الاتقان",
+                     
+                   
                       fontSize: 6.sp,
                     ),
                     SizedBox(
@@ -62,7 +60,9 @@ class Dashboard extends StatelessWidget {
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
                           .sidebarpermessions
-                          .map((e) => Column(
+                          .map((e) => 
+                          
+                          Column(
                                 children: [
                                   customdraweritem(
                                       count: e["count"],
@@ -107,8 +107,7 @@ class Dashboard extends StatelessWidget {
                   children: [
                     appbartittle(
                       sizedboxwidth: Appsizes.size10.w,
-                      logo: "images/logo.png",
-                      name: "شركة الاتقان",
+                     
                       fontSize: conters.maxWidth > 600 ? 12.sp : 15.sp,
                     ),
                     SizedBox(

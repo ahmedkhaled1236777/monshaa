@@ -51,14 +51,14 @@ class showtemployeedialog extends StatelessWidget {
                     ),
                     if (BlocProvider.of<showemployeescuibt>(context)
                             .employeesdata[index]
-                            .employeephoto !=
+                            .employeeImage !=
                         null)
                       Center(
                         child: CircleAvatar(
                           child: imagefromrequest(
                             url: BlocProvider.of<showemployeescuibt>(context)
                                 .employeesdata[index]
-                                .employeephoto!,
+                                .employeeImage!,
                             height: 200,
                             width: 200,
                             border: 50,

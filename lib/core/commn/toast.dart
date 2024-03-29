@@ -15,5 +15,4 @@ showsnack({required String comment, required BuildContext context}) {
   ));
 }
 
-String generaltoken =
-    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNzEwNjk1MzMxLCJleHAiOjE3NDIyMzEzMzEsIm5iZiI6MTcxMDY5NTMzMSwianRpIjoiUEFGT0lrT1l6MTdVQ0FOaCIsInN1YiI6IjIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Ywa0SaJfFuKVDgl39tdLqTGq45ZbnE6QDRqsge7DDy4";
+String generaltoken =cashhelper.getdata(key: "token");

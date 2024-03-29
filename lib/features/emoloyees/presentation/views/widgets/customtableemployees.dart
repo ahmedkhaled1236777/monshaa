@@ -29,13 +29,7 @@ class _customtableemployeeesState extends State<customtableemployees> {
     BlocProvider.of<showemployeescuibt>(context).employeesdata.clear();
     await BlocProvider.of<showemployeescuibt>(context)
         .getallemployees(token: generaltoken, page: 1);
-    widget.scrollController.addListener(() async {
-      if (widget.scrollController.position.pixels ==
-          widget.scrollController.position.maxScrollExtent) {
-        await BlocProvider.of<showemployeescuibt>(context)
-            .getallmoreemployees(token: generaltoken);
-      }
-    });
+
   }
 
   @override
@@ -77,12 +71,7 @@ class _customtableemployeeesState extends State<customtableemployees> {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return index >=
-                            BlocProvider.of<showemployeescuibt>(context)
-                                .employeesdata
-                                .length
-                        ? loading()
-                        : InkWell(
+                    return InkWell(
                             onTap: () {
                               navigateto(
                                   navigationscreen: ShowEmployees(),
@@ -148,13 +137,6 @@ class _customtableemployeeesState extends State<customtableemployees> {
                   },
                   separatorBuilder: (context, index) => const Divider(),
                   itemCount: BlocProvider.of<showemployeescuibt>(context)
-                              .loading ==
-                          true
-                      ? BlocProvider.of<showemployeescuibt>(context)
-                              .employeesdata
-                              .length +
-                          1
-                      : BlocProvider.of<showemployeescuibt>(context)
                           .employeesdata
                           .length),
             );

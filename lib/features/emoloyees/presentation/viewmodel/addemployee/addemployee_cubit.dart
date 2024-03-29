@@ -7,7 +7,6 @@ import 'package:aplication/features/emoloyees/data/repos/addemployeerepoimplemen
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../data/models/employeesmodel/datum.dart';
 
 part 'addemployee_state.dart';
 
@@ -53,6 +52,9 @@ class AddemployeeCubit extends Cubit<AddemployeeState> {
     "عقارات البيع": "selling_states",
     "عقارات الايجار": "tenant_stats",
     "الايرادات": "revenues",
+    "العملاء": "shops",
+    "الاشعارات": "notifications",
+    "العقود المنتهيه": "expired_contracts",
     "الارباح": "profits"
   };
   List selecteditems = [];

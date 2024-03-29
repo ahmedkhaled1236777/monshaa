@@ -46,19 +46,9 @@ class mobilereciepts extends StatelessWidget {
                   children: [
                     allrecieptsearch(),
                     const SizedBox(
-                      width: Appsizes.size5,
+                      width: Appsizes.size10,
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.print,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: Appsizes.size5,
-                    ),
+                   
                   ],
                 )
               ],

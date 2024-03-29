@@ -61,25 +61,7 @@ class _customtableallfinancialsState extends State<customtableallfinancials> {
           ),
           centerTitle: true,
           backgroundColor: Appcolors.maincolor,
-          actions: [
-            Row(
-              children: [
-                const SizedBox(
-                  width: 15,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: const Icon(
-                    Icons.print,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-              ],
-            )
-          ],
+        
         ),
         drawer: Dashboard(),
         body: Container(

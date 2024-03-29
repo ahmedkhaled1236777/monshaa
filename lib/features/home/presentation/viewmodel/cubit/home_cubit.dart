@@ -1,12 +1,14 @@
 import 'package:aplication/building.dart';
 import 'package:aplication/catch_receipt.dart';
 import 'package:aplication/connect.dart';
+import 'package:aplication/features/clients/presentation/view/clients.dart';
 import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/employees.dart';
 import 'package:aplication/expense.dart';
 import 'package:aplication/features/expenses.dart/presentation/views/expenses.dart';
 import 'package:aplication/features/financial/presentation/view/financial.dart';
+import 'package:aplication/features/finishedcontracts/presentation/views/finishedcontracts.dart';
 import 'package:aplication/features/home/data/model/homemodel/homemodel.dart';
 import 'package:aplication/features/home/data/model/homemodel/sidebar.dart';
 import 'package:aplication/features/home/data/repos/homerepoimplementation.dart';
@@ -16,7 +18,7 @@ import 'package:aplication/features/reciept/presentaion/view/reciept.dart';
 import 'package:aplication/features/revenus/presentation/views/revenues.dart';
 import 'package:aplication/features/settings/presentation.dart/views/setting.dart';
 import 'package:aplication/receipt.dart';
-import 'package:aplication/reports.dart';
+import 'package:aplication/features/reports/presentation/view/reports.dart';
 import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -31,14 +33,21 @@ class HomeCubit extends Cubit<HomeState> {
 
   Homemodel? home;
   HomeCubit(this.homerepo) : super(HomeInitial());
+  bool firstloafing = true;
   List sidebarpermessions = [];
   List<Home> gridpermessions = [];
+  resetcounter() {
+    sidebar[12]["count"] = 0;
+    emit(resetcounterstate());
+  }
+
   gethome({required String token}) async {
-    emit(Homeloading());
+    if (firstloafing == true) emit(Homeloading());
     var result = await homerepo.gethome(token: token);
     result.fold((l) {
       emit(Homefailure(error_message: l.error_message));
     }, (r) {
+      firstloafing = false;
       home = r;
       gridpermessions.clear();
       sidebarpermessions.clear();
@@ -146,7 +155,7 @@ class HomeCubit extends Cubit<HomeState> {
       "name": "العملاء",
       "name_en": "employees",
       "icon": Icons.people_alt_outlined,
-      "page": Employees(),
+      "page": clients(),
       "count": 0
     },
     {
@@ -172,9 +181,9 @@ class HomeCubit extends Cubit<HomeState> {
     },
     {
       "name": "العقود المنتهيه",
-      "name_en": "setting",
+      "name_en": "finishedcontracts",
       "icon": Icons.book,
-      "page": Setting(),
+      "page": finishedcontracts(),
       "count": 0
     },
     {
@@ -191,10 +200,12 @@ class HomeCubit extends Cubit<HomeState> {
       for (int j = 0; j < sidebar.length; j++) {
         if (mysidebar[i].name == sidebar[j]["name"]) {
           sidebar[j]["count"] = mysidebar[i].count;
+
           sidebarpermessions.add(sidebar[j]);
           break;
         }
       }
     }
+    firstloafing = false;
   }
 }

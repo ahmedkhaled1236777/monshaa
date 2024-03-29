@@ -45,39 +45,20 @@ class mobileclientss extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                         BlocProvider.of<clientsCubit>(context)
+                          BlocProvider.of<clientsCubit>(context)
                               .queryParameters = null;
 
                           BlocProvider.of<clientsCubit>(context)
                               .getallclientss(token: generaltoken, page: 1);
                         },
                         icon: const Icon(
-                          Icons.data_exploration,
+                          Icons.blur_circular_rounded,
                           color: Appcolors.whitecolor,
                         )),
-              clientsearch(),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                    ),
+                    clientsearch(),
+                 
                     const SizedBox(
-                      width: Appsizes.size5,
-                    ),
-                    InkWell(
-                      onTap: () {
-                       
-                      },
-                      child: const Icon(
-                        Icons.print,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: Appsizes.size5,
+                      width: Appsizes.size10,
                     ),
                   ],
                 )

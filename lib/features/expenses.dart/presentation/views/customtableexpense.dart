@@ -136,7 +136,7 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                       showDialog(
                                           context: context,
                                           builder: (_) {
-                                          return AlertDialog(
+                                            return AlertDialog(
                                                 title: Container(
                                                   alignment: Alignment.topLeft,
                                                   child: IconButton(
@@ -153,8 +153,7 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                                         BorderRadius.circular(
                                                             0)),
                                                 scrollable: true,
-                                                content:
-                                                editexpensedialog(
+                                                content: editexpensedialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
                                                               .width *
@@ -181,9 +180,7 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                                               .expensedata[
                                                                   index]
                                                               .description),
-                                                )
-                                            
-                                            );
+                                                ));
                                           });
                                     },
                                   )),

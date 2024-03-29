@@ -1,8 +1,11 @@
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
 import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepoimplementation.dart';
+import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 part 'showaqarat_state.dart';
 
@@ -28,6 +31,7 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
         token: token, page: page, queryParameters: queryParameters);
     loading = true;
     result.fold((failue) {
+    
       emit(Showaqaratfailure(error_message: failue.error_message));
     }, (success) {
       if (success.data!.links?.next == null) {

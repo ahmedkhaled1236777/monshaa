@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class showclientsdialog extends StatelessWidget {
   final int index;
   final Widget child;
-  const showclientsdialog({super.key, required this.index, required this.child});
+  const showclientsdialog(
+      {super.key, required this.index, required this.child});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -122,7 +123,7 @@ class showclientsdialog extends StatelessWidget {
                               Border.all(color: Color(0xff2BA4C8), width: 0.5),
                           borderRadius: BorderRadius.circular(5)),
                       child: Text(
-                        'تاريخ المعاينه: ${BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate==null?"لا يوجد":BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate}',
+                        'تاريخ المعاينه: ${BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate == null ? "لا يوجد" : BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate}',
                         textAlign: TextAlign.right,
                         style: TextStyle(fontSize: 12.5, color: Colors.black87),
                       ),
@@ -130,7 +131,7 @@ class showclientsdialog extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                  /*  Container(
+                    /*  Container(
                       width: MediaQuery.of(context).size.width * 1,
                       padding:
                           EdgeInsets.symmetric(vertical: 12, horizontal: 7),
@@ -147,7 +148,6 @@ class showclientsdialog extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),*/
-                  
                   ],
                 ),
               )),

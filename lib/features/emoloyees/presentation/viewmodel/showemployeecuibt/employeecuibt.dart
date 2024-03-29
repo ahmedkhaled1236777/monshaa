@@ -2,45 +2,29 @@ import 'package:aplication/features/emoloyees/data/repos/addemployeerepoimplemen
 import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeestates.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/employeesmodel/datum.dart';
+import '../../../data/models/employeemodel/datum.dart';
 
 class showemployeescuibt extends Cubit<showemployeesstates> {
   final emplyeerepoimplementaion employeerepo;
   showemployeescuibt({required this.employeerepo})
       : super(showemployeesintial());
   List<Datum> employeesdata = [];
-  bool loading = false;
   int page = 1;
   getallemployees({required String token, required int page}) async {
     this.page = 1;
     emit(showemployeesloading());
     var result = await employeerepo.getemployees(token: token, page: page);
-    loading = true;
     result.fold((l) {
       emit(showemployeesfailure(error_message: l.error_message));
     }, (r) {
       employeesdata.clear();
 
-      employeesdata.addAll(r.data!.data!);
-      if (r.data!.links!.next == null) loading = false;
+      employeesdata.addAll(r.data!);
       emit(showemployeessuccess());
     });
   }
 
-  getallmoreemployees({
-    required String token,
-  }) async {
-    page++;
-    var result = await employeerepo.getemployees(token: token, page: page);
-    loading = true;
-    result.fold((l) {
-      emit(showemployeesfailure(error_message: l.error_message));
-    }, (r) {
-      employeesdata.addAll(r.data!.data!);
-      if (r.data!.links!.next == null) loading = false;
-      emit(showemployeessuccess());
-    });
-  }
+
 
   deleteemployee({required String token, required int employeenumber}) async {
     var result = await employeerepo.deleteemployee(

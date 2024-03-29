@@ -42,22 +42,7 @@ class customsettings extends StatelessWidget {
             ),
             centerTitle: true,
             backgroundColor: const Color(0xff415769),
-            actions: [
-              Row(
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 13,
-                  ),
-                ],
-              )
-            ],
+           
           ),
           drawer: Dashboard(),
           body: Center(
@@ -79,7 +64,7 @@ class customsettings extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 69,
                         child: imagefromrequest(
-                            url: "url", height: 100, width: 100),
+                            url: cashhelper.getdata(key: "logo"), height: 200, width: 200),
                       ),
                     ),
                     SizedBox(
@@ -162,9 +147,8 @@ class customsettings extends StatelessWidget {
                             if (state is loginloading) return loading();
                             return IconButton(
                                 onPressed: () {
-                                  print(cashhelper.getdata(key: "token"));
                                   BlocProvider.of<LogoutCubit>(context).log_out(
-                                      token: cashhelper.getdata(key: "token"));
+                                      token: cashhelper.getdata(key: "token"),devicetoken: cashhelper.getdata(key: "devicetoken"));
                                 },
                                 icon: const Icon(
                                   Icons.logout_outlined,

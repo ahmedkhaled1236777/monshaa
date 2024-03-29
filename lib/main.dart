@@ -1,34 +1,32 @@
+import 'dart:io';
+
 import 'package:aplication/building.dart';
+import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepo.dart';
+import 'package:aplication/features/auth/register/data/repos/registerrepoimplementation.dart';
 import 'package:aplication/features/clients/data/repos/clientrepoimplementation.dart';
-import 'package:aplication/features/clients/presentation/view/clients.dart';
 import 'package:aplication/features/clients/presentation/viewmodel/clients/clients_cubit.dart';
-import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
-import 'package:aplication/expense.dart';
 import 'package:aplication/features/aqarat/data/repos/addaqar/addaqarimplementation.dart';
 import 'package:aplication/features/aqarat/data/repos/editaqar/editaqarrepoimplementation.dart';
 import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepoimplementation.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/edit/edit_cubit.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
 import 'package:aplication/features/auth/login/presentation/views/login.dart';
-import 'package:aplication/features/auth/profile/presentation/view/profile.dart';
-import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:aplication/features/contracts/data/repos/contractrepoimplementation.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
 import 'package:aplication/features/emoloyees/data/repos/addemployeerepoimplementation.dart';
 import 'package:aplication/features/emoloyees/presentation/viewmodel/addemployee/addemployee_cubit.dart';
 import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeecuibt.dart';
-import 'package:aplication/features/emoloyees/presentation/views/widgets/employees.dart';
 import 'package:aplication/features/expenses.dart/data/repos/expenserepoimplementation.dart';
 import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_cubit.dart';
-import 'package:aplication/features/expenses.dart/presentation/views/expenses.dart';
 import 'package:aplication/features/financial/data/repos/financialrepoimplementation.dart';
-import 'package:aplication/features/financial/presentation/view/financial.dart';
+
 import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_cubit.dart';
+import 'package:aplication/features/finishedcontracts/data/repos/finishedcontractsrepoimplementation.dart';
+import 'package:aplication/features/finishedcontracts/presentation/viewmodel/finishedcontracts/finishedcontracts_cubit.dart';
+
 import 'package:aplication/features/home/data/repos/homerepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/addland/addlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/editland/editlandrepoimplementation.dart';
@@ -37,20 +35,21 @@ import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/ad
 import 'package:aplication/features/lands/presentation/viewmodel/date/date_cubit.dart';
 import 'package:aplication/features/lands/presentation/viewmodel/edit/edit_cubit.dart';
 import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
-import 'package:aplication/features/lands/presentation/views/estateland.dart';
+import 'package:aplication/features/notifications/data/repos/notificationrepoimplementation.dart';
+import 'package:aplication/features/notifications/presentations/viewmodel/notifications/notifications_cubit.dart';
 import 'package:aplication/features/reciept/data/repos/recieptrepoimplementation.dart';
-import 'package:aplication/features/reciept/presentaion/view/reciept.dart';
 import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptcuibt.dart';
+import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/data/repos/aqaratrepoimplementationreports.dart';
+import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/mobileaqaratreports.dart';
+import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/viewmodel/aqaratreports/aqaratreports_cubit.dart';
+import 'package:aplication/features/reports/presentation/view/reports.dart';
+import 'package:aplication/features/reports/presentation/viewmodel/cubit/reports_cubit.dart';
 import 'package:aplication/features/revenus/data/repos/revenurepoimplementation.dart';
 import 'package:aplication/features/revenus/presentation/viewmodel/revenuecuibt/revenue_cubit.dart';
-import 'package:aplication/features/revenus/presentation/views/revenues.dart';
 import 'package:aplication/features/tenants/data/repo/tenantrepoimplementation.dart';
-import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
 import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
-import 'package:aplication/features/settings/presentation.dart/views/setting.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:get/get.dart';
 import 'firebase_options.dart';
 import 'package:aplication/core/services/apiservice.dart';
@@ -60,71 +59,27 @@ import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuib
 
 import 'package:aplication/features/auth/profile/data/repo/profilerepoimplementation.dart';
 import 'package:aplication/features/auth/profile/presentation/viewmodel/cubit/profile_cubit.dart';
-import 'package:aplication/features/auth/register/data/repos/registerrepoimplementation.dart';
 import 'package:aplication/features/auth/register/presentation/viewsmodel/registercuibt/registercuibt.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
-import 'package:aplication/features/home/presentation/views/home.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-
-  print("Handling a background message: ${message.messageId}");
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await cashhelper.initcashhelper();
-  await Firebase.initializeApp(
 // Replace with actual values
-    options: const FirebaseOptions(
-      apiKey: "api key here",
-      appId: "monshaa-b498c",
-      messagingSenderId: "messaging id",
-      projectId: "monshaa-b498c",
-    ),
-  );
+  if (Platform.isAndroid) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
   Apiservice.initdio();
-  
+
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  AwesomeNotifications().initialize(
-      // set the icon to null if you want to use the default app icon
-      'resource://drawable/qqq',
-      [
-        NotificationChannel(
-            channelKey: 'basic key',
-            channelName: 'Basic notifications',
-            channelDescription: 'Notification channel for basic tests',
-            defaultColor: Color(0xFF9D50DD),
-            ledColor: Colors.white)
-      ]);
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    AwesomeNotifications().createNotification(
-        content: NotificationContent(
-            id: 1,
-            channelKey: 'basic key',
-            title: message.notification!.title));
-  });
 }
 
 class MyApp extends StatelessWidget {
@@ -154,8 +109,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => TenantCubit(tenantrepoimplementation())),
         BlocProvider(
+            create: (context) => NotificationsCubit(
+                notificationsrepo: notificationrepoimplementation())),
+        BlocProvider(
             create: (context) =>
                 EditlandCubit(editrepo: editlandrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                AqaratreportsCubit(showaqqarrepoimplementationreports())),
         BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
         BlocProvider(create: (context) => HomeCubit(homerepoimplementation())),
@@ -170,6 +131,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 AddemployeeCubit(addemployeerepo: emplyeerepoimplementaion())),
+        BlocProvider(
+            create: (context) =>
+                ReportsCubit()),
         BlocProvider(
             create: (context) =>
                 showemployeescuibt(employeerepo: emplyeerepoimplementaion())),
@@ -190,6 +154,9 @@ class MyApp extends StatelessWidget {
             create: (context) => revenueCubit(revenuerepoimplementation())),
         BlocProvider(
             create: (context) => clientsCubit(clientsrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                finishedcontractsCubit(finishedconreactsrepoimplementation())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
@@ -207,7 +174,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             home:
-                Login() /* Contract(
+              customtableallmobileaqaratreportss() /* Contract(
                 tenantname: TextEditingController(),
                 tenanphone: TextEditingController(),
                 tenantcard: TextEditingController(),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
@@ -14,6 +16,9 @@ import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuib
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/loginstates.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:aplication/features/home/presentation/views/home.dart';
+import 'package:aplication/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +29,23 @@ class Mobilelayout extends StatefulWidget {
 }
 
 class _MobilelayoutState extends State<Mobilelayout> {
+  String? token;
+  gettoken() async {
+    FirebaseMessaging _firebaseMessaging =
+        FirebaseMessaging.instance; // Change here
+    await _firebaseMessaging.getToken().then((token) {
+cashhelper.setdata(key: "devicetoken", value: token);
+print("//////////////////////////////////////");
+print(token);
+      this.token = token;
+    });
+  }
+
+  @override
+  initState() {
+    gettoken();
+  }
+
   TextEditingController phone = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -104,9 +126,13 @@ class _MobilelayoutState extends State<Mobilelayout> {
                   } else if (state is loginsucces) {
                     password.clear();
                     phone.clear();
+                    print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+                    print(state.loginmodel.data!.logo);
                     cashhelper.setdata(
-                        key: "company_logo",
+                        key: "logo",
                         value: state.loginmodel.data!.logo);
+                    cashhelper.setdata(
+                        key: "token", value: state.loginmodel.data!.token);
                     cashhelper.setdata(
                         key: "company_name",
                         value: state.loginmodel.data!.companyName);
@@ -129,7 +155,7 @@ class _MobilelayoutState extends State<Mobilelayout> {
                             .loginpostdata(
                                 login: loginrequest(
                           device_type: "android",
-                          token: "kljkjkljljklkl",
+                          token: token!,
                           phone: phone.text,
                           password: password.text,
                         ));

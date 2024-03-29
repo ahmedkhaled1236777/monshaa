@@ -6,6 +6,8 @@ abstract class loginstate {}
 // ignore: camel_case_types
 class logininitial extends loginstate {}
 
+class changercounter extends loginstate {}
+
 class loginloading extends loginstate {}
 
 // ignore: camel_case_types

@@ -39,14 +39,14 @@ class desktopclientss extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () async {
-                   BlocProvider.of<clientsCubit>(context).queryParameters =
+                    BlocProvider.of<clientsCubit>(context).queryParameters =
                         null;
                     BlocProvider.of<clientsCubit>(context)
                         .getallclientss(token: generaltoken, page: 1);
                   },
                   icon: Icon(Icons.data_exploration,
                       color: Appcolors.whitecolor)),
-clientsearch(),
+              clientsearch(),
               Row(
                 children: [
                   const SizedBox(

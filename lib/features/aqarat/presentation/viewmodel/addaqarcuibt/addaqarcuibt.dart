@@ -1,4 +1,5 @@
 import 'package:aplication/features/aqarat/data/models/addaqarrequest/addaqarrequest.dart';
+import 'package:aplication/features/aqarat/data/models/allemployeesmodel/allemployeesmodel.dart';
 import 'package:aplication/features/aqarat/data/repos/addaqar/addaqarimplementation.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
 import 'package:dio/dio.dart';
@@ -11,6 +12,9 @@ class addaqarcuibt extends Cubit<addaqarstate> {
   addaqarcuibt({required this.addaqarrepo}) : super(addaaqarintial());
   List<XFile> imageFile = [];
   List? images = [];
+  int? employeeid;
+  Map<String, int> employessides = {};
+  Allemployeesmodel? allemployeesmodel;
   String? aqartype;
   String? departement;
   String? advistor_type;
@@ -23,9 +27,17 @@ class addaqarcuibt extends Cubit<addaqarstate> {
     "تعديل",
     "حذف"
   ];
+  String? employeename;
+
   changeaddaqartype(String val) {
     aqartype = val;
     emit(changetype());
+  }
+
+  changeemployeename(String val) {
+    employeeid = employessides[val];
+    employeename = val;
+    emit(addchangeemployeename());
   }
 
   changeaddaqardepartement(String val) {
@@ -64,6 +76,19 @@ class addaqarcuibt extends Cubit<addaqarstate> {
       emit(addaaqarfailure(error: failure.error_message));
     }, (success) {
       emit(addaaqarsuccess(successmessage: success));
+    });
+  }
+
+  getallemployees({required String token}) async {
+    var result = await addaqarrepo.getallemployees(token: token);
+    result.fold((failure) {
+      emit(getallemployeesfailure(error_message: failure.error_message));
+    }, (success) {
+      allemployeesmodel = success;
+      for (var element in allemployeesmodel!.data!.data!) {
+        employessides.addAll({element.name!: element.id!.toInt()});
+      }
+      emit(getallemployeessuccess());
     });
   }
 

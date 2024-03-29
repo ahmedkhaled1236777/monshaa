@@ -14,7 +14,7 @@ class Login extends StatefulWidget {
 class LoginState extends State<Login> {
   @override
   void initState() {
-  //   BlocProvider.of<logincuibt>(context).getdevicetoken();
+    //   BlocProvider.of<logincuibt>(context).getdevicetoken();
   }
   @override
   Widget build(BuildContext context) {

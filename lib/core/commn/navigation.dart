@@ -9,7 +9,7 @@ navigateto({required Widget navigationscreen, required BuildContext context}) {
 
 navigateandfinish(
     {required Widget navigationscreen, required BuildContext context}) {
- /* Get.off(navigationscreen,
+  /* Get.off(navigationscreen,
       transition: Transition.rightToLeft,
       duration: Duration(seconds: 1),
       curve: Curves.easeInOut);*/

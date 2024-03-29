@@ -66,6 +66,28 @@ class alertcontent extends StatelessWidget {
                             height: Appsizes.size10,
                           ),
                           dropdownbutton(
+                            items: BlocProvider.of<addaqarcuibt>(context)
+                                        .allemployeesmodel ==
+                                    null
+                                ? []
+                                : BlocProvider.of<addaqarcuibt>(context)
+                                    .allemployeesmodel!
+                                    .data!
+                                    .data!
+                                    .map((e) => e.name!)
+                                    .toList(),
+                            hint: "اسم الموظف",
+                            name: BlocProvider.of<addaqarcuibt>(context)
+                                .employeename,
+                            onchanged: (val) {
+                              BlocProvider.of<addaqarcuibt>(context)
+                                  .changeemployeename(val);
+                            },
+                          ),
+                          const SizedBox(
+                            height: Appsizes.size10,
+                          ),
+                          dropdownbutton(
                               onchanged: (val) {
                                 BlocProvider.of<addaqarcuibt>(context)
                                     .changeaddaqardepartement(val);
@@ -250,6 +272,9 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .queryParameters = {
                                   "real_state_address": adress.text,
+                                  "user_id":
+                                      BlocProvider.of<addaqarcuibt>(context)
+                                          .employeeid,
                                   "department": request[
                                       BlocProvider.of<addaqarcuibt>(context)
                                           .departement],
@@ -266,12 +291,13 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .data
                                     .clear();
-                                Navigator.pop(context);
 
                                 await BlocProvider.of<ShowaqaratCubit>(context)
                                     .getallaqarat(token: generaltoken, page: 1);
                                 BlocProvider.of<DateCubit>(context)
                                     .cleardates();
+                                BlocProvider.of<addaqarcuibt>(context)
+                                    .employeeid = null;
 
                                 Navigator.pop(context);
                               }

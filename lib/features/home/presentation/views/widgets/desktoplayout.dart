@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
@@ -10,24 +12,43 @@ import 'package:aplication/features/home/presentation/views/widgets/appbartittle
 import 'package:aplication/features/home/presentation/views/widgets/customappbaractions.dart';
 import 'package:aplication/features/home/presentation/views/widgets/customdraweitem.dart';
 import 'package:aplication/features/home/presentation/views/widgets/customgriditem.dart';
+import 'package:aplication/features/notifications/presentations/view/alertnotifications.dart';
+import 'package:aplication/features/notifications/presentations/view/mobilenotifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: camel_case_types, use_key_in_widget_constructors
-class desktoplayout extends StatelessWidget {
+class desktoplayout extends StatefulWidget {
+  GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
+
   @override
+  State<desktoplayout> createState() => _desktoplayoutState();
+}
+
+class _desktoplayoutState extends State<desktoplayout> {
+  int x = 0;
+  Timer? timer;
+  @override
+  void initState() {
+    if (context.mounted)
+      timer = Timer.periodic(
+          Duration(seconds: 15),
+          (Timer t) =>
+              BlocProvider.of<HomeCubit>(context).gethome(token: generaltoken));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        key: widget.scafoldstate,
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: appbartittle(
             sizedboxwidth: Appsizes.size5.w,
-            logo: cashhelper.getdata(key: "company_logo") ?? "images/logo.png",
-            name: cashhelper.getdata(key: "company_name") ?? "شركة الاتقان",
+           
             fontSize: 5.sp,
           ),
           leading: const Text(''),
@@ -37,7 +58,30 @@ class desktoplayout extends StatelessWidget {
           actions: [
             customappbaractions(
               onTapmessage: (() {}),
-              onTapnotific: (() {}),
+              onTapnotific: (() {
+                showDialog(
+                    context: context,
+                    builder: ((context) {
+                      return AlertDialog(
+                        surfaceTintColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0)),
+                        title: Container(
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: const Icon(Icons.close)),
+                        ),
+                        content: alernotifications(
+                          tablet_or_mobile: "",
+                          counter: BlocProvider.of<HomeCubit>(context)
+                              .sidebar[12]["count"],
+                        ),
+                      );
+                    }));
+              }),
             )
           ],
         ),
@@ -115,5 +159,11 @@ class desktoplayout extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    timer!.cancel();
+    super.dispose();
   }
 }

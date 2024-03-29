@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -8,7 +10,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class desktopdrawer extends StatelessWidget {
+import '../../../../../core/commn/toast.dart';
+
+class desktopdrawer extends StatefulWidget {
+  @override
+  State<desktopdrawer> createState() => _desktopdrawerState();
+}
+
+class _desktopdrawerState extends State<desktopdrawer> {
+  Timer? timer;
+  @override
+  void initState() {
+    if (context.mounted)
+      timer = Timer.periodic(
+          Duration(seconds: 15),
+          (Timer t) =>
+              BlocProvider.of<HomeCubit>(context).gethome(token: generaltoken));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,8 +42,7 @@ class desktopdrawer extends StatelessWidget {
               children: [
                 appbartittle(
                   sizedboxwidth: Appsizes.size5.w,
-                  logo: "images/logo.png",
-                  name: "شركة الاتقان",
+                
                   fontSize: 6.sp,
                 ),
                 SizedBox(
@@ -58,5 +76,11 @@ class desktopdrawer extends StatelessWidget {
             ),
           )),
     );
+  }
+
+  @override
+  void dispose() {
+    timer!.cancel();
+    super.dispose();
   }
 }

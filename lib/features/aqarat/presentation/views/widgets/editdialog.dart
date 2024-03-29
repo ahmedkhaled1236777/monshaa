@@ -174,7 +174,7 @@ class editdialog extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: Appsizes.size10,
+                  height: 10,
                 ),
                 dropdownbutton(
                     onchanged: (val) {

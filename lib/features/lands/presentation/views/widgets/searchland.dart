@@ -1,10 +1,25 @@
 import 'package:aplication/advertiser_type.dart';
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/dropdown_estate.dart';
+import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/alertcontent.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/alertcontentland.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class landsearch extends StatelessWidget {
+class landsearch extends StatefulWidget {
+  @override
+  State<landsearch> createState() => _landsearchState();
+}
+
+class _landsearchState extends State<landsearch> {
+  @override
+  void initState() {
+    if (BlocProvider.of<addaqarcuibt>(context).allemployeesmodel == null)
+      BlocProvider.of<addaqarcuibt>(context)
+          .getallemployees(token: generaltoken);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

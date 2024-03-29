@@ -20,6 +20,8 @@ class editfailure extends EditState {
 
 class editchangetype extends EditState {}
 
+class editchangeemployeename extends EditState {}
+
 class editchangedepartement extends EditState {}
 
 class editchangeadvistortype extends EditState {}

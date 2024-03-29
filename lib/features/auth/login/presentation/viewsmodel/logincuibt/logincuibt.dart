@@ -9,6 +9,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 // ignore: camel_case_types
 class logincuibt extends Cubit<loginstate> {
   Loginmodel? loginModel;
+  int counter = 0;
+  changecounter() {
+    counter++;
+    emit(changercounter());
+  }
 
   final login_repo_implementation loginrepo;
   logincuibt({required this.loginrepo}) : super(logininitial());
@@ -24,7 +29,7 @@ class logincuibt extends Cubit<loginstate> {
       emit(loginsucces(loginmodel: success));
     });
   }
- /* getdevicetoken(){
+  /* getdevicetoken(){
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; // Change here
     _firebaseMessaging.getToken().then((token){
       cashhelper.setdata(key: "devicetoken", value: token);

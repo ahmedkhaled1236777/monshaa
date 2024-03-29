@@ -20,21 +20,24 @@ class clientsCubit extends Cubit<clientsState> {
   List<Datum> clientsdata = [];
   bool loading = false;
   int page = 1;
-  String?status;
-  String?departement;
-  changestatus(String val){
-    status=val;
+  String? status;
+  String? departement;
+  changestatus(String val) {
+    status = val;
     emit(changestatusstate());
   }
-  changedepartement(String val){
-    departement=val;
+
+  changedepartement(String val) {
+    departement = val;
     emit(changestatusstate());
   }
-  cleardata(){
-    departement=null;
-    status=null;
+
+  cleardata() {
+    departement = null;
+    status = null;
     emit(changestatusstate());
   }
+
   addclients(
       {required String token, required clientmodelrequest clients}) async {
     emit(Addclientsloading());

@@ -26,7 +26,7 @@ class customtableclientss extends StatefulWidget {
 
 class _customtableclientssState extends State<customtableclientss> {
   initscroll() async {
-   await BlocProvider.of<clientsCubit>(context)
+    await BlocProvider.of<clientsCubit>(context)
         .getallclientss(token: generaltoken, page: 1);
     widget.scrollController.addListener(() async {
       if (widget.scrollController.position.pixels ==
@@ -72,12 +72,10 @@ class _customtableclientssState extends State<customtableclientss> {
           }, builder: (context, state) {
             print("///////////////////////////////////////");
             print(state);
-            print(BlocProvider.of<clientsCubit>(context)
-                                  .clientsdata
-                                  .length);
+            print(BlocProvider.of<clientsCubit>(context).clientsdata.length);
             if (state is showclientsloadin) return loading();
             if (state is showclientsfailure) return SizedBox();
-           return SingleChildScrollView(
+            return SingleChildScrollView(
                 controller: widget.scrollController,
                 child: ListView.separated(
                     physics: NeverScrollableScrollPhysics(),
@@ -88,44 +86,46 @@ class _customtableclientssState extends State<customtableclientss> {
                                   .clientsdata
                                   .length
                           ? loading()
-                          :  showclientsdialog(
-                            index: index,
-                            child: customtableclientsitem(
-                                    textStyle: Appstyles.gettabletextstyle(
-                                        context: context),
-                                    clientname: BlocProvider.of<clientsCubit>(context)
-                                        .clientsdata[index]
-                                        .name
-                                        .toString()!,
-                                    clientphone:
-                                        BlocProvider.of<clientsCubit>(context)
-                                            .clientsdata[index]
-                                            .phone!,
-                                    status:clientstatussresponse[ BlocProvider.of<clientsCubit>(context)
-                                        .clientsdata[index]
-                                        .status!],
-                                    delet: IconButton(
-                                        onPressed: () async {
-                                         await BlocProvider.of<clientsCubit>(
-                                                  context)
-                                              .deleteclients(
-                                                  token: generaltoken,
-                                                  clientsid: BlocProvider.of<
-                                                          clientsCubit>(context)
-                                                      .clientsdata[index]
-                                                      .id!
-                                                      .toInt());
-                                        },
-                                        icon: Icon(
-                                          size:
-                                              MediaQuery.of(context).size.width <
-                                                      600
-                                                  ? 20.sp
-                                                  : 22,
-                                          Icons.delete_outline_outlined,
-                                          color: Colors.red,
-                                        )),
-                                    edit: IconButton(
+                          : showclientsdialog(
+                              index: index,
+                              child: customtableclientsitem(
+                                  textStyle: Appstyles.gettabletextstyle(
+                                      context: context),
+                                  clientname:
+                                      BlocProvider.of<clientsCubit>(context)
+                                          .clientsdata[index]
+                                          .name
+                                          .toString()!,
+                                  clientphone:
+                                      BlocProvider.of<clientsCubit>(context)
+                                          .clientsdata[index]
+                                          .phone!,
+                                  status: clientstatussresponse[
+                                      BlocProvider.of<clientsCubit>(context)
+                                          .clientsdata[index]
+                                          .status!],
+                                  delet: IconButton(
+                                      onPressed: () async {
+                                        await BlocProvider.of<clientsCubit>(
+                                                context)
+                                            .deleteclients(
+                                                token: generaltoken,
+                                                clientsid: BlocProvider.of<
+                                                        clientsCubit>(context)
+                                                    .clientsdata[index]
+                                                    .id!
+                                                    .toInt());
+                                      },
+                                      icon: Icon(
+                                        size:
+                                            MediaQuery.of(context).size.width <
+                                                    600
+                                                ? 20.sp
+                                                : 22,
+                                        Icons.delete_outline_outlined,
+                                        color: Colors.red,
+                                      )),
+                                  edit: IconButton(
                                     icon: Icon(
                                       Icons.edit,
                                       size: MediaQuery.of(context).size.width <
@@ -135,16 +135,22 @@ class _customtableclientssState extends State<customtableclientss> {
                                     ),
                                     onPressed: () {
                                       BlocProvider.of<DateCubit>(context)
-                                              .date5??
+                                              .date5 ??
                                           BlocProvider.of<clientsCubit>(context)
                                               .clientsdata[index]
                                               .inspectionDate;
-                                 BlocProvider.of<clientsCubit>(context).status=clientstatussresponse [ BlocProvider.of<clientsCubit>(context)
-                                              .clientsdata[index]
-                                              .status];
-                                 BlocProvider.of<clientsCubit>(context).departement= clientsdepartementresponse["state_sale"];
+                                      BlocProvider.of<clientsCubit>(context)
+                                              .status =
+                                          clientstatussresponse[
+                                              BlocProvider.of<clientsCubit>(
+                                                      context)
+                                                  .clientsdata[index]
+                                                  .status];
+                                      BlocProvider.of<clientsCubit>(context)
+                                              .departement =
+                                          clientsdepartementresponse[
+                                              "state_sale"];
 
-                                            
                                       showDialog(
                                           context: context,
                                           builder: (_) {
@@ -165,8 +171,7 @@ class _customtableclientssState extends State<customtableclientss> {
                                                         BorderRadius.circular(
                                                             0)),
                                                 scrollable: true,
-                                                content:
-                                                editclientdialog(
+                                                content: editclientdialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
                                                               .width *
@@ -180,31 +185,32 @@ class _customtableclientssState extends State<customtableclientss> {
                                                       .clientsdata[index],
                                                   clientname: TextEditingController(
                                                       text: BlocProvider.of<
-                                                          clientsCubit>(context)
-                                                      .clientsdata[index].name
+                                                                  clientsCubit>(
+                                                              context)
+                                                          .clientsdata[index]
+                                                          .name
                                                           .toString()),
                                                   clientphone:
                                                       TextEditingController(
-                                                          text:BlocProvider.of<
-                                                          clientsCubit>(context)
-                                                      .clientsdata[index]
+                                                          text: BlocProvider.of<
+                                                                      clientsCubit>(
+                                                                  context)
+                                                              .clientsdata[
+                                                                  index]
                                                               .phone),
-                                                              code:TextEditingController(
-                                                          text:BlocProvider.of<
-                                                          clientsCubit>(context)
-                                                      .clientsdata[index]
-                                                              .code), 
-                                                notes: TextEditingController(
-                                                          text:""),
-
-                                                )
-                                              
-                                            );
+                                                  code: TextEditingController(
+                                                      text: BlocProvider.of<
+                                                                  clientsCubit>(
+                                                              context)
+                                                          .clientsdata[index]
+                                                          .code),
+                                                  notes: TextEditingController(
+                                                      text: ""),
+                                                ));
                                           });
                                     },
                                   )),
-                          );
-                            
+                            );
                     },
                     separatorBuilder: (context, index) => const Divider(),
                     itemCount:

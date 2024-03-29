@@ -15,7 +15,7 @@ class clientmodelrequest {
       required this.inspectiondate,
       required this.notes,
       required this.status});
-  tojson() => { 
+  tojson() => {
         "name": this.name,
         "phone": this.phone,
         "notes": this.notes,
