@@ -92,7 +92,7 @@ class desktopcontracts extends StatelessWidget {
                     await BlocProvider.of<contractCubit>(context)
                         .getallcontracts(token: generaltoken, page: 1);
                   },
-                  icon: Icon(Icons.data_exploration,
+                  icon: Icon(Icons.blur_circular_rounded,
                       color: Appcolors.whitecolor)),
               contractsearch(),
               Row(

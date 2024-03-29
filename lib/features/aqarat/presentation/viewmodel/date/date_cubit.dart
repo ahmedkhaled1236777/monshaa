@@ -11,6 +11,8 @@ class DateCubit extends Cubit<DateState> {
   String date3 = "الايجار من";
   String date4 = "الايجار الي";
   String date5 = "تاريخ المعاينه";
+  String date6 = "التاريخ من";
+  String date7 = "التاريخ الي";
 
   DateTime selectedDate1 = DateTime.now();
   DateCubit() : super(DateInitial());
@@ -102,12 +104,48 @@ class DateCubit extends Cubit<DateState> {
     emit(changedatestate());
   }
 
+  changedate7(BuildContext context) async {
+    DateTime? date = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(3000));
+    if (date != null) {
+      selectedDate = date;
+      String month = date.month > 9 ? '${date.month}' : '0${date.month}';
+      String day = date.day > 9 ? '${date.day}' : '0${date.day}';
+
+      date7 = '${date.year}-${month}-${day}';
+    }
+
+    emit(changedatestate());
+  }
+
+  changedate6(BuildContext context) async {
+    DateTime? date = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(3000));
+    if (date != null) {
+      selectedDate = date;
+      String month = date.month > 9 ? '${date.month}' : '0${date.month}';
+      String day = date.day > 9 ? '${date.day}' : '0${date.day}';
+
+      date6 = '${date.year}-${month}-${day}';
+    }
+
+    emit(changedatestate());
+  }
+
   cleardates() {
     date1 = "التاريخ";
     date2 = "التاريخ";
     date3 = "الايجار من";
     date4 = "الايجار الي";
     date5 = "تاريخ المعاينه";
+    date6 = "التاريخ من";
+    date7 = "التاريخ الي";
     emit(changedatestate());
   }
 }

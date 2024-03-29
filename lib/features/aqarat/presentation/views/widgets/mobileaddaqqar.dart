@@ -64,8 +64,6 @@ class mobiladdaqaar extends StatelessWidget {
                     const SizedBox(
                       width: Appsizes.size10,
                     ),
-                  
-
                   ],
                 )
               ],

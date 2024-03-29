@@ -42,7 +42,6 @@ class _desktopdrawerState extends State<desktopdrawer> {
               children: [
                 appbartittle(
                   sizedboxwidth: Appsizes.size5.w,
-                
                   fontSize: 6.sp,
                 ),
                 SizedBox(

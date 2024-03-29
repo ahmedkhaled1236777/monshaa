@@ -1,10 +1,12 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/customheadertable.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/customtableaqaratreportitem.dart';
+import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/search.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/viewmodel/aqaratreports/aqaratreports_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,6 +58,21 @@ class _customtableallmobileaqaratreportssState
                   color: Colors.white,
                 ),
               ),
+              actions: [
+                IconButton(
+                    onPressed: () async {
+                      BlocProvider.of<AqaratreportsCubit>(context)
+                          .queryParameters = null;
+                      await BlocProvider.of<AqaratreportsCubit>(context)
+                          .getallaqarat(token: generaltoken, page: 1);
+                    },
+                    icon: const Icon(Icons.blur_circular_rounded,
+                        color: Appcolors.whitecolor)),
+                aqaratsearchreport(),
+                SizedBox(
+                  width: 5,
+                )
+              ],
               title: Text(
                 'العقارات',
                 style: TextStyle(
@@ -65,7 +82,6 @@ class _customtableallmobileaqaratreportssState
               ),
               centerTitle: true,
               backgroundColor: Appcolors.maincolor,
-             
             ),
             drawer: Dashboard(),
             body: Container(
@@ -84,7 +100,7 @@ class _customtableallmobileaqaratreportssState
                                     .mobileheadertabeleallaqaratreportss
                                     .map((e) => customheadertable(
                                           title: e,
-                                          flex:  3,
+                                          flex: 3,
                                           textStyle:
                                               Appstyles.getheadertextstyle(
                                                   context: context),
@@ -101,10 +117,7 @@ class _customtableallmobileaqaratreportssState
                                   context: context);
                           },
                           builder: (context, state) {
-                            print(state);
-                            print(prov.data);
-                          if (state is Aqaratreportsloading)
-                              return loading();
+                            if (state is Aqaratreportsloading) return loading();
                             if (state is Aqaratreportsfailure)
                               return SizedBox();
                             return SingleChildScrollView(
@@ -113,7 +126,7 @@ class _customtableallmobileaqaratreportssState
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                 return     index >=
+                                      return index >=
                                               BlocProvider.of<
                                                           AqaratreportsCubit>(
                                                       context)
@@ -121,44 +134,33 @@ class _customtableallmobileaqaratreportssState
                                                   .length
                                           ? loading()
                                           : customtableaqaratreportsitem(
-                                      
-                                              departement: prov
-                                                  .data[index].department!,
-                                                  
+                                              departement: show[
+                                                  prov.data[index].department!],
                                               textStyle:
                                                   Appstyles.gettabletextstyle(
                                                       context: context),
-                                              emoloyeename: prov
-                                                  .data[index].advertiser_name
-                                                  !,
-                                                 date:  prov
-                                                  .data[index].createdAt
-                                                  !,
-                                            
-                                              adress: prov
-                                                  .data[index]
+                                              emoloyeename:
+                                                  prov.data[index].user!.name!,
+                                              date: prov.data[index].createdAt!,
+                                              adress: prov.data[index]
                                                   .realStateAddress!,
-                                              type: prov
-                                                  .data[index]
-                                                  .realStateType!,
-                                             
+                                              type: show[prov
+                                                  .data[index].realStateType!],
                                             );
                                     },
                                     separatorBuilder: (context, index) =>
                                         const Divider(),
                                     itemCount: BlocProvider.of<
-                                                        AqaratreportsCubit>(
-                                                    context)
+                                                    AqaratreportsCubit>(context)
                                                 .loading ==
                                             true
-                                        ? BlocProvider.of<
-                                                        AqaratreportsCubit>(
+                                        ? BlocProvider.of<AqaratreportsCubit>(
                                                     context)
                                                 .data
                                                 .length +
                                             1
-                                        : BlocProvider.of<
-                                                AqaratreportsCubit>(context)
+                                        : BlocProvider.of<AqaratreportsCubit>(
+                                                context)
                                             .data
                                             .length));
                           },

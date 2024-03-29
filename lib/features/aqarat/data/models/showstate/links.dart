@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class Links extends Equatable {
   final String? first;
   final String? last;
-  final String? prev;
+  final dynamic prev;
   final dynamic next;
 
   const Links({this.first, this.last, this.prev, this.next});
@@ -11,7 +11,7 @@ class Links extends Equatable {
   factory Links.fromJson(Map<String, dynamic> json) => Links(
         first: json['first']?.toString(),
         last: json['last']?.toString(),
-        prev: json['prev']?.toString(),
+        prev: json['prev'],
         next: json['next'],
       );
 

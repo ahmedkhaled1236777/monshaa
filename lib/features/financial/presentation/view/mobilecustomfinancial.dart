@@ -64,7 +64,6 @@ class _customtableallmobilefinancialsState
           ),
           centerTitle: true,
           backgroundColor: Appcolors.maincolor,
-         
         ),
         drawer: Dashboard(),
         body: Container(

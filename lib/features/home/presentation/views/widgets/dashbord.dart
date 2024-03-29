@@ -50,8 +50,6 @@ class Dashboard extends StatelessWidget {
                   children: [
                     appbartittle(
                       sizedboxwidth: Appsizes.size5.w,
-                     
-                   
                       fontSize: 6.sp,
                     ),
                     SizedBox(
@@ -60,9 +58,7 @@ class Dashboard extends StatelessWidget {
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
                           .sidebarpermessions
-                          .map((e) => 
-                          
-                          Column(
+                          .map((e) => Column(
                                 children: [
                                   customdraweritem(
                                       count: e["count"],
@@ -107,7 +103,6 @@ class Dashboard extends StatelessWidget {
                   children: [
                     appbartittle(
                       sizedboxwidth: Appsizes.size10.w,
-                     
                       fontSize: conters.maxWidth > 600 ? 12.sp : 15.sp,
                     ),
                     SizedBox(

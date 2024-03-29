@@ -67,7 +67,6 @@ class _customtableallmobilefinishedcontractssState
               ),
               centerTitle: true,
               backgroundColor: Appcolors.maincolor,
-             
             ),
             drawer: Dashboard(),
             body: Container(
@@ -117,7 +116,7 @@ class _customtableallmobilefinishedcontractssState
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                         return             index >=
+                                      return index >=
                                               BlocProvider.of<
                                                           finishedcontractsCubit>(
                                                       context)

@@ -184,7 +184,7 @@ class _customtableaqarState extends State<customtableaqar> {
                                                                     ShowaqaratCubit>(
                                                                 context)
                                                             .data[index]
-                                                            .advertiser_name),
+                                                            .advertiserName),
                                                 aqarnumber: TextEditingController(
                                                     text: BlocProvider.of<
                                                                 ShowaqaratCubit>(

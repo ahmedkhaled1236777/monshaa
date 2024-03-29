@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'package:aplication/features/reports/presentation/view/widgets/customreports.dart';
 import 'package:flutter/material.dart';
 
@@ -14,15 +9,17 @@ class Reports extends StatefulWidget {
 }
 
 class ReportsState extends State<Reports> {
-
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, consters) {
       if (consters.maxWidth >= 1100) {
-        return customreports(devicetype: "desktop",);
+        return customreports(
+          devicetype: "desktop",
+        );
       } else {
-        return customreports(devicetype: "mobile",);
+        return customreports(
+          devicetype: "mobile",
+        );
       }
     });
   }

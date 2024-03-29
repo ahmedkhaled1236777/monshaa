@@ -7,5 +7,4 @@ abstract class showaqarreporeports {
       {required String token,
       required int page,
       Map<String, dynamic>? queryParameters});
-  
 }

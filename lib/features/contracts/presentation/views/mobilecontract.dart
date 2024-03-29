@@ -106,7 +106,9 @@ class mobilecontracts extends StatelessWidget {
                           color: Appcolors.whitecolor,
                         )),
                     contractsearch(),
-          SizedBox(width: 10,)
+                    SizedBox(
+                      width: 10,
+                    )
                   ],
                 )
               ],

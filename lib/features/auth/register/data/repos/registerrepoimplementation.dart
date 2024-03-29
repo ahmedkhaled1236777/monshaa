@@ -12,15 +12,13 @@ import 'package:dio/dio.dart';
 
 class registerrepoimplementation extends registerrepo {
   @override
-  Future<Either<failure, Registermodel>>  register(
+  Future<Either<failure, Registermodel>> register(
       {required registerrequest registerrequest}) async {
     Registermodel registermodel;
     try {
       Response response = await Postdata.postdata(
           path: urls.register, data: registerrequest.tojson());
-      if (response.statusCode == 200 &&
-          response.data["status"] ==true
-            ) {
+      if (response.statusCode == 200 && response.data["status"] == true) {
         registermodel = Registermodel.fromJson(response.data);
         return right(registermodel);
       } else {

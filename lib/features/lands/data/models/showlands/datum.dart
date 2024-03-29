@@ -14,7 +14,7 @@ class Datum extends Equatable {
   final num? totalCost;
   final String? sellerPhoneNumber;
   final String? advertiserType;
-  final dynamic advertiseDetails;
+  final String? advertiseDetails;
   final String? status;
   final String? createdAt;
   final String? updatedAt;
@@ -51,7 +51,7 @@ class Datum extends Equatable {
         totalCost: num.tryParse(json['total_cost'].toString()),
         sellerPhoneNumber: json['seller_phone_number']?.toString(),
         advertiserType: json['advertiser_type']?.toString(),
-        advertiseDetails: json['advertise_details'],
+        advertiseDetails: json['advertise_details']?.toString(),
         status: json['status']?.toString(),
         createdAt: json['created_at']?.toString(),
         updatedAt: json['updated_at']?.toString(),

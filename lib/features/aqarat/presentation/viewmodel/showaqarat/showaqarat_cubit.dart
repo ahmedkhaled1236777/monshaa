@@ -31,7 +31,6 @@ class ShowaqaratCubit extends Cubit<ShowaqaratState> {
         token: token, page: page, queryParameters: queryParameters);
     loading = true;
     result.fold((failue) {
-    
       emit(Showaqaratfailure(error_message: failue.error_message));
     }, (success) {
       if (success.data!.links?.next == null) {

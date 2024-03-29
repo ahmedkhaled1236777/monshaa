@@ -28,6 +28,7 @@ import 'package:aplication/features/finishedcontracts/data/repos/finishedcontrac
 import 'package:aplication/features/finishedcontracts/presentation/viewmodel/finishedcontracts/finishedcontracts_cubit.dart';
 
 import 'package:aplication/features/home/data/repos/homerepoimplementation.dart';
+import 'package:aplication/features/home/presentation/views/home.dart';
 import 'package:aplication/features/lands/data/repos/addland/addlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/editland/editlandrepoimplementation.dart';
 import 'package:aplication/features/lands/data/repos/showland/showlandrepoimplementation.dart';
@@ -40,9 +41,16 @@ import 'package:aplication/features/notifications/presentations/viewmodel/notifi
 import 'package:aplication/features/reciept/data/repos/recieptrepoimplementation.dart';
 import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptcuibt.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/data/repos/aqaratrepoimplementationreports.dart';
+import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/aqaratreports.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/mobileaqaratreports.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/viewmodel/aqaratreports/aqaratreports_cubit.dart';
+import 'package:aplication/features/reports/presentation/view/landsreports.dart/data/repos/landsreportsrepoimplementation.dart';
+import 'package:aplication/features/reports/presentation/view/landsreports.dart/presentation/viewmodel/landsreports/landsreports_cubit.dart';
+import 'package:aplication/features/reports/presentation/view/landsreports.dart/presentation/views/landsreports.dart';
 import 'package:aplication/features/reports/presentation/view/reports.dart';
+import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/data/repos/contractsreportsimp.dart';
+import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/presentation/view/contractsreport.dart';
+import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/presentation/viewmodel/contracts/contractsreport_cubit.dart';
 import 'package:aplication/features/reports/presentation/viewmodel/cubit/reports_cubit.dart';
 import 'package:aplication/features/revenus/data/repos/revenurepoimplementation.dart';
 import 'package:aplication/features/revenus/presentation/viewmodel/revenuecuibt/revenue_cubit.dart';
@@ -118,6 +126,9 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 AqaratreportsCubit(showaqqarrepoimplementationreports())),
         BlocProvider(
+            create: (context) =>
+                landatreportsCubit(showlandrepoimplementationreports())),
+        BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
         BlocProvider(create: (context) => HomeCubit(homerepoimplementation())),
         BlocProvider(
@@ -131,9 +142,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 AddemployeeCubit(addemployeerepo: emplyeerepoimplementaion())),
-        BlocProvider(
-            create: (context) =>
-                ReportsCubit()),
+        BlocProvider(create: (context) => ReportsCubit()),
         BlocProvider(
             create: (context) =>
                 showemployeescuibt(employeerepo: emplyeerepoimplementaion())),
@@ -146,6 +155,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 ShowlandsCubit(showlands: showlandsrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                contractsatreportsCubit(showcontractsrepoimplementationreports())),
         BlocProvider(
             create: (context) => contractCubit(contractrepoimplementation())),
         BlocProvider(
@@ -174,7 +186,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             home:
-              customtableallmobileaqaratreportss() /* Contract(
+                MyHomePage() /* Contract(
                 tenantname: TextEditingController(),
                 tenanphone: TextEditingController(),
                 tenantcard: TextEditingController(),

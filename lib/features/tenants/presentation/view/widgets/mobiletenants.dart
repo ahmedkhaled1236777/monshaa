@@ -62,7 +62,6 @@ class mobiletenants extends StatelessWidget {
                     const SizedBox(
                       width: Appsizes.size10,
                     ),
-                   
                   ],
                 )
               ],

@@ -8,12 +8,13 @@ import 'package:dio/dio.dart';
 
 class logoutrepoimplementation extends logoutrepo {
   @override
-  Future<Either<failure, String>> logout({required String token,required String devicetoken})async {
+  Future<Either<failure, String>> logout(
+      {required String token, required String devicetoken}) async {
     try {
-      Response response =
-          await Postdata.postdata(path: urls.log_out, token: token,queryParameters: {
-            "token":devicetoken
-          });
+      Response response = await Postdata.postdata(
+          path: urls.log_out,
+          token: token,
+          queryParameters: {"token": devicetoken});
       if (response.statusCode == 200 && response.data["status"] == true) {
         return right(response.data["message"]);
       } else

@@ -1,21 +1,24 @@
 import 'package:equatable/equatable.dart';
 
+import 'user.dart';
+
 class Datum extends Equatable {
   final num? id;
+  final User? user;
   final String? status;
-  final String? advertiser_name;
-  final List? realStateImages;
+  final List<dynamic>? realStateImages;
   final String? buildingNumber;
   final String? apartmentNumber;
   final String? realStateAddress;
   final String? realStateAddressDetails;
   final String? realStateType;
   final String? department;
+  final String? advertiserName;
   final String? advertiserType;
   final String? advertisedPhoneNumber;
   final num? realStateSpace;
   final num? realStatePrice;
-  final num? numberOfBathrooms;
+  final dynamic numberOfBathrooms;
   final num? numberOfRooms;
   final dynamic advertiseDetails;
   final String? createdAt;
@@ -23,8 +26,8 @@ class Datum extends Equatable {
 
   const Datum({
     this.id,
+    this.user,
     this.status,
-    this.advertiser_name,
     this.realStateImages,
     this.buildingNumber,
     this.apartmentNumber,
@@ -32,6 +35,7 @@ class Datum extends Equatable {
     this.realStateAddressDetails,
     this.realStateType,
     this.department,
+    this.advertiserName,
     this.advertiserType,
     this.advertisedPhoneNumber,
     this.realStateSpace,
@@ -45,20 +49,23 @@ class Datum extends Equatable {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: num.tryParse(json['id'].toString()),
+        user: json['user'] == null
+            ? null
+            : User.fromJson(Map<String, dynamic>.from(json['user'])),
         status: json['status']?.toString(),
-        advertiser_name: json['advertiser_name']?.toString(),
-        realStateImages: json['real_state_images'],
+        realStateImages: List<dynamic>.from(json['real_state_images'] ?? []),
         buildingNumber: json['building_number']?.toString(),
         apartmentNumber: json['apartment_number']?.toString(),
         realStateAddress: json['real_state_address']?.toString(),
         realStateAddressDetails: json['real_state_address_details']?.toString(),
         realStateType: json['real_state_type']?.toString(),
         department: json['department']?.toString(),
+        advertiserName: json['advertiser_name']?.toString(),
         advertiserType: json['advertiser_type']?.toString(),
         advertisedPhoneNumber: json['advertised_phone_number']?.toString(),
         realStateSpace: num.tryParse(json['real_state_space'].toString()),
         realStatePrice: num.tryParse(json['real_state_price'].toString()),
-        numberOfBathrooms: num.tryParse(json['number_of_bathrooms'].toString()),
+        numberOfBathrooms: json['number_of_bathrooms'],
         numberOfRooms: num.tryParse(json['number_of_rooms'].toString()),
         advertiseDetails: json['advertise_details'],
         createdAt: json['created_at']?.toString(),
@@ -67,6 +74,7 @@ class Datum extends Equatable {
 
   Map<String, dynamic> toJson() => {
         if (id != null) 'id': id,
+        if (user != null) 'user': user?.toJson(),
         if (status != null) 'status': status,
         if (realStateImages != null) 'real_state_images': realStateImages,
         if (buildingNumber != null) 'building_number': buildingNumber,
@@ -76,6 +84,7 @@ class Datum extends Equatable {
           'real_state_address_details': realStateAddressDetails,
         if (realStateType != null) 'real_state_type': realStateType,
         if (department != null) 'department': department,
+        if (advertiserName != null) 'advertiser_name': advertiserName,
         if (advertiserType != null) 'advertiser_type': advertiserType,
         if (advertisedPhoneNumber != null)
           'advertised_phone_number': advertisedPhoneNumber,
@@ -92,6 +101,7 @@ class Datum extends Equatable {
   List<Object?> get props {
     return [
       id,
+      user,
       status,
       realStateImages,
       buildingNumber,
@@ -100,6 +110,7 @@ class Datum extends Equatable {
       realStateAddressDetails,
       realStateType,
       department,
+      advertiserName,
       advertiserType,
       advertisedPhoneNumber,
       realStateSpace,

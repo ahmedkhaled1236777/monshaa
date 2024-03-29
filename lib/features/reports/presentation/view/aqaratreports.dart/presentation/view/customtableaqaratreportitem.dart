@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class customtableaqaratreportsitem extends StatelessWidget {
   final String emoloyeename;
   final String adress;
-    String? amoutofmoney;
+  String? amoutofmoney;
   final String departement;
-    final String date;
- final String type;
+  final String date;
+  final String type;
 
-   String? phone;
-   String? advertiser;
-   String? advertisertype;
+  String? phone;
+  String? advertiser;
+  String? advertisertype;
   String? area;
 
   TextStyle textStyle;
@@ -21,12 +21,13 @@ class customtableaqaratreportsitem extends StatelessWidget {
   customtableaqaratreportsitem(
       {required this.adress,
       required this.emoloyeename,
-       this.advertiser,
+      this.advertiser,
       this.amoutofmoney,
-     required this.type,
+      required this.type,
+      this.advertisertype,
       this.area,
       this.phone,
-     required this.date,
+      required this.date,
       required this.departement,
       this.iconsize = 22,
       this.textStyle = Appstyles.textStyle12b});
@@ -66,12 +67,12 @@ class customtableaqaratreportsitem extends StatelessWidget {
                 style: textStyle,
                 textAlign: TextAlign.center,
               )),
-                  if (amoutofmoney != null)
-      SizedBox(
-            width: 3,
-          ),
-              if (amoutofmoney != null)
-          Expanded(
+          if (amoutofmoney != null)
+            SizedBox(
+              width: 3,
+            ),
+          if (amoutofmoney != null)
+            Expanded(
                 flex: 3,
                 child: Text(
                   amoutofmoney!,
@@ -81,17 +82,17 @@ class customtableaqaratreportsitem extends StatelessWidget {
           SizedBox(
             width: 3,
           ),
-            Expanded(
-                flex: 3,
-                child: Text(
-                  type!,
-                  style: textStyle,
-                  textAlign: TextAlign.center,
-                )),
-               if (advertiser != null)
-     SizedBox(
-            width: 3,
-          ),
+          Expanded(
+              flex: 3,
+              child: Text(
+                type!,
+                style: textStyle,
+                textAlign: TextAlign.center,
+              )),
+          if (advertiser != null)
+            SizedBox(
+              width: 3,
+            ),
           if (advertiser != null)
             Expanded(
                 flex: 3,
@@ -100,10 +101,10 @@ class customtableaqaratreportsitem extends StatelessWidget {
                   style: textStyle,
                   textAlign: TextAlign.center,
                 )),
-                if (phone != null)
-    SizedBox(
-            width: 3,
-          ),
+          if (phone != null)
+            SizedBox(
+              width: 3,
+            ),
           if (phone != null)
             Expanded(
                 flex: 3,
@@ -112,10 +113,10 @@ class customtableaqaratreportsitem extends StatelessWidget {
                   style: textStyle,
                   textAlign: TextAlign.center,
                 )),
-             if (advertisertype != null)
-       SizedBox(
-            width: 3,
-          ),
+          if (advertisertype != null)
+            SizedBox(
+              width: 3,
+            ),
           if (advertisertype != null)
             Expanded(
                 flex: 3,
@@ -124,29 +125,28 @@ class customtableaqaratreportsitem extends StatelessWidget {
                   style: textStyle,
                   textAlign: TextAlign.center,
                 )),
-              if (area != null)
-        SizedBox(
-            width: 3,
-          ),
-            if (area != null)
-        Expanded(
-              flex: 3,
-              child: Text(
-                area!,
-                style: textStyle,
-                textAlign: TextAlign.center,
-              )),
+          if (area != null)
+            SizedBox(
+              width: 3,
+            ),
+          if (area != null)
+            Expanded(
+                flex: 3,
+                child: Text(
+                  area!,
+                  style: textStyle,
+                  textAlign: TextAlign.center,
+                )),
           SizedBox(
             width: 3,
           ),
-            Expanded(
+          Expanded(
               flex: 3,
               child: Text(
-                date!,
+                date,
                 style: textStyle,
                 textAlign: TextAlign.center,
               )),
-            
         ],
       ),
     );

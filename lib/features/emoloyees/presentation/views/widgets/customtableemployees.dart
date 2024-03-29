@@ -29,7 +29,6 @@ class _customtableemployeeesState extends State<customtableemployees> {
     BlocProvider.of<showemployeescuibt>(context).employeesdata.clear();
     await BlocProvider.of<showemployeescuibt>(context)
         .getallemployees(token: generaltoken, page: 1);
-
   }
 
   @override
@@ -72,73 +71,64 @@ class _customtableemployeeesState extends State<customtableemployees> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return InkWell(
-                            onTap: () {
-                              navigateto(
-                                  navigationscreen: ShowEmployees(),
-                                  context: context);
-                            },
-                            child: showtemployeedialog(
-                              index: index,
-                              child: customtableemployeeitem(
-                                  textStyle: Appstyles.gettabletextstyle(
-                                      context: context),
-                                  employeename:
-                                      BlocProvider.of<showemployeescuibt>(
-                                              context)
-                                          .employeesdata[index]
-                                          .name!,
-                                  adress: BlocProvider.of<showemployeescuibt>(
+                      onTap: () {
+                        navigateto(
+                            navigationscreen: ShowEmployees(),
+                            context: context);
+                      },
+                      child: showtemployeedialog(
+                        index: index,
+                        child: customtableemployeeitem(
+                            textStyle:
+                                Appstyles.gettabletextstyle(context: context),
+                            employeename:
+                                BlocProvider.of<showemployeescuibt>(context)
+                                    .employeesdata[index]
+                                    .name!,
+                            adress: BlocProvider.of<showemployeescuibt>(context)
+                                .employeesdata[index]
+                                .address!,
+                            phone: BlocProvider.of<showemployeescuibt>(context)
+                                .employeesdata[index]
+                                .phone!,
+                            job: BlocProvider.of<showemployeescuibt>(context)
+                                .employeesdata[index]
+                                .jobTitle!,
+                            delet: IconButton(
+                                onPressed: () async {
+                                  await BlocProvider.of<showemployeescuibt>(
                                           context)
-                                      .employeesdata[index]
-                                      .address!,
-                                  phone: BlocProvider.of<showemployeescuibt>(
-                                          context)
-                                      .employeesdata[index]
-                                      .phone!,
-                                  job: BlocProvider.of<showemployeescuibt>(
-                                          context)
-                                      .employeesdata[index]
-                                      .jobTitle!,
-                                  delet: IconButton(
-                                      onPressed: () async {
-                                        await BlocProvider.of<
-                                                showemployeescuibt>(context)
-                                            .deleteemployee(
-                                                token: generaltoken,
-                                                employeenumber: BlocProvider.of<
-                                                            showemployeescuibt>(
-                                                        context)
-                                                    .employeesdata[index]
-                                                    .id!
-                                                    .toInt());
-                                      },
-                                      icon: Icon(
-                                        size:
-                                            MediaQuery.of(context).size.width <
-                                                    600
-                                                ? 20.sp
-                                                : 22,
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      )),
-                                  edit: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        size:
-                                            MediaQuery.of(context).size.width <
-                                                    600
-                                                ? 20.sp
-                                                : 22,
-                                        Icons.edit,
-                                        color: Appcolors.buttoncolor,
-                                      ))),
-                            ),
-                          );
+                                      .deleteemployee(
+                                          token: generaltoken,
+                                          employeenumber: BlocProvider.of<
+                                                  showemployeescuibt>(context)
+                                              .employeesdata[index]
+                                              .id!
+                                              .toInt());
+                                },
+                                icon: Icon(
+                                  size: MediaQuery.of(context).size.width < 600
+                                      ? 20.sp
+                                      : 22,
+                                  Icons.delete,
+                                  color: Colors.red,
+                                )),
+                            edit: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  size: MediaQuery.of(context).size.width < 600
+                                      ? 20.sp
+                                      : 22,
+                                  Icons.edit,
+                                  color: Appcolors.buttoncolor,
+                                ))),
+                      ),
+                    );
                   },
                   separatorBuilder: (context, index) => const Divider(),
                   itemCount: BlocProvider.of<showemployeescuibt>(context)
-                          .employeesdata
-                          .length),
+                      .employeesdata
+                      .length),
             );
           }))
         ]));

@@ -61,7 +61,6 @@ class _customtableallfinancialsState extends State<customtableallfinancials> {
           ),
           centerTitle: true,
           backgroundColor: Appcolors.maincolor,
-        
         ),
         drawer: Dashboard(),
         body: Container(

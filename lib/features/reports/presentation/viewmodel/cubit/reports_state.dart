@@ -1,5 +1,5 @@
 part of 'reports_cubit.dart';
 
-abstract class ReportsState{}
+abstract class ReportsState {}
 
- class ReportsInitial extends ReportsState {}
+class ReportsInitial extends ReportsState {}

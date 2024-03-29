@@ -8,16 +8,16 @@ import 'package:get/get_core/src/get_main.dart';
 // ignore: camel_case_types
 class requestfailure extends failure {
   // ignore: non_constant_identifier_names
-  requestfailure({required super.error_message}){
- 
-if(super.error_message=="تم الغاء تفعيل الحساب برجاء التواصل مع الادمن")  {
-  Get.off(Login(),
-      transition: Transition.rightToLeft,
-      duration: Duration(seconds: 1),
-      curve: Curves.easeInOut);
-}
+  requestfailure({required super.error_message}) {
+    if (super.error_message ==
+        "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن") {
+      Get.off(Login(),
+          transition: Transition.rightToLeft,
+          duration: Duration(seconds: 1),
+          curve: Curves.easeInOut);
+    }
   }
- 
+
   factory requestfailure.fromdioexception(DioException dioException) {
     switch (dioException.type) {
       case DioExceptionType.connectionTimeout:
@@ -51,14 +51,12 @@ if(super.error_message=="تم الغاء تفعيل الحساب برجاء ال
     }
   }
   factory requestfailure.fromresponse(int statuscode, dynamic respnse) {
-    if (statuscode == 422 || statuscode == 400 ) {      return requestfailure(error_message: respnse["data"][0]);
-    } 
-    
-    else if (statuscode == 401) {
-        
-      return requestfailure(error_message: "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن");
-    }
-    else if (statuscode == 403) {
+    if (statuscode == 422 || statuscode == 400) {
+      return requestfailure(error_message: respnse["data"][0]);
+    } else if (statuscode == 401) {
+      return requestfailure(
+          error_message: "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن");
+    } else if (statuscode == 403) {
       return requestfailure(error_message: respnse["message"]);
     } else if (statuscode == 404) {
       return requestfailure(error_message: "الصفحه غير موجوده");

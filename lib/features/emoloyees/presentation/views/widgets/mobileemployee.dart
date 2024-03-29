@@ -65,7 +65,6 @@ class mobileemployee extends StatelessWidget {
                     const SizedBox(
                       width: Appsizes.size10,
                     ),
-                   
                   ],
                 )
               ],

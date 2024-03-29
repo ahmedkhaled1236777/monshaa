@@ -48,7 +48,6 @@ class mobilereciepts extends StatelessWidget {
                     const SizedBox(
                       width: Appsizes.size10,
                     ),
-                   
                   ],
                 )
               ],

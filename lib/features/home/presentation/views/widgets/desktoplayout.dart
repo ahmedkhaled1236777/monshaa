@@ -48,7 +48,6 @@ class _desktoplayoutState extends State<desktoplayout> {
         appBar: AppBar(
           title: appbartittle(
             sizedboxwidth: Appsizes.size5.w,
-           
             fontSize: 5.sp,
           ),
           leading: const Text(''),

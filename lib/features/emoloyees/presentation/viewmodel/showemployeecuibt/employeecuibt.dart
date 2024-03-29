@@ -24,8 +24,6 @@ class showemployeescuibt extends Cubit<showemployeesstates> {
     });
   }
 
-
-
   deleteemployee({required String token, required int employeenumber}) async {
     var result = await employeerepo.deleteemployee(
         token: token, employeenumber: employeenumber);

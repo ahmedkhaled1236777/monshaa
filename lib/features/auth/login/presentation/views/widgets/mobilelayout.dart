@@ -34,9 +34,9 @@ class _MobilelayoutState extends State<Mobilelayout> {
     FirebaseMessaging _firebaseMessaging =
         FirebaseMessaging.instance; // Change here
     await _firebaseMessaging.getToken().then((token) {
-cashhelper.setdata(key: "devicetoken", value: token);
-print("//////////////////////////////////////");
-print(token);
+      cashhelper.setdata(key: "devicetoken", value: token);
+      print("//////////////////////////////////////");
+      print(token);
       this.token = token;
     });
   }
@@ -129,8 +129,7 @@ print(token);
                     print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
                     print(state.loginmodel.data!.logo);
                     cashhelper.setdata(
-                        key: "logo",
-                        value: state.loginmodel.data!.logo);
+                        key: "logo", value: state.loginmodel.data!.logo);
                     cashhelper.setdata(
                         key: "token", value: state.loginmodel.data!.token);
                     cashhelper.setdata(

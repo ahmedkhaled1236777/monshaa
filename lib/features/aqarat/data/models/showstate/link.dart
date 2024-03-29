@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class Link extends Equatable {
-  final String? url;
+  final dynamic url;
   final String? label;
   final bool? active;
 
   const Link({this.url, this.label, this.active});
 
   factory Link.fromJson(Map<String, dynamic> json) => Link(
-        url: json['url']?.toString(),
+        url: json['url'],
         label: json['label']?.toString(),
         active: json['active']?.toString().contains("true"),
       );

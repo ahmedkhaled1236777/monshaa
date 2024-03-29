@@ -18,9 +18,9 @@ class showaqqarrepoimplementationreports extends showaqarreporeports {
           path: "/reports/states?page=${page}",
           token: token,
           queryParameters: queryParameters);
-      if (response.statusCode == 200 &&
-          response.data["status"] ==true
-              ) {
+      print(response.data);
+      print(queryParameters);
+      if (response.statusCode == 200 && response.data["status"] == true) {
         showstate = Showstate.fromJson(response.data);
         return right(showstate);
       } else
@@ -34,6 +34,4 @@ class showaqqarrepoimplementationreports extends showaqarreporeports {
       }
     }
   }
-
-  
 }

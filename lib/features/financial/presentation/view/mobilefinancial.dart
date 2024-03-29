@@ -41,7 +41,6 @@ class mobilefinancials extends StatelessWidget {
                     const SizedBox(
                       width: Appsizes.size10,
                     ),
-                 
                   ],
                 )
               ],

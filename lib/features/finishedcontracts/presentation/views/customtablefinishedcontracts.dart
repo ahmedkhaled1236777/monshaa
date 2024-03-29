@@ -132,7 +132,7 @@ class _customtableallfinishedcontractsState
                                   physics: NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
-                             return       index >=
+                                    return index >=
                                             BlocProvider.of<
                                                         finishedcontractsCubit>(
                                                     context)

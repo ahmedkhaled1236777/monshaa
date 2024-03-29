@@ -15,4 +15,4 @@ showsnack({required String comment, required BuildContext context}) {
   ));
 }
 
-String generaltoken =cashhelper.getdata(key: "token");
+String generaltoken = cashhelper.getdata(key: "token");

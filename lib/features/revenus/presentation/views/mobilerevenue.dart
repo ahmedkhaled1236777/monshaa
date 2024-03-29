@@ -56,7 +56,6 @@ class mobilerevenues extends StatelessWidget {
                           color: Appcolors.whitecolor,
                         )),
                     revenuesearch(),
-                  
                     const SizedBox(
                       width: Appsizes.size10,
                     ),

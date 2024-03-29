@@ -56,7 +56,6 @@ class mobileclientss extends StatelessWidget {
                           color: Appcolors.whitecolor,
                         )),
                     clientsearch(),
-                 
                     const SizedBox(
                       width: Appsizes.size10,
                     ),

@@ -64,7 +64,6 @@ class _customtableallmobilerecieptsState
           ),
           centerTitle: true,
           backgroundColor: Appcolors.maincolor,
-          
         ),
         drawer: Dashboard(),
         body: Container(

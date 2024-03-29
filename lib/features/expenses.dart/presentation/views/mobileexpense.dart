@@ -57,7 +57,6 @@ class mobileexpenses extends StatelessWidget {
                           color: Appcolors.whitecolor,
                         )),
                     expensesearch(),
-                   
                     const SizedBox(
                       width: Appsizes.size10,
                     ),

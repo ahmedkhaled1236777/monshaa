@@ -9,20 +9,20 @@ import 'package:equatable/equatable.dart';
 part 'aqaratreports_state.dart';
 
 class AqaratreportsCubit extends Cubit<AqaratreportsState> {
- final showaqqarrepoimplementationreports showaqarrepo;
+  final showaqqarrepoimplementationreports showaqarrepo;
   AqaratreportsCubit(this.showaqarrepo) : super(AqaratreportsInitial());
 
   bool search = true;
   List<Datum> data = [];
   Map<String, dynamic>? queryParameters;
-  List mobileheadertabeleallaqaratreportss=[
+  List mobileheadertabeleallaqaratreportss = [
     "اسم الموظف",
     "العنوان ",
     "القسم",
     "النوع",
     "التاريخ",
   ];
-  List headertabeleallaqaratreportss=[
+  List headertabeleallaqaratreportss = [
     "اسم الموظف",
     "العنوان ",
     "القسم",
@@ -34,7 +34,6 @@ class AqaratreportsCubit extends Cubit<AqaratreportsState> {
     "المساحه",
     "التاريخ",
   ];
-
 
   int page = 1;
   bool loading = false;
@@ -74,7 +73,4 @@ class AqaratreportsCubit extends Cubit<AqaratreportsState> {
       emit(Aqaratreportssuccess());
     });
   }
-
-  
-
 }
