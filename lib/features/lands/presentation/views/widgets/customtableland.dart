@@ -1,5 +1,6 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
@@ -72,6 +73,8 @@ class _customtablelandState extends State<customtableland> {
               child: BlocConsumer<ShowlandsCubit, ShowlandsState>(
                   listener: (context, state) {
             if (state is Showlandsfailure)
+              showsnack(comment: state.error_message, context: context);
+            if (state is deletelandsfailure)
               showsnack(comment: state.error_message, context: context);
           }, builder: (context, state) {
             if (state is Showlandsloading) {
@@ -222,7 +225,8 @@ class _customtablelandState extends State<customtableland> {
                                             : 22,
                                   ),
                                   onPressed: () {
-                                    BlocProvider.of<ShowlandsCubit>(context)
+                                     awsomdialogerror(context: context, tittle: "هل تريد حذف هذه الارض ؟", btnOkOnPress:() async {
+   await  BlocProvider.of<ShowlandsCubit>(context)
                                         .deleteland(
                                             token: generaltoken,
                                             landnumber:
@@ -231,6 +235,8 @@ class _customtablelandState extends State<customtableland> {
                                                     .data[index]
                                                     .id!
                                                     .toInt());
+                                } );
+                                   
                                   },
                                 );
                               }),

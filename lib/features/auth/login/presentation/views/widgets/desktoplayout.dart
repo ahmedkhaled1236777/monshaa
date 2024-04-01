@@ -144,6 +144,19 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             cashhelper.setdata(
                                 key: "token",
                                 value: state.loginmodel.data!.token);
+                                
+                    cashhelper.setdata(
+                        key: "name",
+                        value: state.loginmodel.data!.name);
+                    cashhelper.setdata(
+                        key: "company_phone",
+                        value: state.loginmodel.data!.companyPhone);
+                    cashhelper.setdata(
+                        key: "phone",
+                        value: state.loginmodel.data!.phone);
+                    cashhelper.setdata(
+                        key: "company_adress",
+                        value: state.loginmodel.data!.companyAddress);
                             cashhelper.setdata(
                                 key: "company_name",
                                 value: state.loginmodel.data!.companyName);

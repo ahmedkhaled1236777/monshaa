@@ -1,3 +1,4 @@
+import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/errors/failure.dart';
 import 'package:aplication/features/auth/login/presentation/views/login.dart';
 import 'package:dio/dio.dart';
@@ -11,6 +12,7 @@ class requestfailure extends failure {
   requestfailure({required super.error_message}) {
     if (super.error_message ==
         "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن") {
+          cashhelper.cleardata();
       Get.off(Login(),
           transition: Transition.rightToLeft,
           duration: Duration(seconds: 1),
@@ -57,7 +59,7 @@ class requestfailure extends failure {
       return requestfailure(
           error_message: "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن");
     } else if (statuscode == 403) {
-      return requestfailure(error_message: respnse["message"]);
+      return requestfailure(error_message: "يوجد خطأ في السيرفر برجاء المحاوله مره اخري");
     } else if (statuscode == 404) {
       return requestfailure(error_message: "الصفحه غير موجوده");
     } else if (statuscode == 500)

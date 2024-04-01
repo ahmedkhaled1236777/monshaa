@@ -38,7 +38,7 @@ class addrevenuewithscafold extends StatelessWidget {
         body: Center(
             child: addrevenue(
           formkey: foemkey,
-          width: MediaQuery.sizeOf(context).width * 0.75,
+          width: MediaQuery.sizeOf(context).width,
         )),
       ),
     );

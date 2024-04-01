@@ -87,7 +87,7 @@ class addcontractwithscafold extends StatelessWidget {
         body: Center(
             child: addcontract(
                 formkey: foemkey,
-                width: MediaQuery.of(context).size.width * 0.95,
+                width: MediaQuery.of(context).size.width,
                 tenantname: tenantname,
                 tenanphone: tenanphone,
                 tenantcard: tenantcard,

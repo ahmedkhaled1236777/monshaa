@@ -102,7 +102,7 @@ class contractrepoimplementation extends contractrepo {
       } else if (response.statusCode == 200 && response.data["code"] == 409) {
         return left(requestfailure(error_message: response.data["message"]));
       } else
-        return left(requestfailure(error_message: response.data["message"]));
+        return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
       if (e is DioException) {
         return left(requestfailure.fromdioexception(e));

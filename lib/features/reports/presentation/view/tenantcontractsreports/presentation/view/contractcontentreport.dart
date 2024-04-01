@@ -71,7 +71,8 @@ class contractsatalertcontent extends StatelessWidget {
                               button_name: "بحث",
                               buttonicon: Icons.search,
                               onPressed: () {
-                                BlocProvider.of<contractsatreportsCubit>(context)
+                                BlocProvider.of<contractsatreportsCubit>(
+                                        context)
                                     .queryParameters = {
                                   "date_from":
                                       BlocProvider.of<DateCubit>(context).date6,
@@ -81,8 +82,10 @@ class contractsatalertcontent extends StatelessWidget {
                                 BlocProvider.of<DateCubit>(context)
                                     .cleardates();
                                 Navigator.pop(context);
-                                BlocProvider.of<contractsatreportsCubit>(context)
-                                    .getallcontractsat(token: generaltoken, page: 1);
+                                BlocProvider.of<contractsatreportsCubit>(
+                                        context)
+                                    .getallcontractsat(
+                                        token: generaltoken, page: 1);
                               },
                             )
                           ]))))

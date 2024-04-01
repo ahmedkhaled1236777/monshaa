@@ -38,7 +38,7 @@ class addclientswithscafold extends StatelessWidget {
         body: Center(
             child: addclients(
           formkey: foemkey,
-          width: MediaQuery.sizeOf(context).width * 0.75,
+          width: MediaQuery.sizeOf(context).width,
         )),
       ),
     );

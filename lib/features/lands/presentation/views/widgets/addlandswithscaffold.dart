@@ -36,7 +36,7 @@ class addlandwithscafold extends StatelessWidget {
         drawer: Dashboard(),
         body: Center(
             child: addaqar(
-          width: MediaQuery.sizeOf(context).width * 0.75,
+          width: MediaQuery.sizeOf(context).width,
         )),
       ),
     );

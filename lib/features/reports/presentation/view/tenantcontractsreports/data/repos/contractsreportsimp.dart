@@ -18,7 +18,7 @@ class showcontractsrepoimplementationreports extends showcontractsreporeports {
           path: "/reports/tenant-contracts?page=${page}",
           token: token,
           queryParameters: queryParameters);
-    
+
       if (response.statusCode == 200 && response.data["status"] == true) {
         contractmodel = Contractmodel.fromJson(response.data);
         return right(contractmodel);

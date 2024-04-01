@@ -132,30 +132,24 @@ class _customtabledesktoplandatreportsState
                                             textStyle:
                                                 Appstyles.gettabletextstyle(
                                                     context: context),
-
                                             date: prov.data[index].createdAt!,
-                                            advertisertype:show[
-                                              prov
-                                                .data[index].advertiserType
-                                            ] ,
-                                          
+                                            advertisertype: show[prov
+                                                .data[index].advertiserType],
                                             emoloyeename:
                                                 prov.data[index].user!.name!,
-                                            advertiser: prov
-                                                .data[index].sellerName!,
-                                            area: prov
-                                                .data[index].sizeInMetres!
+                                            advertiser:
+                                                prov.data[index].sellerName!,
+                                            area: prov.data[index].sizeInMetres!
                                                 .toString(),
-                                            phone: prov.data[index]
-                                                .sellerPhoneNumber!,
-                                            adress: prov
-                                                .data[index].address!,
+                                            phone: prov
+                                                .data[index].sellerPhoneNumber!,
+                                            adress: prov.data[index].address!,
                                             amoutofmoney: prov
                                                 .data[index].totalCost
                                                 .toString(),
-                                                priceofmeter:prov
+                                            priceofmeter: prov
                                                 .data[index].priceOfOneMeter
-                                                .toString() ,
+                                                .toString(),
                                           );
                                   },
                                   separatorBuilder: (context, index) =>

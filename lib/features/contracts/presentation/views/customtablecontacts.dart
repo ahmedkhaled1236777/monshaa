@@ -1,5 +1,6 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -72,6 +73,8 @@ class _customtablecontractsState extends State<customtablecontracts> {
             if (state is showcontractfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
+             if (state is deletecontractfailure)
+              showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showcontractloadin) return loading();
             if (state is showcontractfailure) return SizedBox();
@@ -110,7 +113,8 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                       icon: Icon(Icons.print_rounded)),
                                   delet: IconButton(
                                       onPressed: () async {
-                                        await BlocProvider.of<contractCubit>(
+                    awsomdialogerror(context: context, tittle: "هل تريد حذف العثد", btnOkOnPress:()async{
+  await BlocProvider.of<contractCubit>(
                                                 context)
                                             .deletecontract(
                                                 token: generaltoken,
@@ -119,6 +123,8 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                                     .contractdata[index]
                                                     .id!
                                                     .toInt());
+                    } );
+                                      
                                       },
                                       icon: Icon(
                                         size:
@@ -141,6 +147,8 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                       onPressed: () {
                                         BlocProvider.of<contractCubit>(context)
                                             .id = contract[index].id!.toInt();
+                                        BlocProvider.of<contractCubit>(context)
+                                            .havemoney = contract[index].cashType=="تحصيل الايجار من خلال الشركه"?"company":"owner";
 
                                         BlocProvider.of<contractCubit>(context)
                                                 .aqartype =
@@ -224,7 +232,7 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                                     housenumber: TextEditingController(text: contract[index].apartmentNumber),
                                                     totalvalue: TextEditingController(text: contract[index].contractTotal.toString()),
                                                     insuranceval: TextEditingController(text: contract[index].insuranceTotal.toString()),
-                                                    commessionvalue: TextEditingController(text: contract[index].commission.toString()),
+                                                    commessionvalue: TextEditingController(text:BlocProvider.of<contractCubit>(context).commessiontype=="نسبه"? (contract[index].commission!.toInt()*100/contract[index].contractTotal!.toInt()).toString():contract[index].commission.toString()),
                                                     periodofdelay: TextEditingController(text: contract[index].periodOfDelay.toString())),
                                               );
                                             });

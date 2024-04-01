@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   firebase_core
   printing
+  rive_common
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

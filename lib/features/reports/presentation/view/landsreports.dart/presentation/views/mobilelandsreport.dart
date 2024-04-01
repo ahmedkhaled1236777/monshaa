@@ -133,18 +133,19 @@ class _customtableallmobilelandatreportssState
                                                   .length
                                           ? loading()
                                           : customtablelandatreportsitem(
-                                              priceofmeter: 
-                                                  prov.data[index].priceOfOneMeter.toString()!,
+                                              priceofmeter: prov
+                                                  .data[index].priceOfOneMeter
+                                                  .toString()!,
                                               textStyle:
                                                   Appstyles.gettabletextstyle(
                                                       context: context),
                                               emoloyeename:
                                                   prov.data[index].user!.name!,
                                               date: prov.data[index].createdAt!,
-                                              adress: prov.data[index]
-                                                  .address!,
+                                              adress: prov.data[index].address!,
                                               area: prov
-                                                  .data[index].sizeInMetres.toString(),
+                                                  .data[index].sizeInMetres
+                                                  .toString(),
                                             );
                                     },
                                     separatorBuilder: (context, index) =>

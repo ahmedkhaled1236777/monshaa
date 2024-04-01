@@ -1,5 +1,6 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
@@ -14,6 +15,7 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customhead
 import 'package:aplication/features/aqarat/presentation/views/widgets/customtableitem.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/editdialog.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,6 +74,8 @@ class _customtableaqarState extends State<customtableaqar> {
               child: BlocConsumer<ShowaqaratCubit, ShowaqaratState>(
                   listener: (context, state) {
             if (state is Showaqaratfailure)
+              showsnack(comment: state.error_message, context: context);
+            if (state is deleteaqarfailure)
               showsnack(comment: state.error_message, context: context);
           }, builder: (context, state) {
             if (state is Showaqaratloading) {
@@ -279,7 +283,8 @@ class _customtableaqarState extends State<customtableaqar> {
                                             : 22,
                                   ),
                                   onPressed: () {
-                                    BlocProvider.of<ShowaqaratCubit>(context)
+          awsomdialogerror(context: context, tittle: "هل تريد حذف العقار", btnOkOnPress: ()async{
+          await    BlocProvider.of<ShowaqaratCubit>(context)
                                         .deleteaqar(
                                             token: generaltoken,
                                             aqarnumber: BlocProvider.of<
@@ -287,6 +292,8 @@ class _customtableaqarState extends State<customtableaqar> {
                                                 .data[index]
                                                 .id!
                                                 .toInt());
+          });
+                                  
                                   },
                                 )));
                   },

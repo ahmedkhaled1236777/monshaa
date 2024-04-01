@@ -82,26 +82,26 @@ class customsettings extends StatelessWidget {
                     ),
                     customitem(
                         description: "اسم الشركه",
-                        value: "الفرسان للتسويق العقاري"),
+                        value: cashhelper.getdata(key: "company_name")),
                     SizedBox(
                       height: 10,
                     ),
                     customitem(
-                        description: "عنوان الشركه", value: "التجمع التالت"),
+                        description: "عنوان الشركه", value: cashhelper.getdata(key: "company_adress")),
                     SizedBox(
                       height: 10,
                     ),
                     customitem(
-                        description: "هاتف الشركه", value: "01552770367"),
+                        description: "هاتف الشركه", value: cashhelper.getdata(key: "company_phone")),
                     SizedBox(
                       height: 10,
                     ),
-                    customitem(description: "اسم المدير", value: "محمد السيد"),
+                    customitem(description: "الاسم", value:cashhelper.getdata(key: "name")),
                     SizedBox(
                       height: 10,
                     ),
                     customitem(
-                        description: "هاتف المدير", value: "01552770367"),
+                        description: "الهاتف", value: cashhelper.getdata(key: "phone")),
                     SizedBox(
                       height: 10,
                     ),
@@ -151,6 +151,7 @@ class customsettings extends StatelessWidget {
                                   BlocProvider.of<LogoutCubit>(context).log_out(
                                       token: cashhelper.getdata(key: "token"),
                                       devicetoken: cashhelper.getdata(
+                                          key: "devicetoken")==null?"agfgkjjkhjkhjhjhjkhjghg":cashhelper.getdata(
                                           key: "devicetoken"));
                                 },
                                 icon: const Icon(

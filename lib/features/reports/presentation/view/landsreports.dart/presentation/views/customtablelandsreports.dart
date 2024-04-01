@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class customtablelandatreportsitem extends StatelessWidget {
   final String emoloyeename;
   final String adress;
-   final String area;
-   final String priceofmeter;
+  final String area;
+  final String priceofmeter;
   final String date;
 
   String? amoutofmoney;
@@ -66,28 +66,28 @@ class customtablelandatreportsitem extends StatelessWidget {
                 style: textStyle,
                 textAlign: TextAlign.center,
               )),
-            SizedBox(
-              width: 3,
-            ),
-            Expanded(
-                flex: 3,
-                child: Text(
-                  priceofmeter!,
-                  style: textStyle,
-                  textAlign: TextAlign.center,
-                )),
-             if (amoutofmoney != null)
-       SizedBox(
+          SizedBox(
             width: 3,
           ),
-               if (amoutofmoney != null)
-     Expanded(
+          Expanded(
               flex: 3,
               child: Text(
-                amoutofmoney!,
+                priceofmeter!,
                 style: textStyle,
                 textAlign: TextAlign.center,
               )),
+          if (amoutofmoney != null)
+            SizedBox(
+              width: 3,
+            ),
+          if (amoutofmoney != null)
+            Expanded(
+                flex: 3,
+                child: Text(
+                  amoutofmoney!,
+                  style: textStyle,
+                  textAlign: TextAlign.center,
+                )),
           if (advertiser != null)
             SizedBox(
               width: 3,
@@ -124,7 +124,6 @@ class customtablelandatreportsitem extends StatelessWidget {
                   style: textStyle,
                   textAlign: TextAlign.center,
                 )),
-          
           SizedBox(
             width: 3,
           ),

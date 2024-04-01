@@ -34,7 +34,7 @@ class SettingState extends State<Setting> {
         if (consters.maxWidth >= 950) {
           return customsettings(width: MediaQuery.of(context).size.width * 0.4);
         } else {
-          return customsettings(width: MediaQuery.of(context).size.width * 0.9);
+          return customsettings(width: MediaQuery.of(context).size.width );
         }
       }),
     );

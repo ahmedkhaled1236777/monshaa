@@ -1,6 +1,5 @@
 part of 'contractsreport_cubit.dart';
 
-
 abstract class contractsatreportsState {}
 
 class contractsatreportsInitial extends contractsatreportsState {}
@@ -14,4 +13,3 @@ class contractsatreportsfailure extends contractsatreportsState {
 
   contractsatreportsfailure({required this.error_message});
 }
-

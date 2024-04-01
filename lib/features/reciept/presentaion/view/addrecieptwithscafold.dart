@@ -38,7 +38,7 @@ class addrecieptwithscafold extends StatelessWidget {
         body: Center(
             child: addreciept(
           formkey: foemkey,
-          width: MediaQuery.sizeOf(context).width * 0.95,
+          width: MediaQuery.sizeOf(context).width,
         )),
       ),
     );

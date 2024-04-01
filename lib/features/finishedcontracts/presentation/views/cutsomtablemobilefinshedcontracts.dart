@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -104,6 +105,8 @@ class _customtableallmobilefinishedcontractssState
                               showsnack(
                                   comment: state.errorr_message,
                                   context: context);
+                                    if (state is deletefinishedcontractsfailure)
+              showsnack(comment: state.errormessage, context: context);
                           },
                           builder: (context, state) {
                             if (state is showfinishedcontractsloadin)
@@ -126,19 +129,21 @@ class _customtableallmobilefinishedcontractssState
                                           : customtablefinishedcontractsitem(
                                               delet: IconButton(
                                                   onPressed: () async {
-                                                    await BlocProvider.of<
-                                                                finishedcontractsCubit>(
-                                                            context)
-                                                        .deletefinishedcontracts(
-                                                            token: generaltoken,
-                                                            finishedcontractsid:
-                                                                BlocProvider.of<
-                                                                            finishedcontractsCubit>(
-                                                                        context)
-                                                                    .myfinishedcontractss[
-                                                                        index]
-                                                                    .id!
-                                                                    .toInt());
+                                                   awsomdialogerror(context: context, tittle: "هل تريد حذف هذا العقد ؟", btnOkOnPress:() async {
+   await BlocProvider.of<
+                                                              finishedcontractsCubit>(
+                                                          context)
+                                                      .deletefinishedcontracts(
+                                                          token: generaltoken,
+                                                          finishedcontractsid:
+                                                              BlocProvider.of<
+                                                                          finishedcontractsCubit>(
+                                                                      context)
+                                                                  .myfinishedcontractss[
+                                                                      index]
+                                                                  .id!
+                                                                  .toInt());
+                                } );
                                                   },
                                                   icon: Icon(
                                                     Icons.delete_outlined,

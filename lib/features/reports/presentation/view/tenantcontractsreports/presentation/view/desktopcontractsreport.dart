@@ -92,17 +92,16 @@ class _customtabledesktopcontractsatreportsState
                         height: 50,
                         color: Appcolors.buttoncolor,
                         child: Row(
-                            children:
-                                BlocProvider.of<contractsatreportsCubit>(context)
-                                    .headertabeleallcontractsatreportss
-                                    .map((e) => customheadertable(
-                                          title: e,
-                                          flex: 3,
-                                          textStyle:
-                                              Appstyles.getheadertextstyle(
-                                                  context: context),
-                                        ))
-                                    .toList()),
+                            children: BlocProvider.of<contractsatreportsCubit>(
+                                    context)
+                                .headertabeleallcontractsatreportss
+                                .map((e) => customheadertable(
+                                      title: e,
+                                      flex: 3,
+                                      textStyle: Appstyles.getheadertextstyle(
+                                          context: context),
+                                    ))
+                                .toList()),
                       ),
                       Expanded(
                           child: BlocConsumer<contractsatreportsCubit,
@@ -113,8 +112,10 @@ class _customtabledesktopcontractsatreportsState
                                 comment: state.error_message, context: context);
                         },
                         builder: (context, state) {
-                          if (state is contractsatreportsloading) return loading();
-                          if (state is contractsatreportsfailure) return SizedBox();
+                          if (state is contractsatreportsloading)
+                            return loading();
+                          if (state is contractsatreportsfailure)
+                            return SizedBox();
                           return SingleChildScrollView(
                               controller: widget.scrollController,
                               child: ListView.separated(
@@ -122,7 +123,8 @@ class _customtabledesktopcontractsatreportsState
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     return index >=
-                                            BlocProvider.of<contractsatreportsCubit>(
+                                            BlocProvider.of<
+                                                        contractsatreportsCubit>(
                                                     context)
                                                 .data
                                                 .length
@@ -131,38 +133,39 @@ class _customtabledesktopcontractsatreportsState
                                             textStyle:
                                                 Appstyles.gettabletextstyle(
                                                     context: context),
-
-                                            date: prov.data[index].contractDate!,
-                                            tenantname: prov.data[index].tenant!.name!,
-                                          
-                                         
+                                            date:
+                                                prov.data[index].contractDate!,
+                                            tenantname:
+                                                prov.data[index].tenant!.name!,
                                             totalmoney: prov
-                                                .data[index].contractTotal.toString()!,
+                                                .data[index].contractTotal
+                                                .toString()!,
                                             tenantphone: prov
                                                 .data[index].tenant!.phone!
                                                 .toString(),
-                                            ownername: prov.data[index]
-                                                .ownerName!,
-                                            ownerphone: prov.data[index]
-                                                .ownerPhone!,
+                                            ownername:
+                                                prov.data[index].ownerName!,
+                                            ownerphone:
+                                                prov.data[index].ownerPhone!,
                                             adress: prov
                                                 .data[index].realStateAddress!,
-                                          
                                           );
                                   },
                                   separatorBuilder: (context, index) =>
                                       const Divider(),
                                   itemCount: BlocProvider.of<
-                                                  contractsatreportsCubit>(context)
+                                                      contractsatreportsCubit>(
+                                                  context)
                                               .loading ==
                                           true
-                                      ? BlocProvider.of<contractsatreportsCubit>(
+                                      ? BlocProvider.of<
+                                                      contractsatreportsCubit>(
                                                   context)
                                               .data
                                               .length +
                                           1
-                                      : BlocProvider.of<contractsatreportsCubit>(
-                                              context)
+                                      : BlocProvider.of<
+                                              contractsatreportsCubit>(context)
                                           .data
                                           .length));
                         },

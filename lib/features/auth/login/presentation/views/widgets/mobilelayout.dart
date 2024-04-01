@@ -135,6 +135,18 @@ class _MobilelayoutState extends State<Mobilelayout> {
                     cashhelper.setdata(
                         key: "company_name",
                         value: state.loginmodel.data!.companyName);
+                    cashhelper.setdata(
+                        key: "name",
+                        value: state.loginmodel.data!.name);
+                    cashhelper.setdata(
+                        key: "company_phone",
+                        value: state.loginmodel.data!.companyPhone);
+                    cashhelper.setdata(
+                        key: "phone",
+                        value: state.loginmodel.data!.phone);
+                    cashhelper.setdata(
+                        key: "company_adress",
+                        value: state.loginmodel.data!.companyAddress);
                     showsnack(
                         comment: "تم تسجيل الدخول بنجاح", context: context);
                     navigateandfinish(

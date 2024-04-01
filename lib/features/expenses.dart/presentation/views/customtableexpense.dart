@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -68,6 +69,8 @@ class _customtableexpensesState extends State<customtableexpenses> {
             if (state is showexpensefailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
+             if (state is deleteexpensefailure)
+              showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showexpenseloadin) return loading();
             if (state is showexpensefailure) return SizedBox();
@@ -100,7 +103,8 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                       .transactionDate!,
                                   delet: IconButton(
                                       onPressed: () async {
-                                        await BlocProvider.of<expenseCubit>(
+                                            awsomdialogerror(context: context, tittle: "هل تريد حذف المصروف ؟", btnOkOnPress:()async{
+  await     await BlocProvider.of<expenseCubit>(
                                                 context)
                                             .deleteexpense(
                                                 token: generaltoken,
@@ -109,6 +113,10 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                                     .expensedata[index]
                                                     .id!
                                                     .toInt());
+                                                
+                                                
+                    } );
+                                      
                                       },
                                       icon: Icon(
                                         size:

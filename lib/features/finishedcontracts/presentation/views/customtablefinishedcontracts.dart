@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -120,6 +121,8 @@ class _customtableallfinishedcontractsState
                             showsnack(
                                 comment: state.errorr_message,
                                 context: context);
+                                if (state is deletefinishedcontractsfailure)
+              showsnack(comment: state.errormessage, context: context);
                         },
                         builder: (context, state) {
                           if (state is showfinishedcontractsloadin)
@@ -142,7 +145,8 @@ class _customtableallfinishedcontractsState
                                         : customtablefinishedcontractsitem(
                                             delet: IconButton(
                                                 onPressed: () async {
-                                                  await BlocProvider.of<
+                                awsomdialogerror(context: context, tittle: "هل تريد حذف هذا العقد ؟", btnOkOnPress:() async {
+   await BlocProvider.of<
                                                               finishedcontractsCubit>(
                                                           context)
                                                       .deletefinishedcontracts(
@@ -155,8 +159,10 @@ class _customtableallfinishedcontractsState
                                                                       index]
                                                                   .id!
                                                                   .toInt());
+                                } );
+                                               
                                                 },
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.delete_outlined,
                                                   color: Colors.red,
                                                 )),

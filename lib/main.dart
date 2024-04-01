@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:aplication/building.dart';
 import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepo.dart';
+import 'package:aplication/features/connect/data/repo/connectrepoimp.dart';
+import 'package:aplication/features/connect/presentation/viewmodel/connect/connectcuibt.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:aplication/features/auth/register/data/repos/registerrepoimplementation.dart';
 import 'package:aplication/features/clients/data/repos/clientrepoimplementation.dart';
 import 'package:aplication/features/clients/presentation/viewmodel/clients/clients_cubit.dart';
@@ -47,7 +51,13 @@ import 'package:aplication/features/reports/presentation/view/aqaratreports.dart
 import 'package:aplication/features/reports/presentation/view/landsreports.dart/data/repos/landsreportsrepoimplementation.dart';
 import 'package:aplication/features/reports/presentation/view/landsreports.dart/presentation/viewmodel/landsreports/landsreports_cubit.dart';
 import 'package:aplication/features/reports/presentation/view/landsreports.dart/presentation/views/landsreports.dart';
+import 'package:aplication/features/reports/presentation/view/moneyreports/data/repos/moneyreportsrepoimplementation.dart';
+import 'package:aplication/features/reports/presentation/view/moneyreports/presentation/viewmodel/expenses/expenswsreports_cubit.dart';
+import 'package:aplication/features/reports/presentation/view/profitsreports/data/repo/profitrepoimp.dart';
+import 'package:aplication/features/reports/presentation/view/profitsreports/presentation/viewmodel/cubit/profit_cubit.dart';
 import 'package:aplication/features/reports/presentation/view/reports.dart';
+import 'package:aplication/features/reports/presentation/view/revenusreports.dart/data/repo/revenusreportsrepoimplementation.dart';
+import 'package:aplication/features/reports/presentation/view/revenusreports.dart/presentation/viewmodel/revenus/revenusreports_cubit.dart';
 import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/data/repos/contractsreportsimp.dart';
 import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/presentation/view/contractsreport.dart';
 import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/presentation/viewmodel/contracts/contractsreport_cubit.dart';
@@ -59,6 +69,7 @@ import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenan
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'firebase_options.dart';
 import 'package:aplication/core/services/apiservice.dart';
 
@@ -127,6 +138,12 @@ class MyApp extends StatelessWidget {
                 AqaratreportsCubit(showaqqarrepoimplementationreports())),
         BlocProvider(
             create: (context) =>
+                moneyatreportsCubit(showmoneyrepoimplementationreports())),
+        BlocProvider(
+            create: (context) =>
+                revenusatreportsCubit(showrevenusrepoimplementationreports())),
+        BlocProvider(
+            create: (context) =>
                 landatreportsCubit(showlandrepoimplementationreports())),
         BlocProvider(
             create: (context) => ProfileCubit(profilerepoimplementation())),
@@ -150,14 +167,19 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 ShowaqaratCubit(showaqar: showaqqarrepoimplementation())),
         BlocProvider(
+            create: (context) => connectCubit(connectrepoimplementation())),
+        BlocProvider(
+            create: (context) =>
+                profitatreportsCubit(showprofitrepoimplementationreports())),
+        BlocProvider(
             create: (context) =>
                 addlandcuibt(addlandrepo: addlandrepoimplementation())),
         BlocProvider(
             create: (context) =>
                 ShowlandsCubit(showlands: showlandsrepoimplementation())),
         BlocProvider(
-            create: (context) =>
-                contractsatreportsCubit(showcontractsrepoimplementationreports())),
+            create: (context) => contractsatreportsCubit(
+                showcontractsrepoimplementationreports())),
         BlocProvider(
             create: (context) => contractCubit(contractrepoimplementation())),
         BlocProvider(
@@ -185,8 +207,14 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home:
-                MyHomePage() /* Contract(
+            localizationsDelegates: [
+              GlobalWidgetsLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              MonthYearPickerLocalizations.delegate,
+            ],
+            home:Login()
+            /*cashhelper.getdata(key: "token")==null?Login():
+                MyHomePage()*/ /* Contract(
                 tenantname: TextEditingController(),
                 tenanphone: TextEditingController(),
                 tenantcard: TextEditingController(),

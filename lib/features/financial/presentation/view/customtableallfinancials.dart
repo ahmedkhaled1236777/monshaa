@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -92,6 +93,8 @@ class _customtableallfinancialsState extends State<customtableallfinancials> {
                 if (state is showfinancialfailure) {
                   showsnack(comment: state.errorr_message, context: context);
                 }
+                 if (state is deletefinancialfailure)
+              showsnack(comment: state.errormessage, context: context);
               }, builder: (context, state) {
                 if (state is showfinancialloadin) return loading();
                 if (state is showfinancialfailure) return SizedBox();
@@ -146,7 +149,8 @@ class _customtableallfinancialsState extends State<customtableallfinancials> {
                                       )),
                                   delete: IconButton(
                                       onPressed: () {
-                                        BlocProvider.of<financialCubit>(context)
+                                         awsomdialogerror(context: context, tittle: "هل تريد حذف سند القبض ؟", btnOkOnPress:()async{
+  await         BlocProvider.of<financialCubit>(context)
                                             .deletefinancial(
                                                 token: generaltoken,
                                                 financialid: BlocProvider.of<
@@ -154,6 +158,10 @@ class _customtableallfinancialsState extends State<customtableallfinancials> {
                                                     .myfinancials[index]
                                                     .id!
                                                     .toInt());
+                                                
+                                                
+                    } );
+                                    
                                       },
                                       icon: Icon(
                                         Icons.delete,

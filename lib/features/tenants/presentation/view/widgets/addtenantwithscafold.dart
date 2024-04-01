@@ -38,7 +38,7 @@ class addtenantwithscafold extends StatelessWidget {
         body: Center(
             child: addtenant(
           formkey: foemkey,
-          width: MediaQuery.sizeOf(context).width * 0.95,
+          width: MediaQuery.sizeOf(context).width,
         )),
       ),
     );

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 class customtablecontractsatreportsitem extends StatelessWidget {
   final String adress;
-   final String date;
-   final String ownername;
+  final String date;
+  final String ownername;
   final String totalmoney;
-
 
   String? tenantphone;
   String? tenantname;
@@ -19,10 +18,10 @@ class customtablecontractsatreportsitem extends StatelessWidget {
   customtablecontractsatreportsitem(
       {required this.adress,
       required this.totalmoney,
-     required this.ownername,
+      required this.ownername,
       this.tenantname,
-       this.tenantphone,
-     required this.ownerphone,
+      this.tenantphone,
+      required this.ownerphone,
       required this.date,
       this.iconsize = 22,
       this.textStyle = Appstyles.textStyle12b});
@@ -34,7 +33,6 @@ class customtablecontractsatreportsitem extends StatelessWidget {
           BoxConstraints(minHeight: MediaQuery.of(context).size.height / 19),
       child: Row(
         children: [
-         
           Expanded(
               flex: 3,
               child: Text(
@@ -52,19 +50,18 @@ class customtablecontractsatreportsitem extends StatelessWidget {
                 style: textStyle,
                 textAlign: TextAlign.center,
               )),
-           
-             if (ownerphone != null)
-       SizedBox(
-            width: 3,
-          ),
-               if (ownerphone != null)
-     Expanded(
-              flex: 3,
-              child: Text(
-                ownerphone!,
-                style: textStyle,
-                textAlign: TextAlign.center,
-              )),
+          if (ownerphone != null)
+            SizedBox(
+              width: 3,
+            ),
+          if (ownerphone != null)
+            Expanded(
+                flex: 3,
+                child: Text(
+                  ownerphone!,
+                  style: textStyle,
+                  textAlign: TextAlign.center,
+                )),
           if (tenantname != null)
             SizedBox(
               width: 3,
@@ -89,17 +86,16 @@ class customtablecontractsatreportsitem extends StatelessWidget {
                   style: textStyle,
                   textAlign: TextAlign.center,
                 )),
-            SizedBox(
-              width: 3,
-            ),
-            Expanded(
-                flex: 3,
-                child: Text(
-                  totalmoney!,
-                  style: textStyle,
-                  textAlign: TextAlign.center,
-                )),
-          
+          SizedBox(
+            width: 3,
+          ),
+          Expanded(
+              flex: 3,
+              child: Text(
+                totalmoney!,
+                style: textStyle,
+                textAlign: TextAlign.center,
+              )),
           SizedBox(
             width: 3,
           ),

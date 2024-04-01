@@ -1,3 +1,4 @@
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
 import 'package:aplication/features/contracts/presentation/views/addcontractwithscafold.dart';
 import 'package:aplication/features/contracts/presentation/views/contract.dart';
@@ -72,6 +73,8 @@ class _customtabletenantsState extends State<customtabletenants> {
             if (state is showTenantfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
+              if (state is deleteTenantfailure)
+              showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showTenantloadin) return loading();
             if (state is showTenantfailure) return SizedBox();
@@ -238,7 +241,8 @@ class _customtabletenantsState extends State<customtabletenants> {
                                           size: 23, color: Color(0xff00416A))),
                                   delet: IconButton(
                                       onPressed: () async {
-                                        await BlocProvider.of<TenantCubit>(
+                                         awsomdialogerror(context: context, tittle: "هل تريد حذف المستأجر ؟", btnOkOnPress: ()async{
+                                  await BlocProvider.of<TenantCubit>(
                                                 context)
                                             .deletetenant(
                                                 token: generaltoken,
@@ -247,6 +251,9 @@ class _customtabletenantsState extends State<customtabletenants> {
                                                     .tenantdata[index]
                                                     .id!
                                                     .toInt());
+                                    });
+                                        
+                                       
                                       },
                                       icon: Icon(
                                         size:

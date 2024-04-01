@@ -1,6 +1,5 @@
 part of 'landsreports_cubit.dart';
 
-
 abstract class landatreportsState {}
 
 class landatreportsInitial extends landatreportsState {}

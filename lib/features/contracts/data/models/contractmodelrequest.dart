@@ -26,9 +26,11 @@ class contractmodelrequest {
   final String commission;
   final String insurance_total;
   final String period_of_delay;
+  final String havemoney;
 
   contractmodelrequest(
       {required this.tenant_name,
+      required this.havemoney,
       required this.tenant_cardnumber,
       required this.tenant_phone,
       required this.tenant_adress,
@@ -58,6 +60,7 @@ class contractmodelrequest {
 
   tojson() => {
         "name": tenant_name,
+        "cash_type": havemoney,
         "phone": tenant_phone,
         "card_number": tenant_cardnumber,
         "card_address": tenant_adress,

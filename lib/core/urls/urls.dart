@@ -3,6 +3,7 @@ abstract class urls {
   static const login = "/login";
   static const add_clients = "/clients/create";
   static const home = "/home";
+  static const addmessage = "/technical_support/create";
   static const register = "/register";
   static const allemployees = "/employee/get-all-employees";
   // ignore: constant_identifier_names

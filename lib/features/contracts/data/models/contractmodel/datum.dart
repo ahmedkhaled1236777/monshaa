@@ -26,6 +26,7 @@ class Datum extends Equatable {
   final num? commission;
   final num? insuranceTotal;
   final num? periodOfDelay;
+  final String? cashType;
 
   const Datum({
     this.id,
@@ -51,6 +52,7 @@ class Datum extends Equatable {
     this.commission,
     this.insuranceTotal,
     this.periodOfDelay,
+    this.cashType,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -79,6 +81,7 @@ class Datum extends Equatable {
         commission: num.tryParse(json['commission'].toString()),
         insuranceTotal: num.tryParse(json['insurance_total'].toString()),
         periodOfDelay: num.tryParse(json['period_of_delay'].toString()),
+        cashType: json['cash_type']?.toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -106,6 +109,7 @@ class Datum extends Equatable {
         if (commission != null) 'commission': commission,
         if (insuranceTotal != null) 'insurance_total': insuranceTotal,
         if (periodOfDelay != null) 'period_of_delay': periodOfDelay,
+        if (cashType != null) 'cash_type': cashType,
       };
 
   @override
@@ -134,6 +138,7 @@ class Datum extends Equatable {
       commission,
       insuranceTotal,
       periodOfDelay,
+      cashType,
     ];
   }
 }

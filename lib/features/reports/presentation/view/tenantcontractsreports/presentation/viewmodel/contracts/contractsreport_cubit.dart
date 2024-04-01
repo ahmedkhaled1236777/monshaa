@@ -8,7 +8,8 @@ part 'contractsreport_state.dart';
 
 class contractsatreportsCubit extends Cubit<contractsatreportsState> {
   final showcontractsrepoimplementationreports showcontractsrepo;
-  contractsatreportsCubit(this.showcontractsrepo) : super(contractsatreportsInitial());
+  contractsatreportsCubit(this.showcontractsrepo)
+      : super(contractsatreportsInitial());
 
   bool search = true;
   List<Datum> data = [];
@@ -22,9 +23,8 @@ class contractsatreportsCubit extends Cubit<contractsatreportsState> {
   ];
   List headertabeleallcontractsatreportss = [
     "عنوان العقار",
-        "اسم المالك",
-   "هاتف المالك",
-
+    "اسم المالك",
+    "هاتف المالك",
     "اسم المستاجر",
     "هاتف المستأجر",
     "قيمة الايجار",

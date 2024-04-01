@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -66,7 +67,10 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                   listener: (context, state) {
             if (state is showrevenuefailure) {
               showsnack(comment: state.errorr_message, context: context);
+
             }
+             if (state is deleterevenuefailure)
+              showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showrevenueloadin) return loading();
             if (state is showrevenuefailure) return SizedBox();
@@ -99,7 +103,8 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                                       .transactionDate!,
                                   delet: IconButton(
                                       onPressed: () async {
-                                        await BlocProvider.of<revenueCubit>(
+                                         awsomdialogerror(context: context, tittle: "هل تريد حذف الايراد ؟", btnOkOnPress: ()async{
+                                 await BlocProvider.of<revenueCubit>(
                                                 context)
                                             .deleterevenue(
                                                 token: generaltoken,
@@ -108,6 +113,8 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                                                     .revenuedata[index]
                                                     .id!
                                                     .toInt());
+                                    });
+                                        
                                       },
                                       icon: Icon(
                                         size:

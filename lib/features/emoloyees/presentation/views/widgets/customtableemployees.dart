@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
@@ -61,6 +62,8 @@ class _customtableemployeeesState extends State<customtableemployees> {
                   listener: (context, state) {
             if (state is showemployeesfailure)
               showsnack(comment: state.error_message, context: context);
+               if (state is deleteemployeefailure)
+              showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showemployeesloading) return loading();
             if (state is showemployeesfailure) return SizedBox();
@@ -96,7 +99,8 @@ class _customtableemployeeesState extends State<customtableemployees> {
                                 .jobTitle!,
                             delet: IconButton(
                                 onPressed: () async {
-                                  await BlocProvider.of<showemployeescuibt>(
+                                    awsomdialogerror(context: context, tittle: "هل تريد حذف الموظف ؟", btnOkOnPress:()async{
+  await   await BlocProvider.of<showemployeescuibt>(
                                           context)
                                       .deleteemployee(
                                           token: generaltoken,
@@ -105,6 +109,10 @@ class _customtableemployeeesState extends State<customtableemployees> {
                                               .employeesdata[index]
                                               .id!
                                               .toInt());
+                                                
+                                                
+                    } );
+                                
                                 },
                                 icon: Icon(
                                   size: MediaQuery.of(context).size.width < 600

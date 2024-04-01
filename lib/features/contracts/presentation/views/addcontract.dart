@@ -16,6 +16,7 @@ import 'package:aplication/features/contracts/data/models/contractmodelrequest.d
 import 'package:aplication/features/contracts/data/repos/contractrepoimplementation.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_state.dart';
+import 'package:aplication/features/contracts/presentation/views/customradios.dart';
 import 'package:aplication/features/contracts/presentation/views/customshoosedate.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customchoosedate.dart';
 import 'package:flutter/material.dart';
@@ -419,6 +420,10 @@ class addcontract extends StatelessWidget {
                           hintText: "مدة التاخير",
                         ),
                         SizedBox(
+                          height: 10,
+                        ),
+                        customradios(),
+                        SizedBox(
                           height: 30,
                         ),
                         if (is_edit == false)
@@ -518,6 +523,9 @@ class addcontract extends StatelessWidget {
                                                 .id,
                                             token: generaltoken,
                                             contract: contractmodelrequest(
+                                                havemoney:
+                                                    BlocProvider.of<contractCubit>(context)
+                                                        .havemoney!,
                                                 tenant_name: tenantname.text,
                                                 tenant_cardnumber:
                                                     tenantcard.text,
@@ -548,13 +556,10 @@ class addcontract extends StatelessWidget {
                                                 date: BlocProvider.of<DateCubit>(context)
                                                     .date1,
                                                 contractfrom:
-                                                    BlocProvider.of<DateCubit>(context)
-                                                        .date3,
-                                                contractto: BlocProvider.of<DateCubit>(context)
-                                                    .date4,
+                                                    BlocProvider.of<DateCubit>(context).date3,
+                                                contractto: BlocProvider.of<DateCubit>(context).date4,
                                                 contractvalue: totalvalue.text,
-                                                commission_type:
-                                                    commessionrequest[BlocProvider.of<contractCubit>(context).commessiontype],
+                                                commission_type: commessionrequest[BlocProvider.of<contractCubit>(context).commessiontype],
                                                 commission: BlocProvider.of<contractCubit>(context).commessiontype == "نسبه" ? (double.parse(commessionvalue.text) / 100 * double.parse(totalvalue.text)).toString() : commessionvalue.text,
                                                 insurance_total: insuranceval.text,
                                                 period_of_delay: periodofdelay.text));
@@ -595,11 +600,20 @@ class addcontract extends StatelessWidget {
                               button_name: "تعديل البيانات",
                               buttonicon: Icons.data_array,
                               onPressed: () {
+                                print(
+                                    "//////////////////////////////////////////////////////////////");
+                                print(BlocProvider.of<contractCubit>(context)
+                                    .id!);
+                                print(BlocProvider.of<contractCubit>(context)
+                                    .havemoney!);
                                 BlocProvider.of<contractCubit>(context).updatecontract(
+                                  
                                     id: BlocProvider.of<contractCubit>(context)
                                         .id!,
                                     token: generaltoken,
                                     contractmodel: contractmodelrequest(
+                                        havemoney:  BlocProvider.of<contractCubit>(context).havemoney!,
+                                            
                                         tenant_name: tenantname.text,
                                         tenant_cardnumber: tenantcard.text,
                                         tenant_phone: tenanphone.text,
@@ -633,9 +647,8 @@ class addcontract extends StatelessWidget {
                                             BlocProvider.of<DateCubit>(context)
                                                 .date4,
                                         contractvalue: totalvalue.text,
-                                        commission_type: commessionrequest[
-                                            BlocProvider.of<contractCubit>(context)
-                                                .commessiontype],
+                                        commission_type:
+                                            commessionrequest[BlocProvider.of<contractCubit>(context).commessiontype],
                                         commission: BlocProvider.of<contractCubit>(context).commessiontype == "نسبه" ? (double.parse(commessionvalue.text) / 100 * double.parse(totalvalue.text)).toString() : commessionvalue.text,
                                         insurance_total: insuranceval.text,
                                         period_of_delay: periodofdelay.text));

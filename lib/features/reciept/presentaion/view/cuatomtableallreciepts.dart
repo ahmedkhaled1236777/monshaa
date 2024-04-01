@@ -1,4 +1,5 @@
 import 'package:aplication/core/color/appcolors.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -110,6 +111,8 @@ class _customtableallrecieptsState extends State<customtableallreciepts> {
                       listener: (context, state) {
                 if (state is showrecieptfailure) {
                   showsnack(comment: state.errorr_message, context: context);
+                    if (state is deleterecieptfailure)
+              showsnack(comment: state.errorr_message, context: context);
                 }
               }, builder: (context, state) {
                 if (state is showrecieptloadin) return loading();
@@ -164,7 +167,8 @@ class _customtableallrecieptsState extends State<customtableallreciepts> {
                                       )),
                                   delete: IconButton(
                                       onPressed: () {
-                                        BlocProvider.of<recieptCubit>(context)
+                                         awsomdialogerror(context: context, tittle: "هل تريد حذف سند الصرف ؟", btnOkOnPress:() async {
+   await  BlocProvider.of<recieptCubit>(context)
                                             .deletereciept(
                                                 token: generaltoken,
                                                 recieptid: BlocProvider.of<
@@ -172,6 +176,8 @@ class _customtableallrecieptsState extends State<customtableallreciepts> {
                                                     .myreciepts[index]
                                                     .id!
                                                     .toInt());
+                                } );
+                                       
                                       },
                                       icon: Icon(
                                         Icons.delete,

@@ -50,6 +50,12 @@ class contractCubit extends Cubit<contractState> {
     commessiontype = null;
   }
 
+  String? havemoney;
+  getmoney(String val) {
+    havemoney = val;
+    emit(getmoneystate());
+  }
+
   changecommessiontype(String? val) {
     commessiontype = val;
     emit(changecommison());

@@ -94,17 +94,16 @@ class _customtableallmobilecontractsatreportssState
                         height: 50,
                         color: Appcolors.buttoncolor,
                         child: Row(
-                            children:
-                                BlocProvider.of<contractsatreportsCubit>(context)
-                                    .mobileheadertabeleallcontractsatreportss
-                                    .map((e) => customheadertable(
-                                          title: e,
-                                          flex: 3,
-                                          textStyle:
-                                              Appstyles.getheadertextstyle(
-                                                  context: context),
-                                        ))
-                                    .toList()),
+                            children: BlocProvider.of<contractsatreportsCubit>(
+                                    context)
+                                .mobileheadertabeleallcontractsatreportss
+                                .map((e) => customheadertable(
+                                      title: e,
+                                      flex: 3,
+                                      textStyle: Appstyles.getheadertextstyle(
+                                          context: context),
+                                    ))
+                                .toList()),
                       ),
                       Expanded(
                         child: BlocConsumer<contractsatreportsCubit,
@@ -116,7 +115,8 @@ class _customtableallmobilecontractsatreportssState
                                   context: context);
                           },
                           builder: (context, state) {
-                            if (state is contractsatreportsloading) return loading();
+                            if (state is contractsatreportsloading)
+                              return loading();
                             if (state is contractsatreportsfailure)
                               return SizedBox();
                             return SingleChildScrollView(
@@ -133,32 +133,37 @@ class _customtableallmobilecontractsatreportssState
                                                   .length
                                           ? loading()
                                           : customtablecontractsatreportsitem(
-                                            
                                               textStyle:
                                                   Appstyles.gettabletextstyle(
                                                       context: context),
-                                            
-                                              date: prov.data[index].contractDate!,
-                                              ownername: prov.data[index].ownerName!,
-                                              ownerphone: prov.data[index].ownerPhone!,
+                                              date: prov
+                                                  .data[index].contractDate!,
+                                              ownername:
+                                                  prov.data[index].ownerName!,
+                                              ownerphone:
+                                                  prov.data[index].ownerPhone!,
                                               adress: prov.data[index]
                                                   .realStateAddress!,
                                               totalmoney: prov
-                                                  .data[index].contractTotal.toString(),
+                                                  .data[index].contractTotal
+                                                  .toString(),
                                             );
                                     },
                                     separatorBuilder: (context, index) =>
                                         const Divider(),
                                     itemCount: BlocProvider.of<
-                                                    contractsatreportsCubit>(context)
+                                                        contractsatreportsCubit>(
+                                                    context)
                                                 .loading ==
                                             true
-                                        ? BlocProvider.of<contractsatreportsCubit>(
+                                        ? BlocProvider.of<
+                                                        contractsatreportsCubit>(
                                                     context)
                                                 .data
                                                 .length +
                                             1
-                                        : BlocProvider.of<contractsatreportsCubit>(
+                                        : BlocProvider.of<
+                                                    contractsatreportsCubit>(
                                                 context)
                                             .data
                                             .length));

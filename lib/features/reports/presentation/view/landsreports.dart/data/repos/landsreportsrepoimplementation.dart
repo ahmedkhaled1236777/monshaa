@@ -18,7 +18,7 @@ class showlandrepoimplementationreports extends showlandreporeports {
           path: "/reports/lands?page=${page}",
           token: token,
           queryParameters: queryParameters);
-      
+
       if (response.statusCode == 200 && response.data["status"] == true) {
         showstate = Showlands.fromJson(response.data);
         return right(showstate);

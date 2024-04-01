@@ -1,5 +1,6 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
+import 'package:aplication/core/commn/dialogerror.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
@@ -69,6 +70,8 @@ class _customtableclientssState extends State<customtableclientss> {
             if (state is showclientsfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
+             if (state is deleteclientsfailure)
+              showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             print("///////////////////////////////////////");
             print(state);
@@ -106,7 +109,8 @@ class _customtableclientssState extends State<customtableclientss> {
                                           .status!],
                                   delet: IconButton(
                                       onPressed: () async {
-                                        await BlocProvider.of<clientsCubit>(
+   awsomdialogerror(context: context, tittle: "هل تريد حذف العميل", btnOkOnPress: ()async{
+             await BlocProvider.of<clientsCubit>(
                                                 context)
                                             .deleteclients(
                                                 token: generaltoken,
@@ -115,6 +119,9 @@ class _customtableclientssState extends State<customtableclientss> {
                                                     .clientsdata[index]
                                                     .id!
                                                     .toInt());
+          });
+
+                                     
                                       },
                                       icon: Icon(
                                         size:

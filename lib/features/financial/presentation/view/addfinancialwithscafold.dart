@@ -38,7 +38,7 @@ class addfinancialwithscafold extends StatelessWidget {
         body: Center(
             child: addfinancial(
           formkey: foemkey,
-          width: MediaQuery.sizeOf(context).width * 0.95,
+          width: MediaQuery.sizeOf(context).width,
         )),
       ),
     );

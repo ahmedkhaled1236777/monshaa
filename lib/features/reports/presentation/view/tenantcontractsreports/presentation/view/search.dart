@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class contractsatsearchreport extends StatefulWidget {
   @override
-  State<contractsatsearchreport> createState() => _contractsatsearchreportState();
+  State<contractsatsearchreport> createState() =>
+      _contractsatsearchreportState();
 }
 
 class _contractsatsearchreportState extends State<contractsatsearchreport> {
