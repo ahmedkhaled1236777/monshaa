@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:aplication/advertiser_type.dart';
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/dialogerror.dart';
@@ -9,7 +8,6 @@ import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
-import 'package:aplication/dropdown_estate.dart';
 import 'package:aplication/features/aqarat/data/models/addaqarrequest/addaqarrequest.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
@@ -21,11 +19,8 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customchoo
 import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/pickedimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
-import 'package:aplication/type.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class addaqar extends StatefulWidget {
   final double width;
@@ -94,9 +89,9 @@ class _addaqarState extends State<addaqar> {
                             child: Column(
                               children: [
                                 custommytextform(
-                                    val: "برجاء ادخال اسم المعلن",
+                                    val: "برجاء ادخال اسم المالك او الوسيط",
                                     controller: advertiser_name,
-                                    hintText: "اسم المعلن"),
+                                    hintText: "اسم المالك او الوسيط"),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -144,7 +139,7 @@ class _addaqarState extends State<addaqar> {
                                     keyboardType: TextInputType.number,
                                     val: "برجاء ادخال رقم الهاتف",
                                     controller: phone,
-                                    hintText: "رقم االهاتف"),
+                                    hintText: "رقم هاتف المالك او الوسيط"),
                               ],
                             ),
                           ),
@@ -216,7 +211,10 @@ class _addaqarState extends State<addaqar> {
                             height: Appsizes.size10,
                           ),
                           custommytextform(
-                              controller: details, hintText: "تفاصيل الاعلان"),
+                            controller: details,
+                            hintText: "تفاصيل العقار",
+                            maxlines: 3,
+                          ),
                           const SizedBox(
                             height: Appsizes.size10,
                           ),
@@ -230,7 +228,7 @@ class _addaqarState extends State<addaqar> {
                           ),
                           customgridimages(),
                           const SizedBox(
-                            height: Appsizes.size15,
+                            height: Appsizes.size10,
                           ),
                           BlocConsumer<addaqarcuibt, addaqarstate>(
                               listener: (context, state) {
@@ -253,10 +251,6 @@ class _addaqarState extends State<addaqar> {
                             if (state is addaaqarloading) return loading();
                             return custommaterialbutton(
                                 onPressed: () async {
-                                  var player = new AudioPlayer();
-                                  const alarmAudioPath =
-                                      "sound/click-124467.mp3";
-                                  player.play(UrlSource(alarmAudioPath));
                                   if (formkey.currentState!.validate()) {
                                     if (BlocProvider.of<addaqarcuibt>(context)
                                             .aqartype ==
@@ -331,5 +325,21 @@ class _addaqarState extends State<addaqar> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    aqarnumber.dispose();
+    housenumber.dispose();
+    adress.dispose();
+    advertiser_name.dispose();
+    phone.dispose();
+    roomsnumber.dispose();
+    price.dispose();
+    toilletsnumber.dispose();
+    details.dispose();
+    adressdetails.dispose();
+    area.dispose();
+    super.dispose();
   }
 }

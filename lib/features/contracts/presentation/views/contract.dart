@@ -1,12 +1,7 @@
 import 'package:aplication/features/contracts/presentation/views/desktopcontracts.dart';
 import 'package:aplication/features/contracts/presentation/views/mobilecontract.dart';
-import 'package:aplication/main.dart';
-import 'package:aplication/pdt.dart';
-import 'package:aplication/readcontract.dart';
-import 'package:aplication/readestate.dart';
-import 'package:flutter/material.dart';
 
-import '../../../../building.dart';
+import 'package:flutter/material.dart';
 
 class Contract extends StatefulWidget {
   final TextEditingController tenantname;

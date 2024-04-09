@@ -67,9 +67,8 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                   listener: (context, state) {
             if (state is showrevenuefailure) {
               showsnack(comment: state.errorr_message, context: context);
-
             }
-             if (state is deleterevenuefailure)
+            if (state is deleterevenuefailure)
               showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showrevenueloadin) return loading();
@@ -103,18 +102,22 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                                       .transactionDate!,
                                   delet: IconButton(
                                       onPressed: () async {
-                                         awsomdialogerror(context: context, tittle: "هل تريد حذف الايراد ؟", btnOkOnPress: ()async{
-                                 await BlocProvider.of<revenueCubit>(
-                                                context)
-                                            .deleterevenue(
-                                                token: generaltoken,
-                                                revenueid: BlocProvider.of<
-                                                        revenueCubit>(context)
-                                                    .revenuedata[index]
-                                                    .id!
-                                                    .toInt());
-                                    });
-                                        
+                                        awsomdialogerror(
+                                            context: context,
+                                            tittle: "هل تريد حذف الايراد ؟",
+                                            btnOkOnPress: () async {
+                                              await BlocProvider.of<
+                                                      revenueCubit>(context)
+                                                  .deleterevenue(
+                                                      token: generaltoken,
+                                                      revenueid: BlocProvider
+                                                              .of<revenueCubit>(
+                                                                  context)
+                                                          .revenuedata[index]
+                                                          .id!
+                                                          .toInt());
+                                              Navigator.pop(context);
+                                            });
                                       },
                                       icon: Icon(
                                         size:
@@ -127,7 +130,7 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                                       )),
                                   edit: IconButton(
                                     icon: Icon(
-                                      Icons.edit,
+                                      Icons.edit_note,
                                       size: MediaQuery.of(context).size.width <
                                               600
                                           ? 20.sp
@@ -145,6 +148,9 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                                               .revenuedata[index]
                                               .transactionDate!;
                                       showDialog(
+                                          barrierDismissible:
+                                              false, // user must tap button!
+
                                           context: context,
                                           builder: (_) {
                                             return AlertDialog(
@@ -164,10 +170,16 @@ class _customtablerevenuesState extends State<customtablerevenues> {
                                                       BorderRadius.circular(0)),
                                               scrollable: true,
                                               content: editrevenuedialog(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
+                                                width: MediaQuery
+                                                                .sizeOf(context)
+                                                            .width >
+                                                        950
+                                                    ? MediaQuery.sizeOf(context)
                                                             .width *
-                                                        0.5,
+                                                        0.25
+                                                    : MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1,
                                                 height:
                                                     MediaQuery.sizeOf(context)
                                                             .height *

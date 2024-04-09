@@ -1,11 +1,7 @@
-import 'package:aplication/building.dart';
 import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/widgets/cashedimage.dart';
 import 'package:aplication/features/aqarat/data/models/showstate/datum.dart';
-import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
-import 'package:aplication/main.dart';
-import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:flutter/material.dart';
 
 class mShowEstate extends StatefulWidget {
@@ -305,13 +301,41 @@ class ShowEstateState extends State<mShowEstate> {
                                     ],
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  child: Text(
+                                    "اسم المالك او الوسيط : ${widget.data.advertiserName}",
+                                    textAlign: TextAlign.justify,
+                                    style: const TextStyle(
+                                        height: 2,
+                                        fontSize: 12.5,
+                                        color: Colors.blueGrey,
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  child: Text(
+                                    "اسم الموظف : ${widget.data.user!.name!}",
+                                    textAlign: TextAlign.justify,
+                                    style: const TextStyle(
+                                        height: 2,
+                                        fontSize: 12.5,
+                                        color: Colors.blueGrey,
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                ),
                                 SizedBox(
                                   height: 15,
                                 ),
                                 if (widget.data.advertiseDetails != null)
                                   Container(
                                     child: Text(
-                                      "وصف الاعلان : ${widget.data.advertiseDetails!}",
+                                      "تفاصيل العقار : ${widget.data.advertiseDetails!}",
                                       textAlign: TextAlign.justify,
                                       style: TextStyle(
                                           height: 2,
@@ -341,7 +365,10 @@ class ShowEstateState extends State<mShowEstate> {
                                         mainAxisSpacing: 10),
                                 children: widget.data.realStateImages!
                                     .map((e) => imagefromrequest(
-                                        url: e, height: 200, width: 200))
+                                        border: 0,
+                                        url: e,
+                                        height: 200,
+                                        width: 200))
                                     .toList(),
                               ),
                             ),
@@ -588,10 +615,38 @@ class ShowEstateState extends State<mShowEstate> {
                                   const SizedBox(
                                     height: 15,
                                   ),
+                                  Container(
+                                    child: Text(
+                                      "اسم المالك او الوسيط : ${widget.data.advertiserName!}",
+                                      textAlign: TextAlign.justify,
+                                      style: const TextStyle(
+                                          height: 2,
+                                          fontSize: 12,
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.w100),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      "اسم الموظف : ${widget.data.user!.name!}",
+                                      textAlign: TextAlign.justify,
+                                      style: const TextStyle(
+                                          height: 2,
+                                          fontSize: 12,
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.w100),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
                                   if (widget.data.advertiseDetails != null)
                                     Container(
                                       child: Text(
-                                        "وصف الاعلان : ${widget.data.advertiseDetails!}",
+                                        "تفاصيل العقار : ${widget.data.advertiseDetails!}",
                                         textAlign: TextAlign.justify,
                                         style: TextStyle(
                                             height: 2,
@@ -622,7 +677,10 @@ class ShowEstateState extends State<mShowEstate> {
                                         mainAxisSpacing: 10),
                                 children: widget.data.realStateImages!
                                     .map((e) => imagefromrequest(
-                                        url: e, height: 200, width: 200))
+                                        border: 0,
+                                        url: e,
+                                        height: 200,
+                                        width: 200))
                                     .toList(),
                               ),
                             ),

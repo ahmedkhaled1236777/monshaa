@@ -35,37 +35,23 @@ class desktopreciepts extends StatelessWidget {
             ),
             title: Text(
               'سند صرف',
-              style: TextStyle(color: Colors.white, fontSize: 4.sp),
+              style: TextStyle(color: Colors.white, fontSize: 3.5.sp),
             ),
             centerTitle: true,
             backgroundColor: Appcolors.maincolor,
             actions: [
               IconButton(
                   onPressed: () async {
-                    BlocProvider.of<contractCubit>(context).queryParameters =
+                    BlocProvider.of<recieptCubit>(context).queryParameters =
                         null;
-                    await BlocProvider.of<contractCubit>(context)
-                        .getallcontracts(token: generaltoken, page: 1);
+                    await BlocProvider.of<recieptCubit>(context)
+                        .getallreciepts(token: generaltoken, page: 1);
                   },
-                  icon: const Icon(Icons.data_exploration,
+                  icon: const Icon(Icons.blur_circular_rounded,
                       color: Appcolors.whitecolor)),
               allrecieptsearch(),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.print,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                ],
+              SizedBox(
+                width: 10,
               )
             ],
           ),

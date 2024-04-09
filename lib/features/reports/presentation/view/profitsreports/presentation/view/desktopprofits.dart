@@ -71,7 +71,7 @@ class _customtabledesktopprofitatreportsState
               ],
               title: Text(
                 'الارباح',
-                style: TextStyle(color: Colors.white, fontSize: 4.sp),
+                style: TextStyle(color: Colors.white, fontSize: 3.5.sp),
               ),
               centerTitle: true,
               backgroundColor: Appcolors.maincolor,

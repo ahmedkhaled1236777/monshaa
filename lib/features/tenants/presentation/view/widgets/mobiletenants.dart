@@ -9,7 +9,6 @@ import 'package:aplication/features/tenants/presentation/view/widgets/customtabl
 import 'package:aplication/features/tenants/presentation/view/widgets/tenantsearch.dart';
 import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
 import 'package:aplication/pdt.dart';
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,30 +65,15 @@ class mobiletenants extends StatelessWidget {
                 )
               ],
             ),
-            floatingActionButton: AvatarGlow(
-              startDelay: const Duration(milliseconds: 1000),
-              glowColor: Color(0xffBF4F51),
-              glowShape: BoxShape.circle,
-              curve: Curves.fastOutSlowIn,
-              animate: true,
-              child: Material(
-                elevation: 8.0,
-                shape: CircleBorder(),
-                color: Colors.transparent,
-                child: FloatingActionButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    navigateandfinish(
-                        navigationscreen: addtenantwithscafold(),
-                        context: context);
-                  },
-                  backgroundColor: Color(0xffBF4F51),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                navigateandfinish(
+                    navigationscreen: addtenantwithscafold(), context: context);
+              },
+              backgroundColor: Color(0xffBF4F51),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
               ),
             ),
             drawer: Dashboard(),

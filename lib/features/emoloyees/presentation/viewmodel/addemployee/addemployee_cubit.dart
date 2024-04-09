@@ -42,19 +42,38 @@ class AddemployeeCubit extends Cubit<AddemployeeState> {
     "الاراضي": "lands",
     "المستاجرين": "tenants",
     "عقود الايجار": "tenant_contracts",
-    "سندات القبض": "financial_receipt",
-    "سندات الصرف": "financial_cash",
+    "سندات القبض": "financial_cash",
+    "سندات الصرف": "financial_receipt",
     "المصروفات": "expenses",
     "الموظفين": "employees",
     "التقارير": "reports",
     "الدعم الفني": "technical_support",
     "عقارات البيع": "selling_states",
-    "عقارات الايجار": "tenant_stats",
-    "الايرادات": "revenues",
-    "العملاء": "shops",
+    "عقارات الايجار": "tenant_states",
+    "الايرادات": "revenue",
+    "العملاء": "clients",
     "الاشعارات": "notifications",
     "العقود المنتهيه": "expired_contracts",
     "الارباح": "profits"
+  };
+  Map showpermessions = {
+    "states": "العقارات",
+    "lands": "الاراضي",
+    "tenants": "المستاجرين",
+    "tenant_contracts": "عقود الايجار",
+    "financial_cash": "سندات القبض",
+    "financial_receipt": "سندات الصرف",
+    "expenses": "المصروفات",
+    "employees": "الموظفين",
+    "reports": "التقارير",
+    "technical_support": "الدعم الفني",
+    "selling_states": "عقارات البيع",
+    "tenant_states": "عقارات الايجار",
+    "revenue": "الايرادات",
+    "clients": "العملاء",
+    "notifications": "الاشعارات",
+    "expired_contracts": "العقود المنتهيه",
+    "profits": "الارباح"
   };
   List selecteditems = [];
   getselecteditems() {
@@ -63,6 +82,14 @@ class AddemployeeCubit extends Cubit<AddemployeeState> {
       employeepermession.add(permessions[selecteditems[i]]);
     }
     return employeepermession;
+  }
+
+  showselecteditems(List<String> permessions) {
+    selecteditems = [];
+    for (int i = 0; i < permessions.length; i++) {
+      if (permessions[i] != "home_page" && permessions[i] != "setting")
+        selecteditems.add(showpermessions[permessions[i]]);
+    }
   }
 
   addemployee(
@@ -75,5 +102,23 @@ class AddemployeeCubit extends Cubit<AddemployeeState> {
     }, (succes) {
       emit(Addemployeesuccess(succes_message: succes));
     });
+  }
+
+  updateemployee(
+      {required String token,
+      required int id,
+      required addemployeemodel employee}) async {
+    emit(updateemployeeloading());
+    var result = await addemployeerepo.editemployee(
+        token: token, id: id, employee: employee);
+    result.fold(
+        (l) => {emit(updateemployeefailure(errormessage: l.error_message))},
+        (r) => {emit(updateemployeesuccess(succes_message: r))});
+  }
+
+  resetdata() {
+    selecteditems = [];
+    image = null;
+    emit(resetdatastate());
   }
 }

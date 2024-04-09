@@ -17,7 +17,6 @@ class financialrepoimplementation extends financialrepo {
     try {
       Response response = await Postdata.postdata(
           path: "/cash/create/${id}", token: token, data: financial.tojson());
-      print(response);
       if (response.statusCode == 200 && response.data["status"] == true) {
         return right(response.data["message"]);
       }
@@ -43,6 +42,7 @@ class financialrepoimplementation extends financialrepo {
           path: "/cash/get-all-cashes?page=${page}",
           token: token,
           queryParameters: queryParameters);
+      print(response);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         financialmodel = Financialmodel.fromJson(response.data);
         return right(financialmodel);
@@ -62,8 +62,9 @@ class financialrepoimplementation extends financialrepo {
   Future<Either<failure, String>> deletefinancial(
       {required String token, required int financialid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/cash/delete/${financialid}", token: token);
+        
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);
       } else if (response.statusCode == 200 && response.data["code"] == 409) {

@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:aplication/advertiser_type.dart';
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/dialogerror.dart';
@@ -9,17 +6,9 @@ import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
-import 'package:aplication/dropdown_estate.dart';
-import 'package:aplication/features/aqarat/data/models/addaqarrequest/addaqarrequest.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/views/estate.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customgridimages.dart';
+
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/pickedimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/lands/data/models/addlandrequestmodel.dart';
 import 'package:aplication/features/lands/presentation/viewmodel/addlandcuibt/addlandcuibt.dart';
@@ -29,10 +18,8 @@ import 'package:aplication/features/lands/presentation/views/estateland.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/customgridimages.dart';
 import 'package:aplication/features/lands/presentation/views/widgets/pickedimage.dart';
-import 'package:aplication/type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class addland extends StatefulWidget {
   final double width;
@@ -78,7 +65,7 @@ class _addlandState extends State<addland> {
                       return Column(
                         children: [
                           Image.asset(
-                            'images/appartments.png',
+                            'images/land.png',
                             height: 50,
                             width: 50,
                           ),
@@ -111,9 +98,9 @@ class _addlandState extends State<addland> {
                                   height: 10,
                                 ),
                                 custommytextform(
-                                    val: "يرجي ادخال اسم العميل",
+                                    val: "يرجي ادخال اسم المالك او الوسيط",
                                     controller: clientname,
-                                    hintText: "اسم العميل"),
+                                    hintText: "اسم المالك او الوسيط"),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -137,7 +124,7 @@ class _addlandState extends State<addland> {
                                     keyboardType: TextInputType.number,
                                     val: "برجاء ادخال رقم الهاتف",
                                     controller: phone,
-                                    hintText: "رقم االهاتف"),
+                                    hintText: "رقم هاتف المالك او الوسيط"),
                               ],
                             ),
                           ),
@@ -157,7 +144,10 @@ class _addlandState extends State<addland> {
                             height: 10,
                           ),
                           custommytextform(
-                              controller: details, hintText: "تفاصيل الاعلان"),
+                            controller: details,
+                            hintText: "تفاصيل الارض",
+                            maxlines: 3,
+                          ),
                           const SizedBox(
                             height: Appsizes.size10,
                           ),
@@ -171,7 +161,7 @@ class _addlandState extends State<addland> {
                           ),
                           customgridimagesland(),
                           const SizedBox(
-                            height: Appsizes.size15,
+                            height: Appsizes.size10,
                           ),
                           BlocConsumer<addlandcuibt, addlandstate>(
                               listener: (context, state) {
@@ -222,8 +212,9 @@ class _addlandState extends State<addland> {
                                                 land_images: BlocProvider.of<
                                                         addlandcuibt>(context)
                                                     .images,
+                                                advertise_details: details.text,
                                                 real_state_address_details:
-                                                    "ghfghfghhg",
+                                                    adressdetails.text,
                                                 address: adress.text,
                                                 seller_name: clientname.text,
                                                 size_in_metres:
@@ -258,5 +249,17 @@ class _addlandState extends State<addland> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    clientname.dispose();
+    adress.dispose();
+    phone.dispose();
+    price.dispose();
+    details.dispose();
+    adressdetails.dispose();
+    area.dispose();
+    super.dispose();
   }
 }

@@ -5,16 +5,9 @@ import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
-import 'package:aplication/features/aqarat/data/models/addaqarrequest/addaqarrequest.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/edit/edit_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/views/estate.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customgridimages.dart';
+
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/pickedimage.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/lands/data/models/addlandrequestmodel.dart';
 import 'package:aplication/features/lands/data/models/showlands/datum.dart';
@@ -65,7 +58,7 @@ class editlanddialog extends StatelessWidget {
             height: height,
             child: SingleChildScrollView(
               child: Column(children: [
-                SizedBox(
+                const SizedBox(
                   height: Appsizes.size20,
                 ),
                 Image.asset(
@@ -97,7 +90,7 @@ class editlanddialog extends StatelessWidget {
                       custommytextform(
                           val: "برجاء ادخال تفاصيل العنوان",
                           controller: adressdetails,
-                          hintText: "تفاصيل"),
+                          hintText: "عنوان الارض بالتفصيل"),
                       const SizedBox(
                         height: 10,
                       ),
@@ -140,6 +133,7 @@ class editlanddialog extends StatelessWidget {
                       BlocProvider.of<EditlandCubit>(context)
                           .changeaddlandadvistortype(val);
                     },
+                    // ignore: prefer_if_null_operators
                     name: BlocProvider.of<EditlandCubit>(context)
                                 .advistor_type ==
                             null
@@ -151,6 +145,7 @@ class editlanddialog extends StatelessWidget {
                   height: Appsizes.size10,
                 ),
                 custommytextform(
+                  maxlines: 3,
                     controller: details, hintText: "تفاصيل الاعلان"),
                 const SizedBox(
                   height: Appsizes.size10,

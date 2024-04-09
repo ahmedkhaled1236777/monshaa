@@ -6,11 +6,10 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customhead
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_state.dart';
 import 'package:aplication/features/reciept/presentaion/view/addrecieptwithscafold.dart';
-import 'package:aplication/features/reciept/presentaion/view/cuatomtableallreciepts.dart';
 import 'package:aplication/features/reciept/presentaion/view/customtablerecieptitem.dart';
-import 'package:aplication/features/reciept/presentaion/view/mobilecustomreciept.dart';
-import 'package:aplication/features/reciept/presentaion/view/reciept.dart';
+
 import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptcuibt.dart';
+import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptstate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,15 +28,15 @@ class customtablereciepts extends StatefulWidget {
 
 class _customtablerecieptsState extends State<customtablereciepts> {
   initscroll() async {
-    BlocProvider.of<contractCubit>(context).queryParameters = null;
-    if (BlocProvider.of<contractCubit>(context).contractdata.isEmpty)
-      await BlocProvider.of<contractCubit>(context)
-          .getallcontracts(token: generaltoken, page: 1);
+    BlocProvider.of<recieptCubit>(context).queryParameters = null;
+
+    await BlocProvider.of<recieptCubit>(context)
+        .getallreciepts(token: generaltoken, page: 1);
     widget.scrollController.addListener(() async {
       if (widget.scrollController.position.pixels ==
           widget.scrollController.position.maxScrollExtent) {
-        await BlocProvider.of<contractCubit>(context)
-            .getallmorecontracts(token: generaltoken);
+        await BlocProvider.of<recieptCubit>(context)
+            .getallmorereciepts(token: generaltoken);
       }
     });
   }
@@ -49,7 +48,6 @@ class _customtablerecieptsState extends State<customtablereciepts> {
 
   @override
   Widget build(BuildContext context) {
-    var contract = BlocProvider.of<contractCubit>(context).contractdata;
     return Container(
         color: Colors.white,
         width: widget.width,
@@ -70,14 +68,14 @@ class _customtablerecieptsState extends State<customtablereciepts> {
                     .toList()),
           ),
           Expanded(
-              child: BlocConsumer<contractCubit, contractState>(
+              child: BlocConsumer<recieptCubit, recieptState>(
                   listener: (context, state) {
-            if (state is showcontractfailure) {
+            if (state is showrecieptfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
           }, builder: (context, state) {
-            if (state is showcontractloadin) return loading();
-            if (state is showcontractfailure) return SizedBox();
+            if (state is showrecieptloadin) return loading();
+            if (state is showrecieptfailure) return SizedBox();
             return SingleChildScrollView(
                 controller: widget.scrollController,
                 child: ListView.separated(
@@ -85,60 +83,52 @@ class _customtablerecieptsState extends State<customtablereciepts> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return index >=
-                              BlocProvider.of<contractCubit>(context)
-                                  .contractdata
+                              BlocProvider.of<recieptCubit>(context)
+                                  .myreciepts!
                                   .length
                           ? loading()
                           : GestureDetector(
                               onTap: () {
-                                BlocProvider.of<recieptCubit>(context)
-                                    .queryParameters = {
-                                  "owner_phone":
-                                      BlocProvider.of<contractCubit>(context)
-                                          .contractdata[index]
-                                          .ownerPhone!
-                                };
-                                navigateto(
-                                    navigationscreen: allreciepts(),
-                                    context: context);
+                                  BlocProvider.of<recieptCubit>(context).reciepts= BlocProvider.of<recieptCubit>(context)
+                                              .myreciepts[index]
+                                              .receipts!;
+                              navigateandfinish(navigationscreen: allreciepts(), context: context);
                               },
                               child: customtablerecieptitem(
                                 textStyle: Appstyles.gettabletextstyle(
                                     context: context),
                                 tenantname:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
-                                        .tenant!
-                                        .name!
-                                        .toString()!,
+                                    BlocProvider.of<recieptCubit>(context)
+                                        .myreciepts[index]
+                                        .tenant!,
                                 ownername:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
+                                    BlocProvider.of<recieptCubit>(context)
+                                        .myreciepts[index]
                                         .ownerName!,
                                 aqaradress:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
+                                    BlocProvider.of<recieptCubit>(context)
+                                        .myreciepts[index]
                                         .realStateAddress!,
                                 amountofmoney:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
+                                    BlocProvider.of<recieptCubit>(context)
+                                        .myreciepts[index]
                                         .contractTotal
                                         .toString(),
                                 addreciept: IconButton(
                                     onPressed: () {
                                       BlocProvider.of<recieptCubit>(context)
-                                          .id = BlocProvider.of<contractCubit>(
-                                              context)
-                                          .contractdata[index]
-                                          .id!
-                                          .toInt();
+                                              .id =
+                                          BlocProvider.of<recieptCubit>(context)
+                                              .myreciepts[index]
+                                              .id!
+                                              .toInt();
                                       if (MediaQuery.sizeOf(context).width <=
                                           950) {
                                         BlocProvider.of<recieptCubit>(context)
                                             .giverecieptdata(
-                                                BlocProvider.of<contractCubit>(
+                                                BlocProvider.of<recieptCubit>(
                                                         context)
-                                                    .contractdata[index]);
+                                                    .myreciepts[index]);
                                         navigateandfinish(
                                             context: context,
                                             navigationscreen:
@@ -146,13 +136,13 @@ class _customtablerecieptsState extends State<customtablereciepts> {
                                       } else {
                                         BlocProvider.of<recieptCubit>(context)
                                             .giverecieptdata(
-                                                BlocProvider.of<contractCubit>(
+                                                BlocProvider.of<recieptCubit>(
                                                         context)
-                                                    .contractdata[index]);
+                                                    .myreciepts[index]);
                                       }
                                     },
                                     icon: Icon(
-                                      Icons.add_alert_outlined,
+                                      Icons.add_box_outlined,
                                       size: MediaQuery.of(context).size.width <
                                               600
                                           ? 20.sp
@@ -163,13 +153,13 @@ class _customtablerecieptsState extends State<customtablereciepts> {
                     },
                     separatorBuilder: (context, index) => const Divider(),
                     itemCount:
-                        BlocProvider.of<contractCubit>(context).loading == true
-                            ? BlocProvider.of<contractCubit>(context)
-                                    .contractdata
+                        BlocProvider.of<recieptCubit>(context).loading == true
+                            ? BlocProvider.of<recieptCubit>(context)
+                                    .myreciepts
                                     .length +
                                 1
-                            : BlocProvider.of<contractCubit>(context)
-                                .contractdata
+                            : BlocProvider.of<recieptCubit>(context)
+                                .myreciepts
                                 .length));
           }))
         ]));

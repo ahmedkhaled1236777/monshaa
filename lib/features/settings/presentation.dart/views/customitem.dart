@@ -20,7 +20,7 @@ class customitem extends StatelessWidget {
             description,
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width > 950
-                    ? 3.sp
+                    ? 12.5
                     : MediaQuery.of(context).size.width > 550
                         ? 6.sp
                         : MediaQuery.of(context).size.width > 400
@@ -31,7 +31,7 @@ class customitem extends StatelessWidget {
             value,
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width > 950
-                    ? 4.sp
+                    ? 12.5
                     : MediaQuery.of(context).size.width > 550
                         ? 7.sp
                         : MediaQuery.of(context).size.width > 400

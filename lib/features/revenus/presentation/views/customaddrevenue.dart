@@ -11,7 +11,6 @@ import 'package:aplication/features/auth/login/presentation/views/widgets/custom
 import 'package:aplication/features/revenus/data/model/revenumodelrequest.dart';
 import 'package:aplication/features/revenus/presentation/viewmodel/revenuecuibt/revenue_cubit.dart';
 import 'package:aplication/features/revenus/presentation/viewmodel/revenuecuibt/revenue_state.dart';
-import 'package:aplication/features/revenus/presentation/views/choosedates.dart';
 import 'package:aplication/features/revenus/presentation/views/revenues.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,11 +43,8 @@ class _addrevenueState extends State<addrevenue> {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 60.h,
-                ),
                 Image.asset(
-                  'images/people.png',
+                 "images/mmm.png",
                   height: 50,
                   width: 50,
                 ),
@@ -92,7 +88,7 @@ class _addrevenueState extends State<addrevenue> {
                   height: Appsizes.size10,
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 10,
                 ),
                 BlocConsumer<revenueCubit, revenueState>(
                   listener: (context, state) {
@@ -141,5 +137,11 @@ class _addrevenueState extends State<addrevenue> {
                 )
               ],
             ))));
+  }
+
+  @override
+  void dispose() {
+    amount.dispose();
+    super.dispose();
   }
 }

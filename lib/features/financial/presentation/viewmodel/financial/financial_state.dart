@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+@immutable
 abstract class financialState {}
 
 class financialInitial extends financialState {}

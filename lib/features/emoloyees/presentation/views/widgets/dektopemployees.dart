@@ -1,19 +1,11 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/toast.dart';
-import 'package:aplication/features/emoloyees/presentation/views/widgets/employees_powers.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
-import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
-import 'package:aplication/features/auth/login/presentation/views/widgets/customtextform.dart';
-import 'package:aplication/features/emoloyees/presentation/viewmodel/addemployee/addemployee_cubit.dart';
+
 import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeecuibt.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/addemployee.dart';
-import 'package:aplication/features/emoloyees/presentation/views/widgets/customtableemployeeitem.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/customtableemployees.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/emplyeesearch.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
-import 'package:aplication/pdt.dart';
-import 'package:aplication/show_employees.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +33,7 @@ class desktopemployees extends StatelessWidget {
             ),
             title: Text(
               'الموظفين',
-              style: TextStyle(color: Colors.white, fontSize: 4.sp),
+              style: TextStyle(color: Colors.white, fontSize: 3.5.sp),
             ),
             centerTitle: true,
             backgroundColor: Appcolors.maincolor,
@@ -57,41 +49,13 @@ class desktopemployees extends StatelessWidget {
                       token: generaltoken,
                     );
                   },
-                  icon: Icon(Icons.data_exploration,
+                  icon: Icon(Icons.blur_circular_rounded,
                       color: Appcolors.whitecolor)),
               Row(
                 children: [
                   emplyeesearch(),
                   const SizedBox(
-                    width: 15,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return PdfView(
-                          titles: 'العقارات',
-                        );
-                      }));
-                    },
-                    child: const Icon(
-                      Icons.print,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 13,
+                    width: 10,
                   ),
                 ],
               )

@@ -38,7 +38,7 @@ class finishedconreactsrepoimplementation extends finishedcontractrepo {
   Future<Either<failure, String>> deletecontract(
       {required String token, required int contractid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/tenant-contracts-expired/remove-from-screen//${contractid}",
           token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {

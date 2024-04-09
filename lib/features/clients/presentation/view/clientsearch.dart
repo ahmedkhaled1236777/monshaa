@@ -16,6 +16,8 @@ class clientsearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        BlocProvider.of<clientsCubit>(context).status = null;
+        BlocProvider.of<DateCubit>(context).date5 = "تاريخ المعاينه";
         showDialog(
           context: context,
 
@@ -29,6 +31,8 @@ class clientsearch extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: IconButton(
                     onPressed: () {
+                      BlocProvider.of<clientsCubit>(context).cleardata();
+                      BlocProvider.of<DateCubit>(context).cleardates();
                       Navigator.of(context).pop();
                     },
                     icon: const Icon(Icons.close)),
@@ -40,14 +44,16 @@ class clientsearch extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
+                          width: MediaQuery.sizeOf(context).width > 950
+                              ? MediaQuery.sizeOf(context).width * 0.25
+                              : MediaQuery.sizeOf(context).width * 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
                               color: Colors.white,
                             ),
                             padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                                vertical: 20, horizontal: 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Column(

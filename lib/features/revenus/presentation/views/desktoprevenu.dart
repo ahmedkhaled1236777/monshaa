@@ -32,7 +32,7 @@ class desktoprevenues extends StatelessWidget {
             ),
             title: Text(
               'الايرادات',
-              style: TextStyle(color: Colors.white, fontSize: 4.sp),
+              style: TextStyle(color: Colors.white, fontSize: 3.5.sp),
             ),
             centerTitle: true,
             backgroundColor: Appcolors.maincolor,
@@ -44,25 +44,11 @@ class desktoprevenues extends StatelessWidget {
                     BlocProvider.of<revenueCubit>(context)
                         .getallrevenues(token: generaltoken, page: 1);
                   },
-                  icon: Icon(Icons.data_exploration,
+                  icon: Icon(Icons.blur_circular_rounded,
                       color: Appcolors.whitecolor)),
               revenuesearch(),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.print,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                ],
+              SizedBox(
+                width: 10,
               )
             ],
           ),

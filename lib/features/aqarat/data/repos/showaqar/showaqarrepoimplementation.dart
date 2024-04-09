@@ -39,7 +39,7 @@ class showaqqarrepoimplementation extends showaqarrepo {
   Future<Either<failure, String>> deleteaqar(
       {required String token, required int aqarnumber}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/state/delete/${aqarnumber}", token: token);
       if (response.statusCode == 200 &&
           response.data["message"] == "تم حذف بيانات العقار  بنجاح")

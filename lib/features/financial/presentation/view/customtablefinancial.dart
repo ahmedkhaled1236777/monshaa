@@ -10,6 +10,7 @@ import 'package:aplication/features/financial/presentation/view/addfinancialwith
 import 'package:aplication/features/financial/presentation/view/allfinancials.dart';
 import 'package:aplication/features/financial/presentation/view/customtablefinancialitem.dart';
 import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_cubit.dart';
+import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,15 +26,14 @@ class customtablefinancials extends StatefulWidget {
 
 class _customtablefinancialsState extends State<customtablefinancials> {
   initscroll() async {
-    BlocProvider.of<contractCubit>(context).queryParameters = null;
-    if (BlocProvider.of<contractCubit>(context).contractdata.isEmpty)
-      await BlocProvider.of<contractCubit>(context)
-          .getallcontracts(token: generaltoken, page: 1);
+    BlocProvider.of<financialCubit>(context).queryParameters = null;
+    await BlocProvider.of<financialCubit>(context)
+        .getallfinancials(token: generaltoken, page: 1);
     widget.scrollController.addListener(() async {
       if (widget.scrollController.position.pixels ==
           widget.scrollController.position.maxScrollExtent) {
-        await BlocProvider.of<contractCubit>(context)
-            .getallmorecontracts(token: generaltoken);
+        await BlocProvider.of<financialCubit>(context)
+            .getallmorefinancials(token: generaltoken);
       }
     });
   }
@@ -45,7 +45,6 @@ class _customtablefinancialsState extends State<customtablefinancials> {
 
   @override
   Widget build(BuildContext context) {
-    var contract = BlocProvider.of<contractCubit>(context).contractdata;
     return Container(
         color: Colors.white,
         width: widget.width,
@@ -66,14 +65,14 @@ class _customtablefinancialsState extends State<customtablefinancials> {
                     .toList()),
           ),
           Expanded(
-              child: BlocConsumer<contractCubit, contractState>(
+              child: BlocConsumer<financialCubit, financialState>(
                   listener: (context, state) {
-            if (state is showcontractfailure) {
+            if (state is showfinancialfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
           }, builder: (context, state) {
-            if (state is showcontractloadin) return loading();
-            if (state is showcontractfailure) return SizedBox();
+            if (state is showfinancialloadin) return loading();
+            if (state is showfinancialfailure) return SizedBox();
             return SingleChildScrollView(
                 controller: widget.scrollController,
                 child: ListView.separated(
@@ -81,60 +80,53 @@ class _customtablefinancialsState extends State<customtablefinancials> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return index >=
-                              BlocProvider.of<contractCubit>(context)
-                                  .contractdata
+                              BlocProvider.of<financialCubit>(context)
+                                  .myfinancials
                                   .length
                           ? loading()
                           : GestureDetector(
                               onTap: () {
-                                BlocProvider.of<financialCubit>(context)
-                                    .queryParameters = {
-                                  "owner_phone":
-                                      BlocProvider.of<contractCubit>(context)
-                                          .contractdata[index]
-                                          .ownerPhone!
-                                };
-                                navigateto(
-                                    navigationscreen: allfinancials(),
-                                    context: context);
+            BlocProvider.of<financialCubit>(context).myreciepts=  BlocProvider.of<financialCubit>(
+                                                  context)
+                                              .myfinancials[index]
+                                              .receipts!;                    
+                              navigateandfinish(navigationscreen: allfinancialsState(), context: context);
                               },
                               child: customtablefinancialitem(
                                 textStyle: Appstyles.gettabletextstyle(
                                     context: context),
                                 tenantname:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
-                                        .tenant!
-                                        .name!
-                                        .toString()!,
+                                    BlocProvider.of<financialCubit>(context)
+                                        .myfinancials[index]
+                                        .tenant!,
                                 ownername:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
+                                    BlocProvider.of<financialCubit>(context)
+                                        .myfinancials[index]
                                         .ownerName!,
                                 aqaradress:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
+                                    BlocProvider.of<financialCubit>(context)
+                                        .myfinancials[index]
                                         .realStateAddress!,
                                 amountofmoney:
-                                    BlocProvider.of<contractCubit>(context)
-                                        .contractdata[index]
+                                    BlocProvider.of<financialCubit>(context)
+                                        .myfinancials[index]
                                         .contractTotal
                                         .toString(),
                                 addfinancial: IconButton(
                                     onPressed: () {
                                       BlocProvider.of<financialCubit>(context)
-                                          .id = BlocProvider.of<contractCubit>(
+                                          .id = BlocProvider.of<financialCubit>(
                                               context)
-                                          .contractdata[index]
+                                          .myfinancials[index]
                                           .id!
                                           .toInt();
                                       if (MediaQuery.sizeOf(context).width <=
                                           950) {
                                         BlocProvider.of<financialCubit>(context)
                                             .givefinancialdata(
-                                                BlocProvider.of<contractCubit>(
+                                                BlocProvider.of<financialCubit>(
                                                         context)
-                                                    .contractdata[index]);
+                                                    .myfinancials[index]);
                                         navigateandfinish(
                                             context: context,
                                             navigationscreen:
@@ -142,13 +134,13 @@ class _customtablefinancialsState extends State<customtablefinancials> {
                                       } else {
                                         BlocProvider.of<financialCubit>(context)
                                             .givefinancialdata(
-                                                BlocProvider.of<contractCubit>(
+                                                BlocProvider.of<financialCubit>(
                                                         context)
-                                                    .contractdata[index]);
+                                                    .myfinancials[index]);
                                       }
                                     },
                                     icon: Icon(
-                                      Icons.add_alert_outlined,
+                                      Icons.add_box_outlined,
                                       size: MediaQuery.of(context).size.width <
                                               600
                                           ? 20.sp
@@ -159,13 +151,13 @@ class _customtablefinancialsState extends State<customtablefinancials> {
                     },
                     separatorBuilder: (context, index) => const Divider(),
                     itemCount:
-                        BlocProvider.of<contractCubit>(context).loading == true
-                            ? BlocProvider.of<contractCubit>(context)
-                                    .contractdata
+                        BlocProvider.of<financialCubit>(context).loading == true
+                            ? BlocProvider.of<financialCubit>(context)
+                                    .myfinancials
                                     .length +
                                 1
-                            : BlocProvider.of<contractCubit>(context)
-                                .contractdata
+                            : BlocProvider.of<financialCubit>(context)
+                                .myfinancials
                                 .length));
           }))
         ]));

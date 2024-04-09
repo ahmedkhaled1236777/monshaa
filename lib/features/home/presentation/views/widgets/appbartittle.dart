@@ -16,16 +16,16 @@ class appbartittle extends StatelessWidget {
       children: [
         cashhelper.getdata(key: "logo") == null
             ? CircleAvatar(
+              radius: 25,
                 backgroundImage: AssetImage("images/logo.png"),
               )
             : imagefromrequest(
                 url: cashhelper.getdata(key: "logo"),
-                height: 30,
-                width: 30,
-                border: 30,
+                height: 50,
+                width: 50,
               ),
         SizedBox(
-          width: sizedboxwidth,
+          width: 0,
         ),
         Text(
           cashhelper.getdata(key: "company_name"),

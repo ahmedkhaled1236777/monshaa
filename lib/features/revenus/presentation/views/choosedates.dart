@@ -28,12 +28,12 @@ class _choosedaterevenueState extends State<choosedaterevenue> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
                   onPressed: () async {
-                    BlocProvider.of<DateCubit>(context).changedate(context);
+                    BlocProvider.of<DateCubit>(context).changedate6(context);
                   },
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
-                      BlocProvider.of<DateCubit>(context).date1,
+                      BlocProvider.of<DateCubit>(context).date6,
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                           color: Colors.black45,
@@ -59,12 +59,12 @@ class _choosedaterevenueState extends State<choosedaterevenue> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
                   onPressed: () async {
-                    BlocProvider.of<DateCubit>(context).changedate2(context);
+                    BlocProvider.of<DateCubit>(context).changedate7(context);
                   },
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
-                      BlocProvider.of<DateCubit>(context).date2,
+                      BlocProvider.of<DateCubit>(context).date7,
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                           color: Colors.black45,

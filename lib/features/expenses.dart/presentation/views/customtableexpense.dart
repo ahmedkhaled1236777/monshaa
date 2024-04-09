@@ -69,7 +69,7 @@ class _customtableexpensesState extends State<customtableexpenses> {
             if (state is showexpensefailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
-             if (state is deleteexpensefailure)
+            if (state is deleteexpensefailure)
               showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showexpenseloadin) return loading();
@@ -103,20 +103,22 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                       .transactionDate!,
                                   delet: IconButton(
                                       onPressed: () async {
-                                            awsomdialogerror(context: context, tittle: "هل تريد حذف المصروف ؟", btnOkOnPress:()async{
-  await     await BlocProvider.of<expenseCubit>(
-                                                context)
-                                            .deleteexpense(
-                                                token: generaltoken,
-                                                expenseid: BlocProvider.of<
-                                                        expenseCubit>(context)
-                                                    .expensedata[index]
-                                                    .id!
-                                                    .toInt());
-                                                
-                                                
-                    } );
-                                      
+                                        awsomdialogerror(
+                                            context: context,
+                                            tittle: "هل تريد حذف المصروف ؟",
+                                            btnOkOnPress: () async {
+                                              await await BlocProvider.of<
+                                                      expenseCubit>(context)
+                                                  .deleteexpense(
+                                                      token: generaltoken,
+                                                      expenseid: BlocProvider
+                                                              .of<expenseCubit>(
+                                                                  context)
+                                                          .expensedata[index]
+                                                          .id!
+                                                          .toInt());
+                                              Navigator.pop(context);
+                                            });
                                       },
                                       icon: Icon(
                                         size:
@@ -129,7 +131,7 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                       )),
                                   edit: IconButton(
                                     icon: Icon(
-                                      Icons.edit,
+                                      Icons.edit_note,
                                       size: MediaQuery.of(context).size.width <
                                               600
                                           ? 20.sp
@@ -142,6 +144,9 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                               .expensedata[index]
                                               .transactionDate!;
                                       showDialog(
+                                          barrierDismissible:
+                                              false, // user must tap button!
+
                                           context: context,
                                           builder: (_) {
                                             return AlertDialog(
@@ -164,8 +169,16 @@ class _customtableexpensesState extends State<customtableexpenses> {
                                                 content: editexpensedialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          0.5,
+                                                                  .width >
+                                                              950
+                                                          ? MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .width *
+                                                              0.25
+                                                          : MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .width *
+                                                              1,
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *

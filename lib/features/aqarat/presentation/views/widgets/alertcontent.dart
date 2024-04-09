@@ -18,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class alertcontent extends StatelessWidget {
   TextEditingController adress = TextEditingController();
-  TextEditingController phone = TextEditingController();
   TextEditingController pricefrom = TextEditingController();
   TextEditingController priceto = TextEditingController();
   TextEditingController minimumarea = TextEditingController();
@@ -38,16 +37,16 @@ class alertcontent extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Column(children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width < 600
-                      ? MediaQuery.of(context).size.width * 0.70
-                      : MediaQuery.of(context).size.width * 0.3,
+                  width: MediaQuery.sizeOf(context).width > 950
+                      ? MediaQuery.sizeOf(context).width * 0.25
+                      : MediaQuery.sizeOf(context).width * 1,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(0),
                       color: Colors.white,
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 20),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
                     child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(children: [
@@ -96,11 +95,6 @@ class alertcontent extends StatelessWidget {
                                   .departement,
                               items: ["بيع", "ايجار"],
                               hint: "القسم"),
-                          const SizedBox(
-                            height: Appsizes.size10,
-                          ),
-                          custommytextform(
-                              controller: phone, hintText: "رقم الهاتف"),
                           const SizedBox(
                             height: Appsizes.size10,
                           ),
@@ -272,13 +266,13 @@ class alertcontent extends StatelessWidget {
                                 BlocProvider.of<ShowaqaratCubit>(context)
                                     .queryParameters = {
                                   "real_state_address": adress.text,
+                                  "code": advertisecode.text,
                                   "user_id":
                                       BlocProvider.of<addaqarcuibt>(context)
                                           .employeeid,
                                   "department": request[
                                       BlocProvider.of<addaqarcuibt>(context)
                                           .departement],
-                                  "advertised_phone_number": phone.text,
                                   "lowest_price": pricefrom.text.isEmpty
                                       ? null
                                       : num.parse(pricefrom.text),

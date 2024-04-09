@@ -3,7 +3,6 @@ import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
@@ -48,11 +47,8 @@ class _addclientsState extends State<addclients> {
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 60.h,
-                    ),
                     Image.asset(
-                      'images/people.png',
+                      'images/employees.png',
                       height: 50,
                       width: 50,
                     ),
@@ -143,7 +139,7 @@ class _addclientsState extends State<addclients> {
                       hintText: "ملاحظات",
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 15,
                     ),
                     BlocConsumer<clientsCubit, clientsState>(
                       listener: (context, state) {
@@ -157,7 +153,8 @@ class _addclientsState extends State<addclients> {
                           code.clear();
                           BlocProvider.of<DateCubit>(context).cleardates();
                           BlocProvider.of<clientsCubit>(context).cleardata();
-
+                          BlocProvider.of<clientsCubit>(context)
+                              .getallclientss(token: generaltoken, page: 1);
                           showsnack(
                               comment: state.success_message, context: context);
                         }
@@ -196,5 +193,14 @@ class _addclientsState extends State<addclients> {
                 ))));
       },
     );
+  }
+
+  @override
+  void dispose() {
+    clientname.dispose();
+    clientphone.dispose();
+    code.dispose();
+    notes.dispose();
+    super.dispose();
   }
 }

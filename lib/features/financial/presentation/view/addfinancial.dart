@@ -9,39 +9,47 @@ import 'package:aplication/features/contracts/presentation/views/customshoosedat
 import 'package:aplication/features/financial/data/model/financialmodelrequest.dart';
 import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_cubit.dart';
 import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_state.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class addfinancial extends StatelessWidget {
+class addfinancial extends StatefulWidget {
   final GlobalKey<FormState> formkey;
   final double width;
-
-  const addfinancial({super.key, required this.formkey, required this.width});
+  addfinancial({super.key, required this.formkey, required this.width});
 
   @override
+  State<addfinancial> createState() => _addfinancialState();
+}
+
+class _addfinancialState extends State<addfinancial> {
+  @override
+  void initState() {
+ BlocProvider.of<financialCubit>(context).clearcontrollers();
+   BlocProvider.of<DateCubit>(context).cleardates();
+    
+  }
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<financialCubit, financialState>(
-      builder: (context, state) {
+   
         return Container(
             height: double.infinity,
             padding: const EdgeInsets.all(20),
-            width: width,
+            width: widget.width,
             color: Colors.white,
             margin:
                 EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.01),
             child: Form(
-                key: formkey,
+                key: widget.formkey,
                 child: SingleChildScrollView(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 30.h,
+                      height: 0.h,
                     ),
                     Image.asset(
-                      'images/people.png',
+                      'images/mone.png',
                       height: 50,
                       width: 50,
                     ),
@@ -57,22 +65,30 @@ class addfinancial extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    custommytextform(
-                      readonly: true,
-                      controller:
-                          BlocProvider.of<financialCubit>(context).tenantname,
-                      hintText: "اسم المستأجر",
-                      val: "برجاء ادخال اسم المستأجر",
+                    BlocBuilder<financialCubit, financialState>(
+                      builder: (context, state) {
+                        return custommytextform(
+                                          readonly: true,
+                                          controller:
+                                              BlocProvider.of<financialCubit>(context).tenantname,
+                                          hintText: "اسم المستأجر",
+                                          val: "برجاء ادخال اسم المستأجر",
+                                        );
+                      },
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    custommytextform(
-                      readonly: true,
-                      controller:
-                          BlocProvider.of<financialCubit>(context).ownername,
-                      hintText: "اسم المالك",
-                      val: "برجاء ادخال اسم المالك",
+                    BlocBuilder<financialCubit, financialState>(
+                      builder: (context, state) {
+                        return custommytextform(
+                                          readonly: true,
+                                          controller:
+                                              BlocProvider.of<financialCubit>(context).ownername,
+                                          hintText: "اسم المالك",
+                                          val: "برجاء ادخال اسم المالك",
+                                        );
+                      },
                     ),
                     const SizedBox(
                       height: 10,
@@ -94,21 +110,16 @@ class addfinancial extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    custommytextform(
-                      readonly: true,
-                      controller: BlocProvider.of<financialCubit>(context)
-                          .amountofmoney,
-                      hintText: "قيمة القسط",
-                      val: "برجاء ادخال قيمة القسط ",
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    custommytextform(
-                      controller: BlocProvider.of<financialCubit>(context)
-                          .installment_number,
-                      hintText: "رقم القسط",
-                      val: "برجاء ادخال رقم القسط ",
+                    BlocBuilder<financialCubit, financialState>(
+                      builder: (context, state) {
+                        return custommytextform(
+                                          readonly: true,
+                                          controller: BlocProvider.of<financialCubit>(context)
+                                              .amountofmoney,
+                                          hintText: "قيمة القسط",
+                                          val: "برجاء ادخال قيمة القسط ",
+                                        );
+                      },
                     ),
                     const SizedBox(
                       height: 10,
@@ -139,20 +150,22 @@ class addfinancial extends StatelessWidget {
                       },
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 15,
                     ),
                     BlocConsumer<financialCubit, financialState>(
-                      listener: (context, state) {
+                      listener: (context, state) async {
                         if (state is Addfinancialfailure)
                           showsnack(
                               comment: state.error_message, context: context);
-                        if (state is Addfinancialsuccess) {
+                else        if (state is Addfinancialsuccess) {
                           BlocProvider.of<financialCubit>(context).id = null;
                           BlocProvider.of<financialCubit>(context)
                               .clearcontrollers();
 
                           BlocProvider.of<DateCubit>(context).cleardates();
-
+                           BlocProvider.of<financialCubit>(context).queryParameters = null;
+    await BlocProvider.of<financialCubit>(context)
+        .getallfinancials(token: generaltoken, page: 1);
                           showsnack(
                               comment: state.success_message, context: context);
                         }
@@ -161,10 +174,7 @@ class addfinancial extends StatelessWidget {
                         if (state is Addfinancialloading) return loading();
                         return custommaterialbutton(
                             onPressed: () async {
-                              var player = new AudioPlayer();
-                              const alarmAudioPath = "sound/click-124467.mp3";
-                              player.play(UrlSource(alarmAudioPath));
-                              if (formkey.currentState!.validate()) {
+                              if (widget.formkey.currentState!.validate()) {
                                 if (BlocProvider.of<DateCubit>(context).date1 ==
                                     "التاريخ") {
                                   showdialogerror(
@@ -183,29 +193,25 @@ class addfinancial extends StatelessWidget {
                                       error: "برجاء اختيار تاريخ الايجار الي",
                                       context: context);
                                 } else {
-                                  await BlocProvider.of<financialCubit>(context).addfinancial(
-                                      token: generaltoken,
-                                      financial: financialmodelrequest(
-                                          installment_number:
-                                              BlocProvider.of<financialCubit>(context)
-                                                  .installment_number
-                                                  .text,
-                                          date:
-                                              BlocProvider.of<DateCubit>(context)
-                                                  .date1,
-                                          amountofmoney:
-                                              BlocProvider.of<financialCubit>(
+                                  await BlocProvider.of<financialCubit>(context)
+                                      .addfinancial(
+                                          token: generaltoken,
+                                          financial: financialmodelrequest(
+                                              date: BlocProvider.of<DateCubit>(
                                                       context)
+                                                  .date1,
+                                              amountofmoney: BlocProvider.of<
+                                                      financialCubit>(context)
                                                   .amountofmoney
                                                   .text,
-                                          datefrom:
-                                              BlocProvider.of<DateCubit>(context)
-                                                  .date3,
-                                          dateto:
-                                              BlocProvider.of<DateCubit>(context)
+                                              datefrom:
+                                                  BlocProvider.of<DateCubit>(context)
+                                                      .date3,
+                                              dateto: BlocProvider.of<DateCubit>(
+                                                      context)
                                                   .date4),
-                                      id: BlocProvider.of<financialCubit>(context)
-                                          .id!);
+                                          id: BlocProvider.of<financialCubit>(context)
+                                              .id!);
                                 }
                               }
                             },
@@ -215,7 +221,6 @@ class addfinancial extends StatelessWidget {
                     )
                   ],
                 ))));
-      },
-    );
+    
   }
 }

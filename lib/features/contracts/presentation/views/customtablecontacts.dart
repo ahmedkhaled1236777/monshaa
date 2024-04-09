@@ -52,6 +52,7 @@ class _customtablecontractsState extends State<customtablecontracts> {
         height: MediaQuery.of(context).size.height,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
+            width: widget.width,
             height: 50,
             color: Appcolors.buttoncolor,
             child: Row(
@@ -59,7 +60,7 @@ class _customtablecontractsState extends State<customtablecontracts> {
                     .headertabel
                     .map((e) => customheadertable(
                           title: e,
-                          flex: e == "تعديل" || e == "حذف" || e == "اضافة عقد"
+                          flex: e == "تعديل" || e == "حذف" || e == "طباعة عقد"
                               ? 2
                               : 3,
                           textStyle:
@@ -73,7 +74,7 @@ class _customtablecontractsState extends State<customtablecontracts> {
             if (state is showcontractfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
-             if (state is deletecontractfailure)
+            if (state is deletecontractfailure)
               showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showcontractloadin) return loading();
@@ -113,18 +114,22 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                       icon: Icon(Icons.print_rounded)),
                                   delet: IconButton(
                                       onPressed: () async {
-                    awsomdialogerror(context: context, tittle: "هل تريد حذف العثد", btnOkOnPress:()async{
-  await BlocProvider.of<contractCubit>(
-                                                context)
-                                            .deletecontract(
-                                                token: generaltoken,
-                                                contractid: BlocProvider.of<
-                                                        contractCubit>(context)
-                                                    .contractdata[index]
-                                                    .id!
-                                                    .toInt());
-                    } );
-                                      
+                                        awsomdialogerror(
+                                            context: context,
+                                            tittle: "هل تريد حذف العثد",
+                                            btnOkOnPress: () async {
+                                              await BlocProvider.of<
+                                                      contractCubit>(context)
+                                                  .deletecontract(
+                                                      token: generaltoken,
+                                                      contractid: BlocProvider
+                                                              .of<contractCubit>(
+                                                                  context)
+                                                          .contractdata[index]
+                                                          .id!
+                                                          .toInt());
+                                              Navigator.pop(context);
+                                            });
                                       },
                                       icon: Icon(
                                         size:
@@ -137,7 +142,7 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                       )),
                                   edit: IconButton(
                                       icon: Icon(
-                                        Icons.edit,
+                                        Icons.edit_note,
                                         size:
                                             MediaQuery.of(context).size.width <
                                                     600
@@ -148,7 +153,11 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                         BlocProvider.of<contractCubit>(context)
                                             .id = contract[index].id!.toInt();
                                         BlocProvider.of<contractCubit>(context)
-                                            .havemoney = contract[index].cashType=="تحصيل الايجار من خلال الشركه"?"company":"owner";
+                                            .havemoney = contract[index]
+                                                    .cashType ==
+                                                "تحصيل الايجار من خلال الشركه"
+                                            ? "company"
+                                            : "owner";
 
                                         BlocProvider.of<contractCubit>(context)
                                                 .aqartype =
@@ -167,6 +176,9 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                                 .date4 =
                                             contract[index].contractDateTo!;
                                         showDialog(
+                                            barrierDismissible:
+                                                false, // user must tap button!
+
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
@@ -232,7 +244,7 @@ class _customtablecontractsState extends State<customtablecontracts> {
                                                     housenumber: TextEditingController(text: contract[index].apartmentNumber),
                                                     totalvalue: TextEditingController(text: contract[index].contractTotal.toString()),
                                                     insuranceval: TextEditingController(text: contract[index].insuranceTotal.toString()),
-                                                    commessionvalue: TextEditingController(text:BlocProvider.of<contractCubit>(context).commessiontype=="نسبه"? (contract[index].commission!.toInt()*100/contract[index].contractTotal!.toInt()).toString():contract[index].commission.toString()),
+                                                    commessionvalue: TextEditingController(text: BlocProvider.of<contractCubit>(context).commessiontype == "نسبه" ? (contract[index].commission!.toInt() * 100 / contract[index].contractTotal!.toInt()).toString() : contract[index].commission.toString()),
                                                     periodofdelay: TextEditingController(text: contract[index].periodOfDelay.toString())),
                                               );
                                             });

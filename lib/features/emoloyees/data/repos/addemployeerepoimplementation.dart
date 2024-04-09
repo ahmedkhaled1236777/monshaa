@@ -16,11 +16,11 @@ class emplyeerepoimplementaion extends employeerepo {
     try {
       Response response = await Postdata.postdata(
           path: urls.add_employee, token: token, data: employee.tojson());
-      print(response);
-      if (response.statusCode == 422) {}
-      if (response.statusCode == 200 &&
-          response.data["message"] == "تم اضافه بيانات الموظف بنجاح") {
+
+      if (response.statusCode == 200 && response.data["status"] == true) {
         return right(response.data["message"]);
+      } else if (response.data["code"] == 411) {
+        return left(requestfailure(error_message: response.data["message"]));
       } else
         return left(requestfailure(error_message: response.data["data"][0]));
     } catch (e) {
@@ -58,10 +58,9 @@ class emplyeerepoimplementaion extends employeerepo {
   Future<Either<failure, String>> deleteemployee(
       {required String token, required int employeenumber}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/employee/delete/${employeenumber}", token: token);
-      if (response.statusCode == 200 &&
-          response.data["message"] == "تم حذف الموظف بنجاح")
+      if (response.statusCode == 200 && response.data["status"] == true)
         return right("تم حذف البيانات بنجاح");
       else
         return left(requestfailure(error_message: response.data["data"][0]));
@@ -75,11 +74,26 @@ class emplyeerepoimplementaion extends employeerepo {
   }
 
   @override
-  Future<Either<failure, String>> edittenant(
+  Future<Either<failure, String>> editemployee(
       {required String token,
       required int id,
-      required Tenantmodel tenantmodel}) {
-    // TODO: implement edittenant
-    throw UnimplementedError();
+      required addemployeemodel employee}) async {
+    try {
+      Response response = await Postdata.postdata(
+          path: "/employee/update/${id}",
+          token: token,
+          data: employee.tojson());
+      if (response.statusCode == 200 && response.data["status"] == true) {
+        return right(response.data["message"]);
+      } else if (response.data["code"] == 411) {
+        return left(requestfailure(error_message: response.data["message"]));
+      } else
+        return left(requestfailure(error_message: response.data["data"][0]));
+    } catch (e) {
+      if (e is DioException)
+        return left(requestfailure.fromdioexception(e));
+      else
+        return left(requestfailure(error_message: e.toString()));
+    }
   }
 }

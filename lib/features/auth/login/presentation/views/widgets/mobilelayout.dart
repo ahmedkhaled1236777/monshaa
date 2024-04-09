@@ -16,8 +16,7 @@ import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuib
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/loginstates.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';
 import 'package:aplication/features/home/presentation/views/home.dart';
-import 'package:aplication/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +34,6 @@ class _MobilelayoutState extends State<Mobilelayout> {
         FirebaseMessaging.instance; // Change here
     await _firebaseMessaging.getToken().then((token) {
       cashhelper.setdata(key: "devicetoken", value: token);
-      print("//////////////////////////////////////");
       print(token);
       this.token = token;
     });
@@ -126,8 +124,8 @@ class _MobilelayoutState extends State<Mobilelayout> {
                   } else if (state is loginsucces) {
                     password.clear();
                     phone.clear();
-                    print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-                    print(state.loginmodel.data!.logo);
+                    generaltoken = state.loginmodel.data!.token!;
+
                     cashhelper.setdata(
                         key: "logo", value: state.loginmodel.data!.logo);
                     cashhelper.setdata(
@@ -136,14 +134,15 @@ class _MobilelayoutState extends State<Mobilelayout> {
                         key: "company_name",
                         value: state.loginmodel.data!.companyName);
                     cashhelper.setdata(
-                        key: "name",
-                        value: state.loginmodel.data!.name);
+                        key: "role",
+                        value: state.loginmodel.data!.userType);
+                    cashhelper.setdata(
+                        key: "name", value: state.loginmodel.data!.name);
                     cashhelper.setdata(
                         key: "company_phone",
                         value: state.loginmodel.data!.companyPhone);
                     cashhelper.setdata(
-                        key: "phone",
-                        value: state.loginmodel.data!.phone);
+                        key: "phone", value: state.loginmodel.data!.phone);
                     cashhelper.setdata(
                         key: "company_adress",
                         value: state.loginmodel.data!.companyAddress);
@@ -185,5 +184,13 @@ class _MobilelayoutState extends State<Mobilelayout> {
             ),
           )),
     );
+  }
+
+  @override
+  void dispose() {
+    phone.dispose();
+
+    password.dispose();
+    super.dispose();
   }
 }

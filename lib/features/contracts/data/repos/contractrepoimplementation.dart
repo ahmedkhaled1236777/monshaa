@@ -70,7 +70,7 @@ class contractrepoimplementation extends contractrepo {
   Future<Either<failure, String>> deletecontract(
       {required String token, required int contractid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/tenant-contract/delete/${contractid}", token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);

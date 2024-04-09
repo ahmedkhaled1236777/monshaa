@@ -1,5 +1,5 @@
 import 'package:aplication/core/errors/failure.dart';
-import 'package:aplication/features/reciept/data/models/recieptmodel/recieptmodel.dart';
+import 'package:aplication/features/reciept/data/models/allrecieptmodel/allrecieptmodel.dart';
 import 'package:aplication/features/reciept/data/models/recieptmodelrequest.dart';
 import 'package:dartz/dartz.dart';
 
@@ -8,7 +8,7 @@ abstract class recieptrepo {
       {required String token,
       required recieptsmodelrequest reciept,
       required int id});
-  Future<Either<failure, Recieptmodel>> getreciepts(
+  Future<Either<failure, Allrecieptmodel>> getreciepts(
       {required String token,
       required int page,
       Map<String, dynamic>? queryParameters});

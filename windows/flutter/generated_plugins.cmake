@@ -3,12 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  audioplayers_windows
   awesome_notifications
+  bitsdojo_window_windows
   file_selector_windows
   firebase_core
   printing
-  rive_common
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

@@ -20,7 +20,7 @@ class addemployeemodel {
       required this.permessions,
       this.employee_image});
   FormData tojson() => FormData.fromMap({
-        "employee_image": employee_image,
+        if (employee_image != null) "employee_image": employee_image,
         "name": name,
         "phone": phone,
         "password": password,

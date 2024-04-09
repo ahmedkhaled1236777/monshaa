@@ -40,16 +40,16 @@ class landalertcontent extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Column(children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width < 600
-                      ? MediaQuery.of(context).size.width * 0.70
-                      : MediaQuery.of(context).size.width * 0.3,
+                  width: MediaQuery.sizeOf(context).width > 950
+                      ? MediaQuery.sizeOf(context).width * 0.25
+                      : MediaQuery.sizeOf(context).width * 1,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(0),
                       color: Colors.white,
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 20),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
                     child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(children: [

@@ -4,19 +4,21 @@ import 'package:aplication/features/financial/presentation/viewmodel/financial/f
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../contracts/data/models/contractmodel/datum.dart';
+import '../../../data/model/financialmodel/datum.dart';
 import '../../../data/model/financialmodel/receipt.dart';
 
 class financialCubit extends Cubit<financialState> {
   final financialrepoimplementation financialrepo;
   TextEditingController tenantname = TextEditingController();
-  TextEditingController installment_number = TextEditingController();
+   List<Receipt> myreciepts=[];
 
   TextEditingController ownername = TextEditingController();
   TextEditingController amountofmoney = TextEditingController();
   financialCubit(this.financialrepo) : super(financialInitial());
   givefinancialdata(Datum data) {
-    tenantname = TextEditingController(text: data.tenant!.name!);
+    print("wdwwddddddddddddddddwddddddddddddddddd");
+    print(data);
+    tenantname = TextEditingController(text: data.tenant!);
     ownername = TextEditingController(text: data.ownerName!);
     amountofmoney = TextEditingController(text: data.contractTotal.toString());
     emit(financialchangecontrollers());
@@ -26,7 +28,6 @@ class financialCubit extends Cubit<financialState> {
     tenantname.clear();
     ownername.clear();
     amountofmoney.clear();
-    installment_number.clear();
     emit(financialchangecontrollers());
   }
 
@@ -60,7 +61,7 @@ class financialCubit extends Cubit<financialState> {
   bool loading = false;
   int page = 1;
   int? id;
-  List<Receipt> myfinancials = [];
+  List<Datum> myfinancials = [];
   addfinancial(
       {required String token,
       required financialmodelrequest financial,
@@ -85,7 +86,7 @@ class financialCubit extends Cubit<financialState> {
     result.fold((l) {
       emit(showfinancialfailure(errorr_message: l.error_message));
     }, (r) {
-      myfinancials.addAll(r.data!.data![0].receipts!);
+      myfinancials.addAll(r.data!.data!);
       if (r.data!.links!.next == null) loading = false;
       emit(showfinancialsuccess());
     });
@@ -102,7 +103,7 @@ class financialCubit extends Cubit<financialState> {
     }, (r) {
       myfinancials.clear();
 
-      myfinancials.addAll(r.data!.data![0].receipts!);
+      myfinancials.addAll(r.data!.data!);
       if (r.data!.links!.next == null) loading = false;
       emit(showfinancialsuccess());
     });
@@ -112,10 +113,18 @@ class financialCubit extends Cubit<financialState> {
     var result = await financialrepo.deletefinancial(
         token: token, financialid: financialid);
     result.fold((failure) {
+
       emit(deletefinancialfailure(errormessage: failure.error_message));
     }, (success) {
-      myfinancials.removeWhere((element) => element.id == financialid);
+      myreciepts.removeWhere((element) => element.id == financialid);
       emit(deletefinancialsuccess());
     });
+  }
+
+  dispose() {
+    tenantname.clear();
+
+    ownername.clear();
+    amountofmoney.clear();
   }
 }

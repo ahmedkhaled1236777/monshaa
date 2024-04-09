@@ -1,3 +1,4 @@
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,14 @@ class customappbaractions extends StatelessWidget {
       builder: (context, state) {
         return Row(children: [
           InkWell(
-            onTap: onTapnotific,
+            onTap:
+                BlocProvider.of<HomeCubit>(context).shownotifications == false
+                    ? () {
+                        showsnack(
+                            comment: "ليس لديك صلاحية الوصول للرابط",
+                            context: context);
+                      }
+                    : onTapnotific,
             child: badges.Badge(
               position: badges.BadgePosition.custom(top: -10, start: -5),
               badgeContent: Text(
@@ -35,7 +43,14 @@ class customappbaractions extends StatelessWidget {
             width: 4.w,
           ),
           InkWell(
-            onTap: onTapmessage,
+            onTap: BlocProvider.of<HomeCubit>(context).showtechnicalsupport ==
+                    false
+                ? () {
+                    showsnack(
+                        comment: "ليس لديك صلاحية الوصول للرابط",
+                        context: context);
+                  }
+                : onTapmessage,
             child: const Icon(
               Icons.message,
               color: Colors.white,

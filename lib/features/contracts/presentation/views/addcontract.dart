@@ -4,25 +4,20 @@ import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/showdialogerror.dart';
 import 'package:aplication/core/commn/toast.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarcuibt.dart';
-import 'package:aplication/features/aqarat/presentation/viewmodel/addaqarcuibt/addaqarstate.dart';
+
 import 'package:aplication/features/aqarat/presentation/viewmodel/date/date_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/views/widgets/customchoosedate.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/dropdown.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
-import 'package:aplication/features/auth/login/presentation/views/widgets/customtextform.dart';
 import 'package:aplication/features/contracts/data/models/contractmodelrequest.dart';
-import 'package:aplication/features/contracts/data/repos/contractrepoimplementation.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_cubit.dart';
 import 'package:aplication/features/contracts/presentation/viewmodel/contract/contract_state.dart';
 import 'package:aplication/features/contracts/presentation/views/customradios.dart';
 import 'package:aplication/features/contracts/presentation/views/customshoosedate.dart';
-import 'package:aplication/features/lands/presentation/views/widgets/customchoosedate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class addcontract extends StatelessWidget {
+class addcontract extends StatefulWidget {
   final GlobalKey<FormState> formkey;
   final double width;
   final TextEditingController tenantname;
@@ -46,42 +41,46 @@ class addcontract extends StatelessWidget {
   final TextEditingController totalvalue;
   final TextEditingController insuranceval;
   final TextEditingController commessionvalue;
-  final TextEditingController periodofdelay;
   bool? is_edit;
-  addcontract(
-      {super.key,
-      required this.formkey,
-      this.is_edit = false,
-      required this.width,
-      required this.tenantname,
-      required this.tenanphone,
-      required this.tenantcard,
-      required this.tenantadress,
-      required this.tenantjob,
-      required this.tenantnationality,
-      required this.ownername,
-      required this.ownerphone,
-      required this.ownercard,
-      required this.owneradress,
-      required this.ownerjob,
-      required this.ownernationality,
-      required this.aqaradress,
-      required this.aqaradressdetails,
-      required this.aqarmohafza,
-      required this.area,
-      required this.emaranumber,
-      required this.housenumber,
-      required this.totalvalue,
-      required this.insuranceval,
-      required this.commessionvalue,
-      required this.periodofdelay});
+  addcontract({
+    super.key,
+    required this.formkey,
+    this.is_edit = false,
+    required this.width,
+    required this.tenantname,
+    required this.tenanphone,
+    required this.tenantcard,
+    required this.tenantadress,
+    required this.tenantjob,
+    required this.tenantnationality,
+    required this.ownername,
+    required this.ownerphone,
+    required this.ownercard,
+    required this.owneradress,
+    required this.ownerjob,
+    required this.ownernationality,
+    required this.aqaradress,
+    required this.aqaradressdetails,
+    required this.aqarmohafza,
+    required this.area,
+    required this.emaranumber,
+    required this.housenumber,
+    required this.totalvalue,
+    required this.insuranceval,
+    required this.commessionvalue,
+  });
 
+  @override
+  State<addcontract> createState() => _addcontractState();
+}
+
+class _addcontractState extends State<addcontract> {
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
         margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.01),
-        width: width,
+        width: widget.width,
         child: ListView(shrinkWrap: true, children: [
           Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -110,7 +109,7 @@ class addcontract extends StatelessWidget {
                           height: 15,
                         ),
                         Form(
-                          key: formkey,
+                          key: widget.formkey,
                           child: Column(
                             children: [
                               custommytextform(
@@ -120,7 +119,7 @@ class addcontract extends StatelessWidget {
                                             null
                                         ? false
                                         : true,
-                                controller: tenantname,
+                                controller: widget.tenantname,
                                 hintText: "اسم المستاجر",
                                 val: "  برجاء ادخال اسم المستأجر",
                               ),
@@ -134,7 +133,7 @@ class addcontract extends StatelessWidget {
                                             null
                                         ? false
                                         : true,
-                                controller: tenanphone,
+                                controller: widget.tenanphone,
                                 hintText: "رقم هاتف المستاجر",
                                 val: "برجاء ادخال رقم هاتف المستأجر",
                               ),
@@ -148,7 +147,7 @@ class addcontract extends StatelessWidget {
                                             null
                                         ? false
                                         : true,
-                                controller: tenantcard,
+                                controller: widget.tenantcard,
                                 hintText: "رقم بطاقة المستاجر",
                                 val: "برجاء ادخال رقم بطاقة المستأجر",
                               ),
@@ -162,7 +161,7 @@ class addcontract extends StatelessWidget {
                                             null
                                         ? false
                                         : true,
-                                controller: tenantadress,
+                                controller: widget.tenantadress,
                                 hintText: "عنوان المستاجر",
                                 val: "برجاء ادخال عنوان المستأجر",
                               ),
@@ -176,7 +175,7 @@ class addcontract extends StatelessWidget {
                                             null
                                         ? false
                                         : true,
-                                controller: tenantjob,
+                                controller: widget.tenantjob,
                                 hintText: "وظيفة المستأجر",
                                 val: "برجاء ادخال وظيفة المستأجر",
                               ),
@@ -190,7 +189,7 @@ class addcontract extends StatelessWidget {
                                             null
                                         ? false
                                         : true,
-                                controller: tenantnationality,
+                                controller: widget.tenantnationality,
                                 hintText: "جنسية المستاجر",
                                 val: "برجاء ادخال جنيبة المستأجر",
                               ),
@@ -198,7 +197,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: ownername,
+                                controller: widget.ownername,
                                 hintText: "اسم المالك",
                                 val: "برجاء ادخال اسم المالك",
                               ),
@@ -206,7 +205,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: ownerphone,
+                                controller: widget.ownerphone,
                                 hintText: "رقم هاتف المالك",
                                 val: "برجاء ادخال رقم هاتف المالك",
                               ),
@@ -214,7 +213,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: ownerjob,
+                                controller: widget.ownerjob,
                                 hintText: "وظيفة المالك",
                                 val: "برجاء ادخال وظيفة المالك",
                               ),
@@ -222,7 +221,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: ownercard,
+                                controller: widget.ownercard,
                                 hintText: "رقم بطاقة المالك",
                                 val: "برجاء ادخال رقم بطاقة المالك",
                               ),
@@ -230,7 +229,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: owneradress,
+                                controller: widget.owneradress,
                                 hintText: "عنوان المالك",
                                 val: "برجاء ادخال  عنوان المالك",
                               ),
@@ -238,7 +237,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: ownernationality,
+                                controller: widget.ownernationality,
                                 hintText: "جنسية المالك",
                                 val: "برجاء ادخال جنسية المالك",
                               ),
@@ -270,7 +269,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: aqaradress,
+                                controller: widget.aqaradress,
                                 hintText: "عنوان العقار",
                                 val: "برجاء ادخال عنوان العقار",
                               ),
@@ -278,7 +277,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: aqarmohafza,
+                                controller: widget.aqarmohafza,
                                 hintText: "المحافظه التابع لها العقار",
                                 val: "برجاء ادخال المحافظه التابع لها العقار",
                               ),
@@ -286,7 +285,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: aqaradressdetails,
+                                controller: widget.aqaradressdetails,
                                 hintText: "عنوان العقار بالتفصيل",
                                 val: "برجاء ادخال لمحافظه التابع لها العقار",
                               ),
@@ -294,7 +293,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: area,
+                                controller: widget.area,
                                 hintText: " مساخة العقار",
                                 val: "برجاء ادخال مساحة العقار",
                               ),
@@ -302,7 +301,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: emaranumber,
+                                controller: widget.emaranumber,
                                 hintText: "رقم العماره",
                                 val: "برجاء ادخال رقم العماره",
                               ),
@@ -310,7 +309,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: housenumber,
+                                controller: widget.housenumber,
                                 hintText: "رقم الشقه",
                                 val: "برجاء ادخال رقم الشقه",
                               ),
@@ -363,7 +362,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: insuranceval,
+                                controller: widget.insuranceval,
                                 hintText: "التأمين",
                                 val: "برجاء ادخال قيمة التامين",
                               ),
@@ -371,7 +370,7 @@ class addcontract extends StatelessWidget {
                                 height: 10,
                               ),
                               custommytextform(
-                                controller: totalvalue,
+                                controller: widget.totalvalue,
                                 hintText: "قيمة الايجار",
                                 val: "برجاء ادخال قيمة الايجار",
                               ),
@@ -398,7 +397,7 @@ class addcontract extends StatelessWidget {
                               BlocBuilder<contractCubit, contractState>(
                                 builder: (context, state) {
                                   return custommytextform(
-                                    controller: commessionvalue,
+                                    controller: widget.commessionvalue,
                                     hintText:
                                         BlocProvider.of<contractCubit>(context)
                                                     .commessiontype ==
@@ -415,18 +414,11 @@ class addcontract extends StatelessWidget {
                             ],
                           ),
                         ),
-                        custommytextform(
-                          controller: periodofdelay,
-                          hintText: "مدة التاخير",
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         customradios(),
                         SizedBox(
-                          height: 30,
+                          height: 15,
                         ),
-                        if (is_edit == false)
+                        if (widget.is_edit == false)
                           BlocConsumer<contractCubit, contractState>(
                             listener: (context, state) {
                               if (state is Addcontractfailure)
@@ -483,7 +475,8 @@ class addcontract extends StatelessWidget {
                               if (state is Addcontractloading) return loading();
                               return custommaterialbutton(
                                   onPressed: () {
-                                    if (formkey.currentState!.validate()) {
+                                    if (widget.formkey.currentState!
+                                        .validate()) {
                                       if (BlocProvider.of<DateCubit>(context)
                                               .date1 ==
                                           "التاريخ") {
@@ -508,61 +501,90 @@ class addcontract extends StatelessWidget {
                                             context: context);
                                       }
                                       if (true) {
-                                        print(
-                                            "//////////////////////////////////////////////////////////////");
-                                        print(request[
-                                            BlocProvider.of<contractCubit>(
-                                                    context)
-                                                .aqartype!]);
-                                        print(commessionrequest[
-                                            BlocProvider.of<contractCubit>(
-                                                    context)
-                                                .commessiontype]);
-                                        BlocProvider.of<contractCubit>(context).addcontract(
-                                            id: BlocProvider.of<contractCubit>(context)
-                                                .id,
-                                            token: generaltoken,
-                                            contract: contractmodelrequest(
-                                                havemoney:
-                                                    BlocProvider.of<contractCubit>(context)
-                                                        .havemoney!,
-                                                tenant_name: tenantname.text,
-                                                tenant_cardnumber:
-                                                    tenantcard.text,
-                                                tenant_phone: tenanphone.text,
-                                                tenant_adress:
-                                                    tenantadress.text,
-                                                tenant_job: tenantjob.text,
-                                                tenant_nationality:
-                                                    tenantnationality.text,
-                                                owner_name: ownername.text,
-                                                owner_cardnumber:
-                                                    ownercard.text,
-                                                owner_phone: ownerphone.text,
-                                                owner_adress: owneradress.text,
-                                                owner_job: ownerjob.text,
-                                                owner_nationality:
-                                                    ownernationality.text,
-                                                aqar_adress: aqaradress.text,
-                                                governrate: aqarmohafza.text,
-                                                aqar_type: request[
-                                                    BlocProvider.of<contractCubit>(context)
-                                                        .aqartype!],
-                                                area: area.text,
-                                                aqaradressdetails:
-                                                    aqaradressdetails.text,
-                                                emaranumber: emaranumber.text,
-                                                flatnumber: housenumber.text,
-                                                date: BlocProvider.of<DateCubit>(context)
-                                                    .date1,
-                                                contractfrom:
-                                                    BlocProvider.of<DateCubit>(context).date3,
-                                                contractto: BlocProvider.of<DateCubit>(context).date4,
-                                                contractvalue: totalvalue.text,
-                                                commission_type: commessionrequest[BlocProvider.of<contractCubit>(context).commessiontype],
-                                                commission: BlocProvider.of<contractCubit>(context).commessiontype == "نسبه" ? (double.parse(commessionvalue.text) / 100 * double.parse(totalvalue.text)).toString() : commessionvalue.text,
-                                                insurance_total: insuranceval.text,
-                                                period_of_delay: periodofdelay.text));
+                                        BlocProvider.of<contractCubit>(context)
+                                            .addcontract(
+                                                id: BlocProvider.of<
+                                                        contractCubit>(context)
+                                                    .id,
+                                                token: generaltoken,
+                                                contract: contractmodelrequest(
+                                                  havemoney: BlocProvider.of<
+                                                              contractCubit>(
+                                                          context)
+                                                      .havemoney!,
+                                                  tenant_name:
+                                                      widget.tenantname.text,
+                                                  tenant_cardnumber:
+                                                      widget.tenantcard.text,
+                                                  tenant_phone:
+                                                      widget.tenanphone.text,
+                                                  tenant_adress:
+                                                      widget.tenantadress.text,
+                                                  tenant_job:
+                                                      widget.tenantjob.text,
+                                                  tenant_nationality: widget
+                                                      .tenantnationality.text,
+                                                  owner_name:
+                                                      widget.ownername.text,
+                                                  owner_cardnumber:
+                                                      widget.ownercard.text,
+                                                  owner_phone:
+                                                      widget.ownerphone.text,
+                                                  owner_adress:
+                                                      widget.owneradress.text,
+                                                  owner_job:
+                                                      widget.ownerjob.text,
+                                                  owner_nationality: widget
+                                                      .ownernationality.text,
+                                                  aqar_adress:
+                                                      widget.aqaradress.text,
+                                                  governrate:
+                                                      widget.aqarmohafza.text,
+                                                  aqar_type: request[BlocProvider
+                                                          .of<contractCubit>(
+                                                              context)
+                                                      .aqartype!],
+                                                  area: widget.area.text,
+                                                  aqaradressdetails: widget
+                                                      .aqaradressdetails.text,
+                                                  emaranumber:
+                                                      widget.emaranumber.text,
+                                                  flatnumber:
+                                                      widget.housenumber.text,
+                                                  date: BlocProvider.of<
+                                                          DateCubit>(context)
+                                                      .date1,
+                                                  contractfrom: BlocProvider.of<
+                                                          DateCubit>(context)
+                                                      .date3,
+                                                  contractto: BlocProvider.of<
+                                                          DateCubit>(context)
+                                                      .date4,
+                                                  contractvalue:
+                                                      widget.totalvalue.text,
+                                                  commission_type:
+                                                      commessionrequest[BlocProvider
+                                                              .of<contractCubit>(
+                                                                  context)
+                                                          .commessiontype],
+                                                  commission: BlocProvider.of<
+                                                                      contractCubit>(
+                                                                  context)
+                                                              .commessiontype ==
+                                                          "نسبه"
+                                                      ? (double.parse(widget
+                                                                  .commessionvalue
+                                                                  .text) /
+                                                              100 *
+                                                              double.parse(widget
+                                                                  .totalvalue
+                                                                  .text))
+                                                          .toString()
+                                                      : widget
+                                                          .commessionvalue.text,
+                                                  insurance_total:
+                                                      widget.insuranceval.text,
+                                                ));
                                       }
                                     }
                                   },
@@ -570,7 +592,7 @@ class addcontract extends StatelessWidget {
                                   buttonicon: Icons.data_array);
                             },
                           ),
-                        if (is_edit == true)
+                        if (widget.is_edit == true)
                           BlocConsumer<contractCubit, contractState>(
                               listener: (context, state) async {
                             if (state is editcontractfailure) {
@@ -606,56 +628,107 @@ class addcontract extends StatelessWidget {
                                     .id!);
                                 print(BlocProvider.of<contractCubit>(context)
                                     .havemoney!);
-                                BlocProvider.of<contractCubit>(context).updatecontract(
-                                  
-                                    id: BlocProvider.of<contractCubit>(context)
-                                        .id!,
-                                    token: generaltoken,
-                                    contractmodel: contractmodelrequest(
-                                        havemoney:  BlocProvider.of<contractCubit>(context).havemoney!,
-                                            
-                                        tenant_name: tenantname.text,
-                                        tenant_cardnumber: tenantcard.text,
-                                        tenant_phone: tenanphone.text,
-                                        tenant_adress: tenantadress.text,
-                                        tenant_job: tenantjob.text,
-                                        tenant_nationality:
-                                            tenantnationality.text,
-                                        owner_name: ownername.text,
-                                        owner_cardnumber: ownercard.text,
-                                        owner_phone: ownerphone.text,
-                                        owner_adress: owneradress.text,
-                                        owner_job: ownerjob.text,
-                                        owner_nationality:
-                                            ownernationality.text,
-                                        aqar_adress: aqaradress.text,
-                                        governrate: aqarmohafza.text,
-                                        aqar_type: request[
-                                            BlocProvider.of<contractCubit>(context)
-                                                .aqartype!],
-                                        area: area.text,
-                                        aqaradressdetails:
-                                            aqaradressdetails.text,
-                                        emaranumber: emaranumber.text,
-                                        flatnumber: housenumber.text,
-                                        date: BlocProvider.of<DateCubit>(context)
-                                            .date1,
-                                        contractfrom:
-                                            BlocProvider.of<DateCubit>(context)
-                                                .date3,
-                                        contractto:
-                                            BlocProvider.of<DateCubit>(context)
-                                                .date4,
-                                        contractvalue: totalvalue.text,
-                                        commission_type:
-                                            commessionrequest[BlocProvider.of<contractCubit>(context).commessiontype],
-                                        commission: BlocProvider.of<contractCubit>(context).commessiontype == "نسبه" ? (double.parse(commessionvalue.text) / 100 * double.parse(totalvalue.text)).toString() : commessionvalue.text,
-                                        insurance_total: insuranceval.text,
-                                        period_of_delay: periodofdelay.text));
+                                BlocProvider.of<contractCubit>(context)
+                                    .updatecontract(
+                                        id: BlocProvider.of<contractCubit>(
+                                                context)
+                                            .id!,
+                                        token: generaltoken,
+                                        contractmodel: contractmodelrequest(
+                                          havemoney:
+                                              BlocProvider.of<contractCubit>(
+                                                      context)
+                                                  .havemoney!,
+                                          tenant_name: widget.tenantname.text,
+                                          tenant_cardnumber:
+                                              widget.tenantcard.text,
+                                          tenant_phone: widget.tenanphone.text,
+                                          tenant_adress:
+                                              widget.tenantadress.text,
+                                          tenant_job: widget.tenantjob.text,
+                                          tenant_nationality:
+                                              widget.tenantnationality.text,
+                                          owner_name: widget.ownername.text,
+                                          owner_cardnumber:
+                                              widget.ownercard.text,
+                                          owner_phone: widget.ownerphone.text,
+                                          owner_adress: widget.owneradress.text,
+                                          owner_job: widget.ownerjob.text,
+                                          owner_nationality:
+                                              widget.ownernationality.text,
+                                          aqar_adress: widget.aqaradress.text,
+                                          governrate: widget.aqarmohafza.text,
+                                          aqar_type: request[
+                                              BlocProvider.of<contractCubit>(
+                                                      context)
+                                                  .aqartype!],
+                                          area: widget.area.text,
+                                          aqaradressdetails:
+                                              widget.aqaradressdetails.text,
+                                          emaranumber: widget.emaranumber.text,
+                                          flatnumber: widget.housenumber.text,
+                                          date: BlocProvider.of<DateCubit>(
+                                                  context)
+                                              .date1,
+                                          contractfrom:
+                                              BlocProvider.of<DateCubit>(
+                                                      context)
+                                                  .date3,
+                                          contractto:
+                                              BlocProvider.of<DateCubit>(
+                                                      context)
+                                                  .date4,
+                                          contractvalue: widget.totalvalue.text,
+                                          commission_type: commessionrequest[
+                                              BlocProvider.of<contractCubit>(
+                                                      context)
+                                                  .commessiontype],
+                                          commission:
+                                              BlocProvider.of<contractCubit>(
+                                                              context)
+                                                          .commessiontype ==
+                                                      "نسبه"
+                                                  ? (double.parse(widget
+                                                              .commessionvalue
+                                                              .text) /
+                                                          100 *
+                                                          double.parse(widget
+                                                              .totalvalue.text))
+                                                      .toString()
+                                                  : widget.commessionvalue.text,
+                                          insurance_total:
+                                              widget.insuranceval.text,
+                                        ));
                               },
                             );
                           }),
                       ]))))
         ]));
+  }
+
+  @override
+  void dispose() {
+    widget.tenantname.clear();
+    widget.tenanphone.clear();
+    widget.tenantcard.clear();
+    widget.tenantadress.clear();
+    widget.tenantjob.clear();
+    widget.tenantnationality.clear();
+    widget.ownername.clear();
+    widget.ownerphone.clear();
+    widget.ownercard.clear();
+    widget.owneradress.clear();
+    widget.ownerjob.clear();
+    widget.ownernationality.clear();
+    widget.aqaradress.clear();
+    widget.aqaradressdetails.clear();
+    widget.aqarmohafza.clear();
+    widget.area.clear();
+    widget.emaranumber.clear();
+    widget.housenumber.clear();
+    widget.totalvalue.clear();
+    widget.insuranceval.clear();
+    widget.commessionvalue.clear();
+    super.dispose();
   }
 }

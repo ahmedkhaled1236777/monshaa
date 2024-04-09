@@ -49,7 +49,7 @@ class editexpensedialog extends StatelessWidget {
                   height: Appsizes.size20,
                 ),
                 Image.asset(
-                  'images/appartments.png',
+                  'images/give.png',
                   height: 50,
                   width: 50,
                 ),

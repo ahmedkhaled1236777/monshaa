@@ -61,7 +61,7 @@ class tenantrepoimplementation extends tenantrepo {
   Future<Either<failure, String>> deletetenant(
       {required String token, required int tenantid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/tenant/delete/${tenantid}", token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);

@@ -212,7 +212,8 @@ class editdialog extends StatelessWidget {
                   height: Appsizes.size10,
                 ),
                 custommytextform(
-                    controller: details, hintText: "تفاصيل الاعلان"),
+                  maxlines: 3,
+                    controller: details, hintText: "تفاصيل العقار"),
                 const SizedBox(
                   height: Appsizes.size10,
                 ),
@@ -234,9 +235,12 @@ class editdialog extends StatelessWidget {
                 BlocConsumer<EditCubit, EditState>(
                   listener: (context, state) {
                     if (state is editfailure) {
+                      Navigator.pop(context);
                       showsnack(comment: state.error_message, context: context);
                     }
                     if (state is editsuccess) {
+                      BlocProvider.of<DateCubit>(context).cleardates();
+                      BlocProvider.of<addaqarcuibt>(context).cleardata();
                       navigateandfinish(
                           navigationscreen: Estate(), context: context);
 

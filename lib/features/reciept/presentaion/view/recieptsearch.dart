@@ -1,4 +1,5 @@
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/reciept/presentaion/view/cuatomtableallreciepts.dart';
@@ -39,14 +40,16 @@ class allrecieptsearch extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
+                          width: MediaQuery.sizeOf(context).width > 950
+                              ? MediaQuery.sizeOf(context).width * 0.25
+                              : MediaQuery.sizeOf(context).width * 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
                               color: Colors.white,
                             ),
                             padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                                vertical: 20, horizontal: 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Column(
@@ -80,10 +83,10 @@ class allrecieptsearch extends StatelessWidget {
                                           "owner_card_number": ownercard.text
                                         };
                                         Navigator.pop(context);
-                                        navigateto(
-                                            navigationscreen:
-                                                customtableallreciepts(),
-                                            context: context);
+                                        await BlocProvider.of<recieptCubit>(
+                                                context)
+                                            .getallreciepts(
+                                                token: generaltoken, page: 1);
 
                                         ownercard.clear();
                                         ownerphone.clear();

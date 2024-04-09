@@ -36,14 +36,16 @@ class revenuesearch extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
+                          width: MediaQuery.sizeOf(context).width > 950
+                              ? MediaQuery.sizeOf(context).width * 0.25
+                              : MediaQuery.sizeOf(context).width * 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
                               color: Colors.white,
                             ),
                             padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                                vertical: 20, horizontal: 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Column(
@@ -64,15 +66,15 @@ class revenuesearch extends StatelessWidget {
                                   custommaterialbutton(
                                       onPressed: () async {
                                         if (BlocProvider.of<DateCubit>(context)
-                                                .date1 ==
-                                            "التاريخ")
+                                                .date6 ==
+                                            "التاريخ من")
                                           showdialogerror(
                                               error: "برجاء اختيار التاريخ من",
                                               context: context);
                                         else if (BlocProvider.of<DateCubit>(
                                                     context)
-                                                .date2 ==
-                                            "التاريخ")
+                                                .date7 ==
+                                            "التاريخ الي")
                                           showdialogerror(
                                               error: "برجاء اختيار التاريخ الي",
                                               context: context);
@@ -82,11 +84,11 @@ class revenuesearch extends StatelessWidget {
                                             "date_from":
                                                 BlocProvider.of<DateCubit>(
                                                         context)
-                                                    .date1,
+                                                    .date6,
                                             "date_to":
                                                 BlocProvider.of<DateCubit>(
                                                         context)
-                                                    .date2,
+                                                    .date7,
                                           };
                                           await BlocProvider.of<revenueCubit>(
                                                   context)

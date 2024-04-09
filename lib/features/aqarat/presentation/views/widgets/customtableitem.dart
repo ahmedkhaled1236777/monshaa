@@ -31,7 +31,7 @@ class customtableitem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints:
-          BoxConstraints(minHeight: MediaQuery.of(context).size.height / 19),
+          BoxConstraints(minHeight: MediaQuery.of(context).size.height / 21),
       child: Row(
         children: [
           Expanded(

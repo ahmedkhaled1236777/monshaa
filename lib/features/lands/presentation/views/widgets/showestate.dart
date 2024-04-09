@@ -1,11 +1,8 @@
-import 'package:aplication/building.dart';
 import 'package:aplication/core/commn/constants.dart';
 import 'package:aplication/core/commn/widgets/cashedimage.dart';
-import 'package:aplication/features/aqarat/presentation/views/estate.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/features/lands/data/models/showlands/datum.dart';
-import 'package:aplication/main.dart';
-import 'package:aplication/features/auth/register/presentation/views/register.dart';
+
 import 'package:flutter/material.dart';
 
 class mlandShowEstate extends StatefulWidget {
@@ -248,7 +245,35 @@ class ShowlandEstateState extends State<mlandShowEstate> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  child: Text(
+                                    "اسم المالك او الوسيط : ${widget.data.sellerName!}",
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        height: 2,
+                                        fontSize: 12.5,
+                                        color: Colors.blueGrey,
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  child: Text(
+                                    "اسم الموظف : ${widget.data.user!.name!}",
+                                    textAlign: TextAlign.justify,
+                                    style: const TextStyle(
+                                        height: 2,
+                                        fontSize: 12.5,
+                                        color: Colors.blueGrey,
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                ),
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 if (widget.data.advertiseDetails != null)
@@ -393,7 +418,7 @@ class ShowlandEstateState extends State<mlandShowEstate> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'نوع المعلن:${show[widget.data.advertiserType]}',
+                                          'النوع:${show[widget.data.advertiserType]}',
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.blueGrey,
@@ -468,6 +493,34 @@ class ShowlandEstateState extends State<mlandShowEstate> {
                                               fontWeight: FontWeight.w100),
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      "اسم المالك او الوسيط : ${widget.data.sellerName!}",
+                                      textAlign: TextAlign.justify,
+                                      style: const TextStyle(
+                                          height: 2,
+                                          fontSize: 12,
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.w100),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      "اسم الموظف : ${widget.data.user!.name!}",
+                                      textAlign: TextAlign.justify,
+                                      style: const TextStyle(
+                                          height: 2,
+                                          fontSize: 12,
+                                          color: Colors.blueGrey,
+                                          fontWeight: FontWeight.w100),
                                     ),
                                   ),
                                   const SizedBox(

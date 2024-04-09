@@ -64,7 +64,7 @@ class revenuerepoimplementation extends revenuerepo {
   Future<Either<failure, String>> deleterevenue(
       {required String token, required int revenueid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/expenses/delete/${revenueid}", token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);

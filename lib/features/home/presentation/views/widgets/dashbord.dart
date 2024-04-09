@@ -1,34 +1,15 @@
-import 'dart:math';
-
-import 'package:aplication/building.dart';
-import 'package:aplication/catch_receipt.dart';
-import 'package:aplication/connect.dart';
-import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
-import 'package:aplication/features/contracts/presentation/views/contract.dart';
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/presentation/viewmodel/showaqarat/showaqarat_cubit.dart';
-import 'package:aplication/features/aqarat/presentation/views/estate.dart';
-import 'package:aplication/expense.dart';
+
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
-import 'package:aplication/features/home/presentation/views/home.dart';
-import 'package:aplication/features/auth/login/presentation/views/login.dart';
+
 import 'package:aplication/features/home/presentation/views/widgets/appbartittle.dart';
 import 'package:aplication/features/home/presentation/views/widgets/customdraweitem.dart';
 import 'package:aplication/features/lands/presentation/viewmodel/showlands/showlands_cubit.dart';
-import 'package:aplication/main.dart';
-import 'package:aplication/readbuild.dart';
-import 'package:aplication/readcatch.dart';
-import 'package:aplication/readcontract.dart';
-import 'package:aplication/readestate.dart';
-import 'package:aplication/readexpense.dart';
-import 'package:aplication/readreceipt.dart';
-import 'package:aplication/readtenants.dart';
-import 'package:aplication/receipt.dart';
-import 'package:aplication/features/reports/presentation/view/reports.dart';
-import 'package:aplication/features/tenants/presentation/view/widgets/tenants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,6 +20,7 @@ class Dashboard extends StatelessWidget {
     return LayoutBuilder(builder: (context, conters) {
       if (MediaQuery.sizeOf(context).width >= 950) {
         return Container(
+          width: MediaQuery.of(context).size.width * 0.19,
           child: Drawer(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0),
@@ -46,42 +28,52 @@ class Dashboard extends StatelessWidget {
               backgroundColor: Color(0xff415769),
               width: MediaQuery.of(context).size.width * 0.25,
               child: Container(
+                padding: EdgeInsets.all(10),
                 child: ListView(
                   children: [
+                    SizedBox(
+                      height: 10,
+                    ),
                     appbartittle(
                       sizedboxwidth: Appsizes.size5.w,
-                      fontSize: 6.sp,
+                      fontSize: 17,
                     ),
                     SizedBox(
-                      height: 2.h,
+                      height: 30,
                     ),
                     Column(
                       children: BlocProvider.of<HomeCubit>(context)
                           .sidebarpermessions
-                          .map((e) => Column(
-                                children: [
-                                  customdraweritem(
-                                      count: e["count"],
-                                      sizedboxwidth: 3.w,
-                                      textstyle: Appstyles.textStyle13w,
-                                      iconData: e["icon"],
-                                      text: e["name"],
-                                      onTap: () {
-                                        BlocProvider.of<ShowaqaratCubit>(
-                                                context)
-                                            .queryParameters = null;
-                                        BlocProvider.of<ShowlandsCubit>(context)
-                                            .queryParameters = null;
-                                        navigateandfinish(
-                                            navigationscreen: e["page"],
-                                            context: context);
-                                      },
-                                      iconsize: 10.sp.clamp(0, 10.sp)),
-                                  SizedBox(
-                                    height: Appsizes.size10.h,
-                                  )
-                                ],
-                              ))
+                          .map((e) => e["name"] == "الاشعارات"
+                              ? SizedBox()
+                              : Column(
+                                  children: [
+                                    customdraweritem(
+                                        count: e["count"],
+                                        sizedboxwidth: 3.w,
+                                        textstyle: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w300),
+                                        iconData: e["icon"],
+                                        text: e["name"],
+                                        onTap: () {
+                                          BlocProvider.of<ShowaqaratCubit>(
+                                                  context)
+                                              .queryParameters = null;
+                                          BlocProvider.of<ShowlandsCubit>(
+                                                  context)
+                                              .queryParameters = null;
+                                          navigateandfinish(
+                                              navigationscreen: e["page"],
+                                              context: context);
+                                        },
+                                        iconsize: 21),
+                                    SizedBox(
+                                      height: 22,
+                                    )
+                                  ],
+                                ))
                           .toList(),
                     )
                   ],
@@ -90,6 +82,7 @@ class Dashboard extends StatelessWidget {
         );
       } else {
         return Container(
+          width: MediaQuery.of(context).size.width * 0.85,
           child: Drawer(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0),

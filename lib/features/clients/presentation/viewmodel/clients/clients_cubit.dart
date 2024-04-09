@@ -16,6 +16,11 @@ class clientsCubit extends Cubit<clientsState> {
     "تعديل",
     "حذف",
   ];
+  Map showdepartement={
+"state_sale":"عقار بيع",
+"state_rent":"عقار ايجار",
+"land_sale":"ارض بيع"
+  };
   Map<String, dynamic>? queryParameters;
   List<Datum> clientsdata = [];
   bool loading = false;

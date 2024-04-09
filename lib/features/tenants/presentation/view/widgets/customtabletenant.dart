@@ -8,12 +8,10 @@ import 'package:aplication/core/commn/navigation.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/styles/style.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/customheadertable.dart';
-import 'package:aplication/features/auth/profile/presentation/view/widgets/customdescription.dart';
 import 'package:aplication/features/tenants/presentation/view/widgets/customtabletenantitem.dart';
 import 'package:aplication/features/tenants/presentation/view/widgets/editdialog.dart';
 import 'package:aplication/features/tenants/presentation/view/widgets/showtenantdialog.dart';
 import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
-import 'package:aplication/showtenants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +71,7 @@ class _customtabletenantsState extends State<customtabletenants> {
             if (state is showTenantfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
-              if (state is deleteTenantfailure)
+            if (state is deleteTenantfailure)
               showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showTenantloadin) return loading();
@@ -241,19 +239,22 @@ class _customtabletenantsState extends State<customtabletenants> {
                                           size: 23, color: Color(0xff00416A))),
                                   delet: IconButton(
                                       onPressed: () async {
-                                         awsomdialogerror(context: context, tittle: "هل تريد حذف المستأجر ؟", btnOkOnPress: ()async{
-                                  await BlocProvider.of<TenantCubit>(
-                                                context)
-                                            .deletetenant(
-                                                token: generaltoken,
-                                                tenantid: BlocProvider.of<
-                                                        TenantCubit>(context)
-                                                    .tenantdata[index]
-                                                    .id!
-                                                    .toInt());
-                                    });
-                                        
-                                       
+                                        awsomdialogerror(
+                                            context: context,
+                                            tittle: "هل تريد حذف المستأجر ؟",
+                                            btnOkOnPress: () async {
+                                              await BlocProvider.of<
+                                                      TenantCubit>(context)
+                                                  .deletetenant(
+                                                      token: generaltoken,
+                                                      tenantid: BlocProvider.of<
+                                                                  TenantCubit>(
+                                                              context)
+                                                          .tenantdata[index]
+                                                          .id!
+                                                          .toInt());
+                                              Navigator.pop(context);
+                                            });
                                       },
                                       icon: Icon(
                                         size:
@@ -261,12 +262,12 @@ class _customtabletenantsState extends State<customtabletenants> {
                                                     600
                                                 ? 20.sp
                                                 : 22,
-                                        Icons.delete,
+                                        Icons.delete_outline_outlined,
                                         color: Colors.red,
                                       )),
                                   edit: IconButton(
                                     icon: Icon(
-                                      Icons.edit,
+                                      Icons.edit_note,
                                       size: MediaQuery.of(context).size.width <
                                               600
                                           ? 20.sp
@@ -274,6 +275,9 @@ class _customtabletenantsState extends State<customtabletenants> {
                                     ),
                                     onPressed: () {
                                       showDialog(
+                                          barrierDismissible:
+                                              false, // user must tap button!
+
                                           context: context,
                                           builder: (_) {
                                             return AlertDialog(
@@ -296,8 +300,16 @@ class _customtabletenantsState extends State<customtabletenants> {
                                                 content: edittenantdialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          0.8,
+                                                                  .width >
+                                                              950
+                                                          ? MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .width *
+                                                              0.25
+                                                          : MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .width *
+                                                              1,
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *

@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<ScaffoldState> scafoldstate = GlobalKey<ScaffoldState>();
   @override
   intializedata() async {
-    BlocProvider.of<HomeCubit>(context).gethome(token: generaltoken);
+    await BlocProvider.of<HomeCubit>(context).gethome(token: generaltoken);
   }
 
   void initState() {

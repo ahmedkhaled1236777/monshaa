@@ -25,38 +25,37 @@ class contractmodelrequest {
   final String commission_type;
   final String commission;
   final String insurance_total;
-  final String period_of_delay;
   final String havemoney;
 
-  contractmodelrequest(
-      {required this.tenant_name,
-      required this.havemoney,
-      required this.tenant_cardnumber,
-      required this.tenant_phone,
-      required this.tenant_adress,
-      required this.tenant_job,
-      required this.tenant_nationality,
-      required this.owner_name,
-      required this.owner_cardnumber,
-      required this.owner_phone,
-      required this.owner_adress,
-      required this.owner_job,
-      required this.owner_nationality,
-      required this.aqar_adress,
-      required this.governrate,
-      required this.aqar_type,
-      required this.area,
-      required this.aqaradressdetails,
-      required this.emaranumber,
-      required this.flatnumber,
-      required this.date,
-      required this.contractfrom,
-      required this.contractto,
-      required this.contractvalue,
-      required this.commission_type,
-      required this.commission,
-      required this.insurance_total,
-      required this.period_of_delay});
+  contractmodelrequest({
+    required this.tenant_name,
+    required this.havemoney,
+    required this.tenant_cardnumber,
+    required this.tenant_phone,
+    required this.tenant_adress,
+    required this.tenant_job,
+    required this.tenant_nationality,
+    required this.owner_name,
+    required this.owner_cardnumber,
+    required this.owner_phone,
+    required this.owner_adress,
+    required this.owner_job,
+    required this.owner_nationality,
+    required this.aqar_adress,
+    required this.governrate,
+    required this.aqar_type,
+    required this.area,
+    required this.aqaradressdetails,
+    required this.emaranumber,
+    required this.flatnumber,
+    required this.date,
+    required this.contractfrom,
+    required this.contractto,
+    required this.contractvalue,
+    required this.commission_type,
+    required this.commission,
+    required this.insurance_total,
+  });
 
   tojson() => {
         "name": tenant_name,
@@ -86,6 +85,5 @@ class contractmodelrequest {
         "commission_type": commission_type,
         "commission": commission,
         "insurance_total": insurance_total,
-        "period_of_delay": period_of_delay
       };
 }

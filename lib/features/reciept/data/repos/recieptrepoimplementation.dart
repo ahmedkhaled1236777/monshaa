@@ -1,7 +1,7 @@
 import 'package:aplication/core/errors/failure.dart';
 import 'package:aplication/core/errors/handlingerror.dart';
 import 'package:aplication/core/services/apiservice.dart';
-import 'package:aplication/features/reciept/data/models/recieptmodel/recieptmodel.dart';
+import 'package:aplication/features/reciept/data/models/allrecieptmodel/allrecieptmodel.dart';
 import 'package:aplication/features/reciept/data/models/recieptmodelrequest.dart';
 import 'package:aplication/features/reciept/data/repos/recieptrepo.dart';
 import 'package:dartz/dartz.dart';
@@ -21,6 +21,10 @@ class recieptrepoimplementation extends recieptrepo {
       if (response.statusCode == 200 && response.data["status"] == true) {
         return right(response.data["message"]);
       }
+      if (response.statusCode == 200 &&
+          (response.data["code"] == 415 || response.data["code"] == 416)) {
+        return left(requestfailure(error_message: response.data["message"]));
+      }
       if (response.statusCode == 200 && response.data["code"] == 422) {
         return left(requestfailure(error_message: response.data[0]));
       } else {
@@ -33,18 +37,20 @@ class recieptrepoimplementation extends recieptrepo {
   }
 
   @override
-  Future<Either<failure, Recieptmodel>> getreciepts(
+  Future<Either<failure, Allrecieptmodel>> getreciepts(
       {required String token,
       required int page,
       Map<String, dynamic>? queryParameters}) async {
-    Recieptmodel recieptmodel;
+    Allrecieptmodel recieptmodel;
     try {
       Response response = await Getdata.getdata(
           path: "/receipt/get-all-receipts?page=${page}",
           token: token,
           queryParameters: queryParameters);
+      print("rrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      print(response);
       if (response.statusCode == 200 && response.data["code"] == 200) {
-        recieptmodel = Recieptmodel.fromJson(response.data);
+        recieptmodel = Allrecieptmodel.fromJson(response.data);
         return right(recieptmodel);
       } else if (response.statusCode == 200 && response.data["code"] == 409) {
         return left(requestfailure(error_message: response.data["message"]));
@@ -62,7 +68,7 @@ class recieptrepoimplementation extends recieptrepo {
   Future<Either<failure, String>> deletereciept(
       {required String token, required int recieptid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/receipt/delete/${recieptid}", token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);

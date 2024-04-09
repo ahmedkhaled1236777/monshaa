@@ -4,6 +4,7 @@ import 'package:aplication/features/contracts/presentation/viewmodel/contract/co
 import 'package:aplication/features/financial/presentation/view/addfinancial.dart';
 import 'package:aplication/features/financial/presentation/view/customtablefinancial.dart';
 import 'package:aplication/features/financial/presentation/view/financialsearch.dart';
+import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_cubit.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,37 +34,23 @@ class desktopfinancials extends StatelessWidget {
             ),
             title: Text(
               'سند قبض',
-              style: TextStyle(color: Colors.white, fontSize: 4.sp),
+              style: TextStyle(color: Colors.white, fontSize: 3.5.sp),
             ),
             centerTitle: true,
             backgroundColor: Appcolors.maincolor,
             actions: [
               IconButton(
                   onPressed: () async {
-                    BlocProvider.of<contractCubit>(context).queryParameters =
+                    BlocProvider.of<financialCubit>(context).queryParameters =
                         null;
-                    await BlocProvider.of<contractCubit>(context)
-                        .getallcontracts(token: generaltoken, page: 1);
+                    await BlocProvider.of<financialCubit>(context)
+                        .getallfinancials(token: generaltoken, page: 1);
                   },
-                  icon: const Icon(Icons.data_exploration,
+                  icon: const Icon(Icons.blur_circular_rounded,
                       color: Appcolors.whitecolor)),
               allfinancialsearch(),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.print,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                ],
+              SizedBox(
+                width: 10,
               )
             ],
           ),

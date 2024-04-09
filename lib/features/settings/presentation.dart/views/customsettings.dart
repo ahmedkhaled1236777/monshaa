@@ -11,6 +11,7 @@ import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
 import 'package:aplication/features/settings/presentation.dart/views/customitem.dart';
 import 'package:aplication/features/settings/presentation.dart/views/customitemwithicon.dart';
+import 'package:aplication/features/settings/presentation.dart/views/updatepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,7 +56,7 @@ class customsettings extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
-                      height: 25,
+                      height: 10,
                     ),
                     CircleAvatar(
                       radius: 70,
@@ -63,6 +64,7 @@ class customsettings extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 69,
                         child: imagefromrequest(
+                            border: 100,
                             url: cashhelper.getdata(key: "logo"),
                             height: 200,
                             width: 200),
@@ -87,29 +89,36 @@ class customsettings extends StatelessWidget {
                       height: 10,
                     ),
                     customitem(
-                        description: "عنوان الشركه", value: cashhelper.getdata(key: "company_adress")),
+                        description: "عنوان الشركه",
+                        value: cashhelper.getdata(key: "company_adress")),
                     SizedBox(
                       height: 10,
                     ),
                     customitem(
-                        description: "هاتف الشركه", value: cashhelper.getdata(key: "company_phone")),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    customitem(description: "الاسم", value:cashhelper.getdata(key: "name")),
+                        description: "هاتف الشركه",
+                        value: cashhelper.getdata(key: "company_phone")),
                     SizedBox(
                       height: 10,
                     ),
                     customitem(
-                        description: "الهاتف", value: cashhelper.getdata(key: "phone")),
+                        description: "الاسم",
+                        value: cashhelper.getdata(key: "name")),
                     SizedBox(
                       height: 10,
                     ),
-                    customitemwithicon(
+                    customitem(
+                        description: "الهاتف",
+                        value: cashhelper.getdata(key: "phone")),
+                    SizedBox(
+                      height: 10,
+                    ),
+  if(cashhelper.getdata(key: "role")=="manager")                  customitemwithicon(
                       description: 'تعديل الحساب',
                       value: IconButton(
                           onPressed: () {
-                            print('hello');
+                            navigateandfinish(
+                                navigationscreen: updatepage(),
+                                context: context);
                           },
                           icon: Icon(
                             Icons.edit,
@@ -125,15 +134,11 @@ class customsettings extends StatelessWidget {
                         value: BlocConsumer<LogoutCubit, LogoutState>(
                           listener: (context, state) {
                             if (state is Logoutsuccess) {
-                              BlocProvider.of<HomeCubit>(context)
-                                  .sidebarpermessions
-                                  .clear();
-                              BlocProvider.of<HomeCubit>(context)
-                                  .gridpermessions
-                                  .clear();
+                              BlocProvider.of<HomeCubit>(context).cleardata();
+
                               cashhelper.cleardata();
                               showsnack(
-                                  comment: "تم تشجيل الخروج بنجاح",
+                                  comment: "تم تسجيل الخروج بنجاح",
                                   context: context);
                               navigateandfinish(
                                   navigationscreen: Login(), context: context);
@@ -151,8 +156,8 @@ class customsettings extends StatelessWidget {
                                   BlocProvider.of<LogoutCubit>(context).log_out(
                                       token: cashhelper.getdata(key: "token"),
                                       devicetoken: cashhelper.getdata(
-                                          key: "devicetoken")==null?"agfgkjjkhjkhjhjhjkhjghg":cashhelper.getdata(
-                                          key: "devicetoken"));
+                                              key: "devicetoken") ??
+                                          "");
                                 },
                                 icon: const Icon(
                                   Icons.logout_outlined,

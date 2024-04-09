@@ -1,23 +1,25 @@
-import 'package:aplication/features/reciept/data/models/recieptmodel/receipt.dart';
+import 'package:aplication/features/reciept/data/models/allrecieptmodel/allrecieptmodel.dart';
 import 'package:aplication/features/reciept/data/models/recieptmodelrequest.dart';
 import 'package:aplication/features/reciept/data/repos/recieptrepoimplementation.dart';
 import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptstate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../contracts/data/models/contractmodel/datum.dart';
+import '../../../data/models/allrecieptmodel/datum.dart';
+import '../../../data/models/allrecieptmodel/receipt.dart';
 
 class recieptCubit extends Cubit<recieptState> {
+     List<Receipt> reciepts=[];
+
   final recieptrepoimplementation recieptrepo;
   TextEditingController tenantname = TextEditingController();
-  TextEditingController installment_number = TextEditingController();
-
+  Allrecieptmodel? allrecieptmodel;
   TextEditingController ownername = TextEditingController();
   TextEditingController amountofmoney = TextEditingController();
   TextEditingController companyamola = TextEditingController();
   recieptCubit(this.recieptrepo) : super(recieptInitial());
   giverecieptdata(Datum data) {
-    tenantname = TextEditingController(text: data.tenant!.name!);
+    tenantname = TextEditingController(text: data.tenant!!);
     ownername = TextEditingController(text: data.ownerName!);
     amountofmoney = TextEditingController(text: data.contractTotal.toString());
     emit(recieptchangecontrollers());
@@ -28,7 +30,6 @@ class recieptCubit extends Cubit<recieptState> {
     ownername.clear();
     amountofmoney.clear();
     companyamola.clear();
-    installment_number.clear();
     emit(recieptchangecontrollers());
   }
 
@@ -62,7 +63,7 @@ class recieptCubit extends Cubit<recieptState> {
   bool loading = false;
   int page = 1;
   int? id;
-  List<Receipt> myreciepts = [];
+  List<Datum> myreciepts = [];
   addreciept(
       {required String token,
       required recieptsmodelrequest reciept,
@@ -87,7 +88,7 @@ class recieptCubit extends Cubit<recieptState> {
     result.fold((l) {
       emit(showrecieptfailure(errorr_message: l.error_message));
     }, (r) {
-      myreciepts.addAll(r.data!.data![0].receipts!);
+      myreciepts.addAll(r.data!.data!);
       if (r.data!.links!.next == null) loading = false;
       emit(showrecieptsuccess());
     });
@@ -104,8 +105,10 @@ class recieptCubit extends Cubit<recieptState> {
     }, (r) {
       myreciepts.clear();
 
-      myreciepts.addAll(r.data!.data![0].receipts!);
+      myreciepts.addAll(r.data!.data!);
+      print(myreciepts);
       if (r.data!.links!.next == null) loading = false;
+
       emit(showrecieptsuccess());
     });
   }
@@ -116,7 +119,7 @@ class recieptCubit extends Cubit<recieptState> {
     result.fold((failure) {
       emit(deleterecieptfailure(errormessage: failure.error_message));
     }, (success) {
-      myreciepts.removeWhere((element) => element.id == recieptid);
+      reciepts.removeWhere((element) => element.id == recieptid);
       emit(deleterecieptsuccess());
     });
   }
@@ -134,4 +137,10 @@ class recieptCubit extends Cubit<recieptState> {
       emit(editrecieptsuccess(success_message: success));
     });
   }*/
+  dispose() {
+    tenantname.clear();
+    companyamola.clear();
+    amountofmoney.clear();
+    ownername.clear();
+  }
 }

@@ -94,11 +94,8 @@ class _mobilelayoutState extends State<mobilelayout> {
                   children: BlocProvider.of<HomeCubit>(context)
                       .gridpermessions
                       .map((e) => customgriditem(
-                          imagewidth:
-                              widget.tablet_or_mobile == "tablet" ? 20.w : 35.w,
-                          textfontsize: widget.tablet_or_mobile == "tablet"
-                              ? 8.sp
-                              : 12.sp,
+                          imagewidth: 45,
+                          textfontsize: 12.5,
                           image: e.icon!,
                           onTap: () {},
                           count: e.count!.toInt(),

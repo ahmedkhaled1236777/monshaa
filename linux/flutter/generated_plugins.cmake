@@ -3,8 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  audioplayers_linux
   awesome_notifications
+  bitsdojo_window_linux
   file_selector_linux
   printing
 )

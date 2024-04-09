@@ -8,9 +8,16 @@ import 'package:aplication/features/connect/presentation/viewmodel/connect/conne
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class mobileconnect extends StatelessWidget {
+class mobileconnect extends StatefulWidget {
+  @override
+  State<mobileconnect> createState() => _mobileconnectState();
+}
+
+class _mobileconnectState extends State<mobileconnect> {
   TextEditingController message = TextEditingController();
+
   TextEditingController tittle = TextEditingController();
+
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   @override
@@ -178,5 +185,13 @@ class mobileconnect extends StatelessWidget {
                                         )),
                                   ])))))
             ])));
+  }
+
+  @override
+  void dispose() {
+    tittle.dispose();
+    message.dispose();
+
+    super.dispose();
   }
 }

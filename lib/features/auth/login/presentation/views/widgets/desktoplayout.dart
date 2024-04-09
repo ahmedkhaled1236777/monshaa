@@ -13,8 +13,8 @@ import 'package:aplication/features/auth/login/presentation/views/widgets/noacco
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/logincuibt.dart';
 import 'package:aplication/features/auth/login/presentation/viewsmodel/logincuibt/loginstates.dart';
 import 'package:aplication/features/auth/register/presentation/views/register.dart';
+import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
 import 'package:aplication/features/home/presentation/views/home.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +33,7 @@ class _DesktoplayoutState extends State<Desktoplayout> {
 
   IconData passicon = Icons.visibility_off;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
+  @override
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -115,14 +115,11 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             button_name: Apptextes.login,
                             buttonicon: Icons.login,
                             onPressed: () async {
-                              print(
-                                  "oooooooooooooooooooooooooooooooooooooooooo");
-
                               if (formkey.currentState!.validate()) {
                                 await BlocProvider.of<logincuibt>(context)
                                     .loginpostdata(
                                         login: loginrequest(
-                                  token: "jknjknjkjk",
+                                  token: "",
                                   device_type: "android",
                                   phone: phone.text,
                                   password: password.text,
@@ -138,25 +135,32 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                           } else if (state is loginsucces) {
                             password.clear();
                             phone.clear();
+                            generaltoken = state.loginmodel.data!.token!;
                             cashhelper.setdata(
                                 key: "logo",
                                 value: state.loginmodel.data!.logo);
                             cashhelper.setdata(
                                 key: "token",
                                 value: state.loginmodel.data!.token);
-                                
-                    cashhelper.setdata(
-                        key: "name",
-                        value: state.loginmodel.data!.name);
-                    cashhelper.setdata(
-                        key: "company_phone",
-                        value: state.loginmodel.data!.companyPhone);
-                    cashhelper.setdata(
-                        key: "phone",
-                        value: state.loginmodel.data!.phone);
-                    cashhelper.setdata(
-                        key: "company_adress",
-                        value: state.loginmodel.data!.companyAddress);
+
+                            cashhelper.setdata(
+                                key: "name",
+                                value: state.loginmodel.data!.name);
+                            cashhelper.setdata(
+                                key: "currency",
+                                value: state.loginmodel.data!.currency);
+                            cashhelper.setdata(
+                                key: "company_phone",
+                                value: state.loginmodel.data!.companyPhone);
+                                  cashhelper.setdata(
+                        key: "role",
+                        value: state.loginmodel.data!.userType);
+                            cashhelper.setdata(
+                                key: "phone",
+                                value: state.loginmodel.data!.phone);
+                            cashhelper.setdata(
+                                key: "company_adress",
+                                value: state.loginmodel.data!.companyAddress);
                             cashhelper.setdata(
                                 key: "company_name",
                                 value: state.loginmodel.data!.companyName);
@@ -166,6 +170,7 @@ class _DesktoplayoutState extends State<Desktoplayout> {
                             navigateandfinish(
                                 navigationscreen: MyHomePage(),
                                 context: context);
+                                
                           }
                         },
                       ),
@@ -183,5 +188,13 @@ class _DesktoplayoutState extends State<Desktoplayout> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    phone.dispose();
+
+    password.dispose();
+    super.dispose();
   }
 }

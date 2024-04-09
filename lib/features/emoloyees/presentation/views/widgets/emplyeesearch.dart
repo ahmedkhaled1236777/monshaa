@@ -35,7 +35,9 @@ class emplyeesearch extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
+                          width: MediaQuery.sizeOf(context).width > 950
+                              ? MediaQuery.sizeOf(context).width * 0.25
+                              : MediaQuery.sizeOf(context).width * 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),

@@ -1,6 +1,7 @@
 import 'package:aplication/core/color/appcolors.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/addaqar.dart';
 import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
+import 'package:aplication/features/lands/presentation/views/widgets/addland.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,7 +36,7 @@ class addlandwithscafold extends StatelessWidget {
         ),
         drawer: Dashboard(),
         body: Center(
-            child: addaqar(
+            child: addland(
           width: MediaQuery.sizeOf(context).width,
         )),
       ),

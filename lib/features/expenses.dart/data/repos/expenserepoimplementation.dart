@@ -61,7 +61,7 @@ class expenserepoimplementation extends expenserepo {
   Future<Either<failure, String>> deleteexpense(
       {required String token, required int expenseid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/expenses/delete/${expenseid}", token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);

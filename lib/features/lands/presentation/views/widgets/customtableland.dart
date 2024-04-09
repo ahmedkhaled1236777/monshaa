@@ -129,7 +129,7 @@ class _customtablelandState extends State<customtableland> {
                                       .advertiserType!],
                               edit: IconButton(
                                 icon: Icon(
-                                  Icons.edit,
+                                  Icons.edit_note,
                                   size: MediaQuery.of(context).size.width < 600
                                       ? 20.sp
                                       : 22,
@@ -147,14 +147,36 @@ class _customtablelandState extends State<customtableland> {
                                           .data[index]
                                           .createdAt!;
                                   showDialog(
+                                      barrierDismissible:
+                                          false, // user must tap button!
+
                                       context: context,
                                       builder: (_) {
                                         return AlertDialog(
-                                            scrollable: true,
+                                            title: Container(
+                                              alignment: Alignment.topLeft,
+                                              child: IconButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  icon:
+                                                      const Icon(Icons.close)),
+                                            ),
+                                            surfaceTintColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(0)),
                                             content: editlanddialog(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.5,
+                                              width: MediaQuery
+                                                              .sizeOf(context)
+                                                          .width >
+                                                      950
+                                                  ? MediaQuery.sizeOf(context)
+                                                          .width *
+                                                      0.25
+                                                  : MediaQuery.sizeOf(context)
+                                                          .width *
+                                                      1,
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
                                                   0.85,
@@ -217,7 +239,7 @@ class _customtablelandState extends State<customtableland> {
                                       builder: (context, state) {
                                 return IconButton(
                                   icon: Icon(
-                                    Icons.delete,
+                                    Icons.delete_outline_outlined,
                                     color: Colors.red,
                                     size:
                                         MediaQuery.of(context).size.width < 600
@@ -225,18 +247,22 @@ class _customtablelandState extends State<customtableland> {
                                             : 22,
                                   ),
                                   onPressed: () {
-                                     awsomdialogerror(context: context, tittle: "هل تريد حذف هذه الارض ؟", btnOkOnPress:() async {
-   await  BlocProvider.of<ShowlandsCubit>(context)
-                                        .deleteland(
-                                            token: generaltoken,
-                                            landnumber:
-                                                BlocProvider.of<ShowlandsCubit>(
-                                                        context)
-                                                    .data[index]
-                                                    .id!
-                                                    .toInt());
-                                } );
-                                   
+                                    awsomdialogerror(
+                                        context: context,
+                                        tittle: "هل تريد حذف هذه الارض ؟",
+                                        btnOkOnPress: () async {
+                                          await BlocProvider.of<ShowlandsCubit>(
+                                                  context)
+                                              .deleteland(
+                                                  token: generaltoken,
+                                                  landnumber: BlocProvider.of<
+                                                              ShowlandsCubit>(
+                                                          context)
+                                                      .data[index]
+                                                      .id!
+                                                      .toInt());
+                                          Navigator.pop(context);
+                                        });
                                   },
                                 );
                               }),

@@ -15,7 +15,6 @@ import 'package:aplication/features/aqarat/presentation/views/widgets/customhead
 import 'package:aplication/features/aqarat/presentation/views/widgets/customtableitem.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/editdialog.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/showestate.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -132,7 +131,7 @@ class _customtableaqarState extends State<customtableaqar> {
                                         .advertiserType!],
                                 edit: IconButton(
                                   icon: Icon(
-                                    Icons.edit,
+                                    Icons.edit_note,
                                     size:
                                         MediaQuery.of(context).size.width < 600
                                             ? 20.sp
@@ -155,6 +154,9 @@ class _customtableaqarState extends State<customtableaqar> {
                                     BlocProvider.of<EditCubit>(context)
                                         .departement = null;
                                     showDialog(
+                                        barrierDismissible:
+                                            false, // user must tap button!
+
                                         context: context,
                                         builder: (_) {
                                           return AlertDialog(
@@ -172,12 +174,17 @@ class _customtableaqarState extends State<customtableaqar> {
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(0)),
-                                              scrollable: true,
                                               content: editdialog(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
+                                                width: MediaQuery
+                                                                .sizeOf(context)
+                                                            .width >
+                                                        950
+                                                    ? MediaQuery.sizeOf(context)
                                                             .width *
-                                                        0.5,
+                                                        0.25
+                                                    : MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1,
                                                 height:
                                                     MediaQuery.sizeOf(context)
                                                             .height *
@@ -211,8 +218,12 @@ class _customtableaqarState extends State<customtableaqar> {
                                                                     ShowaqaratCubit>(
                                                                 context)
                                                             .data[index]
-                                                            .numberOfBathrooms
-                                                            .toString()),
+                                                            .numberOfBathrooms!=null?BlocProvider.of<
+                                                                    ShowaqaratCubit>(
+                                                                context)
+                                                            .data[index]
+                                                            .numberOfBathrooms.toString():""
+                                                            ),
                                                 housenumber: TextEditingController(
                                                     text: BlocProvider.of<
                                                                 ShowaqaratCubit>(
@@ -275,7 +286,7 @@ class _customtableaqarState extends State<customtableaqar> {
                                 ),
                                 delet: IconButton(
                                   icon: Icon(
-                                    Icons.delete,
+                                    Icons.delete_outline_outlined,
                                     color: Colors.red,
                                     size:
                                         MediaQuery.of(context).size.width < 600
@@ -283,17 +294,22 @@ class _customtableaqarState extends State<customtableaqar> {
                                             : 22,
                                   ),
                                   onPressed: () {
-          awsomdialogerror(context: context, tittle: "هل تريد حذف العقار", btnOkOnPress: ()async{
-          await    BlocProvider.of<ShowaqaratCubit>(context)
-                                        .deleteaqar(
-                                            token: generaltoken,
-                                            aqarnumber: BlocProvider.of<
-                                                    ShowaqaratCubit>(context)
-                                                .data[index]
-                                                .id!
-                                                .toInt());
-          });
-                                  
+                                    awsomdialogerror(
+                                        context: context,
+                                        tittle: "هل تريد حذف العقار",
+                                        btnOkOnPress: () async {
+                                          await BlocProvider.of<
+                                                  ShowaqaratCubit>(context)
+                                              .deleteaqar(
+                                                  token: generaltoken,
+                                                  aqarnumber: BlocProvider.of<
+                                                              ShowaqaratCubit>(
+                                                          context)
+                                                      .data[index]
+                                                      .id!
+                                                      .toInt());
+                                          Navigator.pop(context);
+                                        });
                                   },
                                 )));
                   },

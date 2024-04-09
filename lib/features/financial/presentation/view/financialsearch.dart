@@ -1,4 +1,5 @@
 import 'package:aplication/core/commn/navigation.dart';
+import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
 import 'package:aplication/features/auth/login/presentation/views/widgets/custommaterialbutton.dart';
 import 'package:aplication/features/financial/presentation/view/customtableallfinancials.dart';
@@ -40,14 +41,16 @@ class allfinancialsearch extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
+                          width: MediaQuery.sizeOf(context).width > 950
+                              ? MediaQuery.sizeOf(context).width * 0.25
+                              : MediaQuery.sizeOf(context).width * 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
                               color: Colors.white,
                             ),
                             padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                                vertical: 20, horizontal: 0),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Column(
@@ -89,19 +92,20 @@ class allfinancialsearch extends StatelessWidget {
                                       onPressed: () async {
                                         BlocProvider.of<financialCubit>(context)
                                             .queryParameters = {
-                                          "tenant_phone": tenantphone,
-                                          "tenant_card_number": tenantcard,
+                                          "tenant_phone": tenantphone.text,
+                                          "tenant_card_number": tenantcard.text,
                                           "owner_phone": ownerphone.text,
                                           "owner_card_number": ownercard.text
                                         };
                                         Navigator.pop(context);
-                                        navigateto(
-                                            navigationscreen:
-                                                customtableallfinancials(),
-                                            context: context);
-
+                                        await BlocProvider.of<financialCubit>(
+                                                context)
+                                            .getallfinancials(
+                                                token: generaltoken, page: 1);
                                         ownercard.clear();
                                         ownerphone.clear();
+                                        tenantcard.clear();
+                                        tenantphone.clear();
                                       },
                                       button_name: "بحث",
                                       buttonicon: Icons.search)

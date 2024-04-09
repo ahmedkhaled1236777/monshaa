@@ -123,7 +123,7 @@ class showclientsdialog extends StatelessWidget {
                               Border.all(color: Color(0xff2BA4C8), width: 0.5),
                           borderRadius: BorderRadius.circular(5)),
                       child: Text(
-                        'تاريخ المعاينه: ${BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate == null ? "لا يوجد" : BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate}',
+                        'القسم : ${BlocProvider.of<clientsCubit>(context).showdepartement[BlocProvider.of<clientsCubit>(context).clientsdata[index].department]}',
                         textAlign: TextAlign.right,
                         style: TextStyle(fontSize: 12.5, color: Colors.black87),
                       ),
@@ -131,7 +131,7 @@ class showclientsdialog extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    /*  Container(
+                    Container(
                       width: MediaQuery.of(context).size.width * 1,
                       padding:
                           EdgeInsets.symmetric(vertical: 12, horizontal: 7),
@@ -140,14 +140,50 @@ class showclientsdialog extends StatelessWidget {
                               Border.all(color: Color(0xff2BA4C8), width: 0.5),
                           borderRadius: BorderRadius.circular(5)),
                       child: Text(
-                        'الملاحظات: ${BlocProvider.of<clientsCubit>(context).clientsdata[index].}',
+                        'تاريخ المعاينه: ${BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate == null ? "لا يوجد" : BlocProvider.of<clientsCubit>(context).clientsdata[index].inspectionDate}',
                         textAlign: TextAlign.right,
                         style: TextStyle(fontSize: 12.5, color: Colors.black87),
                       ),
                     ),
                     SizedBox(
                       height: 10,
-                    ),*/
+                    ),
+   if(BlocProvider.of<clientsCubit>(context).clientsdata[index].notes!=null)                  Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'الملاحظات: ${BlocProvider.of<clientsCubit>(context).clientsdata[index].notes}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+         if(BlocProvider.of<clientsCubit>(context).clientsdata[index].notes!=null)               SizedBox(
+                      height: 10,
+                    ),
+  
+                    
+           Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Color(0xff2BA4C8), width: 0.5),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        'اسم الموظف : ${BlocProvider.of<clientsCubit>(context).clientsdata[index].employee}',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.5, color: Colors.black87),
+                      ),
+                    ),
+                  SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               )),

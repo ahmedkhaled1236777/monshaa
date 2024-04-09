@@ -60,7 +60,7 @@ class clientsrepoimplementation extends clientsrepo {
   Future<Either<failure, String>> deleteclients(
       {required String token, required int clientsid}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/clients/delete/${clientsid}", token: token);
       if (response.statusCode == 200 && response.data["code"] == 200) {
         return right(response.data["message"]);

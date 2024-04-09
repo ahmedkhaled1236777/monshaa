@@ -1,4 +1,4 @@
-import 'package:aplication/connect.dart';
+import 'package:aplication/features/connect/presentation/view/connect.dart';
 import 'package:aplication/core/commn/loading.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/features/aqarat/presentation/views/widgets/custommytextform.dart';
@@ -9,10 +9,18 @@ import 'package:aplication/features/connect/presentation/viewmodel/connect/conne
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class desktopconnect extends StatelessWidget {
+class desktopconnect extends StatefulWidget {
+  @override
+  State<desktopconnect> createState() => _desktopconnectState();
+}
+
+class _desktopconnectState extends State<desktopconnect> {
   TextEditingController message = TextEditingController();
+
   TextEditingController tittle = TextEditingController();
+
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,5 +146,13 @@ class desktopconnect extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    tittle.dispose();
+    message.dispose();
+
+    super.dispose();
   }
 }

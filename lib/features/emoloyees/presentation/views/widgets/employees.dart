@@ -1,23 +1,8 @@
-import 'dart:io';
-
-import 'package:aplication/advertiser_type.dart';
-import 'package:aplication/dropdown_estate.dart';
-import 'package:aplication/features/emoloyees/presentation/views/widgets/employees_powers.dart';
-import 'package:aplication/features/emoloyees/data/repos/addemployeerepoimplementation.dart';
-import 'package:aplication/features/emoloyees/presentation/viewmodel/addemployee/addemployee_cubit.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/dektopemployees.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/mobileemployee.dart';
-import 'package:aplication/features/home/presentation/views/widgets/dashbord.dart';
-import 'package:aplication/main.dart';
-import 'package:aplication/pdt.dart';
-import 'package:aplication/reademployees.dart';
-import 'package:aplication/readestate.dart';
-import 'package:aplication/show_employees.dart';
-import 'package:aplication/type.dart';
+
 import 'package:flutter/material.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../building.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class Employees extends StatefulWidget {

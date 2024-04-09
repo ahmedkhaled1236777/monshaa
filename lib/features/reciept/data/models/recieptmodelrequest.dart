@@ -1,15 +1,13 @@
 class recieptsmodelrequest {
   final String date;
   final String amountofmoney;
-  final String installment_number;
   final String amola;
   final String compenyamola;
   final String datefrom;
   final String dateto;
 
   recieptsmodelrequest(
-      {required this.installment_number,
-      required this.date,
+      {required this.date,
       required this.amountofmoney,
       required this.amola,
       required this.compenyamola,
@@ -18,7 +16,6 @@ class recieptsmodelrequest {
 
   tojson() => {
         "total_amount": amountofmoney,
-        "installment_number": installment_number,
         "commission_type": amola,
         "commission": compenyamola,
         "transaction_date": date,

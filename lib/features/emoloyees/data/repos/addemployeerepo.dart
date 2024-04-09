@@ -11,8 +11,8 @@ abstract class employeerepo {
       {required String token, required int page});
   Future<Either<failure, String>> deleteemployee(
       {required String token, required int employeenumber});
-  Future<Either<failure, String>> edittenant(
+  Future<Either<failure, String>> editemployee(
       {required String token,
       required int id,
-      required Tenantmodel tenantmodel});
+      required addemployeemodel employee});
 }

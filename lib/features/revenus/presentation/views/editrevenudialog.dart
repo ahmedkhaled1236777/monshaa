@@ -51,7 +51,7 @@ class editrevenuedialog extends StatelessWidget {
                   height: Appsizes.size20,
                 ),
                 Image.asset(
-                  'images/appartments.png',
+                  "images/mmm.png",
                   height: 50,
                   width: 50,
                 ),

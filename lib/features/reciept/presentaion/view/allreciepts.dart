@@ -2,19 +2,18 @@ import 'package:aplication/features/reciept/presentaion/view/cuatomtableallrecie
 import 'package:aplication/features/reciept/presentaion/view/mobilecustomreciept.dart';
 import 'package:flutter/material.dart';
 
-class allreciepts extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return allrecieptsState();
-  }
-}
+import '../../data/models/allrecieptmodel/receipt.dart';
 
-class allrecieptsState extends State<allreciepts> {
+class allreciepts extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, consters) {
       if (consters.maxWidth >= 950) {
-        return customtableallreciepts();
+        return customtableallreciepts(
+         
+        );
       } else {
         return customtableallmobilereciepts();
       }

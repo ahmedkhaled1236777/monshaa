@@ -18,12 +18,11 @@ class login_repo_implementation extends loginrepo {
     try {
       var response =
           await Postdata.postdata(path: urls.login, data: login.tojson());
+
       if (response.statusCode == 200 && response.data["status"] == true) {
         loginModel = Loginmodel.fromJson(response.data);
-        return right(loginModel);
-      }
-      if (response.statusCode == 200 && response.data["status"] == true) {
-        loginModel = Loginmodel.fromJson(response.data);
+        print("hjbghghbghvghvghvghvghvghgvghvghvgh");
+        print(response);
         return right(loginModel);
       } else {
         return left(requestfailure(error_message: response.data["message"]));

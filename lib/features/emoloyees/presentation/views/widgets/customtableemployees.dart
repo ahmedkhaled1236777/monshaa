@@ -10,8 +10,9 @@ import 'package:aplication/features/emoloyees/presentation/viewmodel/addemployee
 import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeecuibt.dart';
 import 'package:aplication/features/emoloyees/presentation/viewmodel/showemployeecuibt/employeestates.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/customtableemployeeitem.dart';
+import 'package:aplication/features/emoloyees/presentation/views/widgets/editemployeedialog.dart';
 import 'package:aplication/features/emoloyees/presentation/views/widgets/showemployeedialog.dart';
-import 'package:aplication/show_employees.dart';
+import 'package:aplication/features/emoloyees/presentation/views/widgets/show_employees.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,7 +63,7 @@ class _customtableemployeeesState extends State<customtableemployees> {
                   listener: (context, state) {
             if (state is showemployeesfailure)
               showsnack(comment: state.error_message, context: context);
-               if (state is deleteemployeefailure)
+            if (state is deleteemployeefailure)
               showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
             if (state is showemployeesloading) return loading();
@@ -99,37 +100,132 @@ class _customtableemployeeesState extends State<customtableemployees> {
                                 .jobTitle!,
                             delet: IconButton(
                                 onPressed: () async {
-                                    awsomdialogerror(context: context, tittle: "هل تريد حذف الموظف ؟", btnOkOnPress:()async{
-  await   await BlocProvider.of<showemployeescuibt>(
-                                          context)
-                                      .deleteemployee(
-                                          token: generaltoken,
-                                          employeenumber: BlocProvider.of<
-                                                  showemployeescuibt>(context)
-                                              .employeesdata[index]
-                                              .id!
-                                              .toInt());
-                                                
-                                                
-                    } );
-                                
+                                  awsomdialogerror(
+                                      context: context,
+                                      tittle: "هل تريد حذف الموظف ؟",
+                                      btnOkOnPress: () async {
+                                        await await BlocProvider.of<
+                                                showemployeescuibt>(context)
+                                            .deleteemployee(
+                                                token: generaltoken,
+                                                employeenumber: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .id!
+                                                    .toInt());
+                                        Navigator.pop(context);
+                                      });
                                 },
                                 icon: Icon(
                                   size: MediaQuery.of(context).size.width < 600
                                       ? 20.sp
                                       : 22,
-                                  Icons.delete,
+                                  Icons.delete_outline_outlined,
                                   color: Colors.red,
                                 )),
                             edit: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  size: MediaQuery.of(context).size.width < 600
-                                      ? 20.sp
-                                      : 22,
-                                  Icons.edit,
-                                  color: Appcolors.buttoncolor,
-                                ))),
+                              icon: Icon(
+                                Icons.edit_note,
+                                size: MediaQuery.of(context).size.width < 600
+                                    ? 20.sp
+                                    : 22,
+                              ),
+                              onPressed: () {
+                                BlocProvider.of<AddemployeeCubit>(context)
+                                    .showselecteditems(
+                                        BlocProvider.of<showemployeescuibt>(
+                                                context)
+                                            .employeesdata[index]
+                                            .permissions!);
+                                showDialog(
+                                    barrierDismissible:
+                                        false, // user must tap button!
+
+                                    context: context,
+                                    builder: (_) {
+                                      return AlertDialog(
+                                          title: Container(
+                                            alignment: Alignment.topLeft,
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  BlocProvider.of<
+                                                              AddemployeeCubit>(
+                                                          context)
+                                                      .resetdata();
+                                                  Navigator.of(context).pop();
+                                                },
+                                                icon: const Icon(Icons.close)),
+                                          ),
+                                          surfaceTintColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(0)),
+                                          scrollable: true,
+                                          content: editemployeedialog(
+                                            index: index,
+                                            width:
+                                                MediaQuery.sizeOf(context)
+                                                            .width >
+                                                        950
+                                                    ? MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.25
+                                                    : MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1,
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                0.85,
+                                            data: BlocProvider.of<
+                                                    showemployeescuibt>(context)
+                                                .employeesdata[index],
+                                            employeename: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .name
+                                                    .toString()),
+                                            adress: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .address
+                                                    .toString()),
+                                            cardnumber: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .cardNumber
+                                                    .toString()),
+                                            phone: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .phone
+                                                    .toString()),
+                                            password: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .phone
+                                                    .toString()),
+                                            jobtittle: TextEditingController(
+                                                text: BlocProvider.of<
+                                                            showemployeescuibt>(
+                                                        context)
+                                                    .employeesdata[index]
+                                                    .jobTitle
+                                                    .toString()),
+                                          ));
+                                    });
+                              },
+                            )),
                       ),
                     );
                   },

@@ -1,10 +1,7 @@
 import 'dart:io';
 
-import 'package:aplication/building.dart';
-import 'package:aplication/features/aqarat/data/repos/showaqar/showaqarrepo.dart';
 import 'package:aplication/features/connect/data/repo/connectrepoimp.dart';
 import 'package:aplication/features/connect/presentation/viewmodel/connect/connectcuibt.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:aplication/features/auth/register/data/repos/registerrepoimplementation.dart';
 import 'package:aplication/features/clients/data/repos/clientrepoimplementation.dart';
@@ -26,6 +23,7 @@ import 'package:aplication/features/emoloyees/presentation/viewmodel/showemploye
 import 'package:aplication/features/expenses.dart/data/repos/expenserepoimplementation.dart';
 import 'package:aplication/features/expenses.dart/presentation/viewmodel/expense/expenses_cubit.dart';
 import 'package:aplication/features/financial/data/repos/financialrepoimplementation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:aplication/features/financial/presentation/viewmodel/financial/financial_cubit.dart';
 import 'package:aplication/features/finishedcontracts/data/repos/finishedcontractsrepoimplementation.dart';
@@ -45,27 +43,23 @@ import 'package:aplication/features/notifications/presentations/viewmodel/notifi
 import 'package:aplication/features/reciept/data/repos/recieptrepoimplementation.dart';
 import 'package:aplication/features/reciept/presentaion/viewmodel/recieptcuibt/recieptcuibt.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/data/repos/aqaratrepoimplementationreports.dart';
-import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/aqaratreports.dart';
-import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/view/mobileaqaratreports.dart';
 import 'package:aplication/features/reports/presentation/view/aqaratreports.dart/presentation/viewmodel/aqaratreports/aqaratreports_cubit.dart';
 import 'package:aplication/features/reports/presentation/view/landsreports.dart/data/repos/landsreportsrepoimplementation.dart';
 import 'package:aplication/features/reports/presentation/view/landsreports.dart/presentation/viewmodel/landsreports/landsreports_cubit.dart';
-import 'package:aplication/features/reports/presentation/view/landsreports.dart/presentation/views/landsreports.dart';
 import 'package:aplication/features/reports/presentation/view/moneyreports/data/repos/moneyreportsrepoimplementation.dart';
 import 'package:aplication/features/reports/presentation/view/moneyreports/presentation/viewmodel/expenses/expenswsreports_cubit.dart';
 import 'package:aplication/features/reports/presentation/view/profitsreports/data/repo/profitrepoimp.dart';
 import 'package:aplication/features/reports/presentation/view/profitsreports/presentation/viewmodel/cubit/profit_cubit.dart';
-import 'package:aplication/features/reports/presentation/view/reports.dart';
 import 'package:aplication/features/reports/presentation/view/revenusreports.dart/data/repo/revenusreportsrepoimplementation.dart';
 import 'package:aplication/features/reports/presentation/view/revenusreports.dart/presentation/viewmodel/revenus/revenusreports_cubit.dart';
 import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/data/repos/contractsreportsimp.dart';
-import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/presentation/view/contractsreport.dart';
 import 'package:aplication/features/reports/presentation/view/tenantcontractsreports/presentation/viewmodel/contracts/contractsreport_cubit.dart';
 import 'package:aplication/features/reports/presentation/viewmodel/cubit/reports_cubit.dart';
 import 'package:aplication/features/revenus/data/repos/revenurepoimplementation.dart';
 import 'package:aplication/features/revenus/presentation/viewmodel/revenuecuibt/revenue_cubit.dart';
 import 'package:aplication/features/tenants/data/repo/tenantrepoimplementation.dart';
 import 'package:aplication/features/tenants/presentation/viewmodel/tenants/tenant_cubit.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
@@ -95,9 +89,19 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }
+/*Size screenSize = WidgetsBinding.instance.window.physicalSize;
+double width = screenSize.width;
+double height = screenSize.height;
+doWhenWindowReady(() {
+    appWindow.minSize = Size(width,height -10);
+    appWindow.size = Size(width,height-10);
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });*/
   Apiservice.initdio();
 
   runApp(const MyApp());
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
@@ -199,22 +203,19 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => GetMaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
-            routes: {
-              'build': (context) => Building(),
-            },
             theme: ThemeData(
               fontFamily: 'Alexandria',
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
             localizationsDelegates: [
-              GlobalWidgetsLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              MonthYearPickerLocalizations.delegate,
-            ],
-            home:Login()
-            /*cashhelper.getdata(key: "token")==null?Login():
-                MyHomePage()*/ /* Contract(
+        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        MonthYearPickerLocalizations.delegate,
+      ],
+            home: cashhelper.getdata(key: "token") == null
+                ? Login()
+                : MyHomePage() /* Contract(
                 tenantname: TextEditingController(),
                 tenanphone: TextEditingController(),
                 tenantcard: TextEditingController(),

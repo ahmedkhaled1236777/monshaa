@@ -70,11 +70,9 @@ class _customtableclientssState extends State<customtableclientss> {
             if (state is showclientsfailure) {
               showsnack(comment: state.errorr_message, context: context);
             }
-             if (state is deleteclientsfailure)
+            if (state is deleteclientsfailure)
               showsnack(comment: state.errormessage, context: context);
           }, builder: (context, state) {
-            print("///////////////////////////////////////");
-            print(state);
             print(BlocProvider.of<clientsCubit>(context).clientsdata.length);
             if (state is showclientsloadin) return loading();
             if (state is showclientsfailure) return SizedBox();
@@ -109,19 +107,22 @@ class _customtableclientssState extends State<customtableclientss> {
                                           .status!],
                                   delet: IconButton(
                                       onPressed: () async {
-   awsomdialogerror(context: context, tittle: "هل تريد حذف العميل", btnOkOnPress: ()async{
-             await BlocProvider.of<clientsCubit>(
-                                                context)
-                                            .deleteclients(
-                                                token: generaltoken,
-                                                clientsid: BlocProvider.of<
-                                                        clientsCubit>(context)
-                                                    .clientsdata[index]
-                                                    .id!
-                                                    .toInt());
-          });
-
-                                     
+                                        awsomdialogerror(
+                                            context: context,
+                                            tittle: "هل تريد حذف العميل",
+                                            btnOkOnPress: () async {
+                                              await BlocProvider.of<
+                                                      clientsCubit>(context)
+                                                  .deleteclients(
+                                                      token: generaltoken,
+                                                      clientsid: BlocProvider
+                                                              .of<clientsCubit>(
+                                                                  context)
+                                                          .clientsdata[index]
+                                                          .id!
+                                                          .toInt());
+                                              Navigator.pop(context);
+                                            });
                                       },
                                       icon: Icon(
                                         size:
@@ -134,7 +135,7 @@ class _customtableclientssState extends State<customtableclientss> {
                                       )),
                                   edit: IconButton(
                                     icon: Icon(
-                                      Icons.edit,
+                                      Icons.edit_note,
                                       size: MediaQuery.of(context).size.width <
                                               600
                                           ? 20.sp
@@ -142,10 +143,10 @@ class _customtableclientssState extends State<customtableclientss> {
                                     ),
                                     onPressed: () {
                                       BlocProvider.of<DateCubit>(context)
-                                              .date5 ??
+                                              .date5 =
                                           BlocProvider.of<clientsCubit>(context)
                                               .clientsdata[index]
-                                              .inspectionDate;
+                                              .inspectionDate!;
                                       BlocProvider.of<clientsCubit>(context)
                                               .status =
                                           clientstatussresponse[
@@ -159,6 +160,9 @@ class _customtableclientssState extends State<customtableclientss> {
                                               "state_sale"];
 
                                       showDialog(
+                                          barrierDismissible:
+                                              false, // user must tap button!
+
                                           context: context,
                                           builder: (_) {
                                             return AlertDialog(
@@ -181,8 +185,16 @@ class _customtableclientssState extends State<customtableclientss> {
                                                 content: editclientdialog(
                                                   width:
                                                       MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          0.5,
+                                                                  .width >
+                                                              950
+                                                          ? MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .width *
+                                                              0.25
+                                                          : MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .width *
+                                                              1,
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *

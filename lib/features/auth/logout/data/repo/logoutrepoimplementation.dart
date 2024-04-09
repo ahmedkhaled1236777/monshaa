@@ -15,6 +15,7 @@ class logoutrepoimplementation extends logoutrepo {
           path: urls.log_out,
           token: token,
           queryParameters: {"token": devicetoken});
+
       if (response.statusCode == 200 && response.data["status"] == true) {
         return right(response.data["message"]);
       } else

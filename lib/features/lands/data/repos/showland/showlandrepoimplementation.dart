@@ -41,7 +41,7 @@ class showlandsrepoimplementation extends showlandsrepo {
   Future<Either<failure, String>> deleteland(
       {required String token, required int landnumber}) async {
     try {
-      Response response = await Deletedata.deletedata(
+      Response response = await Postdata.postdata(
           path: "/land/delete/${landnumber}", token: token);
       if (response.statusCode == 200 &&
           response.data["message"] == "تم حذف بيانات الارض  بنجاح")

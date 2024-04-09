@@ -61,7 +61,7 @@ class _customtableallfinishedcontractsState
               ),
               title: Text(
                 'العقود المنتهيه',
-                style: TextStyle(color: Colors.white, fontSize: 4.sp),
+                style: TextStyle(color: Colors.white, fontSize: 3.5.sp),
               ),
               centerTitle: true,
               backgroundColor: Appcolors.maincolor,
@@ -121,8 +121,9 @@ class _customtableallfinishedcontractsState
                             showsnack(
                                 comment: state.errorr_message,
                                 context: context);
-                                if (state is deletefinishedcontractsfailure)
-              showsnack(comment: state.errormessage, context: context);
+                          if (state is deletefinishedcontractsfailure)
+                            showsnack(
+                                comment: state.errormessage, context: context);
                         },
                         builder: (context, state) {
                           if (state is showfinishedcontractsloadin)
@@ -145,25 +146,29 @@ class _customtableallfinishedcontractsState
                                         : customtablefinishedcontractsitem(
                                             delet: IconButton(
                                                 onPressed: () async {
-                                awsomdialogerror(context: context, tittle: "هل تريد حذف هذا العقد ؟", btnOkOnPress:() async {
-   await BlocProvider.of<
-                                                              finishedcontractsCubit>(
-                                                          context)
-                                                      .deletefinishedcontracts(
-                                                          token: generaltoken,
-                                                          finishedcontractsid:
-                                                              BlocProvider.of<
-                                                                          finishedcontractsCubit>(
-                                                                      context)
-                                                                  .myfinishedcontractss[
-                                                                      index]
-                                                                  .id!
-                                                                  .toInt());
-                                } );
-                                               
+                                                  awsomdialogerror(
+                                                      context: context,
+                                                      tittle:
+                                                          "هل تريد حذف هذا العقد ؟",
+                                                      btnOkOnPress: () async {
+                                                        await BlocProvider.of<
+                                                                    finishedcontractsCubit>(
+                                                                context)
+                                                            .deletefinishedcontracts(
+                                                                token:
+                                                                    generaltoken,
+                                                                finishedcontractsid: BlocProvider.of<
+                                                                            finishedcontractsCubit>(
+                                                                        context)
+                                                                    .myfinishedcontractss[
+                                                                        index]
+                                                                    .id!
+                                                                    .toInt());
+                                                        Navigator.pop(context);
+                                                      });
                                                 },
                                                 icon: const Icon(
-                                                  Icons.delete_outlined,
+                                                  Icons.delete_outline_outlined,
                                                   color: Colors.red,
                                                 )),
                                             textStyle:

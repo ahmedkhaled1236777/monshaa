@@ -1,3 +1,6 @@
+
+
+// ignore: camel_case_types
 import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/errors/failure.dart';
 import 'package:aplication/features/auth/login/presentation/views/login.dart';
@@ -5,14 +8,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
-// ignore: camel_case_types
 class requestfailure extends failure {
   // ignore: non_constant_identifier_names
   requestfailure({required super.error_message}) {
     if (super.error_message ==
         "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن") {
-          cashhelper.cleardata();
+      cashhelper.cleardata();
       Get.off(Login(),
           transition: Transition.rightToLeft,
           duration: Duration(seconds: 1),
@@ -59,7 +62,8 @@ class requestfailure extends failure {
       return requestfailure(
           error_message: "تم الغاء تفعيل الحساب برجاء التواصل مع الادمن");
     } else if (statuscode == 403) {
-      return requestfailure(error_message: "يوجد خطأ في السيرفر برجاء المحاوله مره اخري");
+      return requestfailure(
+          error_message: respnse["message"]);
     } else if (statuscode == 404) {
       return requestfailure(error_message: "الصفحه غير موجوده");
     } else if (statuscode == 500)

@@ -46,11 +46,8 @@ class _addexpenseState extends State<addexpense> {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 60.h,
-                ),
                 Image.asset(
-                  'images/people.png',
+                  'images/give.png',
                   height: 50,
                   width: 50,
                 ),
@@ -75,10 +72,10 @@ class _addexpenseState extends State<addexpense> {
                   height: 10,
                 ),
                 custommytextform(
-                  maxlines: 5,
+                  maxlines: 3,
                   controller: descreption,
                   hintText: "الوصف مثل..فاتوره..مرتب",
-                  val: "برجاء ادخال رقم الهاتف",
+                  val: "برجاء ادخال الوصف مثل..فاتوره..مرتب",
                 ),
                 const SizedBox(
                   height: 10,
@@ -88,7 +85,7 @@ class _addexpenseState extends State<addexpense> {
                   height: Appsizes.size10,
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 10,
                 ),
                 BlocConsumer<expenseCubit, expenseState>(
                   listener: (context, state) {
@@ -134,5 +131,13 @@ class _addexpenseState extends State<addexpense> {
                 )
               ],
             ))));
+  }
+
+  @override
+  void dispose() {
+    amount.dispose();
+
+    descreption.dispose();
+    super.dispose();
   }
 }

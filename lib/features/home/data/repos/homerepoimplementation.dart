@@ -15,11 +15,18 @@ class homerepoimplementation extends homerepo {
       Homemodel home;
       var response = await Getdata.getdata(path: urls.home, token: token);
       if (response.statusCode == 200 && response.data["status"] == true) {
+        print("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+        print(response);
         home = Homemodel.fromJson(response.data);
         return right(home);
-      } else
+      } else {
+        print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         return left(requestfailure(error_message: response.data["message"]));
+      }
     } catch (e) {
+      print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+      print(e);
+
       if (e is DioException)
         return left(requestfailure.fromdioexception(e));
       else

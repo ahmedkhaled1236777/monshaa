@@ -20,36 +20,28 @@ class dropdownbutton extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(color: Appcolors.bluecolor),
           borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
-          Expanded(
-            child: DropdownButton(
-                padding: EdgeInsets.only(right: 7),
-                isExpanded: true,
-                underline: Text(""),
-                borderRadius: BorderRadius.circular(30),
-                value: name,
-                hint: Text(
-                  hint,
-                  style: Appstyles.textStyle12,
-                  textAlign: TextAlign.center,
-                ),
-                items: items
-                    .map((e) => DropdownMenuItem(
-                          child: Center(
-                              child: Text("${e}",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: "Alexanderia"))),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: ((val) {
-                  onchanged(val);
-                })),
+      child: DropdownButton(
+          padding: EdgeInsets.only(right: 7),
+          isExpanded: true,
+          underline: Text(""),
+          value: name,
+          hint: Text(
+            hint,
+            style: Appstyles.textStyle12,
+            textAlign: TextAlign.center,
           ),
-        ],
-      ),
+          items: items
+              .map((e) => DropdownMenuItem(
+                    child: Center(
+                        child: Text("${e}",
+                            style: TextStyle(
+                                fontSize: 15, fontFamily: "Alexanderia"))),
+                    value: e,
+                  ))
+              .toList(),
+          onChanged: ((val) {
+            onchanged(val);
+          })),
     );
   }
 }

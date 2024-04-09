@@ -7,6 +7,7 @@ import 'package:aplication/core/commn/sharedpref/cashhelper.dart';
 import 'package:aplication/core/commn/toast.dart';
 import 'package:aplication/core/sizes/appsizes.dart';
 import 'package:aplication/core/styles/style.dart';
+import 'package:aplication/features/connect/presentation/view/connect.dart';
 import 'package:aplication/features/home/presentation/viewmodel/cubit/home_cubit.dart';
 import 'package:aplication/features/home/presentation/views/widgets/appbartittle.dart';
 import 'package:aplication/features/home/presentation/views/widgets/customappbaractions.dart';
@@ -48,7 +49,7 @@ class _desktoplayoutState extends State<desktoplayout> {
         appBar: AppBar(
           title: appbartittle(
             sizedboxwidth: Appsizes.size5.w,
-            fontSize: 5.sp,
+            fontSize: 17,
           ),
           leading: const Text(''),
           leadingWidth: 0,
@@ -56,7 +57,10 @@ class _desktoplayoutState extends State<desktoplayout> {
           backgroundColor: Appcolors.maincolor,
           actions: [
             customappbaractions(
-              onTapmessage: (() {}),
+              onTapmessage: (() {
+                navigateandfinish(
+                    navigationscreen: Connect(), context: context);
+              }),
               onTapnotific: (() {
                 showDialog(
                     context: context,
@@ -99,30 +103,35 @@ class _desktoplayoutState extends State<desktoplayout> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.15,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   color: Appcolors.maincolor,
                   child: ListView(
                       children: BlocProvider.of<HomeCubit>(context)
                           .sidebarpermessions
-                          .map((e) => Column(
-                                children: [
-                                  customdraweritem(
-                                      count: e["count"],
-                                      sizedboxwidth: 3.w,
-                                      textstyle: Appstyles.textStyle13w,
-                                      iconsize: 6.w,
-                                      iconData: e["icon"],
-                                      text: e["name"],
-                                      onTap: () {
-                                        navigateandfinish(
-                                            navigationscreen: e["page"],
-                                            context: context);
-                                      }),
-                                  SizedBox(
-                                    height: 12.h,
-                                  )
-                                ],
-                              ))
+                          .map((e) => e["name"] == "الاشعارات"
+                              ? SizedBox()
+                              : Column(
+                                  children: [
+                                    customdraweritem(
+                                        count: e["count"],
+                                        sizedboxwidth: 3.w,
+                                        textstyle: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white),
+                                        iconsize: 21,
+                                        iconData: e["icon"],
+                                        text: e["name"],
+                                        onTap: () {
+                                          navigateandfinish(
+                                              navigationscreen: e["page"],
+                                              context: context);
+                                        }),
+                                    SizedBox(
+                                      height: 22,
+                                    )
+                                  ],
+                                ))
                           .toList()),
                 ),
                 Container(
@@ -143,8 +152,8 @@ class _desktoplayoutState extends State<desktoplayout> {
                         children: BlocProvider.of<HomeCubit>(context)
                             .gridpermessions
                             .map((e) => customgriditem(
-                                imagewidth: 12.w,
-                                textfontsize: 3.6.sp,
+                                imagewidth: 50,
+                                textfontsize: 13.5,
                                 image: e.icon!,
                                 onTap: () {},
                                 count: e.count!.toInt(),
